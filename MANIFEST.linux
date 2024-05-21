@@ -1,3 +1,4 @@
 .zshrc|symlink|
 .termux|symlink|
 .p10k.zsh|symlink|
+nvim|symlink|.config

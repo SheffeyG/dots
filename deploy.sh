@@ -10,7 +10,8 @@ symlinkFile() {
     
     if [ ! -L "$destination" ]; then
         if [ -e "$destination" ]; then
-            echo "[ERROR] $destination exists but it's not a symlink. Please fix that manually" && exit 1
+            echo "[ERROR] $destination exists but it's not a symlink." 
+            # exit 1
         else
             ln -s "$filename" "$destination"
             echo "[OK] $filename -> $destination"
