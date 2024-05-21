@@ -27,12 +27,14 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # omz snippet
-zinit snippet OMZL::theme-and-appearance.zsh
 zinit snippet OMZL::git.zsh
-zinit snippet OMZL::prompt_info_functions.zsh 
 zinit snippet OMZL::history.zsh 
 zinit snippet OMZL::key-bindings.zsh 
 zinit snippet OMZL::completion.zsh
+
+# omz plugin
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
 
 # zsh heighlight
 zinit ice wait lucid \
@@ -55,9 +57,14 @@ zinit ice lucid wait="1" && zinit light le0me55i/zsh-extract
 
 
 ### setopt
-setopt autocd
-# setopt correct
-setopt interactive_comments
+## history setting
+setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_EXPIRE_DUPS_FIRST HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS INC_APPEND_HISTORY
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=1000
+
+## pushd and other
+setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS 
 
 
 ### alias
@@ -83,6 +90,7 @@ alias fgrep='fgrep --color=auto'
 alias globurl='noglob urlglobber '
 alias grep='grep --color=auto'
 
+
 # software shortcuts
 [[ $(command -v nvim) ]] && alias vim='nvim'
 [[ $(command -v bat) ]] && alias cat='bat' 
@@ -92,6 +100,7 @@ if [[ -n "$TERMUX_VERSION" ]]; then
     alias tcg='termux-clipboard-get'
     alias hugo='hugo --noBuildLock'
 fi
+
 
 ### eza for ls 
 if [[ $(command -v eza) ]] {

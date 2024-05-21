@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SCRIPT_DIR="$( cd "$( dirname "$BASH_SOURCE[0]" )" && pwd )"
 
@@ -39,6 +39,21 @@ deployManifest() {
     done
 }
 
-echo "--- Linux configs ---"
-deployManifest MANIFEST.linux
+
+target=$1
+
+if [[ -z "$target" ]]; then
+  read -p "Choose the platform(linux/termux): " target
+fi
+
+if [[ "$target" == "linux" ]]; then
+  echo "--- Linux config ---"
+  deployManifest MANIFEST.linux
+elif [[ "$target" == "termux" ]]; then
+  echo "--- Termux config ---"
+  deployManifest MANIFEST.termux
+else
+  echo "[ERROR] The platform '$target' MANIFEST doesn't exists!"
+  exit 1
+fi
 
