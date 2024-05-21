@@ -1,0 +1,11 @@
+[user]
+    name = sheffey
+	email = 57262511+SheffeyG@users.noreply.github.com
+[core]
+    autocrlf = input
+[alias]
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[init]
+	defaultBranch = main 
+[safe]
+    directory = /storage/emulated/0/*

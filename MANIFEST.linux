@@ -1,4 +1,5 @@
+nvim|symlink|.config
 .zshrc|symlink|
 .termux|symlink|
 .p10k.zsh|symlink|
-nvim|symlink|.config
+.gitconfig|symlink|
