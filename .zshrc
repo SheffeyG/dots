@@ -94,7 +94,6 @@ alias grep='grep --color=auto'
 # software shortcuts
 [[ $(command -v nvim) ]] && alias vim='nvim'
 [[ $(command -v bat) ]] && alias cat='bat' 
-# alias gc1='git clone --recursive --depth=1'
 if [[ -n "$TERMUX_VERSION" ]]; then
     alias tcs='termux-clipboard-set'
     alias tcg='termux-clipboard-get'
@@ -113,10 +112,9 @@ if [[ $(command -v eza) ]] {
         }
     }
     [[ -n ${LS_BIN_FILE} ]] || local LS_BIN_FILE=$(whereis ls 2>/dev/null | awk '{print $2}')
+    # lls is the original ls
     alias lls=${LS_BIN_FILE} 
-    # lls is the original ls. lls为原版ls
-    alias ls="eza -a --icons --color=auto" 
-    # Exa is a modern version of ls. 
+    alias ls="eza --icons --color=auto" 
     alias l='eza -lbah --icons'
     alias la='eza -labgh --icons'
     alias ll='eza -lbg --icons'

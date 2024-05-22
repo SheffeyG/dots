@@ -10,7 +10,7 @@ symlinkFile() {
     
     if [ ! -L "$destination" ]; then
         if [ -e "$destination" ]; then
-            echo "[ERROR] $destination exists but it's not a symlink." 
+            echo "[WARNING] $destination exists but it's not a symlink. Skipping ..." 
             # exit 1
         else
             ln -s "$filename" "$destination"
@@ -18,6 +18,21 @@ symlinkFile() {
         fi
     else
         echo "[WARNING] $filename already symlinked"
+    fi
+}
+
+copyFile() {
+    filename="$SCRIPT_DIR/$1"
+    destination="$HOME/$2/$1"
+
+    mkdir -p $(dirname "$destination")
+    
+    if [ -e "$destination" ]; then
+        echo "[WARNING] $destination already exists! Skipping ..."
+        # exit 1
+    else
+        ln -s "$filename" "$destination"
+        echo "[OK] $filename -> $destination"
     fi
 }
 
@@ -32,6 +47,10 @@ deployManifest() {
                 symlinkFile $filename $destination
                 ;;
 
+            copy)
+                copyFile $filename $destination
+                ;;
+
             *)
                 echo "[WARNING] Unknown operation $operation. Skipping..."
                 ;;
@@ -39,21 +58,17 @@ deployManifest() {
     done
 }
 
-
+# set -ex
 target=$1
 
 if [[ -z "$target" ]]; then
-  read -p "Choose the platform(linux/termux): " target
+  echo "[ERROR] You need provide a MANIFEST target."
+  exit 1
 fi
-
-if [[ "$target" == "linux" ]]; then
-  echo "--- Linux config ---"
-  deployManifest MANIFEST.linux
-elif [[ "$target" == "termux" ]]; then
-  echo "--- Termux config ---"
-  deployManifest MANIFEST.termux
+if [[ -e "$target" ]]; then
+  deployManifest $target
 else
-  echo "[ERROR] The platform '$target' MANIFEST doesn't exists!"
+  echo "[ERROR] The MANIFEST target '$target' doesn't exists!"
   exit 1
 fi
 
