@@ -1,4 +1,4 @@
 nvim|symlink|.config
 .zshrc|symlink|
 .p10k.zsh|copy|
-.gitconfig|symlink|
+.gitconfig|copy|

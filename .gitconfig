@@ -11,9 +11,6 @@
 [init]
     defaultBranch = main 
 
-[safe]
-    directory = /storage/emulated/0/*
-
 [url "git@github.com:"]
     insteadOf = https://github.com/
 
