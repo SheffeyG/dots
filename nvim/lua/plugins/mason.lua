@@ -16,6 +16,7 @@ return {
     opt = {
       ensure_installed = {
         "pyright",
+        "clangd",
       },
     },
   },

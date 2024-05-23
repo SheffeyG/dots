@@ -1,4 +1,3 @@
-local mason = require("plugins.mason")
 return {
   "neovim/nvim-lspconfig",
   opts = {
