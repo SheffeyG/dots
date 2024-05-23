@@ -17,7 +17,7 @@ symlinkFile() {
             echo "[OK] $filename -> $destination"
         fi
     else
-        echo "[WARNING] $filename already symlinked"
+        echo "[WARNING] $filename already symlinked. Skipping ..."
     fi
 }
 
@@ -62,13 +62,12 @@ deployManifest() {
 target=$1
 
 if [[ -z "$target" ]]; then
-  echo "[ERROR] You need provide a MANIFEST target."
-  exit 1
+    echo "[ERROR] You need provide a MANIFEST target."
+    exit 1
+elif [[ ! -e "$target" ]]; then
+    echo "[ERROR] The MANIFEST target '$target' doesn't exists!"
+    exit 1
 fi
-if [[ -e "$target" ]]; then
-  deployManifest $target
-else
-  echo "[ERROR] The MANIFEST target '$target' doesn't exists!"
-  exit 1
-fi
+
+deployManifest $target
 
