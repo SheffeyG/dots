@@ -109,6 +109,7 @@ zinit snippet OMZL::completion.zsh
 # omz plugin
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
+zinit snippet OMZP::extract
 
 # zsh heighlight
 zinit ice wait lucid \
@@ -126,7 +127,4 @@ zini light zsh-users/zsh-autosuggestions
 
 # z to jump dir
 zinit ice lucid wait="1" && zinit light agkozak/zsh-z 
-
-# x to extract 
-zinit ice lucid wait="1" && zinit light le0me55i/zsh-extract
 

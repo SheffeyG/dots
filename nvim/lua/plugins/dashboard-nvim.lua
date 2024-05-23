@@ -2,8 +2,6 @@ return {
   "nvimdev/dashboard-nvim",
   lazy = false,
   opts = function()
-    local logo = string.rep("\n", 8)
-
     local opts = {
       theme = "doom",
       hide = {
@@ -12,7 +10,7 @@ return {
         statusline = false,
       },
       config = {
-        header = vim.split(logo, "\n"),
+        header = vim.split(string.rep("\n", 6), "\n"),
         -- stylua: ignore
         center = {
           { action = LazyVim.telescope("files"),                 desc = " Find File",       icon = " ", key = "f" },
