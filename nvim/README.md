@@ -1,23 +1,4 @@
-# NeoVim NvChad Configures
+# 💤 LazyVim
 
-## Install
-
-```
-git clone https://github.com/SheffeyG/nvchad-config.git ~/.config/nvim && nvim
-```
-
-### LSP on Termux
-Some pkgs in mason are not support aarch64 platform.
-```
-pkg in lua-language-server stylua
-npm i clangd
-```
-
-## Remove
-```
-rm -rf ~/.config/nvim
-rm -rf ~/.local/share/nvim
-```
-
-## Reference
-[NvChad starter](https://github.com/NvChad/starter)
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
