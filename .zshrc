@@ -80,7 +80,7 @@ if [[ $(command -v eza) ]] {
 
 ### Zinit Initialization
 if [[ ! -r "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]]; then
-    echo "[ERROR] zinit.zsh not found!" return 1
+    echo "[ERROR] zinit.zsh not found!" && return 1
 fi
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
@@ -107,9 +107,9 @@ zinit snippet OMZL::key-bindings.zsh
 zinit snippet OMZL::completion.zsh
 
 # omz plugin
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::extract
+zinit snippet OMZP::git      # git alias
+zinit snippet OMZP::sudo     # ese twice to add sudo
+zinit snippet OMZP::extract  # x to extract
 
 # zsh heighlight
 zinit ice wait lucid \
