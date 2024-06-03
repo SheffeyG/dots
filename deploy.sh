@@ -14,7 +14,7 @@ symlinkFile() {
             # exit 1
         else
             ln -s "$filename" "$destination"
-            echo "[OK] $filename -> $destination"
+            echo "[OK] symlink: $filename -> $destination"
         fi
     else
         echo "[WARNING] $filename already symlinked. Skipping ..."
@@ -31,8 +31,8 @@ copyFile() {
         echo "[WARNING] $destination already exists! Skipping ..."
         # exit 1
     else
-        ln -s "$filename" "$destination"
-        echo "[OK] $filename -> $destination"
+        cp "$filename" "$destination"
+        echo "[OK] copy: $filename -> $destination"
     fi
 }
 

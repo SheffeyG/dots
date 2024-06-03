@@ -1,7 +1,15 @@
 [user]
-    name = guanxf
-    email = guanxf@jkbl.com
-    password = gxf121024
+    name = sheffey
+    email = 57262511+SheffeyG@users.noreply.github.com
+
+[core]
+    autocrlf = input
+
+[alias]
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit --all
 
 [init]
     defaultBranch = main 
+
+; [url "git@github.com:"]
+;     insteadOf = https://github.com/
