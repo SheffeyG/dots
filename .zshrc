@@ -56,14 +56,14 @@ if [[ -n "$TERMUX_VERSION" ]]; then
     alias hugo='hugo --noBuildLock'
 fi
 
-# eza for ls 
-if [[ $(command -v eza) ]] {
-    alias ls="eza --icons --color=auto" 
-    alias l='eza -lbah --icons'
-    alias la='eza -labgh --icons'
-    alias ll='eza -lbg --icons'
-    alias lsa='eza -lbagR --icons'
-    alias lst='eza -lTabgh --icons' # dispaly as tree
+# exa for ls 
+if [[ $(command -v exa) ]] {
+    alias ls="exa --icons --color=auto" 
+    alias l='exa -lbah --icons'
+    alias la='exa -labgh --icons'
+    alias ll='exa -lbg --icons'
+    alias lsa='exa -lbagR --icons'
+    alias lst='exa -lTabgh --icons' # dispaly as tree
 } else {
     alias ls='ls --color=auto'
     alias lst='tree -pCsh'
@@ -79,10 +79,16 @@ if [[ $(command -v eza) ]] {
 #########
 
 ### Zinit Initialization
-if [[ ! -r "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]]; then
-    echo "[ERROR] zinit.zsh not found!" && return 1
-fi
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# if [[ ! -r "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]]; then
+#     echo "[ERROR] zinit.zsh not found!" && return 1
+# fi
+# source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
