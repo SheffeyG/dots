@@ -54,6 +54,7 @@ if [[ -n "$TERMUX_VERSION" ]]; then
     alias tcs='termux-clipboard-set'
     alias tcg='termux-clipboard-get'
     alias hugo='hugo --noBuildLock'
+    alias exa=eza
 fi
 
 # exa for ls 
