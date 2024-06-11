@@ -138,10 +138,10 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit ice wait lucid atload'_zsh_autosuggest_start'
 zini light zsh-users/zsh-autosuggestions 
 
+# z to jump dir
+zinit ice lucid wait && zinit light agkozak/zsh-z 
+
 # tab to suggestions (pkg fzf needed)
 [[ $(command -v fzf) ]] && \
-    zinit ice lucid pick"fzf-tab.zsh" wait && zinit light Aloxaf/fzf-tab
-
-# z to jump dir
-zinit ice lucid wait="1" && zinit light agkozak/zsh-z 
+    zinit ice lucid pick"fzf-tab.zsh" wait="1" && zinit light Aloxaf/fzf-tab
 
