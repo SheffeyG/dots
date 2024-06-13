@@ -74,6 +74,7 @@ if [[ $(command -v exa) ]] {
     alias lsa='ls -lah'
 }
 
+
 ###############
 # EXPORT PATH #
 ###############
@@ -82,8 +83,18 @@ if [[ $(command -v exa) ]] {
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# git tools
-export PATH=$PATH:~/workspace/souread/tools/
+
+# path dir
+path_dirs=(
+  ~/workspace/souread/tools/
+  ~/anaconda3/bin/
+  ~/.cargo/bin/
+)
+
+for dir in "${path_dirs[@]}"; do
+  [[ -d "$dir" ]] && export PATH="$PATH:$dir"
+done
+
 
 #########
 # ZINIT #
