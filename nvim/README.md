@@ -3,6 +3,10 @@
 ## Install
 
 ```
+# install latest neovim for ubuntu
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update
+# set configures  
 git clone https://github.com/SheffeyG/nvchad-config.git ~/.config/nvim && nvim
 ```
 
