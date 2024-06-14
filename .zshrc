@@ -84,10 +84,23 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# conda init
+CONDA_HOME="$HOME/anaconda3/"
+__conda_setup="$('$CONDA_HOME/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/$CONDA_HOME/etc/profile.d/conda.sh" ]; then
+        . "/$CONDA_HOME/etc/profile.d/conda.sh"
+    else
+        export PATH="/$CONDA_HOME/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
 # path dir
 path_dirs=(
   ~/workspace/souread/tools/
-  ~/anaconda3/bin/
   ~/.cargo/bin/
 )
 
