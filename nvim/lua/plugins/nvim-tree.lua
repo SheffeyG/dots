@@ -2,7 +2,7 @@ local nvtree_opts = {
     renderer = {
         icons = {
             git_placement = "after",
-            symlink_arrow = "➜",
+            symlink_arrow = "➜ ",
         },
     },
 }
