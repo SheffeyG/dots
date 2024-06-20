@@ -42,7 +42,7 @@ if vim.fn.has("termux") == 1 then
             },
         },
     }
-
+    local nvtree_devicons = require("nvim-web-devicons").get_icons()
     local nvchad_devicons = require("nvchad.icons.devicons")
 
     for name, data in pairs(nvtree_devicons) do
