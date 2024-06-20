@@ -101,6 +101,7 @@ unset __conda_setup
 # path dir
 path_dirs=(
   ~/workspace/souread/tools/
+  ~/.local/bin/
   ~/.cargo/bin/
 )
 
