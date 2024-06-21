@@ -54,25 +54,31 @@ if [[ -n "$TERMUX_VERSION" ]]; then
     alias tcs='termux-clipboard-set'
     alias tcg='termux-clipboard-get'
     alias hugo='hugo --noBuildLock'
-    alias exa=eza
 fi
 
-# exa for ls 
-if [[ $(command -v exa) ]] {
+# eza for ls 
+if command -v eza > /dev/null 2>&1; then
+    alias ls="eza --icons --color=auto" 
+    alias l='eza -lbah --icons'
+    alias la='eza -labgh --icons'
+    alias ll='eza -lbg --icons'
+    alias lsa='eza -lbagR --icons'
+    alias lst='eza -lTabgh --icons' # dispaly as tree
+elif command -v exa > /dev/null 2>&1; then
     alias ls="exa --icons --color=auto" 
     alias l='exa -lbah --icons'
     alias la='exa -labgh --icons'
     alias ll='exa -lbg --icons'
     alias lsa='exa -lbagR --icons'
     alias lst='exa -lTabgh --icons' # dispaly as tree
-} else {
+else
     alias ls='ls --color=auto'
     alias lst='tree -pCsh'
     alias l='ls -lah'
     alias la='ls -lAh'
     alias ll='ls -lh'
     alias lsa='ls -lah'
-}
+fi
 
 
 ###############
@@ -169,4 +175,8 @@ zinit ice lucid wait && zinit light agkozak/zsh-z
 # tab to suggestions (pkg fzf needed)
 [[ $(command -v fzf) ]] && \
     zinit ice lucid pick"fzf-tab.zsh" wait="1" && zinit light Aloxaf/fzf-tab
+
+# auto py env
+zinit ice wait=2 lucid pick "zsh-activate-py-environment.plugin.zsh"
+zinit light se-jaeger/zsh-activate-py-environment
 
