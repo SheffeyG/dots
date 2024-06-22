@@ -155,9 +155,10 @@ zinit snippet OMZL::key-bindings.zsh
 zinit snippet OMZL::completion.zsh
 
 # omz plugin
-zinit snippet OMZP::git      # git alias
-zinit snippet OMZP::sudo     # ese twice to add sudo
-zinit snippet OMZP::extract  # x to extract
+zinit snippet OMZP::git            # git alias
+zinit snippet OMZP::sudo           # ese twice to add sudo
+zinit snippet OMZP::extract        # x to extract
+zinit snippet OMZP::dirhistory     # alt to move dir
 
 # zsh heighlight
 zinit ice wait lucid \
