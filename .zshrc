@@ -176,6 +176,3 @@ zinit ice lucid wait && zinit light agkozak/zsh-z
 [[ $(command -v fzf) ]] && \
     zinit ice lucid pick"fzf-tab.zsh" wait="1" && zinit light Aloxaf/fzf-tab
 
-# auto env
-zinit ice wait=2 lucid pick "autoenv.plugin.zsh"
-zinit light zpm-zsh/autoenv 
