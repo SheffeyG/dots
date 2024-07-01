@@ -46,6 +46,7 @@ alias _='sudo '
 alias md='mkdir -p'
 alias rd=rmdir
 alias grep='grep --color=auto'
+alias python=python3
 
 # software shortcuts
 [[ $(command -v nvim) ]] && alias vim='nvim'
@@ -176,3 +177,5 @@ zinit ice lucid wait && zinit light agkozak/zsh-z
 [[ $(command -v fzf) ]] && \
     zinit ice lucid pick"fzf-tab.zsh" wait="1" && zinit light Aloxaf/fzf-tab
 
+# auto switch python venv
+zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
