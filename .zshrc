@@ -49,7 +49,7 @@ alias grep='grep --color=auto'
 alias python=python3
 
 # software shortcuts
-[[ $(command -v nvim) ]] && alias vim='nvim'
+[[ $(command -v nvim) ]] && alias vim='nvim' && export EDITOR=nvim
 [[ $(command -v bat) ]] && alias cat='bat' 
 if [[ -n "$TERMUX_VERSION" ]]; then
     alias tcs='termux-clipboard-set'
