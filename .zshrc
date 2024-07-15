@@ -57,28 +57,28 @@ if [[ -n "$TERMUX_VERSION" ]]; then
     alias hugo='hugo --noBuildLock'
 fi
 
-# eza for ls 
+# aliases for ls command
+set_ls_alias() {
+    local cmd="\\$1"
+    alias ls="$cmd --icons --color=auto"
+    alias l="$cmd -lbah --icons"
+    alias la="$cmd -labgh --icons"
+    alias ll="$cmd -lbg --icons"
+    alias lsa="$cmd -lbagR --icons"
+    alias lst="$cmd -lTabgh --icons" # dispaly as tree
+}
+
 if command -v eza > /dev/null 2>&1; then
-    alias ls="eza --icons --color=auto" 
-    alias l='eza -lbah --icons'
-    alias la='eza -labgh --icons'
-    alias ll='eza -lbg --icons'
-    alias lsa='eza -lbagR --icons'
-    alias lst='eza -lTabgh --icons' # dispaly as tree
+    set_ls_alias "eza"
 elif command -v exa > /dev/null 2>&1; then
-    alias ls="exa --icons --color=auto" 
-    alias l='exa -lbah --icons'
-    alias la='exa -labgh --icons'
-    alias ll='exa -lbg --icons'
-    alias lsa='exa -lbagR --icons'
-    alias lst='exa -lTabgh --icons' # dispaly as tree
+    set_ls_alias "exa"
 else
     alias ls='ls --color=auto'
     alias lst='tree -pCsh'
     alias l='ls -lah'
     alias la='ls -lAh'
     alias ll='ls -lh'
-    alias lsa='ls -lah'
+    alias lsa='ls -lah' 
 fi
 
 
