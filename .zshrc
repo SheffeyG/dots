@@ -86,7 +86,7 @@ fi
 # EXPORT PATH #
 ###############
 
-# nvm
+# nvm init
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -105,7 +105,7 @@ else
 fi
 unset __conda_setup
 
-# path dir
+# add more dirs to path
 path_dirs=(
   ~/workspace/souread/tools/
   ~/.local/bin/
@@ -127,16 +127,11 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
-
-# if [[ ! -r "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]]; then
-#     echo "[ERROR] zinit.zsh not found!" && return 1
-# fi
-# source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 
-### Zinit Load Plugins
+### Zinit Plugins
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
@@ -180,3 +175,4 @@ zinit ice lucid wait && zinit light agkozak/zsh-z
 
 # auto switch python venv
 zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
+
