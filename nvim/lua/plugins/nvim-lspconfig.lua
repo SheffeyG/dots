@@ -24,10 +24,7 @@ return {
           settings = {
             pylsp = {
               plugins = {
-                pycodestyle = {
-                  ignore = {'E401', 'E203', 'W391'},
-                  maxLineLength = 150
-                }
+                pycodestyle = { enabled = false }
               }
             }
           }
