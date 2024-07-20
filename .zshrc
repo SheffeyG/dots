@@ -48,6 +48,13 @@ alias rd=rmdir
 alias grep='grep --color=auto'
 alias python=python3
 
+# git
+alias ga='git add .'
+alias gill='git pull'
+alias gish='git push'
+alias gm='git commit -m'
+alias gma='git commit --amend --no-editor'
+
 # software shortcuts
 [[ $(command -v nvim) ]] && alias vim='nvim' && export EDITOR=nvim
 [[ $(command -v bat) ]] && alias cat='bat' 
@@ -146,12 +153,12 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # omz snippet
-zinit snippet OMZL::git.zsh
+# zinit snippet OMZL::git.zsh
 zinit snippet OMZL::key-bindings.zsh 
 zinit snippet OMZL::completion.zsh
 
 # omz plugin
-zinit snippet OMZP::git            # git alias
+# zinit snippet OMZP::git            # git alias
 zinit snippet OMZP::sudo           # ese twice to add sudo
 zinit snippet OMZP::extract        # x to extract
 zinit snippet OMZP::dirhistory     # alt to move dir
