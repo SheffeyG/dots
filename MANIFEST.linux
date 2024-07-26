@@ -1,4 +1,5 @@
 .zshrc|symlink|
 .p10k.zsh|copy|
+.tmux.conf|symlink|
 .gitconfig|copy|
 .clang-format|symlink|
