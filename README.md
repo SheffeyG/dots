@@ -1,10 +1,30 @@
 ### Tmux
 
-Clone tpm(Tmux plugin manager)
+Clone tpm(Tmux Plugin Manager)
 
 ```
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 tmux source ~/.tmux.conf
 ```
 
+### Nvim
+
+Install latest neovim for ubuntu
+```
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update && apt upgrade 
+sudo apt install neovim
+```
+
+```
+git clone https://github.com/SheffeyG/nvchad-config.git ~/.config/nvim && nvim
+```
+
+**Termux**
+
+Some packages in mason are not support aarch64 platform.
+```
+pkg in lua-language-server stylua
+npm i clangd
+```
 
