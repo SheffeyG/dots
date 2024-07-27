@@ -50,6 +50,7 @@ alias python=python3
 
 # git
 alias ga='git add'
+alias gaa='git add .'
 alias gill='git pull'
 alias gish='git push'
 alias gm='git commit -m'
