@@ -3,3 +3,4 @@
 .tmux.conf|symlink|
 .gitconfig|copy|
 .clang-format|symlink|
+nvim|symlink|.config
