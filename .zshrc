@@ -49,7 +49,7 @@ alias grep='grep --color=auto'
 alias python=python3
 
 # git
-alias ga='git add .'
+alias ga='git add'
 alias gill='git pull'
 alias gish='git push'
 alias gm='git commit -m'
