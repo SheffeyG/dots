@@ -33,7 +33,7 @@ if vim.fn.has("termux") == 1 then
                         unstaged = "✗",
                         staged = "✓",
                         unmerged = "",
-                        renamed = "➜ ",
+                        renamed = ">",
                         untracked = "+",
                         deleted = "-",
                         ignored = "◌",
