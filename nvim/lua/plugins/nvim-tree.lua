@@ -2,7 +2,7 @@ local nvtree_opts = {
     renderer = {
         icons = {
             git_placement = "after",
-            symlink_arrow = "➜ ",
+            symlink_arrow = "->",
         },
     },
 }
@@ -15,7 +15,7 @@ if vim.fn.has("termux") == 1 then
             icons = {
                 git_placement = "after",
                 padding = "",
-                symlink_arrow = "➜ ",
+                symlink_arrow = "->",
                 glyphs = {
                     default = "󰈚 ",
                     symlink = " ",
