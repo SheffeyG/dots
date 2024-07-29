@@ -3,9 +3,8 @@ return {
     config = function()
         require("mason").setup({
             ensure_installed = {
-                "python-lsp-server",
-                "black",
-                "isort",
+                "ruff",
+                "ruff-lsp",
                 "prettier",
                 "lua-language-server",
             }

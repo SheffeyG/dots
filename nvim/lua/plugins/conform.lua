@@ -7,7 +7,7 @@ local options = {
         html = { "prettier" },
         lua = { "stylua" },
         markdown = { "prettier" },
-        python = { "isort", "black" },
+        python = { "ruff" },
         typescript = { "prettier" },
     },
 
