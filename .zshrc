@@ -55,6 +55,7 @@ alias gill='git pull'
 alias gish='git push'
 alias gm='git commit -m'
 alias gma='git commit --amend --no-edit'
+alias glo='git log --oneline -n 10'
 
 # software shortcuts
 [[ $(command -v nvim) ]] && alias vim='nvim' && export EDITOR=nvim
