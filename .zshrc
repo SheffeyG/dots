@@ -24,6 +24,9 @@ SAVEHIST=1000
 # pushd and other
 setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS 
 
+# fzf options
+export FZF_DEFAULT_OPTS='--border'
+
 
 #########
 # ALIAS #
@@ -36,12 +39,6 @@ alias ......=../../../../..
 alias 1='cd -'
 alias 2='cd -2'
 alias 3='cd -3'
-alias 4='cd -4'
-alias 5='cd -5'
-alias 6='cd -6'
-alias 7='cd -7'
-alias 8='cd -8'
-alias 9='cd -9'
 alias _='sudo '
 alias md='mkdir -p'
 alias rd=rmdir
@@ -102,17 +99,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # conda init
 CONDA_HOME="$HOME/anaconda3/"
-__conda_setup="$('$CONDA_HOME/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/$CONDA_HOME/etc/profile.d/conda.sh" ]; then
-        . "/$CONDA_HOME/etc/profile.d/conda.sh"
-    else
-        export PATH="/$CONDA_HOME/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+[ -f "/$CONDA_HOME/etc/profile.d/conda.sh" ] && \. "/$CONDA_HOME/etc/profile.d/conda.sh"
 
 # add more dirs to path
 path_dirs=(
@@ -131,14 +118,12 @@ done
 #########
 
 ### Zinit Initialization
-
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-
 
 ### Zinit Plugins
 # Load a few important annexes, without Turbo
@@ -154,14 +139,12 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# omz snippet
-# zinit snippet OMZL::git.zsh
+# OMZ snippet
 zinit snippet OMZL::key-bindings.zsh 
 zinit snippet OMZL::completion.zsh
 
-# omz plugin
-# zinit snippet OMZP::git            # git alias
-zinit snippet OMZP::sudo           # ese twice to add sudo
+# OMZ plugin
+zinit snippet OMZP::sudo           # tap ESC twice to toggle sudo
 zinit snippet OMZP::extract        # x to extract
 zinit snippet OMZP::dirhistory     # alt to move dir
 
@@ -172,15 +155,15 @@ zinit ice wait lucid \
 zinit light zdharma-continuum/fast-syntax-highlighting
 
 # zsh auto suggestions
-zinit ice wait lucid atload'_zsh_autosuggest_start'
-zini light zsh-users/zsh-autosuggestions 
+zinit ice wait lucid atload"_zsh_autosuggest_start"
+zinit light zsh-users/zsh-autosuggestions 
+
+# fzf tab completion
+[[ $(command -v fzf) ]] && \
+    zinit wait lucid pick"fzf-tab.zsh" for Aloxaf/fzf-tab
 
 # z to jump dir
-zinit ice lucid wait && zinit light agkozak/zsh-z 
-
-# tab to suggestions (pkg fzf needed)
-[[ $(command -v fzf) ]] && \
-    zinit ice lucid pick"fzf-tab.zsh" wait="1" && zinit light Aloxaf/fzf-tab
+zinit wait lucid for agkozak/zsh-z 
 
 # auto switch python venv
 zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
