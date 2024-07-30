@@ -4,9 +4,9 @@
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = {
+M.base64 = {
     theme = "onedark",
-
+    -- transparency = true,
     -- hl_override = {
     -- 	Comment = { italic = true },
     -- 	["@comment"] = { italic = true },
