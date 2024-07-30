@@ -25,8 +25,10 @@ SAVEHIST=1000
 setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS 
 
 # fzf options
-export FZF_DEFAULT_OPTS='--border'
-
+export FZF_DEFAULT_OPTS='
+    --border
+    --color bg+:#7797b7,fg+:#2c2f30,hl:#D8DEE9,hl+:#26292a,gutter:-1
+    --color pointer:#373d49,info:#606672'
 
 #########
 # ALIAS #
@@ -102,15 +104,8 @@ CONDA_HOME="$HOME/anaconda3/"
 [ -f "/$CONDA_HOME/etc/profile.d/conda.sh" ] && \. "/$CONDA_HOME/etc/profile.d/conda.sh"
 
 # add more dirs to path
-path_dirs=(
-  ~/workspace/souread/tools/
-  ~/.local/bin/
-  ~/.cargo/bin/
-)
-
-for dir in "${path_dirs[@]}"; do
-  [[ -d "$dir" ]] && export PATH="$PATH:$dir"
-done
+PATH=$PATH:~/.local/bin/
+PATH=$PATH:~/.cargo/bin/
 
 
 #########
