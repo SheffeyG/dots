@@ -16,13 +16,10 @@ sudo apt update && apt upgrade
 sudo apt install neovim
 ```
 
-```
-git clone https://github.com/SheffeyG/nvchad-config.git ~/.config/nvim && nvim
-```
-
 **Termux**
 
-Some packages in mason are not support aarch64 platform.
+Some packages in mason are not support aarch64 platform, 
+you can install them manaully in termux.
 ```
 pkg in lua-language-server stylua
 npm i clangd
