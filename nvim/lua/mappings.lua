@@ -10,7 +10,7 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
 map("i", "jk", "<ESC>")
 
 
--- Move Line
+-- Move Lines
 map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down", silent = true })
 map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up", silent = true })
 map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down", silent = true })
@@ -19,14 +19,14 @@ map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down", silent = true }
 map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up", silent = true })
 
 
--- Terminal Close
+-- Terminal Closer
 local function close_terminal()
     local win = vim.api.nvim_get_current_win()
     vim.api.nvim_win_close(win, true)
 end
 
 map("t", "jk", close_terminal, { desc = "Terminal Close" })
-map("t", "<ESC>", close_terminal, { desc = "Terminal Close" })
+-- map("t", "<ESC>", close_terminal, { desc = "Terminal Close" })
 
 
 -- Code Runner
