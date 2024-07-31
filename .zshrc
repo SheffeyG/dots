@@ -48,6 +48,7 @@ alias grep='grep --color=auto'
 alias python=python3
 
 # git
+alias gs='git status'
 alias ga='git add'
 alias gaa='git add .'
 alias gill='git pull'
