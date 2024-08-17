@@ -5,7 +5,7 @@ local lspconfig = require("lspconfig")
 local nvlsp = require("nvchad.configs.lspconfig")
 
 -- LSP servers with default configures
-local lsp_servers = { "clangd", "lua_ls", "ruff_lsp"}
+local lsp_servers = { "clangd", "lua_ls", "ruff"}
 
 return {
     "neovim/nvim-lspconfig",
