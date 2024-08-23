@@ -143,6 +143,7 @@ zinit snippet OMZL::completion.zsh
 zinit snippet OMZP::sudo           # tap ESC twice to toggle sudo
 zinit snippet OMZP::extract        # x to extract
 zinit snippet OMZP::dirhistory     # alt to move dir
+zinit snippet OMZP::autoenv        # auto source .env
 
 # zsh heighlight
 zinit ice wait lucid \
