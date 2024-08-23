@@ -143,7 +143,6 @@ zinit snippet OMZL::completion.zsh
 zinit snippet OMZP::sudo           # tap ESC twice to toggle sudo
 zinit snippet OMZP::extract        # x to extract
 zinit snippet OMZP::dirhistory     # alt to move dir
-zinit snippet OMZP::autoenv        # auto source .env
 
 # zsh heighlight
 zinit ice wait lucid \
@@ -164,4 +163,7 @@ zinit wait lucid for agkozak/zsh-z
 
 # auto switch python venv
 zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
+
+# auto source .env
+zinit wait lucid atinit"AUTOENV_FILE_ENTER=.env" for Tarrasch/zsh-autoenv        
 
