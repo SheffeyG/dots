@@ -36,12 +36,9 @@ export FZF_DEFAULT_OPTS='
 
 alias ...=../..
 alias ....=../../..
-alias .....=../../../..
-alias ......=../../../../..
 alias 1='cd -'
 alias 2='cd -2'
 alias 3='cd -3'
-alias _='sudo '
 alias md='mkdir -p'
 alias rd=rmdir
 alias grep='grep --color=auto'
@@ -55,7 +52,7 @@ alias gill='git pull'
 alias gish='git push'
 alias gm='git commit -m'
 alias gma='git commit --amend --no-edit'
-alias glo='git log --oneline -n 10'
+alias glo='git log --oneline -n 10 --graph'
 
 # software shortcuts
 [[ $(command -v nvim) ]] && alias vim='nvim' && export EDITOR=nvim
@@ -165,5 +162,5 @@ zinit wait lucid for agkozak/zsh-z
 zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
 
 # auto source .env
-zinit wait lucid atinit"AUTOENV_FILE_ENTER=.env" for Tarrasch/zsh-autoenv        
+zinit wait lucid atinit"AUTOENV_FILE_ENTER=.env" for Tarrasch/zsh-autoenv
 
