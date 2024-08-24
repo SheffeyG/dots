@@ -40,24 +40,28 @@ autocmd("QuitPre", {
 autocmd("VimEnter", {
     callback = function(data)
         -- buffer is a real file on the disk
-        local real_file = vim.fn.filereadable(data.file) == 1
+        -- local real_file = vim.fn.filereadable(data.file) == 1
+        -- if real_file then
+        --     -- open the tree, find the file but don't focus it
+        --     require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
+        --     return
+        -- end
 
-        -- buffer is a [No Name]
+        -- buffer with no name 
         local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
-
-        if real_file or no_name then
-            -- open the tree, find the file but don't focus it
-            require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
+        if no_name then
+            -- open the tree
+            require("nvim-tree.api").tree.open()
+            return
         end
 
         -- buffer is a directory
         local directory = vim.fn.isdirectory(data.file) == 1
-
         if directory then
             -- change to the directory
             vim.cmd.cd(data.file)
-            -- open the tree
             require("nvim-tree.api").tree.open()
+            return
         end
     end,
 })
