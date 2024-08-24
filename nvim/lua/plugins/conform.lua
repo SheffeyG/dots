@@ -21,7 +21,7 @@ local options = {
 return {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
-    config = function()
-        require("conform").setup(options)
-    end,
+    opt = {
+        require("conform").setup(options),
+    },
 }

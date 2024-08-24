@@ -6,6 +6,7 @@ local nvtree_opts = {
         },
     },
 }
+
 local devicons = require("nvchad.icons.devicons")
 
 if vim.fn.has("termux") == 1 then
@@ -42,6 +43,7 @@ if vim.fn.has("termux") == 1 then
             },
         },
     }
+
     local nvtree_devicons = require("nvim-web-devicons").get_icons()
     local nvchad_devicons = require("nvchad.icons.devicons")
 
@@ -61,19 +63,13 @@ end
 return {
     {
         "nvim-tree/nvim-tree.lua",
+        dofile(vim.g.base46_cache .. "nvimtree"),
         opts = nvtree_opts,
-        config = function(_, opts)
-            dofile(vim.g.base46_cache .. "nvimtree")
-            require("nvim-tree").setup(opts)
-        end,
     },
 
     {
         "nvim-tree/nvim-web-devicons",
+        dofile(vim.g.base46_cache .. "devicons"),
         opts = devicons,
-        config = function(_, opts)
-            dofile(vim.g.base46_cache .. "devicons")
-            require("nvim-web-devicons").setup(opts)
-        end,
     },
 }
