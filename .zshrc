@@ -161,6 +161,3 @@ zinit wait lucid for agkozak/zsh-z
 # auto switch python venv
 zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
 
-# auto source .env
-zinit wait lucid atinit"AUTOENV_FILE_ENTER=.env" for Tarrasch/zsh-autoenv
-
