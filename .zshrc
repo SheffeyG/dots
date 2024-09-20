@@ -45,6 +45,7 @@ alias grep='grep --color=auto'
 alias python=python3
 
 # git
+alias gc1='git clone --depth=1'
 alias gs='git status'
 alias ga='git add'
 alias gaa='git add .'
@@ -92,16 +93,16 @@ fi
 # EXPORT PATH #
 ###############
 
-# nvm init
+### NVM Initialization
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# conda init
+### CONDA Initialization
 CONDA_HOME="$HOME/anaconda3/"
 [ -f "/$CONDA_HOME/etc/profile.d/conda.sh" ] && \. "/$CONDA_HOME/etc/profile.d/conda.sh"
 
-# add more dirs to path
+### Customize Path
 PATH=$PATH:~/.local/bin/
 PATH=$PATH:~/.cargo/bin/
 
@@ -139,7 +140,7 @@ zinit snippet OMZL::completion.zsh
 # OMZ plugin
 zinit snippet OMZP::sudo           # tap ESC twice to toggle sudo
 zinit snippet OMZP::extract        # x to extract
-zinit snippet OMZP::dirhistory     # alt to move dir
+# zinit snippet OMZP::dirhistory     # alt to move dir
 
 # zsh heighlight
 zinit ice wait lucid \
