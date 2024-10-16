@@ -1,36 +1,35 @@
 return {
     "VonHeikemen/searchbox.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
-    cmd = {
+    cnd = {
         "SearchBoxMatchAll",
         "SearchBoxReplace",
         "SearchBoxIncSearch",
     },
     keys = {
-        { "<C-f>", false },
         {
-            "<C-f>",
+            "<leader>s",
             "<CMD> SearchBoxMatchAll clear_matches=true<CR>",
             mode = { "n" },
             desc = "Search",
         },
         {
-            "<C-h>",
-            "<CMD> SearchBoxReplace clear_matches=true<CR>",
+            "<leader>r",
+            "<CMD> SearchBoxReplace<CR>",
             mode = { "n" },
             desc = "Search and Replace",
         },
         {
-            "<C-f>",
+            "<leader>s",
             "<CMD> SearchBoxMatchAll visual_mode=true clear_matches=true<CR>",
             mode = { "v" },
             desc = "Search in selected text",
         },
         {
-            "<C-h>",
-            "<CMD> SearchBoxReplace visual_mode=true clear_matches=true<CR>",
+            "<leader>r",
+            "<CMD> SearchBoxReplace visual_mode=true<CR>",
             mode = { "v" },
-            desc= "Search and Replace in selected text",
+            desc = "Search and Replace in selected text",
         },
     },
 }
