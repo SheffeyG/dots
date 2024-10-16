@@ -14,7 +14,7 @@ return {
             "lua",
             "markdown",
         },
-        auto_install = "true",
+        auto_install = "false",
     },
 }
 

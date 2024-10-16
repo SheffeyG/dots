@@ -1,11 +1,6 @@
 return {
     "VonHeikemen/searchbox.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
-    cnd = {
-        "SearchBoxMatchAll",
-        "SearchBoxReplace",
-        "SearchBoxIncSearch",
-    },
     keys = {
         {
             "<leader>s",
