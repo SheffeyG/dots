@@ -1,10 +1,15 @@
 return {
     mason = {
         pkgs = {
-            "ruff",
-            "lua_ls",
+            "clangd",
+            "lua-language-server",
             "prettier",
+            "ruff",
+            "stylua",
         }
+    },
+    cheatsheet = {
+        theme = "simple"
     }
 }
 
