@@ -1,7 +1,11 @@
 return {
     "brenton-leighton/multiple-cursors.nvim",
     version = "*", -- Use the latest tagged version
-    opts = {}, -- This causes the plugin setup function to be called
+    opts = {
+        custom_key_maps = {
+            { "n", "<Leader>|", function() require("multiple-cursors").align() end },
+        },
+    },
     keys = {
         {
             "<C-M-j>",
