@@ -1,0 +1,12 @@
+#!/bin/sh
+
+prev() {
+	branch=`git symbolic-ref refs/remotes/origin/HEAD`
+	if [ -z "$1" ]; then
+		n=1
+	else
+		n=$1
+	fi
+	git checkout HEAD~$n 
+}
+prev "$@"

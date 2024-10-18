@@ -1,0 +1,14 @@
+#!/bin/sh
+
+next() {
+	branch=`git symbolic-ref refs/remotes/origin/HEAD`
+	if [ -z "$1" ]; then
+		n=1
+	else
+		n=$1
+	fi
+	git log --reverse --pretty=%H $branch | grep -A $n $(git rev-parse HEAD) | tail -1 | xargs git checkout
+	echo "-----------------------------\nStatus  Changed files\n-----------------------------"
+	git diff HEAD~$n HEAD --name-status
+}
+next "$@"
