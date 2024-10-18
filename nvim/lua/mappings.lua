@@ -51,5 +51,5 @@ local function code_runner()
 
     end
 
-map({ "n" }, "<leader>cr", code_runner)
+map({ "n" }, "<leader>cr", code_runner, { desc = "Save and Run (C/Cpp/Python)" })
 
