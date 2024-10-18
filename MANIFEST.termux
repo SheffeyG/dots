@@ -1,6 +1,0 @@
-.termux|copy|
-.zshrc|symlink|
-.p10k.zsh|copy|
-.gitconfig|copy|
-.clang-format|symlink|
-nvim|symlink|.config
