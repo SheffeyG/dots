@@ -4,8 +4,8 @@ local map = vim.keymap.set
 
 
 -- Command
-map("n", ";", ":", { desc = "CMD enter command mode" })
-map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
+map("n", ";", ":", { desc = "Enter command mode" })
+map("n", "<ESC>", "<CMD>noh<CR>", { desc = "General clear highlights" })
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 map("i", "jk", "<ESC>")
 
@@ -13,8 +13,8 @@ map("i", "jk", "<ESC>")
 -- Move Lines
 map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down", silent = true })
 map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up", silent = true })
-map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down", silent = true })
-map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up", silent = true })
+map("i", "<A-j>", "<ESC>:m .+1<CR>==gi", { desc = "Move line down", silent = true })
+map("i", "<A-k>", "<ESC>:m .-2<CR>==gi", { desc = "Move line up", silent = true })
 map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down", silent = true })
 map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up", silent = true })
 

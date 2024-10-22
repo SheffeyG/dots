@@ -4,7 +4,7 @@ return {
     keys = {
         {
             "<leader>s",
-            "<CMD> SearchBoxMatchAll clear_matches=true<CR>",
+            "<CMD> SearchBoxMatchAll<CR>",
             mode = { "n" },
             desc = "Search",
         },
@@ -16,7 +16,7 @@ return {
         },
         {
             "<leader>s",
-            "<CMD> SearchBoxMatchAll visual_mode=true clear_matches=true<CR>",
+            "<CMD> SearchBoxMatchAll visual_mode=true<CR>",
             mode = { "v" },
             desc = "Search in selected text",
         },
