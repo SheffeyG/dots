@@ -1,18 +1,16 @@
 local autocmd = vim.api.nvim_create_autocmd
 
--- autosave when open term
--- autocmd({ "BufWinLeave" }, {
---     -- pattern = { "*" },
---     pattern = { "*.py", "*.c", "*.cpp" },
---     callback = function()
---         -- if vim.api.nvim_buf_get_option(0, "modified") then
---         if vim.api.nvim_get_option_value("modified", {}) then
---             vim.cmd("write")
---         end
---     end,
--- })
+-- Auto same line when opening
+autocmd("BufReadPost", {
+    pattern = { "*" },
+    callback = function()
+        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+            vim.api.nvim_exec("normal! g'\"", false)
+        end
+    end,
+})
 
--- close nvimtree with the last buffer
+-- Auto close nvimtree with the last buffer
 autocmd("QuitPre", {
     callback = function()
         local tree_wins = {}
@@ -36,7 +34,7 @@ autocmd("QuitPre", {
     end,
 })
 
--- open nvimtree for some case
+-- Auto open nvimtree for some cases
 autocmd("VimEnter", {
     callback = function(data)
         -- buffer is a real file on the disk
@@ -47,7 +45,7 @@ autocmd("VimEnter", {
         --     return
         -- end
 
-        -- buffer with no name 
+        -- buffer with no name
         local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
         if no_name then
             -- open the tree
@@ -65,4 +63,3 @@ autocmd("VimEnter", {
         end
     end,
 })
-
