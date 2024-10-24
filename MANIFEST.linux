@@ -1,6 +1,7 @@
-.zshrc|symlink|
+.zshrc|link|
 .p10k.zsh|copy|
-.tmux.conf|symlink|
+.tmux.conf|link|
 .gitconfig|copy|
-.clang-format|symlink|
-nvim|symlink|.config
+.clang-format|link|
+nvim|link|.config
+bin|rlink|.local
