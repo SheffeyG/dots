@@ -9,15 +9,20 @@ symlinkFile() {
 
     mkdir -p $(dirname "$destination")
 
+    if [ ! -e "$filename" ]; then
+        echo "[WARNING] Source '$filename' doesn't exist! skipped."
+        return
+    fi 
+
     if [ ! -L "$destination" ]; then
         if [ -e "$destination" ]; then
-            echo "[WARNING] File '$destination' exists but it's not a symlink! skipped."
+            echo "[WARNING] Target '$destination' exists but it's not a symlink! skipped."
         else
             ln -s "$filename" "$destination"
             echo "[OK] symlink: $filename -> $destination"
         fi
     else
-        echo "[WARNING] File '$filename' already symlinked! skipped."
+        echo "[WARNING] Target '$filename' already symlinked! skipped."
     fi
 }
 
@@ -28,8 +33,13 @@ copyFile() {
 
     mkdir -p $(dirname "$destination")
 
+    if [ ! -e "$filename" ]; then
+        echo "[WARNING] Source '$filename' doesn't exist! skipped."
+        return
+    fi 
+
     if [ -e "$destination" ]; then
-        echo "[WARNING] File '$destination' already exists! skipped."
+        echo "[WARNING] Target '$destination' already exists! skipped."
     else
         cp "$filename" "$destination"
         echo "[OK] copy: $filename -> $destination"
@@ -54,8 +64,8 @@ recursiveLink() {
 
 deployManifest() {
     for row in $(cat $SCRIPT_DIR/$1); do
-        source=$(echo $row | cut -d \| -f 1)
-        operation=$(echo $row | cut -d \| -f 2)
+        operation=$(echo $row | cut -d \| -f 1)
+        source=$(echo $row | cut -d \| -f 2)
         target=$(echo $row | cut -d \| -f 3)
 
         case $operation in
