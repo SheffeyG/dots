@@ -63,10 +63,10 @@ recursiveLink() {
 
 
 deployManifest() {
-    for row in $(cat $SCRIPT_DIR/$1); do
-        operation=$(echo $row | cut -d \| -f 1)
-        source=$(echo $row | cut -d \| -f 2)
-        target=$(echo $row | cut -d \| -f 3)
+    while IFS='|' read -r operation source target; do
+        operation=$(echo "$operation" | tr -d '[:space:]')
+        source=$(echo "$source" | tr -d '[:space:]')
+        target=$(echo "$target" | tr -d '[:space:]')
 
         case $operation in
             link) symlinkFile $source $target ;;
@@ -77,7 +77,7 @@ deployManifest() {
 
             *) echo "[WARNING] Unknown operation '$operation', skipped." ;;
         esac
-    done
+    done < "$SCRIPT_DIR/$1"
 }
 
 
