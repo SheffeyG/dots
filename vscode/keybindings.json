@@ -20,23 +20,23 @@
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     {
-        "key": "ctrl+h",
-        "command": "cursorLeft",
-        "when": "textInputFocus"
+        "key": "alt+j",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+j",
-        "command": "cursorDown",
-        "when": "textInputFocus"
+        "key": "alt+k",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+k",
-        "command": "cursorUp",
-        "when": "textInputFocus"
+        "key": "ctrl+alt+j",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
     },
     {
-        "key": "ctrl+l",
-        "command": "cursorRight",
-        "when": "textInputFocus"
-    }
+        "key": "ctrl+alt+k",
+        "command": "editor.action.insertCursorAbove",
+        "when": "editorTextFocus"
+    },
 ]

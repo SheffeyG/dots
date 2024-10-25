@@ -1,0 +1,45 @@
+{
+    // Apparence
+    "files.autoSave": "afterDelay",
+    "files.trimTrailingWhitespace": true,
+    "editor.fontSize": 18,
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "debug.showVariableTypes": true,
+    "terminal.integrated.fontFamily": "FiraCode Nerd Font",
+
+    // Remote
+    "remote.SSH.configFile": "~/.ssh/config",
+    "remote.autoForwardPorts": false,
+
+    // Vim
+    "vim.leader": "<space>",
+    "vim.useSystemClipboard": true,
+    "vim.handleKeys": {
+        "<C-c>": false,
+        "<C-v>": false,
+        "<C-a>": false,
+        "<C-f>": false,
+    },
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [ "j", "k" ],
+            "after": [ "<Esc>" ]
+        },
+        {
+            "before": ["<C-h>"],
+            "commands": ["cursorLeft"]
+        },
+        {
+            "before": ["<C-j>"],
+            "commands": ["cursorDown"]
+        },
+        {
+            "before": ["<C-k>"],
+            "commands": ["cursorUp"]
+        },
+        {
+            "before": ["<C-l>"],
+            "commands": ["cursorRight"]
+        },
+    ]
+}
