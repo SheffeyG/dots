@@ -1,20 +1,28 @@
--- default LSP configures (lua stuff)
-require("nvchad.configs.lspconfig").defaults()
-
 local lspconfig = require("lspconfig")
-local nvlsp = require("nvchad.configs.lspconfig")
+local default = require("nvchad.configs.lspconfig")
 
--- LSP servers with default configures
-local lsp_servers = { "clangd", "lua_ls", "ruff"}
+-- LSP servers
+local servers = { "clangd", "lua_ls", "ruff" }
+
+local function on_attach(client, bufnr)
+    default.on_attach(client, bufnr)
+
+    local function opts(desc)
+        return { buffer = bufnr, desc = "LSP " .. desc }
+    end
+
+    -- remap some keybindings
+    vim.keymap.set("n", "<leader>rn", require("nvchad.lsp.renamer"), opts("Rename"))
+end
 
 return {
     "neovim/nvim-lspconfig",
     config = function()
-        for _, lsp in ipairs(lsp_servers) do
+        for _, lsp in ipairs(servers) do
             lspconfig[lsp].setup({
-                on_init      = nvlsp.on_init,
-                on_attach    = nvlsp.on_attach,
-                capabilities = nvlsp.capabilities,
+                on_init = default.on_init,
+                on_attach = on_attach,
+                capabilities = default.capabilities,
             })
         end
     end,
