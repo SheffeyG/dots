@@ -37,28 +37,26 @@ autocmd("QuitPre", {
 -- Auto open nvimtree for some cases
 autocmd("VimEnter", {
     callback = function(data)
-        -- buffer is a real file on the disk
-        -- local real_file = vim.fn.filereadable(data.file) == 1
-        -- if real_file then
-        --     -- open the tree, find the file but don't focus it
-        --     require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
-        --     return
-        -- end
-
-        -- buffer with no name
+        -- when buffer has no name
         local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
         if no_name then
-            -- open the tree
             require("nvim-tree.api").tree.open()
             return
         end
 
-        -- buffer is a directory
-        local directory = vim.fn.isdirectory(data.file) == 1
-        if directory then
+        -- when buffer is a directory
+        local is_dir = vim.fn.isdirectory(data.file) == 1
+        if is_dir then
             -- change to the directory
             vim.cmd.cd(data.file)
             require("nvim-tree.api").tree.open()
+            return
+        end
+
+        -- when the window width is large
+        local win_width = vim.api.nvim_win_get_width(0)
+        if win_width > 120 then
+            require("nvim-tree.api").tree.toggle({ focus = false })
             return
         end
     end,
