@@ -1,8 +1,10 @@
 local lspconfig = require("lspconfig")
 local default = require("nvchad.configs.lspconfig")
 
--- LSP servers
-local servers = { "clangd", "lua_ls", "ruff" }
+-- language servers
+local servers = { "clangd", "pyright" }
+-- lua_ls
+require("nvchad.configs.lspconfig").defaults()
 
 local function on_attach(client, bufnr)
     default.on_attach(client, bufnr)

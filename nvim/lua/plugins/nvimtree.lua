@@ -9,8 +9,8 @@ local nvtree_opts = {
 
 local devicons = require("nvchad.icons.devicons")
 
+-- override some nvtree opts for termux
 if vim.fn.has("termux") == 1 then
-    -- override some nvtree opts for termux
     nvtree_opts = {
         renderer = {
             icons = {

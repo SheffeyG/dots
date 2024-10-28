@@ -1,0 +1,12 @@
+return {
+    {
+        "denialofsandwich/sudo.nvim",
+        dependencies = { "MunifTanjim/nui.nvim" },
+        config = true,
+        cmd = { "SudoWrite" },
+    },
+    {
+        "declancm/vim2vscode",
+        cmd = "Code",
+    },
+}
