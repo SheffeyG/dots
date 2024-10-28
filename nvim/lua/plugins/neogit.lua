@@ -6,27 +6,7 @@ return {
     },
     cmd = "Neogit",
     keys = {
-        { "<leader>gg", "<CMD>Neogit<CR>", desc = "Neogit" },
-        {
-            "<leader>gf",
-            function()
-                require("neogit").action("log", "log_current", { "--", vim.fn.expand("%") })()
-            end,
-            desc = "Git log for file",
-        },
-        {
-            "<leader>gf",
-            function()
-                local file = vim.fn.expand("%")
-                vim.cmd([[execute "normal! \<ESC>"]])
-                local line_start = vim.fn.getpos("'<")[2]
-                local line_end = vim.fn.getpos("'>")[2]
-
-                require("neogit").action("log", "log_current", { "-L" .. line_start .. "," .. line_end .. ":" .. file })()
-            end,
-            desc = "Git log for this range",
-            mode = "v",
-        },
+        { "<leader>gg", "<CMD>Neogit<CR>", desc = "Git Neogit Panel" },
     },
     opts = {
         kind = "floating", -- tab/floating/split/vsplit
