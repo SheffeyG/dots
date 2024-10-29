@@ -4,19 +4,19 @@ local map = vim.keymap.set
 
 
 -- Command
-map("n", ";", ":", { desc = "Enter command mode" })
-map("n", "<ESC>", "<CMD>noh<CR>", { desc = "General clear highlights" })
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map("n", ";", ":")
+map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 map("i", "jk", "<ESC>")
+map("n", "<ESC>", "<CMD>noh<CR>", { desc = "General Clear highlights" })
 
 
 -- Move Lines
-map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down", silent = true })
-map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up", silent = true })
-map("i", "<A-j>", "<ESC>:m .+1<CR>==gi", { desc = "Move line down", silent = true })
-map("i", "<A-k>", "<ESC>:m .-2<CR>==gi", { desc = "Move line up", silent = true })
-map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down", silent = true })
-map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up", silent = true })
+map("n", "<A-j>", ":m .+1<CR>==", { desc = "MoveLine Down", silent = true })
+map("n", "<A-k>", ":m .-2<CR>==", { desc = "MoveLine Up", silent = true })
+map("i", "<A-j>", "<ESC>:m .+1<CR>==gi", { desc = "MoveLine Down", silent = true })
+map("i", "<A-k>", "<ESC>:m .-2<CR>==gi", { desc = "MoveLine Up", silent = true })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "MoveLine Down", silent = true })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "MoveLine Up", silent = true })
 
 
 -- Terminal Closer
@@ -25,8 +25,7 @@ local function close_terminal()
     vim.api.nvim_win_close(win, true)
 end
 
-map("t", "jk", close_terminal, { desc = "Terminal Close" })
--- map("t", "<ESC>", close_terminal, { desc = "Terminal Close" })
+map("t", "jk", close_terminal, { desc = "Terminal Close terminal" })
 
 
 -- Code Runner
@@ -51,5 +50,5 @@ local function code_runner()
 
     end
 
-map({ "n" }, "<leader>cr", code_runner, { desc = "Save and Run (C/Cpp/Python)" })
+map({ "n" }, "<leader>cr", code_runner, { desc = "Terminal Save and Run (C/Cpp/Python)" })
 
