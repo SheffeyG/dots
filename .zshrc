@@ -52,9 +52,9 @@ alias ga='git add'
 alias gaa='git add .'
 alias gill='git pull'
 alias gish='git push'
-alias gm='git commit -m'
 alias gma='git commit --amend --no-edit'
 alias glo='git log --oneline -n 10 --graph'
+gm() { if [ -z "$1" ]; then git commit; else git commit -m "$1"; fi; }
 
 # software shortcuts
 [[ $(command -v nvim) ]] && alias vim='nvim' && export EDITOR=nvim
