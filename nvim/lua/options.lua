@@ -11,14 +11,14 @@ o.swapfile = false
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
--- Indenting
+-- indenting
 o.expandtab = true
 o.shiftwidth = 4
 o.smartindent = true
 o.tabstop = 4
 o.softtabstop = 4
 
--- Clipboard
+-- clipboard
 if vim.fn.has("wsl") == 1 then
     o.clipboard = "unnamed,unnamedplus"
     g.clipboard = {

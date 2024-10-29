@@ -1,6 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 
--- Auto same line when opening
+-- move to the same line when opening
 autocmd("BufReadPost", {
     pattern = { "*" },
     callback = function()
@@ -10,7 +10,7 @@ autocmd("BufReadPost", {
     end,
 })
 
--- Auto close nvimtree with the last buffer
+-- close nvimtree if the last buffer
 autocmd("QuitPre", {
     callback = function()
         local tree_wins = {}
@@ -26,7 +26,7 @@ autocmd("QuitPre", {
             end
         end
         if 1 == #wins - #floating_wins - #tree_wins then
-            -- Should quit, so we close all invalid windows.
+            -- should quit, so we close all invalid windows.
             for _, w in ipairs(tree_wins) do
                 vim.api.nvim_win_close(w, true)
             end
@@ -34,7 +34,7 @@ autocmd("QuitPre", {
     end,
 })
 
--- Auto open nvimtree for some cases
+-- open nvimtree for some cases
 autocmd("VimEnter", {
     callback = function(data)
         -- when buffer has no name
