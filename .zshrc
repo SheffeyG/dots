@@ -47,7 +47,7 @@ alias tt='if tmux has-session; then tmux a; else tmux; fi'
 
 # git
 alias gc1='git clone --depth=1'
-alias gs='git status'
+alias gs='git status -sbM'
 alias ga='git add'
 alias gaa='git add .'
 alias gill='git pull'
