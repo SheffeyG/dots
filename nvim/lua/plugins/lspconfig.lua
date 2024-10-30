@@ -4,7 +4,7 @@ local default = require("nvchad.configs.lspconfig")
 -- lua_ls
 require("nvchad.configs.lspconfig").defaults()
 -- other language servers
-local servers = { "clangd", "ruff", "rust_analyzer" }
+local servers = { "clangd", "pyright", "rust_analyzer" }
 
 local function on_attach(client, bufnr)
     default.on_attach(client, bufnr)

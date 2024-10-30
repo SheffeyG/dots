@@ -1,15 +1,15 @@
 return {
     "stevearc/conform.nvim",
-    opt = {
+    opts = {
         formatters_by_ft = {
-            c = { "clang-format" },
-            cpp = { "clang-format" },
+            -- c = { "clang-format" },
+            -- cpp = { "clang-format" },
             css = { "prettier" },
             javascript = { "prettier" },
             html = { "prettier" },
             lua = { "stylua" },
             markdown = { "prettier" },
-            python = { "ruff" },
+            python = { "ruff_format", "ruff_organize_imports" },
             typescript = { "prettier" },
         },
     },
