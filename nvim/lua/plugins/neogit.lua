@@ -9,8 +9,6 @@ return {
         { "<leader>gg", "<CMD>Neogit<CR>", desc = "Git Neogit Panel" },
     },
     opts = {
-        kind = "auto", -- auto/tab/floating/split/vsplit
-        log_view = { kind = "split" },
         signs = {
             hunk = { "", "" },
             item = { " ", " " },
@@ -25,7 +23,9 @@ return {
             kind = "floating",
             show_staged_diff = false,
         },
-        commit_select_view = { kind = "auto" },
+        kind = "auto", -- auto/tab/floating/split/vsplit
+        commit_view = { kind = "vsplit" },
+        log_view = { kind = "split" },
         graph_style = "unicode",
         -- stylua: ignore start
         highlight = {

@@ -3,7 +3,7 @@ return {
     version = "*", -- Use the latest tagged version
     opts = {
         custom_key_maps = {
-            { "n", "<Leader>|", function() require("multiple-cursors").align() end },
+            { "n", "<Leader>|", function() require("multiple-cursors").align() end }, -- stylua: ignore
         },
     },
     keys = {
