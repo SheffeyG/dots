@@ -41,7 +41,7 @@ copyFile() {
     if [ -e "$destination" ]; then
         echo "[WARNING] Target '$destination' already exists! skipped."
     else
-        cp "$filename" "$destination"
+        cp -r "$filename" "$destination"
         echo "[OK] copy: $filename -> $destination"
     fi
 }
