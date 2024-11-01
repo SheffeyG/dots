@@ -2,8 +2,8 @@ return {
     "stevearc/conform.nvim",
     opts = {
         formatters_by_ft = {
-            -- c = { "clang-format" },
-            -- cpp = { "clang-format" },
+            c = { "clang-format", lsp_format = "fallback" },
+            cpp = { "clang-format", lsp_format = "fallback" },
             css = { "prettier" },
             javascript = { "prettier" },
             html = { "prettier" },
