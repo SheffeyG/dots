@@ -1,6 +1,6 @@
-##############
-# P10K THEME #
-##############
+#-----------------------
+# Theme
+#-----------------------
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -10,9 +10,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 
-##########
-# SETOPT #
-##########
+#-----------------------
+# Options
+#-----------------------
 
 # history setting
 setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_EXPIRE_DUPS_FIRST HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS INC_APPEND_HISTORY
@@ -30,9 +30,10 @@ export FZF_DEFAULT_OPTS='
     --color bg+:#7797b7,fg+:#2c2f30,hl:#D8DEE9,hl+:#26292a,gutter:-1
     --color pointer:#373d49,info:#606672'
 
-#########
-# ALIAS #
-#########
+
+#-----------------------
+# Aliases
+#-----------------------
 
 alias ...=../..
 alias ....=../../..
@@ -47,7 +48,7 @@ alias tt='if tmux has-session; then tmux a; else tmux; fi'
 
 # git
 alias gc1='git clone --depth=1'
-alias gs='git status -sbM'
+alias gs='git status -sb'
 alias ga='git add'
 alias gaa='git add .'
 alias gill='git pull'
@@ -90,9 +91,9 @@ else
 fi
 
 
-###############
-# EXPORT PATH #
-###############
+#-----------------------
+# Path
+#-----------------------
 
 ### NVM Initialization
 export NVM_DIR="$HOME/.nvm"
@@ -108,9 +109,9 @@ PATH=$PATH:~/.local/bin/
 PATH=$PATH:~/.cargo/bin/
 
 
-#########
-# ZINIT #
-#########
+#-----------------------
+# Plugins
+#-----------------------
 
 ### Zinit Initialization
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
