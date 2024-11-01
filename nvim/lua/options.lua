@@ -8,6 +8,10 @@ o.cursorlineopt = "both"
 -- o.relativenumber = true
 o.swapfile = false
 
+o.fileencodings = "utf-8,gb2312,gbk,cp936"
+o.encoding = "utf-8"
+-- o.termencoding = "utf-8"
+
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
