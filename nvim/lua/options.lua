@@ -23,8 +23,8 @@ o.tabstop = 4
 o.softtabstop = 4
 
 -- clipboard
+o.clipboard = "unnamed,unnamedplus"
 if vim.fn.has("wsl") == 1 then
-    o.clipboard = "unnamed,unnamedplus"
     g.clipboard = {
         name = "WslClipboard",
         copy = {
