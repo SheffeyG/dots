@@ -1,1 +1,10 @@
+---
+UseTab: Never
 IndentWidth: 4
+ColumnLimit: 120
+---
+Language: Cpp
+SpacesBeforeTrailingComments: 2
+AlignTrailingComments: true
+AllowShortIfStatementsOnASingleLine: WithoutElse
+---
