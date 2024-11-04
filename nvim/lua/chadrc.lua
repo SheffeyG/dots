@@ -6,14 +6,6 @@ M.base46 = {
     theme_taggle = { "onedark", "catppuccin" },
 }
 
-M.mason = {
-    pkgs = {
-        "clangd",
-        "lua-language-server",
-        "pyright",
-    },
-}
-
 M.cheatsheet = {
     theme = "simple",
 }
