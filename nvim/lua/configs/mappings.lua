@@ -4,7 +4,7 @@ local map = vim.keymap.set
 
 map("n", ";", ":")
 map("i", "jk", "<ESC>")
-map("n", "<ESC>", "<CMD>noh<CR>", { desc = "general clear highlights" })
+map("n", "<ESC>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 map("n", "<C-a>", "ggVG",         { desc = "general select whole file" })
 map("n", "<C-s>", "<cmd>w<CR>",   { desc = "general save file" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
@@ -122,7 +122,7 @@ map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>",   { desc = "telescope liv
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>",     { desc = "telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>",   { desc = "telescope help page" })
 map("n", "<leader>ma", "<cmd>Telescope marks<CR>",       { desc = "telescope find marks" })
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>",  { desc = "telescope find files" })
+map("n", "<leader>ff", "<cmd>Telescope find_files<CR>",  { desc = "telescope find files" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>",    { desc = "telescope find oldfiles" })
 map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
 map("n", "<leader>gt", "<cmd>Telescope git_status<CR>",  { desc = "telescope git status" })

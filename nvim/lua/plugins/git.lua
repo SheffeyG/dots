@@ -20,7 +20,7 @@ return {
         },
         cmd = "Neogit",
         keys = {
-            { "<leader>gg", "<CMD>Neogit<CR>", desc = "Git Neogit Panel" },
+            { "<leader>gg", "<cmd>Neogit<CR>", desc = "Git Neogit Panel" },
         },
         opts = {
             signs = {
