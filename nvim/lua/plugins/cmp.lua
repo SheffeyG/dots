@@ -111,6 +111,7 @@ return {
     ---------------------------------------------------------------------------
     {
         "windwp/nvim-autopairs",
+        dependencies = "hrsh7th/nvim-cmp",
         opts = {
             fast_wrap = {},
             disable_filetype = { "TelescopePrompt", "vim" },
