@@ -1,5 +1,7 @@
 -- settings for each lsp server
 local server_settings = {
+    --- C ---
+    clangd = {},
     --- Python ---
     basedpyright = {
         basedpyright = {
@@ -7,9 +9,10 @@ local server_settings = {
                 typeCheckingMode = "basic",
             },
         },
+        python = {
+            venvPath = ".",
+        },
     },
-    --- C ---
-    clangd = {},
     --- Lua ---
     lua_ls = {
         Lua = {
