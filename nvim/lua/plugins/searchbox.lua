@@ -1,6 +1,6 @@
 return {
     "VonHeikemen/searchbox.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
+    dependencies = "MunifTanjim/nui.nvim",
     keys = {
         {
             "<leader>ss",

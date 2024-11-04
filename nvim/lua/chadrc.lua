@@ -10,8 +10,7 @@ M.mason = {
     pkgs = {
         "clangd",
         "lua-language-server",
-        "prettier",
-        "stylua",
+        "pyright",
     },
 }
 

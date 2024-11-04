@@ -1,9 +1,10 @@
 return {
     "brenton-leighton/multiple-cursors.nvim",
     version = "*", -- Use the latest tagged version
+    -- stylua: ignore
     opts = {
         custom_key_maps = {
-            { "n", "<Leader>|", function() require("multiple-cursors").align() end }, -- stylua: ignore
+            { "n", "<Leader>|", function() require("multiple-cursors").align() end },
         },
     },
     keys = {
