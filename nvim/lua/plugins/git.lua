@@ -12,6 +12,7 @@ return {
             }
         end,
     },
+
     {
         "NeogitOrg/neogit",
         dependencies = {

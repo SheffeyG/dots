@@ -54,28 +54,12 @@ return {
     },
 
     {
-        "williamboman/mason.nvim",
-        cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
-        opts = function()
-            dofile(vim.g.base46_cache .. "mason")
-            return {
-                PATH = "skip",
-                ui = {
-                    icons = {
-                        package_pending = " ",
-                        package_installed = " ",
-                        package_uninstalled = " ",
-                    },
-                },
-            }
-        end,
-    },
-    {
         "denialofsandwich/sudo.nvim",
         dependencies = "MunifTanjim/nui.nvim",
         config = true,
         cmd = { "SudoWrite" },
     },
+
     {
         "declancm/vim2vscode",
         cmd = "Code",

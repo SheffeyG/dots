@@ -80,7 +80,7 @@ capabilities.textDocument.completion.completionItem = {
     },
 }
 
--- disable semanticTokens
+-- disable semantic tokens
 local on_init = function(client, _)
     if client.supports_method("textDocument/semanticTokens") then
         client.server_capabilities.semanticTokensProvider = nil
@@ -88,17 +88,37 @@ local on_init = function(client, _)
 end
 
 return {
-    "neovim/nvim-lspconfig",
-    event = "User FilePost",
-    config = function()
-        dofile(vim.g.base46_cache .. "lsp")
-        for server, settings in pairs(server_settings) do
-            require("lspconfig")[server].setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                on_init = on_init,
-                settings = settings,
-            })
-        end
-    end,
+    {
+        "williamboman/mason.nvim",
+        cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
+        opts = function()
+            dofile(vim.g.base46_cache .. "mason")
+            return {
+                PATH = "skip",
+                ui = {
+                    icons = {
+                        package_pending = " ",
+                        package_installed = " ",
+                        package_uninstalled = " ",
+                    },
+                },
+            }
+        end,
+    },
+
+    {
+        "neovim/nvim-lspconfig",
+        event = "User FilePost",
+        config = function()
+            dofile(vim.g.base46_cache .. "lsp")
+            for server, settings in pairs(server_settings) do
+                require("lspconfig")[server].setup({
+                    on_attach = on_attach,
+                    capabilities = capabilities,
+                    on_init = on_init,
+                    settings = settings,
+                })
+            end
+        end,
+    },
 }

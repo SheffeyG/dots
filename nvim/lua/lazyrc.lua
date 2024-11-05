@@ -5,6 +5,7 @@ M.defaults = { lazy = true }
 M.spec = {
     { import = "plugins" },
 }
+
 M.install = { colorscheme = { "nvchad" } }
 
 -- automatically check for plugin updates
