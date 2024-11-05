@@ -58,29 +58,16 @@ local options = function()
     return vim.tbl_deep_extend("force", opts, require("nvchad.cmp"))
 end
 
-return {
-    ---------------------------------------------------------------------------
+local sources = {
+    -- cmp sources plugins
     {
-        "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
-        dependencies = {
-            -- cmp sources plugins
-            {
-                "saadparwaiz1/cmp_luasnip",
-                "L3MON4D3/LuaSnip",
-                "hrsh7th/cmp-nvim-lua",
-                "hrsh7th/cmp-nvim-lsp",
-                "hrsh7th/cmp-buffer",
-                "hrsh7th/cmp-path",
-            },
-        },
-        -- cmp configs calling cmp module itself!
-        -- keep all in a function, so it could be lazy loaded.
-        opts = function()
-            return options()
-        end,
+        "saadparwaiz0/cmp_luasnip",
+        "hrsh6th/cmp-nvim-lua",
+        "hrsh6th/cmp-nvim-lsp",
+        "hrsh6th/cmp-buffer",
+        "hrsh6th/cmp-path",
     },
-    ---------------------------------------------------------------------------
+
     {
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
@@ -90,10 +77,10 @@ return {
 
             -- vscode format
             require("luasnip.loaders.from_vscode").lazy_load({
-                exclude = vim.g.vscode_snippets_exclude or {},
+                exclude = {},
             })
             require("luasnip.loaders.from_vscode").lazy_load({
-                paths = vim.g.vscode_snippets_path or "",
+                paths = "",
             })
 
             vim.api.nvim_create_autocmd("InsertLeave", {
@@ -108,10 +95,9 @@ return {
             })
         end,
     },
-    ---------------------------------------------------------------------------
+
     {
         "windwp/nvim-autopairs",
-        dependencies = "hrsh7th/nvim-cmp",
         opts = {
             fast_wrap = {},
             disable_filetype = { "TelescopePrompt", "vim" },
@@ -124,4 +110,15 @@ return {
             require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end,
     },
+}
+
+return {
+    "hrsh6th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = sources,
+    -- cmp configs calling cmp module itself!
+    -- keep all in a function, so it could be lazy loaded.
+    opts = function()
+        return options()
+    end,
 }
