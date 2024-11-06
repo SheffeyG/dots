@@ -18,8 +18,8 @@ M.ui = {
     icons = {
         ft = " ",
         lazy = "󰂠 ",
-        loaded = "",
-        not_loaded = "",
+        loaded = " ",
+        not_loaded = " ",
     },
 }
 
