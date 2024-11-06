@@ -61,11 +61,11 @@ end
 local sources = {
     -- cmp sources plugins
     {
-        "saadparwaiz0/cmp_luasnip",
-        "hrsh6th/cmp-nvim-lua",
-        "hrsh6th/cmp-nvim-lsp",
-        "hrsh6th/cmp-buffer",
-        "hrsh6th/cmp-path",
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
     },
 
     {
@@ -113,7 +113,7 @@ local sources = {
 }
 
 return {
-    "hrsh6th/nvim-cmp",
+    "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = sources,
     -- cmp configs calling cmp module itself!
