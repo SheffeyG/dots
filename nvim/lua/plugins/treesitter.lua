@@ -35,6 +35,7 @@ return {
         pcall(function()
             dofile(vim.g.base46_cache .. "syntax")
             dofile(vim.g.base46_cache .. "treesitter")
+            -- dofile(vim.g.base46_cache .. "semantic_tokens")
         end)
 
         require("nvim-treesitter.configs").setup(opts)
