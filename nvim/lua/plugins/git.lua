@@ -21,7 +21,7 @@ return {
         },
         cmd = "Neogit",
         keys = {
-            { "<leader>gg", "<cmd>Neogit<CR>", desc = "Git Neogit Panel" },
+            { "<leader>gg", "<cmd>Neogit<CR>", desc = "Git neogit panel" },
         },
         opts = function()
             dofile(vim.g.base46_cache .. "neogit")
