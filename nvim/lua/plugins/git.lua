@@ -44,6 +44,12 @@ return {
                 commit_view = { kind = "vsplit" },
                 log_view = { kind = "split" },
                 graph_style = "unicode",
+                mappings = {
+                    popup = {
+                        ["l"] = false,
+                        ["L"] = "LogPopup",
+                    },
+                },
             }
         end,
     },
