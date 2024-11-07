@@ -2,6 +2,8 @@
 local server_settings = {
     --- C ---
     clangd = {},
+    --- Rust ---
+    rust_analyzer = {},
     --- Python ---
     basedpyright = {
         basedpyright = {
