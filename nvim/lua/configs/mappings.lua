@@ -117,28 +117,22 @@ map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>",    { desc = "Nvimtree toggle window
 map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "Nvimtree focus window" })
 
 -- telescope
+map("n", "<leader>ff", "<cmd>Telescope find_files<CR>",  { desc = "Telescope find files" })
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>",   { desc = "Telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>",     { desc = "Telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>",   { desc = "Telescope help page" })
-map("n", "<leader>ma", "<cmd>Telescope marks<CR>",       { desc = "Telescope find marks" })
-map("n", "<leader>ff", "<cmd>Telescope find_files<CR>",  { desc = "Telescope find files" })
+map("n", "<leader>ft", "<cmd>Telescope terms<CR>",       { desc = "Telescope find hidden term" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>",    { desc = "Telescope find oldfiles" })
-map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
+map("n", "<leader>ma", "<cmd>Telescope marks<CR>",       { desc = "Telescope find marks" })
+map("n", "<leader>gm", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
 map("n", "<leader>gt", "<cmd>Telescope git_status<CR>",  { desc = "Telescope git status" })
-map("n", "<leader>pt", "<cmd>Telescope terms<CR>",       { desc = "Telescope pick hidden term" })
 
 map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>",
     { desc = "Telescope find in current buffer" })
 
-map("n", "<leader>th", function() require("nvchad.themes").open() end,
-    { desc = "Telescope nvchad themes" })
-
 map("n", "<leader>fa", "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
     { desc = "Telescope find all files" })
 
--- whichkey
-map("n", "<leader>wK", "<cmd>WhichKey<CR>", { desc = "Whichkey all keymaps" })
+map("n", "<leader>th", function() require("nvchad.themes").open() end,
+    { desc = "Telescope nvchad themes" })
 
-map("n", "<leader>wk", function()
-    vim.cmd("WhichKey " .. vim.fn.input("WhichKey: "))
-end, { desc = "Whichkey query lookup" })
