@@ -1,11 +1,27 @@
 return {
+    --- formatter ---
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                css = { "prettier" },
+                javascript = { "prettier" },
+                html = { "prettier" },
+                lua = { "stylua" },
+                markdown = { "prettier" },
+                python = { "ruff_format", "ruff_organize_imports" },
+                typescript = { "prettier" },
+            },
+        },
+    },
+    --- multiple cursors ---
     {
         "brenton-leighton/multiple-cursors.nvim",
-        version = "*", -- Use the latest tagged version
+        version = "*",
         opts = {
             custom_key_maps = {
-            -- stylua: ignore
-            { "n", "<leader>|", function() require("multiple-cursors").align() end },
+                -- stylua: ignore
+                { "n", "<leader>|", function() require("multiple-cursors").align() end },
             },
         },
         keys = {
@@ -35,14 +51,14 @@ return {
             },
         },
     },
-
+    --- write as su ---
     {
         "denialofsandwich/sudo.nvim",
         dependencies = "MunifTanjim/nui.nvim",
         config = true,
         cmd = { "SudoWrite" },
     },
-
+    --- you need some VSC power ---
     {
         "declancm/vim2vscode",
         cmd = "Code",
