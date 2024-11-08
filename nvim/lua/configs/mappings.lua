@@ -1,22 +1,28 @@
+-- stylua: ignore start
+
 local map = vim.keymap.set
 
 ------------------------------------- General ----------------------------------------
 
 map("n", ";", ":")
 map("i", "jk", "<ESC>")
+
 map("n", "<ESC>", "<cmd>noh<CR>", { desc = "General clear highlights" })
 map("n", "<C-a>", "ggVG",         { desc = "General select whole file" })
 map("n", "<C-s>", "<cmd>w<CR>",   { desc = "General save file" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General copy whole file" })
 
------------------------------------ Move Lines ---------------------------------------
+map("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
+map("v", "<leader>/", "gc",  { desc = "Toggle comment", remap = true })
 
-map("n", "<A-k>", ":m .-2<CR>==",        { desc = "Move line up" })
-map("n", "<A-j>", ":m .+1<CR>==",        { desc = "Move line down" })
-map("v", "<A-k>", ":m '<-2<CR>gv=gv",    { desc = "Move line up" })
-map("v", "<A-j>", ":m '>+1<CR>gv=gv",    { desc = "Move line down" })
-map("i", "<A-k>", "<ESC>:m .-2<CR>==gi", { desc = "Move line up" })
-map("i", "<A-j>", "<ESC>:m .+1<CR>==gi", { desc = "Move line down" })
+-------------------------------------- Move ------------------------------------------
+
+map("n", "<A-k>", ":m .-2<CR>==",        { desc = "Move line up",   silent = true })
+map("n", "<A-j>", ":m .+1<CR>==",        { desc = "Move line down", silent = true })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv",    { desc = "Move line up",   silent = true })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv",    { desc = "Move line down", silent = true })
+map("i", "<A-k>", "<ESC>:m .-2<CR>==gi", { desc = "Move line up",   silent = true })
+map("i", "<A-j>", "<ESC>:m .+1<CR>==gi", { desc = "Move line down", silent = true })
 
 map("i", "<C-b>", "<ESC>^i", { desc = "Move cusor beginning of line" })
 map("i", "<C-e>", "<End>",   { desc = "Move cusor end of line" })
@@ -108,10 +114,6 @@ map("n", "<leader>x", function()
     require("nvchad.tabufline").close_buffer()
 end, { desc = "Switch buffer close" })
 
--- comment
-map("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
-map("v", "<leader>/", "gc",  { desc = "Toggle comment", remap = true })
-
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>",    { desc = "Nvimtree toggle window" })
 map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "Nvimtree focus window" })
@@ -136,3 +138,4 @@ map("n", "<leader>fa", "<cmd>Telescope find_files follow=true no_ignore=true hid
 map("n", "<leader>th", function() require("nvchad.themes").open() end,
     { desc = "Telescope nvchad themes" })
 
+-- stylua: ignore end

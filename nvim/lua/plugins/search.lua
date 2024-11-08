@@ -36,25 +36,25 @@ return {
         keys = {
             {
                 "<leader>ss",
-                "<cmd> SearchBoxMatchAll<CR>",
+                "<cmd>SearchBoxMatchAll<CR>",
                 mode = { "n" },
                 desc = "SearchBox search",
             },
             {
                 "<leader>sr",
-                "<cmd> SearchBoxReplace<CR>",
+                "<cmd>SearchBoxReplace<CR>",
                 mode = { "n" },
                 desc = "SearchBox search and replace",
             },
             {
                 "<leader>ss",
-                "<cmd> SearchBoxMatchAll visual_mode=true<CR>",
+                "<cmd>SearchBoxMatchAll visual_mode=true<CR>",
                 mode = { "v" },
                 desc = "SearchBox search in selected text",
             },
             {
                 "<leader>sr",
-                "<cmd> SearchBoxReplace visual_mode=true<CR>",
+                "<cmd>SearchBoxReplace visual_mode=true<CR>",
                 mode = { "v" },
                 desc = "SearchBox search and replace in selected text",
             },

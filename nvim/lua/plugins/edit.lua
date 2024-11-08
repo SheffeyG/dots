@@ -3,13 +3,14 @@ return {
     {
         "stevearc/conform.nvim",
         opts = {
+            -- stylua: ignore
             formatters_by_ft = {
-                css = { "prettier" },
+                css        = { "prettier" },
                 javascript = { "prettier" },
-                html = { "prettier" },
-                lua = { "stylua" },
-                markdown = { "prettier" },
-                python = { "ruff_format", "ruff_organize_imports" },
+                html       = { "prettier" },
+                lua        = { "stylua" },
+                markdown   = { "prettier" },
+                python     = { "ruff_format", "ruff_organize_imports" },
                 typescript = { "prettier" },
             },
         },
@@ -21,7 +22,7 @@ return {
         opts = {
             custom_key_maps = {
                 -- stylua: ignore
-                { "n", "<leader>|", function() require("multiple-cursors").align() end },
+                { "n", "<leader>=", function() require("multiple-cursors").align() end },
             },
         },
         keys = {
