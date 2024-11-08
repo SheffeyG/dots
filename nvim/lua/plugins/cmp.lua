@@ -76,12 +76,7 @@ local sources = {
             require("luasnip").config.set_config(opts)
 
             -- vscode format
-            require("luasnip.loaders.from_vscode").lazy_load({
-                exclude = {},
-            })
-            require("luasnip.loaders.from_vscode").lazy_load({
-                paths = "",
-            })
+            require("luasnip.loaders.from_vscode").lazy_load()
 
             vim.api.nvim_create_autocmd("InsertLeave", {
                 callback = function()
