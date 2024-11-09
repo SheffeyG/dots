@@ -3,6 +3,7 @@ vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46_cache/"
 require("configs/options")
 require("configs/autocmds")
 require("configs/mappings")
+require("configs/special")
 
 -- bootstrap lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

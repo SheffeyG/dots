@@ -9,9 +9,10 @@ o.showmode = false
 
 o.clipboard = "unnamedplus"
 o.cursorline = true
+o.relativenumber = false
 o.cursorlineopt = "number"
 
--- indenting
+--- indenting ---
 o.expandtab = true
 o.shiftwidth = 4
 o.smartindent = true
@@ -23,7 +24,7 @@ o.ignorecase = true
 o.smartcase = true
 o.mouse = "a"
 
--- numbers
+--- numbers ---
 o.number = true
 o.numberwidth = 2
 o.ruler = false
@@ -50,27 +51,3 @@ g.loaded_python3_provider = 0
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 
--- add mason binaries to path for native windows
-local is_windows = vim.fn.has("win32") ~= 0
-local sep = is_windows and "\\" or "/"
-local delim = is_windows and ";" or ":"
-local prefix = table.concat({ vim.fn.stdpath("data"), "mason", "bin" }, sep)
-vim.env.PATH = prefix .. delim .. vim.env.PATH
-
--- set clipboard provider for wsl
-if vim.fn.has("wsl") == 1 then
-    g.clipboard = {
-        name = "WslClipboard",
-        copy = {
-            ["+"] = "clip.exe",
-            ["*"] = "clip.exe",
-        },
-        paste = {
-            ["+"] = 'powershell.exe -c \
-                [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-            ["*"] = 'powershell.exe -c \
-                [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        },
-        cache_enabled = false,
-    }
-end
