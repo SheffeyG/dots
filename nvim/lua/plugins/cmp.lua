@@ -58,6 +58,7 @@ local options = function()
     return vim.tbl_deep_extend("force", opts, require("nvchad.cmp"))
 end
 
+---@type NvPluginSpec
 local sources = {
     -- cmp sources plugins
     {
@@ -107,6 +108,7 @@ local sources = {
     },
 }
 
+---@type NvPluginSpec
 return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",

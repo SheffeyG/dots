@@ -89,6 +89,7 @@ local on_init = function(client, _)
     end
 end
 
+---@type NvPluginSpec
 return {
     {
         "williamboman/mason.nvim",
