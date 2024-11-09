@@ -17,13 +17,6 @@ map("v", "<leader>/", "gc",  { desc = "Toggle comment", remap = true })
 
 -------------------------------------- Move ------------------------------------------
 
-map("n", "<A-k>", ":m .-2<CR>==",        { desc = "Move line up",   silent = true })
-map("n", "<A-j>", ":m .+1<CR>==",        { desc = "Move line down", silent = true })
-map("v", "<A-k>", ":m '<-2<CR>gv=gv",    { desc = "Move line up",   silent = true })
-map("v", "<A-j>", ":m '>+1<CR>gv=gv",    { desc = "Move line down", silent = true })
-map("i", "<A-k>", "<ESC>:m .-2<CR>==gi", { desc = "Move line up",   silent = true })
-map("i", "<A-j>", "<ESC>:m .+1<CR>==gi", { desc = "Move line down", silent = true })
-
 map("i", "<C-b>", "<ESC>^i", { desc = "Move cusor beginning of line" })
 map("i", "<C-e>", "<End>",   { desc = "Move cusor end of line" })
 map("i", "<C-h>", "<Left>",  { desc = "Move cusor left" })
@@ -38,31 +31,25 @@ map("n", "<C-l>", "<C-w>l", { desc = "Switch window right" })
 
 ------------------------------------ Terminal ----------------------------------------
 
-map("t", "jk", function()
-    local win = vim.api.nvim_get_current_win()
-    vim.api.nvim_win_close(win, true)
-end, { desc = "Terminal Close terminal" })
-
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
 
--- new terminals
-map("n", "<leader>h", function()
-    require("nvchad.term").new({ pos = "sp" })
-end, { desc = "Terminal new horizontal term" })
-
-map("n", "<leader>v", function()
-    require("nvchad.term").new({ pos = "vsp" })
-end, { desc = "Terminal new vertical term" })
-
-map({ "n", "t" }, "<A-v>", function()
-    require("nvchad.term").toggle({ pos = "vsp", id = "vtoggleTerm" })
-end, { desc = "Terminal toggle vertical term" })
-
-map({ "n", "t" }, "<A-h>", function()
+map({ "t" }, "jk", function()
     require("nvchad.term").toggle({ pos = "sp", id = "htoggleTerm" })
 end, { desc = "Terminal toggle horizontal term" })
 
-map({ "n", "t" }, "<A-i>", function()
+map({ "n", "t" }, "<leader><leader>", function()
+    require("nvchad.term").toggle({ pos = "sp", id = "htoggleTerm" })
+end, { desc = "Terminal toggle horizontal term" })
+
+map({ "n", "t" }, "<leader>-", function()
+    require("nvchad.term").toggle({ pos = "sp", id = "htoggleTerm" })
+end, { desc = "Terminal toggle horizontal term" })
+
+map({ "n", "t" }, "<leader>|", function()
+    require("nvchad.term").toggle({ pos = "vsp", id = "vtoggleTerm" })
+end, { desc = "Terminal toggle vertical term" })
+
+map({ "n", "t" }, "<leader>=", function()
     require("nvchad.term").toggle({ pos = "float", id = "floatTerm" })
 end, { desc = "Terminal toggle floating term" })
 
