@@ -32,7 +32,8 @@ return {
     },
 
     {
-        "VonHeikemen/searchbox.nvim",
+        "SheffeyG/searchbox.nvim",
+        version = "*",
         dependencies = "MunifTanjim/nui.nvim",
         keys = {
             {
