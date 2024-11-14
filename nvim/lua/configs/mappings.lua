@@ -73,6 +73,26 @@ local function code_runner()
 
 map({ "n" }, "<leader>cr", code_runner, { desc = "Terminal save and run (C/Cpp/Python)" })
 
+------------------------------------- Buffer -----------------------------------------
+
+map("n", "<leader>b", "<cmd>enew<CR>", { desc = "Buffer new buffer" })
+
+map("n", "<tab>", function()
+    require("nvchad.tabufline").next()
+end, { desc = "Buffer switch to next buffer" })
+
+map("n", "<S-tab>", function()
+    require("nvchad.tabufline").prev()
+end, { desc = "Buffer switch to prev buffer" })
+
+map("n", "<leader>x", function()
+    require("nvchad.tabufline").close_buffer()
+end, { desc = "Buffer close current buffer" })
+
+map("n", "<leader>X", function()
+    require("nvchad.tabufline").closeAllBufs(false)
+end, { desc = "Buffer close all other buffers" })
+
 ------------------------------------- Plugins ----------------------------------------
 
 -- cheatsheet
@@ -85,21 +105,6 @@ end, { desc = "General format file" })
 
 -- lsp
 map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
-
--- tabufline
-map("n", "<leader>b", "<cmd>enew<CR>", { desc = "Buffer new" })
-
-map("n", "<tab>", function()
-    require("nvchad.tabufline").next()
-end, { desc = "Switch buffer goto next" })
-
-map("n", "<S-tab>", function()
-    require("nvchad.tabufline").prev()
-end, { desc = "Switch buffer goto prev" })
-
-map("n", "<leader>x", function()
-    require("nvchad.tabufline").close_buffer()
-end, { desc = "Switch buffer close" })
 
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>",    { desc = "Nvimtree toggle window" })
