@@ -1,6 +1,26 @@
 ### Neovim
 
-Install the latest neovim for ubuntu:
+Install the latest nvim via appimage:
+
+```
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+./nvim.appimage
+```
+
+If the ./nvim.appimage command fails, try:
+
+```
+./nvim.appimage --appimage-extract
+./squashfs-root/AppRun --version
+
+# optional: exposing nvim globally.
+mv squashfs-root /
+ln -s /squashfs-root/AppRun /usr/bin/nvim
+nvim
+```
+
+If you use Ubuntu:
 
 ```
 sudo add-apt-repository ppa:neovim-ppa/unstable
@@ -21,8 +41,10 @@ npm i clangd
 Change default shell to zsh:
 
 ```
-sudo chsh -s $(which zsh)
+chsh -s $(which zsh)
 ```
+
+### Scripts
 
 Format print commits history to a markdown file:
 
