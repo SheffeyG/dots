@@ -105,9 +105,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -d "$HOME/miniconda3" ] && CONDA_HOME="$HOME/miniconda3/"
 [ -f "/$CONDA_HOME/etc/profile.d/conda.sh" ] && \. "/$CONDA_HOME/etc/profile.d/conda.sh"
 
-### Customize Path
-PATH=$PATH:~/.local/bin/
-PATH=$PATH:~/.cargo/bin/
+[ -d "$HOME/.local/bin" ] && PATH=$PATH:$HOME/.local/bin/
+[ -d "$HOME/.cargo/bin" ] && PATH=$PATH:$HOME/.cargo/bin/
 
 
 #-----------------------
