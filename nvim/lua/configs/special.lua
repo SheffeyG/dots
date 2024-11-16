@@ -1,6 +1,6 @@
-vim.g.is_wsl = vim.fn.has("wsl") == 1
-vim.g.is_windows = vim.fn.has("win32") == 1
-vim.g.is_termux = vim.fn.has("termux") == 1
+vim.g.is_wsl = vim.fn.has("wsl") ~= 0
+vim.g.is_windows = vim.fn.has("win32") ~= 0
+vim.g.is_termux = vim.fn.has("termux") ~= 0
 
 -- add mason binaries to path
 local sep = vim.g.is_windows and "\\" or "/"
