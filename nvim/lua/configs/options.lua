@@ -2,8 +2,6 @@ local opt = vim.opt
 local o = vim.o
 local g = vim.g
 
-g.mapleader = " "
-
 o.laststatus = 3
 o.showmode = false
 
