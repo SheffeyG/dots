@@ -2,9 +2,7 @@
 # Theme
 #-----------------------
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# Enable Powerlevel10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -15,7 +13,8 @@ fi
 #-----------------------
 
 # history setting
-setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_EXPIRE_DUPS_FIRST HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS INC_APPEND_HISTORY
+setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_EXPIRE_DUPS_FIRST HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS INC_APPEND_HISTORY
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -23,12 +22,6 @@ SAVEHIST=1000
 
 # pushd and other
 setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS 
-
-# fzf options
-export FZF_DEFAULT_OPTS='
-    --border
-    --color bg+:#7797b7,fg+:#2c2f30,hl:#D8DEE9,hl+:#26292a,gutter:-1
-    --color pointer:#373d49,info:#606672'
 
 
 #-----------------------
@@ -70,24 +63,24 @@ fi
 set_ls_alias() {
     local cmd="\\$1"
     alias ls="$cmd --icons --color=auto"
-    alias l="$cmd -lbah --icons"
+    alias l="$cmd -lh --icons"
+    alias ll="$cmd -labg --icons"
     alias la="$cmd -labgh --icons"
-    alias ll="$cmd -lbg --icons"
     alias lsa="$cmd -lbagR --icons"
-    alias lst="$cmd -lTabgh --icons" # dispaly as tree
+    alias lst="$cmd --tree --level=3"
 }
 
-if command -v eza > /dev/null 2>&1; then
+if [[ $(command -v eza) ]]; then
     set_ls_alias "eza"
-elif command -v exa > /dev/null 2>&1; then
+elif [[ $(command -v exa) ]]; then
     set_ls_alias "exa"
 else
     alias ls='ls --color=auto'
-    alias lst='tree -pCsh'
-    alias l='ls -lah'
+    alias l='ls -lh'
     alias la='ls -lAh'
-    alias ll='ls -lh'
+    alias ll='ls -lah'
     alias lsa='ls -lah' 
+    alias lst='tree -pCsh'
 fi
 
 
@@ -97,8 +90,8 @@ fi
 
 ### NVM Initialization
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 ### CONDA Initialization
 [ -d "$HOME/anaconda3" ] && CONDA_HOME="$HOME/anaconda3/"
@@ -115,48 +108,33 @@ export NVM_DIR="$HOME/.nvm"
 
 ### Zinit Initialization
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+if [ ! -d $ZINIT_HOME ]; then
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone --depth=1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 source "${ZINIT_HOME}/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-### Zinit Plugins
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
 # p10k theme
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+zinit ice depth"1"
+zinit light romkatv/powerlevel10k
+[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
 
 # OMZ snippet
 zinit snippet OMZL::key-bindings.zsh 
 zinit snippet OMZL::completion.zsh
 
-# OMZ plugin
 zinit snippet OMZP::sudo           # tap ESC twice to toggle sudo
 zinit snippet OMZP::extract        # x to extract
-# zinit snippet OMZP::dirhistory     # alt to move dir
 
-# zsh heighlight
-zinit ice wait lucid \
-    pick"fast-syntax-highlighting.plugin.zsh" \
-    atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay;"
+# heighlight
+zinit ice wait lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay;"
 zinit light zdharma-continuum/fast-syntax-highlighting
 
-# zsh auto suggestions
+# auto suggestions
 zinit ice wait lucid atload"_zsh_autosuggest_start"
 zinit light zsh-users/zsh-autosuggestions 
-
-# fzf tab completion
-[[ $(command -v fzf) ]] && \
-    zinit wait lucid pick"fzf-tab.zsh" for Aloxaf/fzf-tab
 
 # z to jump dir
 zinit wait lucid for agkozak/zsh-z 
@@ -164,3 +142,12 @@ zinit wait lucid for agkozak/zsh-z
 # auto switch python venv
 zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
 
+# fzf tab completion
+if [[ $(command -v fzf) ]]; then
+    export FZF_DEFAULT_OPTS='
+        --border
+        --color bg+:#7797b7,fg+:#2c2f30,hl:#D8DEE9,hl+:#26292a,gutter:-1
+        --color pointer:#373d49,info:#606672'
+    zinit ice wait"1" lucid atload"zstyle ':fzf-tab:*' use-fzf-default-opts yes"
+    zinit load Aloxaf/fzf-tab
+fi
