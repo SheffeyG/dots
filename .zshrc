@@ -37,7 +37,7 @@ alias md='mkdir -p'
 alias rd=rmdir
 alias grep='grep --color=auto'
 alias python=python3
-alias tt='if tmux has-session; then tmux a; else tmux; fi'
+alias tt='if tmux has-session &> /dev/null; then tmux a; else tmux; fi'
 
 # git
 alias gc1='git clone --depth=1'
