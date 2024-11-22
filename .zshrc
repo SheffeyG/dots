@@ -12,6 +12,8 @@ fi
 # Options
 #-----------------------
 
+set bell-style none
+
 # history setting
 setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_EXPIRE_DUPS_FIRST HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS INC_APPEND_HISTORY
