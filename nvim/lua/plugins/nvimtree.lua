@@ -14,9 +14,10 @@ return {
         opts = function()
             dofile(vim.g.base46_cache .. "nvimtree")
             return {
+                git = { ignore = false },
                 filters = {
                     dotfiles = false,
-                    custom = { ".git$" },
+                    custom = { "^.git$", "^__pycache__$" },
                 },
                 disable_netrw = true,
                 hijack_cursor = true,
