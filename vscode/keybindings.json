@@ -30,6 +30,16 @@
         "when": "editorTextFocus && !editorReadonly"
     },
     {
+        "key": "alt+h",
+        "command": "editor.action.outdentLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+l",
+        "command": "editor.action.indentLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
         "key": "ctrl+alt+j",
         "command": "editor.action.insertCursorBelow",
         "when": "editorTextFocus"
@@ -39,4 +49,8 @@
         "command": "editor.action.insertCursorAbove",
         "when": "editorTextFocus"
     },
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.togglePanel"
+    }
 ]
