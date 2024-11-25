@@ -1,4 +1,6 @@
+// Place your key bindings in this file to override the defaults
 [
+    // Select completion suggestion
     {
         "key": "tab",
         "command": "selectNextQuickFix",
@@ -19,6 +21,7 @@
         "command": "selectPrevSuggestion",
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
+    // Move lines
     {
         "key": "alt+j",
         "command": "editor.action.moveLinesDownAction",
@@ -39,6 +42,7 @@
         "command": "editor.action.indentLines",
         "when": "editorTextFocus && !editorReadonly"
     },
+    // Mutilple cursors
     {
         "key": "ctrl+alt+j",
         "command": "editor.action.insertCursorBelow",
@@ -48,6 +52,37 @@
         "key": "ctrl+alt+k",
         "command": "editor.action.insertCursorAbove",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+n",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+alt+p",
+        "command": "editor.action.addSelectionToPreviousFindMatch",
+        "when": "editorFocus"
+    },
+    // Navigate panels
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.navigateLeft",
+        "when": "vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.navigateRight",
+        "when": "vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.navigateDown",
+        "when": "vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.navigateUp",
+        "when": "vim.mode != 'Insert'"
     },
     {
         "key": "ctrl+n",
