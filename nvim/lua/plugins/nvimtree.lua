@@ -4,7 +4,18 @@ return {
         "nvim-tree/nvim-web-devicons",
         opts = function()
             dofile(vim.g.base46_cache .. "devicons")
-            return { override = require("nvchad.icons.devicons") }
+            return {
+                override = {
+                    default_icon = { icon = "󰈚", name = "Default" },
+                    js = { icon = "󰌞", name = "js" },
+                    ts = { icon = "󰛦", name = "ts" },
+                    lock = { icon = "󰌾", name = "lock" },
+                    [".gitignore"] = { icon = "󰊢", color = "#f54d27", cterm_color = "196", name = "GitIgnore" },
+                    [".gitmodules"] = { icon = "󰊢", color = "#f54d27", cterm_color = "196", name = "GitModules" },
+                    ["git"] = { icon = "󰊢", color = "#F14C28", cterm_color = "196", name = "GitLogo" },
+                    ["robots.txt"] = { icon = "󰚩", name = "robots" },
+                },
+            }
         end,
     },
 
