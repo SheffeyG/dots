@@ -17,15 +17,6 @@ return {
         end,
     },
 
-    { "nvchad/volt" },
-
-    { "nvchad/menu" },
-
-    {
-        "nvchad/minty",
-        cmd = { "Huefy", "Shades" },
-    },
-
     {
         "lukas-reineke/indent-blankline.nvim",
         event = "User FilePost",
