@@ -121,7 +121,7 @@
   typeset -g POWERLEVEL9K_MODE=nerdfont-v3
   # When set to `moderate`, some icons will have an extra space after them. This is meant to avoid
   # icon overlap when using non-monospace fonts. When set to `none`, spaces are not added.
-  typeset -g POWERLEVEL9K_ICON_PADDING=moderate
+  typeset -g POWERLEVEL9K_ICON_PADDING=none
 
   # Basic style options that define the overall look of your prompt. You probably don't want to
   # change them.
@@ -304,14 +304,14 @@
   #
   # If POWERLEVEL9K_DIR_SHOW_WRITABLE is set to v3, non-writable and non-existent directories
   # acquire class suffix _NOT_WRITABLE and NON_EXISTENT respectively.
-  #
-  # For example, given these settings:
-  #
-  #   typeset -g POWERLEVEL9K_DIR_CLASSES=(
-  #     '~/work(|/*)'  WORK     ''
-  #     '~(|/*)'       HOME     ''
-  #     '*'            DEFAULT  '')
-  #
+  typeset -g POWERLEVEL9K_DIR_CLASSES=(
+    '~/workspace(|/*)'  WORK     '\uF1CB '
+    '~/dl(|/*)'         DOWNLOAD '\uF01A '
+    '~/dots(|/*)'       DOTFILES '\uE615 '
+    '~'                 HOME     '\uF015 '
+    '*'                 DEFAULT  '\uF115 '
+  )
+ 
   # Whenever the current directory is ~/work or a subdirectory of ~/work, it gets styled with one
   # of the following classes depending on its writability and existence: WORK, WORK_NOT_WRITABLE or
   # WORK_NON_EXISTENT.
@@ -344,7 +344,7 @@
   # typeset -g POWERLEVEL9K_DIR_CLASSES=()
 
   # Custom prefix.
-  # typeset -g POWERLEVEL9K_DIR_PREFIX='%fin '
+  typeset -g POWERLEVEL9K_DIR_PREFIX='%f '
 
   #####################################[ vcs: git status ]######################################
   # Branch icon. Set this parameter to '\UE0A0 ' for the popular Powerline branch icon.
@@ -438,11 +438,15 @@
       # res+=" ${clean}="
     fi
 
-    # ⇠42 if behind the push remote.
-    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
-    # ⇢42 if ahead of the push remote; no leading space if also behind: ⇠42⇢42.
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
+    # Only show push remote status when its url is different with remote url
+    if [[ $VCS_STATUS_REMOTE_URL != $VCS_STATUS_PUSH_REMOTE_URL ]]; then
+      # ⇠42 if behind the push remote.
+      (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
+      (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
+      # ⇢42 if ahead of the push remote; no leading space if also behind: ⇠42⇢42.
+      (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
+    fi
+
     # *42 if have stashes.
     (( VCS_STATUS_STASHES        )) && res+=" ${clean}*${VCS_STATUS_STASHES}"
     # 'merge' if the repo is in an unusual state.
