@@ -85,33 +85,34 @@
     gcloud                  # google cloud cli account and project (https://cloud.google.com/)
     google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
     toolbox                 # toolbox name (https://github.com/containers/toolbox)
-    context                 # user@hostname
-    nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
-    ranger                  # ranger shell (https://github.com/ranger/ranger)
-    yazi                    # yazi shell (https://github.com/sxyazi/yazi)
-    nnn                     # nnn shell (https://github.com/jarun/nnn)
-    lf                      # lf shell (https://github.com/gokcehan/lf)
-    xplr                    # xplr shell (https://github.com/sayanarijit/xplr)
     vim_shell               # vim shell indicator (:sh)
-    midnight_commander      # midnight commander shell (https://midnight-commander.org/)
     nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
-    chezmoi_shell           # chezmoi shell (https://www.chezmoi.io/)
+    # ranger                # ranger shell (https://github.com/ranger/ranger)
+    # yazi                  # yazi shell (https://github.com/sxyazi/yazi)
+    # nnn                   # nnn shell (https://github.com/jarun/nnn)
+    # lf                    # lf shell (https://github.com/gokcehan/lf)
+    # xplr                  # xplr shell (https://github.com/sayanarijit/xplr)
+    # midnight_commander    # midnight commander shell (https://midnight-commander.org/)
+    # chezmoi_shell         # chezmoi shell (https://www.chezmoi.io/)
+    context                 # user@hostname
+    ram                     # free RAM
+    # swap                  # used swap
     # vpn_ip                # virtual private network indicator
     # load                  # CPU load
     # disk_usage            # disk usage
-    # ram                   # free RAM
-    # swap                  # used swap
-    todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
+    # nordvpn               # nordvpn connection status, linux only (https://nordvpn.com/)
+    # todo                  # todo items (https://github.com/todotxt/todo.txt-cli)
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     per_directory_history   # Oh My Zsh per-directory-history local/global indicator
-    # cpu_arch              # CPU architecture
+    proxy                   # system-wide http/https/ftp proxy
     time                    # current time
+
     # =========================[ Line #2 ]=========================
     newline
+    # cpu_arch              # CPU architecture
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
-    # proxy                 # system-wide http/https/ftp proxy
     # battery               # internal battery
     # wifi                  # wifi speed
     # example               # example user-defined segment (see prompt_example function below)
@@ -305,13 +306,13 @@
   # If POWERLEVEL9K_DIR_SHOW_WRITABLE is set to v3, non-writable and non-existent directories
   # acquire class suffix _NOT_WRITABLE and NON_EXISTENT respectively.
   typeset -g POWERLEVEL9K_DIR_CLASSES=(
-    '~/workspace(|/*)'  WORK     '\uF1CB '
-    '~/dl(|/*)'         DOWNLOAD '\uF01A '
-    '~/dots(|/*)'       DOTFILES '\uE615 '
-    '~'                 HOME     '\uF015 '
-    '*'                 DEFAULT  '\uF115 '
+    '~'                   HOME         '\uF015 '
+    '~/workspace(|/*)'    WORKSPACE    '\uF1CB'
+    '~/dl(|/*)'           DOWNLOAD     '\uF01A'
+    '~/dots(|/*)'         DOTFILES     '\uE615'
+    '*'                   DEFAULT      '\uF115'
   )
- 
+
   # Whenever the current directory is ~/work or a subdirectory of ~/work, it gets styled with one
   # of the following classes depending on its writability and existence: WORK, WORK_NOT_WRITABLE or
   # WORK_NON_EXISTENT.
@@ -348,7 +349,7 @@
 
   #####################################[ vcs: git status ]######################################
   # Branch icon. Set this parameter to '\UE0A0 ' for the popular Powerline branch icon.
-  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='\uF126 '
+  # typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='\uF126 '
 
   # Untracked files icon. It's really a question mark, your font isn't broken.
   # Change the value of this parameter to show a different icon.
@@ -438,7 +439,7 @@
       # res+=" ${clean}="
     fi
 
-    # Only show push remote status when its url is different with remote url
+    # Only show push remote status when push url is different with remote url
     if [[ $VCS_STATUS_REMOTE_URL != $VCS_STATUS_PUSH_REMOTE_URL ]]; then
       # ⇠42 if behind the push remote.
       (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
@@ -500,7 +501,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_VCS_PREFIX='%fon '
+  # typeset -g POWERLEVEL9K_VCS_PREFIX='%fon '
 
   # Show status of repositories of these types. You can add svn and/or hg if you are
   # using them. If you do, your prompt may become slow even when your current directory
@@ -561,7 +562,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='%ftook '
+  # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='%ftook '
 
   #######################[ background_jobs: presence of background jobs ]#######################
   # Don't show the number of background jobs.
@@ -731,7 +732,7 @@
   typeset -g POWERLEVEL9K_RANGER_FOREGROUND=178
   # Custom icon.
   # typeset -g POWERLEVEL9K_RANGER_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   ####################[ yazi: yazi shell (https://github.com/sxyazi/yazi) ]#####################
   # Yazi shell color.
   typeset -g POWERLEVEL9K_YAZI_FOREGROUND=178
@@ -926,7 +927,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_CONTEXT_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_CONTEXT_PREFIX='%fwith '
+  # typeset -g POWERLEVEL9K_CONTEXT_PREFIX='%fwith '
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
@@ -1318,7 +1319,7 @@
   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
 
   # Custom prefix.
-  typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='%fat '
+  # typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='%f '
 
   ################[ terraform: terraform workspace (https://www.terraform.io) ]#################
   # Don't show terraform workspace if it's literally "default".
@@ -1547,7 +1548,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_TOOLBOX_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_TOOLBOX_PREFIX='%fin '
+  # typeset -g POWERLEVEL9K_TOOLBOX_PREFIX='%f '
 
   ###############################[ public_ip: public IP address ]###############################
   # Public IP color.
@@ -1650,7 +1651,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_TIME_PREFIX='%fat '
+  # typeset -g POWERLEVEL9K_TIME_PREFIX='%f '
 
   # Example of a user-defined prompt segment. Function prompt_example will be called on every
   # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
