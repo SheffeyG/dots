@@ -102,9 +102,9 @@
     # disk_usage            # disk usage
     # nordvpn               # nordvpn connection status, linux only (https://nordvpn.com/)
     # todo                  # todo items (https://github.com/todotxt/todo.txt-cli)
+    # per_directory_history # Oh My Zsh per-directory-history local/global indicator
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
-    per_directory_history   # Oh My Zsh per-directory-history local/global indicator
     proxy                   # system-wide http/https/ftp proxy
     time                    # current time
 
@@ -973,7 +973,7 @@
   typeset -g POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION='${${${${CONDA_PROMPT_MODIFIER#\(}% }%\)}:-${CONDA_PREFIX:t}}'
 
   # Custom icon.
-  # typeset -g POWERLEVEL9K_ANACONDA_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_ANACONDA_VISUAL_IDENTIFIER_EXPANSION=''
 
   ################[ pyenv: python environment (https://github.com/pyenv/pyenv) ]################
   # Pyenv color.
