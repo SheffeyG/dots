@@ -24,6 +24,9 @@ map("i", "<C-j>", "<Down>",  { desc = "Move cusor down" })
 map("i", "<C-k>", "<Up>",    { desc = "Move cusor up" })
 map("i", "<C-l>", "<Right>", { desc = "Move cusor right" })
 
+map("n", "H", "^", { desc = "Move cusor beginning of line" })
+map("n", "L", "$", { desc = "Move cusor end of line" })
+
 map("n", "<C-h>", "<C-w>h", { desc = "Switch window left" })
 map("n", "<C-j>", "<C-w>j", { desc = "Switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "Switch window up" })
