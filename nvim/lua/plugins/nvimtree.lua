@@ -17,7 +17,7 @@ return {
                 git = { ignore = false },
                 filters = {
                     dotfiles = false,
-                    custom = { "^.git$", "^__pycache__$" },
+                    custom = { "^.git$" },
                 },
                 disable_netrw = true,
                 hijack_cursor = true,
@@ -30,17 +30,23 @@ return {
                     indent_markers = { enable = true },
                     icons = {
                         git_placement = "after",
-                        symlink_arrow = "->",
+                        symlink_arrow = "",
                         glyphs = {
                             default = "󰈚",
                             folder = {
                                 default = "",
+                                open = "",
                                 empty = "",
-                                empty_open = "",
-                                open = "",
+                                empty_open = "",
                                 symlink = "",
                             },
-                            git = { unmerged = "" },
+                            git = {
+                                unmerged = "",
+                                renamed = " ",
+                                untracked = "",
+                                ignored = "",
+                                deleted = "󰗨",
+                            },
                         },
                     },
                 },
