@@ -306,7 +306,7 @@
   # If POWERLEVEL9K_DIR_SHOW_WRITABLE is set to v3, non-writable and non-existent directories
   # acquire class suffix _NOT_WRITABLE and NON_EXISTENT respectively.
   typeset -g POWERLEVEL9K_DIR_CLASSES=(
-    '~'                   HOME         '\uF015 '
+    '~'                   HOME         '\uF015'
     '~/workspace(|/*)'    WORKSPACE    '\uF1CB'
     '~/dl(|/*)'           DOWNLOAD     '\uF01A'
     '~/dots(|/*)'         DOTFILES     '\uE615'
@@ -345,7 +345,7 @@
   # typeset -g POWERLEVEL9K_DIR_CLASSES=()
 
   # Custom prefix.
-  typeset -g POWERLEVEL9K_DIR_PREFIX='%f '
+  # typeset -g POWERLEVEL9K_DIR_PREFIX='%fin '
 
   #####################################[ vcs: git status ]######################################
   # Branch icon. Set this parameter to '\UE0A0 ' for the popular Powerline branch icon.
