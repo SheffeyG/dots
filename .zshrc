@@ -17,17 +17,12 @@ ZLE_RPROMPT_INDENT=0
 
 set bell-style none
 
-# history setting
-setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_EXPIRE_DUPS_FIRST HIST_IGNORE_DUPS
-setopt HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS INC_APPEND_HISTORY
-
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=1000
-
 # pushd and other
 setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS 
 
+# key-bindings
+bindkey '\ej' up-line-or-beginning-search
+bindkey '\ek' down-line-or-beginning-search
 
 #-----------------------
 # Aliases
@@ -129,6 +124,7 @@ zinit light romkatv/powerlevel10k
 # OMZ snippet
 zinit snippet OMZL::key-bindings.zsh 
 zinit snippet OMZL::completion.zsh
+zinit snippet OMZL::history.zsh
 
 zinit snippet OMZP::sudo           # tap ESC twice to toggle sudo
 zinit snippet OMZP::extract        # x to extract
