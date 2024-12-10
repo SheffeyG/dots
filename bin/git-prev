@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 prev() {
     branch=`git symbolic-ref refs/remotes/origin/HEAD`
@@ -9,4 +9,6 @@ prev() {
     fi
     git checkout HEAD~$n
 }
+
 prev "$@"
+

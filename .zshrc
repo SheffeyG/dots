@@ -37,7 +37,7 @@ alias md='mkdir -p'
 alias rd=rmdir
 alias grep='grep --color=auto'
 alias python=python3
-alias tt='if tmux has-session &> /dev/null; then tmux a; else tmux; fi'
+# alias tt='if tmux has-session & 2>/dev/null; then tmux a; else tmux; fi'
 
 # git
 alias gc1='git clone --depth=1'
@@ -60,7 +60,7 @@ if [[ -n "$TERMUX_VERSION" ]]; then
 fi
 
 # aliases for ls command
-set_ls_alias() {
+_ls_alias() {
     local cmd="\\$1"
     alias ls="$cmd --icons --color=auto"
     alias l="$cmd -lh --icons"
@@ -71,9 +71,9 @@ set_ls_alias() {
 }
 
 if [[ $(command -v eza) ]]; then
-    set_ls_alias "eza"
+    _ls_alias "eza"
 elif [[ $(command -v exa) ]]; then
-    set_ls_alias "exa"
+    _ls_alias "exa"
 else
     alias ls='ls --color=auto'
     alias l='ls -lh'
