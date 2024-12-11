@@ -49,7 +49,7 @@ tt() {
     fi
 
     # no parameter provided
-    local session_name="$(basename "$(pwd)")"
+    local session_name='main'
     if has_session_exact $session_name; then
         attach_or_switch $session_name
     else
