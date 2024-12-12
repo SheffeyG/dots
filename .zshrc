@@ -129,26 +129,34 @@ zinit snippet OMZL::history.zsh
 zinit snippet OMZP::sudo           # tap ESC twice to toggle sudo
 zinit snippet OMZP::extract        # x to extract
 
-# heighlight
-zinit ice wait lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay;"
-zinit light zdharma-continuum/fast-syntax-highlighting
+# fzf tab completion
+if [ $(command -v fzf) ]; then
+    if [ $(command -v tmux) ]; then
+        zinit ice wait lucid atload"
+        zstyle ':fzf-tab:*' fzf-flags --color=pointer:#e06c75,bg+:#51576d,gutter:-1
+        zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup"
+    else
+        zinit ice wait lucid atload"
+        FZF_DEFAULT_OPTS='
+        --border
+        --color bg+:#7797b7,fg+:#2c2f30,hl:#D8DEE9,hl+:#26292a,gutter:-1
+        --color pointer:#373d49,info:#606672'
+        zstyle ':fzf-tab:*' use-fzf-default-opts yes"
+    fi
+    zinit load Aloxaf/fzf-tab
+fi
 
 # auto suggestions
 zinit ice wait lucid atload"_zsh_autosuggest_start"
 zinit light zsh-users/zsh-autosuggestions 
 
+# heighlight
+zinit ice wait"1" lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay;"
+zinit light zdharma-continuum/fast-syntax-highlighting
+
 # z to jump dir
-zinit wait lucid for agkozak/zsh-z 
+zinit wait"1" lucid for agkozak/zsh-z 
 
 # auto switch python venv
 zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
 
-# fzf tab completion
-if [[ $(command -v fzf) ]]; then
-    export FZF_DEFAULT_OPTS='
-        --border
-        --color bg+:#7797b7,fg+:#2c2f30,hl:#D8DEE9,hl+:#26292a,gutter:-1
-        --color pointer:#373d49,info:#606672'
-    zinit ice wait"1" lucid atload"zstyle ':fzf-tab:*' use-fzf-default-opts yes"
-    zinit load Aloxaf/fzf-tab
-fi
