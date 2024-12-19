@@ -18,43 +18,46 @@
     "vim.leader": "<space>",
     "vim.useSystemClipboard": true,
     "vim.handleKeys": {
-        "<C-a>": false,
         "<C-b>": false,
         "<C-c>": false,
         "<C-f>": false,
-        "<C-v>": false
+        "<C-v>": false,
     },
     "vim.normalModeKeyBindings": [
         {
             "before": [ "<leader>", "r", "n" ],
-            "commands": [ "editor.action.rename" ]
+            "commands": [ "editor.action.rename" ],
         },
         {
             "before": [ "<leader>", "\/" ],
-            "commands": [ "editor.action.commentLine" ]
-        }
+            "commands": [ "editor.action.commentLine" ],
+        },
+        {
+            "before": [ "<C-a>" ],
+            "after": [ "g", "g", "V", "G" ],
+        },
     ],
     "vim.insertModeKeyBindings": [
         {
             "before": [ "j", "k" ],
-            "after": [ "<Esc>" ]
+            "after": [ "<Esc>" ],
         },
         {
             "before": [ "<C-h>" ],
-            "commands": [ "cursorLeft" ]
+            "commands": [ "cursorLeft" ],
         },
         {
             "before": [ "<C-j>" ],
-            "commands": [ "cursorDown" ]
+            "commands": [ "cursorDown" ],
         },
         {
             "before": [ "<C-k>" ],
-            "commands": [ "cursorUp" ]
+            "commands": [ "cursorUp" ],
         },
         {
             "before": [ "<C-l>" ],
-            "commands": [ "cursorRight" ]
-        }
+            "commands": [ "cursorRight" ],
+        },
     ],
     "vim.visualModeKeyBindings": [
         {
@@ -67,7 +70,18 @@
         },
         {
             "before": [ "<leader>", "\/" ],
-            "commands": [ "editor.action.commentLine" ]
-        }
-    ]
+            "commands": [ "editor.action.commentLine" ],
+        },
+    ],
+
+    // Software & Language
+    "docker.images.label": "Tag",
+    "ruff.lint.ignore": [ "E741", "E731", "E402" ],
+    "terminal.integrated.env.linux": {"PYTHONPATH":"${workspaceFolder}:${env:PYTHONPATH}"},
+    "git.confirmSync": false,
+    "git.openRepositoryInParentFolders": "never",
+
+    // Remote
+    "remote.SSH.configFile": "~/.ssh/config",
+    "remote.autoForwardPorts": false,
 }
