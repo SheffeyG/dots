@@ -20,21 +20,10 @@ tt() {
         tmux new-session -d -s "$session_name" && tt "$session_name" || echo "Error: Failed to create session '$session_name'."
     }
 
-    usage() {
-        echo "Usage: t [session_name]"
-        echo ""
-        echo "  session_name (optional):"
-        echo "    - An exact session name to attach or switch to."
-        echo "    - A new session name to create and attach in the current directory."
-        echo ""
-        echo "  Notes:"
-        echo "    - Use TAB to complete session names."
-        echo "    - No argument creates or attaches to a session (based on the current directory)."
-    }
-
     # more than 1 parameter provided
     if [[ "$#" -gt 1 ]]; then
-        usage && return 1
+        echo "Error: Command tt accept only one parameter as tmux session name."
+        return 1
     fi
 
     # one parameter provided

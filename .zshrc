@@ -131,18 +131,9 @@ zinit snippet OMZP::extract        # x to extract
 
 # fzf tab completion
 if [ $(command -v fzf) ]; then
-    if [ $(command -v tmux) ]; then
-        zinit ice wait lucid atload"
-        zstyle ':fzf-tab:*' fzf-flags --color=pointer:#e06c75,bg+:#51576d,gutter:-1
-        zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup"
-    else
-        zinit ice wait lucid atload"
-        FZF_DEFAULT_OPTS='
-        --border
-        --color bg+:#7797b7,fg+:#2c2f30,hl:#D8DEE9,hl+:#26292a,gutter:-1
-        --color pointer:#373d49,info:#606672'
+    zinit ice wait lucid atload"
+        FZF_DEFAULT_OPTS='--color=pointer:#e06c75,bg+:#51576d,gutter:-1'
         zstyle ':fzf-tab:*' use-fzf-default-opts yes"
-    fi
     zinit load Aloxaf/fzf-tab
 fi
 

@@ -1,7 +1,6 @@
-link   |.zshrc        |
-copy   |.p10k.zsh     |
-link   |.tmux.conf    |
-copy   |.gitconfig    |
-link   |nvim          |.config
-link   |tmux          |.config
-rlink  |bin           |.local
+link  | .zshrc     |
+copy  | .p10k.zsh  |
+link  | .tmux.conf |
+copy  | .gitconfig |
+link  | nvim       | .config
+rlink | bin        | .local
