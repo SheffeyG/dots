@@ -10,4 +10,8 @@ M.base46 = {
     },
 }
 
+M.term = {
+    winopts = { winfixbuf = true },
+}
+
 return M
