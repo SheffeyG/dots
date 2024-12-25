@@ -56,26 +56,6 @@ map({ "n", "t" }, "<leader>=", function()
     require("nvchad.term").toggle({ pos = "float", id = "floatTerm" })
 end, { desc = "Terminal toggle floating term" })
 
--- code runner
-local function code_runner()
-    vim.cmd("write");
-    require("nvchad.term").runner({
-        id = "runner",
-        pos = "sp",
-        cmd = function()
-            local file = vim.fn.expand("%")
-            local ft_cmds = {
-                python = "python3 " .. file,
-                cpp = "clear && g++ -o out " .. file .. " && ./out",
-                c = "clear && gcc -o out " .. file .. " && ./out",
-            }
-            return ft_cmds[vim.bo.ft]
-        end,
-    })
-    end
-
-map({ "n" }, "<leader>cr", code_runner, { desc = "Terminal save and run (C/Cpp/Python)" })
-
 ------------------------------------- Buffer -----------------------------------------
 
 map("n", "<leader>b", "<cmd>enew<CR>", { desc = "Buffer new buffer" })
