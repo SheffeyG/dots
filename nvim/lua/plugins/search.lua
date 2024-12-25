@@ -2,7 +2,7 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        dependencies = "nvim-treesitter/nvim-treesitter",
         cmd = "Telescope",
         opts = function()
             dofile(vim.g.base46_cache .. "telescope")
@@ -19,9 +19,6 @@ return {
                         },
                         width = 0.87,
                         height = 0.80,
-                    },
-                    mappings = {
-                        n = { ["jk"] = require("telescope.actions").close },
                     },
                 },
 
@@ -61,5 +58,13 @@ return {
                 desc = "SearchBox search and replace in selected text",
             },
         },
+    },
+
+    {
+        "AckslD/nvim-neoclip.lua",
+        dependencies = "nvim-telescope/telescope.nvim",
+        opts = {
+            default_register = '+',
+        }
     },
 }

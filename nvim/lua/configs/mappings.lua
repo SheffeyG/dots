@@ -120,6 +120,7 @@ map("n", "<leader>fb", "<cmd>Telescope buffers<CR>",     { desc = "Telescope fin
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>",   { desc = "Telescope help page" })
 map("n", "<leader>ft", "<cmd>Telescope terms<CR>",       { desc = "Telescope find hidden term" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>",    { desc = "Telescope find oldfiles" })
+map("n", "<leader>fp", "<cmd>Telescope neoclip<CR>",     { desc = "Telescope find register" })
 map("n", "<leader>ma", "<cmd>Telescope marks<CR>",       { desc = "Telescope find marks" })
 map("n", "<leader>gm", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
 map("n", "<leader>gt", "<cmd>Telescope git_status<CR>",  { desc = "Telescope git status" })
