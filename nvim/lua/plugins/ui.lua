@@ -46,27 +46,70 @@ return {
     },
 
     {
-        "rcarriga/nvim-notify",
-        lazy = false,
-        opts = function()
-            dofile(vim.g.base46_cache .. "notify")
-
-            vim.notify = require("notify")
-
-            return {
-                stages = "static",
-                timeout = 3000,
-                top_down = false,
-                max_height = function()
-                    return math.floor(vim.o.lines * 0.5)
-                end,
-                max_width = function()
-                    return math.floor(vim.o.columns * 0.5)
-                end,
-                on_open = function(win)
-                    vim.api.nvim_win_set_config(win, { zindex = 100 })
-                end,
-            }
+        "rachartier/tiny-inline-diagnostic.nvim",
+        event = "VeryLazy", -- "VeryLazy" or `LspAttach`
+        -- priority = 1000, -- needs to be loaded in first
+        config = function()
+            vim.diagnostic.config({ virtual_text = false })
+            require("tiny-inline-diagnostic").setup({
+                -- preset = "powerline",
+                signs = {
+                    left = "",
+                    right = "",
+                    diag = "●",
+                    arrow = "",
+                    up_arrow = "  ",
+                    vertical = "  ",
+                    vertical_end = "  ",
+                },
+            })
         end,
+    },
+
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+        opts = {
+            presets = {
+                bottom_search = true, -- use a classic bottom cmdline for search
+            },
+            views = {
+                cmdline_popup = {
+                    border = {
+                        style = "none",
+                        padding = { 2, 3 },
+                    },
+                    filter_options = {},
+                    win_options = {
+                        winhighlight = {
+                            NormalFloat = "NormalFloat",
+                            FloatBorder = "FloatBorder",
+                        },
+                    },
+                },
+            },
+            routes = {
+                {
+                    filter = { -- hide written msg
+                        event = "msg_show",
+                        kind = "",
+                        find = "written",
+                    },
+                    opts = { skip = true },
+                },
+            },
+            lsp = {
+                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+                },
+                progress = { enabled = false },
+            },
+        },
     },
 }
