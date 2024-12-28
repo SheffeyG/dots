@@ -1,6 +1,6 @@
 ---@type NvPluginSpec
 return {
-    --- formatter ---
+    -- formatter
     {
         "stevearc/conform.nvim",
         opts = {
@@ -16,7 +16,8 @@ return {
             },
         },
     },
-    --- multiple cursors ---
+
+    -- multiple cursors
     {
         "brenton-leighton/multiple-cursors.nvim",
         version = "*",
@@ -58,17 +59,32 @@ return {
                 desc = "MultipleCursors add cursor to next match",
             },
         },
+        pre_hook = function()
+            require("nvim-autopairs").disable()
+        end,
+        post_hook = function()
+            require("nvim-autopairs").enable()
+        end,
     },
-    --- write as su ---
+
+    -- write as su
     {
         "denialofsandwich/sudo.nvim",
         dependencies = "MunifTanjim/nui.nvim",
         config = true,
         cmd = { "SudoWrite" },
     },
-    --- you need some VSC power ---
+
+    -- open in vscode
     {
         "declancm/vim2vscode",
         cmd = "Code",
+    },
+
+    -- mini plugins
+    {
+        "echasnovski/mini.move",
+        event = "VeryLazy",
+        opts = {},  -- keep this for setup
     },
 }
