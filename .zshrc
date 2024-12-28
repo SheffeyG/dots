@@ -36,7 +36,7 @@ alias 3='cd -3'
 alias md='mkdir -p'
 alias rd=rmdir
 alias grep='grep --color=auto'
-alias python=python3
+alias python='PYTHONPATH=$PYTHONPATH:$(pwd) python3'
 # alias tt='if tmux has-session & 2>/dev/null; then tmux a; else tmux; fi'
 
 # git
