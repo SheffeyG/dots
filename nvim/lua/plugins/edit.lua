@@ -70,7 +70,6 @@ return {
     -- write as su
     {
         "denialofsandwich/sudo.nvim",
-        dependencies = "MunifTanjim/nui.nvim",
         config = true,
         cmd = { "SudoWrite" },
     },
