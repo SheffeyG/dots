@@ -69,9 +69,8 @@ return {
 
     -- write as su
     {
-        "denialofsandwich/sudo.nvim",
-        config = true,
-        cmd = { "SudoWrite" },
+        "lambdalisue/vim-suda",
+        cmd = "SudaWrite",
     },
 
     -- open in vscode

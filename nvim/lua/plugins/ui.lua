@@ -73,7 +73,13 @@ return {
         event = "VeryLazy",
         opts = {
             presets = {
-                bottom_search = true, -- use a classic bottom cmdline for search
+                bottom_search = true,
+                long_message_to_split = true,
+            },
+            commands = {
+                history = {
+                    view = "popup",
+                },
             },
             views = {
                 cmdline_popup = {
@@ -89,19 +95,41 @@ return {
                         },
                     },
                 },
+                cmdline_input = {
+                    border = { style = "single" },
+                    win_options = {
+                        winhighlight = {
+                            NormalFloat = "Normal",
+                            FloatBorder = "Normal",
+                        },
+                    },
+                },
+                popup = {
+                    border = {
+                        style = "single",
+                        padding = { 0, 1 },
+                    },
+                    win_options = {
+                        winhighlight = {
+                            NormalFloat = "Normal",
+                            FloatBorder = "FloatBorder",
+                        },
+                    },
+                    size = { width = 80 },
+                },
+                mini = {
+                    timeout = 3000,
+                },
             },
             routes = {
-                -- hide written msg
-                {
+                { -- hide written msg
                     filter = {
-                        event = "msg_show",
-                        kind = "",
-                        find = "written",
+                        any = { event = "msg_show", kind = "", find = "written" },
                     },
                     opts = { skip = true },
                 },
             },
-            lsp = { progress = { enabled = false }, },
+            lsp = { progress = { enabled = false } },
         },
     },
 }

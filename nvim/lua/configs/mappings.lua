@@ -93,6 +93,11 @@ map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic locli
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>",    { desc = "Nvimtree toggle window" })
 map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "Nvimtree focus window" })
 
+-- noice
+map("n", "<leader>mh", function()
+  require("noice").cmd("history")
+end, { desc = "Noice show message history" })
+
 -- telescope
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>",  { desc = "Telescope find files" })
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>",   { desc = "Telescope live grep" })

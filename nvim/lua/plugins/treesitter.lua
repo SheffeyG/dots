@@ -23,6 +23,7 @@ return {
                 "toml",
                 "printf",
                 "markdown",
+                "markdown_inline",
             },
 
             highlight = {
