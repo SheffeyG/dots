@@ -5,13 +5,21 @@ M.base46 = {
     theme = "onedark",
     integrations = {
         "neogit",
-        "notify",
-        "semantic_tokens",
+    },
+    hl_override = {
+        -- remove nvimtree separator
+        NvimTreeWinSeparator = { bg = "black", fg = "line" },
     },
 }
 
 M.term = {
     winopts = { winfixbuf = true },
+}
+
+M.ui = {
+    tabufline = {
+        order = { "buffers", "tabs", "btns" },
+    },
 }
 
 return M
