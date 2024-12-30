@@ -27,6 +27,9 @@ return {
         opts = function()
             dofile(vim.g.base46_cache .. "neogit")
             return {
+                kind = "tab", -- auto/tab/floating/split/vsplit
+                commit_view = { kind = "vsplit" },
+                log_view = { kind = "vsplit" },
                 signs = {
                     hunk = { "", "" },
                     item = { " ", " " },
@@ -35,15 +38,12 @@ return {
                 sections = {
                     untracked = { folded = true, hidden = false },
                     rebase = { folded = false },
-                    recent = { folded = false },
+                    recent = { folded = false, hidden = false },
                 },
                 commit_editor = {
                     kind = "floating",
                     show_staged_diff = false,
                 },
-                kind = "auto", -- auto/tab/floating/split/vsplit
-                commit_view = { kind = "vsplit" },
-                log_view = { kind = "split" },
                 graph_style = "unicode",
                 mappings = {
                     popup = {

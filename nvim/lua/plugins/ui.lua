@@ -115,7 +115,7 @@ return {
                             FloatBorder = "FloatBorder",
                         },
                     },
-                    size = { width = 80 },
+                    size = { width = 100 },
                 },
                 mini = {
                     timeout = 3000,
