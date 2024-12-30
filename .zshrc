@@ -8,8 +8,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # remove right prompt space
-ZLE_RPROMPT_INDENT=0
-
+[[ -z "$ZLE_RPROMPT_INDENT" ]] && ZLE_RPROMPT_INDENT=0
 
 #-----------------------
 # Options

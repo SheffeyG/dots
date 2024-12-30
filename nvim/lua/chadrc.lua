@@ -14,6 +14,7 @@ M.base46 = {
 
 M.term = {
     winopts = { winfixbuf = true },
+    sizes = { vsp = 0.3 },
 }
 
 M.ui = {
