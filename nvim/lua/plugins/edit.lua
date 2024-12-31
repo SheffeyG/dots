@@ -85,4 +85,14 @@ return {
         event = "VeryLazy",
         opts = {},  -- keep this for setup
     },
+    {
+        "echasnovski/mini.ai",
+        event = "VeryLazy",
+        opts = {},
+    },
+    {
+        "echasnovski/mini.surround",
+        event = "VeryLazy",
+        opts = {},
+    },
 }
