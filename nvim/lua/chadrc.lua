@@ -8,7 +8,7 @@ M.base46 = {
     },
     hl_override = {
         -- remove nvimtree separator
-        NvimTreeWinSeparator = { bg = "black", fg = "line" },
+        NvimTreeWinSeparator = { fg = "line", bg = "black" },
     },
 }
 

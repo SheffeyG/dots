@@ -121,14 +121,6 @@ return {
                     timeout = 3000,
                 },
             },
-            routes = {
-                { -- hide written msg
-                    filter = {
-                        any = { event = "msg_show", kind = "", find = "written" },
-                    },
-                    opts = { skip = true },
-                },
-            },
             lsp = {
                 progress = { enabled = false },
                 signature = { enabled = false },

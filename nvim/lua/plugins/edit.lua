@@ -19,51 +19,30 @@ return {
 
     -- multiple cursors
     {
-        "brenton-leighton/multiple-cursors.nvim",
-        version = "*",
-        opts = {
-            custom_key_maps = {
-                -- stylua: ignore
-                { "n", "<leader>=", function() require("multiple-cursors").align() end },
-            },
-        },
-        keys = {
-            {
-                "<C-M-j>",
-                "<cmd>MultipleCursorsAddDown<CR>",
-                mode = { "n", "x" },
-                desc = "MultipleCursors add a cursor blow",
-            },
-            {
-                "<C-M-k>",
-                "<cmd>MultipleCursorsAddUp<CR>",
-                mode = { "n", "x" },
-                desc = "MultipleCursors add a cursor above",
-            },
-            {
-                "<C-M-LeftMouse>",
-                "<cmd>MultipleCursorsMouseAddDelete<CR>",
-                mode = { "n", "i" },
-                desc = "MultipleCursors add or remove a cursor with left click",
-            },
-            {
-                "<leader>a",
-                "<cmd>MultipleCursorsAddMatches<CR>",
-                mode = { "n", "x" },
-                desc = "MultipleCursors add cursors to the word under the cursor",
-            },
-            {
-                "<M-n>",
-                "<cmd>MultipleCursorsAddJumpNextMatch<CR>",
-                mode = { "n", "x" },
-                desc = "MultipleCursors add cursor to next match",
-            },
-        },
-        pre_hook = function()
-            require("nvim-autopairs").disable()
-        end,
-        post_hook = function()
-            require("nvim-autopairs").enable()
+        "jake-stewart/multicursor.nvim",
+        event = "VeryLazy",
+        -- stylua: ignore
+        config = function()
+            local mc = require("multicursor-nvim")
+            local map = vim.keymap.set
+            mc.setup()
+
+            map({ "n", "v" }, "<C-M-j>", function() mc.lineAddCursor(1) end)
+            map({ "n", "v" }, "<C-M-k>", function() mc.lineAddCursor(-1) end)
+            map({ "n", "v" }, "<C-M-n>", function() mc.matchAddCursor(1) end)
+            map({ "n", "v" }, "<C-M-p>", function() mc.matchAddCursor(-1) end)
+            map({ "n", "v" }, "<C-x>",   mc.deleteCursor)
+            map("n", "<leader>|",        mc.alignCursors)
+            map("n", "<C-leftmouse>",    mc.handleMouse)
+            map("n", "<Esc>", function()
+                if not mc.cursorsEnabled() then
+                    mc.enableCursors()
+                elseif mc.hasCursors() then
+                    mc.clearCursors()
+                else
+                    vim.cmd("noh")
+                end
+            end)
         end,
     },
 
@@ -83,7 +62,7 @@ return {
     {
         "echasnovski/mini.move",
         event = "VeryLazy",
-        opts = {},  -- keep this for setup
+        opts = {}, -- keep this for setup
     },
     {
         "echasnovski/mini.ai",
