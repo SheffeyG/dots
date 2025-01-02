@@ -63,8 +63,25 @@ return {
     {
         "AckslD/nvim-neoclip.lua",
         dependencies = "nvim-telescope/telescope.nvim",
+        init = function()
+            -- stylua: ignore
+            vim.keymap.set("n", "<leader>fp", "<cmd>Telescope neoclip<CR>",
+                { desc = "Telescope find register" })
+        end,
         opts = {
-            default_register = '+',
-        }
+            default_register = "+",
+        },
+    },
+
+    {
+        "nosduco/remote-sshfs.nvim",
+        dependencies = "nvim-telescope/telescope.nvim",
+        cmd = { "RemoteSSHFSConnect" },
+        init = function()
+            -- stylua: ignore
+            vim.keymap.set("n", "<leader>rc", "<cmd>RemoteSSHFSConnect<CR>",
+                { desc = "Remote connection" })
+        end,
+        opts = {},
     },
 }

@@ -100,12 +100,11 @@ end, { desc = "Noice show message history" })
 
 -- telescope
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>",  { desc = "Telescope find files" })
-map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>",   { desc = "Telescope live grep" })
+map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>",   { desc = "Telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>",     { desc = "Telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>",   { desc = "Telescope help page" })
 map("n", "<leader>ft", "<cmd>Telescope terms<CR>",       { desc = "Telescope find hidden term" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>",    { desc = "Telescope find oldfiles" })
-map("n", "<leader>fp", "<cmd>Telescope neoclip<CR>",     { desc = "Telescope find register" })
 map("n", "<leader>ma", "<cmd>Telescope marks<CR>",       { desc = "Telescope find marks" })
 map("n", "<leader>gm", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
 map("n", "<leader>gt", "<cmd>Telescope git_status<CR>",  { desc = "Telescope git status" })
