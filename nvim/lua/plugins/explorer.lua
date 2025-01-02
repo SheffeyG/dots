@@ -53,4 +53,16 @@ return {
             }
         end,
     },
+
+    {
+        "nosduco/remote-sshfs.nvim",
+        dependencies = "nvim-telescope/telescope.nvim",
+        cmd = { "RemoteSSHFSConnect" },
+        init = function()
+            -- stylua: ignore
+            vim.keymap.set("n", "<leader>rc", "<cmd>RemoteSSHFSConnect<CR>",
+                { desc = "Remote connection" })
+        end,
+        opts = {},
+    },
 }

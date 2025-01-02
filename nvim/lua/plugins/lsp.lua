@@ -114,6 +114,7 @@ return {
         event = "User FilePost",
         config = function()
             dofile(vim.g.base46_cache .. "lsp")
+            -- dofile(vim.g.base46_cache .. "semantic_tokens")
             for server, settings in pairs(server_settings) do
                 require("lspconfig")[server].setup({
                     on_attach = on_attach,
