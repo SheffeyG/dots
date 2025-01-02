@@ -69,6 +69,21 @@ return {
     },
 
     {
+        "rachartier/tiny-code-action.nvim",
+        event = "LspAttach",
+        dependencies = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-telescope/telescope.nvim" },
+        },
+        config = function()
+            vim.keymap.set({ "n", "v" }, "<leader>ca", function()
+                require("tiny-code-action").code_action()
+            end, { desc = "LSP code action" })
+            require("tiny-code-action").setup()
+        end,
+    },
+
+    {
         "folke/noice.nvim",
         event = "VeryLazy",
         opts = {
