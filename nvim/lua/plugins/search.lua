@@ -59,17 +59,4 @@ return {
             },
         },
     },
-
-    {
-        "AckslD/nvim-neoclip.lua",
-        dependencies = "nvim-telescope/telescope.nvim",
-        init = function()
-            -- stylua: ignore
-            vim.keymap.set("n", "<leader>fp", "<cmd>Telescope neoclip<CR>",
-                { desc = "Telescope find register" })
-        end,
-        opts = {
-            default_register = "+",
-        },
-    },
 }
