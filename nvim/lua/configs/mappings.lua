@@ -7,10 +7,15 @@ local map = vim.keymap.set
 map("n", ";", ":")
 map("i", "jk", "<ESC>")
 
-map("n", "<ESC>", "<cmd>noh<CR>", { desc = "General clear highlights" })
-map("n", "<C-a>", "ggVG",         { desc = "General select whole file" })
+-- use default system clipboard
+map({ "n", "v" }, "y", '"+y', { noremap = true, silent = true })
+map({ "n", "v" }, "Y", '"+Y', { noremap = true, silent = true })
+map({ "n", "v" }, "p", '"+p', { noremap = true, silent = true })
+map({ "n", "v" }, "P", '"+P', { noremap = true, silent = true })
+
 map("n", "<C-s>", "<cmd>w<CR>",   { desc = "General save file" })
-map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General copy whole file" })
+map("n", "<C-a>", "ggVG",         { desc = "General select whole file" })
+map("n", "<ESC>", "<cmd>noh<CR>", { desc = "General clear highlights" })
 
 map("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
 map("v", "<leader>/", "gc",  { desc = "Toggle comment", remap = true })
