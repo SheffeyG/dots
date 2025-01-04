@@ -17,7 +17,6 @@ o.smartindent = true
 o.tabstop = 4
 o.softtabstop = 4
 
-opt.fillchars = { eob = " " }
 o.ignorecase = true
 o.smartcase = true
 o.mouse = "a"
@@ -29,6 +28,9 @@ o.ruler = false
 
 -- disable nvim intro
 opt.shortmess:append("sI")
+
+opt.fillchars:append({ eob = " " })
+opt.fillchars:append({ diff = "╱" })
 
 o.signcolumn = "yes"
 o.splitbelow = true
@@ -48,4 +50,3 @@ g.loaded_node_provider = 0
 g.loaded_python3_provider = 0
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
-

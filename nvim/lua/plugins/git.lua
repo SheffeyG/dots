@@ -15,6 +15,29 @@ return {
     },
 
     {
+        "sindrets/diffview.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        cmd = { "DiffviewOpen", "DiffviewClose" },
+        keys = {
+            { "<leader>dv", "<cmd>DiffviewOpen<CR>", desc = "Git open diffview panel" },
+            { "<leader>dc", "<cmd>DiffviewClose<CR>", desc = "Git close diffview panel" },
+        },
+        opts = function()
+            dofile(vim.g.base46_cache .. "diffview")
+            return {
+                enhanced_diff_hl = true,
+                view = {
+                    merge_tool = {
+                        layout = "diff3_mixed",
+                        disable_diagnostics = true,
+                        diff_binaries = false,
+                    },
+                },
+            }
+        end,
+    },
+
+    {
         "NeogitOrg/neogit",
         dependencies = {
             "sindrets/diffview.nvim",

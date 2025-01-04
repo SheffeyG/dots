@@ -4,8 +4,9 @@ local M = {}
 M.base46 = {
     theme = "onedark",
     integrations = {
-        "neogit",
+        "diffview",
         "markview",
+        "neogit",
     },
     hl_override = {
         -- remove nvimtree separator

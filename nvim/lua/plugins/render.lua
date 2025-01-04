@@ -25,7 +25,6 @@ return {
                 "markdown",
                 "markdown_inline",
             },
-
             highlight = {
                 enable = true,
                 use_languagetree = true,
@@ -38,7 +37,6 @@ return {
                 dofile(vim.g.base46_cache .. "syntax")
                 dofile(vim.g.base46_cache .. "treesitter")
             end)
-
             require("nvim-treesitter.configs").setup(opts)
         end,
     },
@@ -50,5 +48,8 @@ return {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons",
         },
+        opts = function()
+            dofile(vim.g.base46_cache .. "markview")
+        end
     },
 }
