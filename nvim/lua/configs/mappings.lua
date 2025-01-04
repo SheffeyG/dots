@@ -39,26 +39,18 @@ map("n", "<C-l>", "<C-w>l", { desc = "Switch window right" })
 
 ------------------------------------ Terminal ----------------------------------------
 
-local t_sp = { pos = "sp", id = "htoggleTerm", cmd = "export ZLE_RPROMPT_INDENT=2" }
-local t_vsp = { pos = "vsp", id = "htoggleTerm", cmd = "export ZLE_RPROMPT_INDENT=2" }
-local t_float = { pos = "float", id = "htoggleTerm", cmd = "export ZLE_RPROMPT_INDENT=2" }
-
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
 
 map({ "n", "t" }, "<leader><leader>", function()
-    require("nvchad.term").toggle(t_sp)
-end, { desc = "Terminal toggle horizontal term" })
-
-map({ "n", "t" }, "<leader>-", function()
-    require("nvchad.term").toggle(t_sp)
+    require("nvchad.term").toggle({ pos = "sp", id = "hTerm" })
 end, { desc = "Terminal toggle horizontal term" })
 
 map({ "n", "t" }, "<leader>|", function()
-    require("nvchad.term").toggle(t_vsp)
+    require("nvchad.term").toggle({ pos = "vsp", id = "vTerm" })
 end, { desc = "Terminal toggle vertical term" })
 
 map({ "n", "t" }, "<leader>=", function()
-    require("nvchad.term").toggle(t_float)
+    require("nvchad.term").toggle({ pos = "float", id = "fTerm" })
 end, { desc = "Terminal toggle floating term" })
 
 ------------------------------------- Buffer -----------------------------------------
