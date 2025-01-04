@@ -62,16 +62,16 @@ return {
     {
         "echasnovski/mini.move",
         event = "VeryLazy",
-        opts = {}, -- keep this for setup
+        config = true,
     },
     {
         "echasnovski/mini.ai",
         event = "VeryLazy",
-        opts = {},
+        config = true,
     },
     {
         "echasnovski/mini.surround",
         event = "VeryLazy",
-        opts = {},
+        config = true,
     },
 }

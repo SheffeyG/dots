@@ -2,10 +2,10 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        version = "*",
         event = { "BufReadPost", "BufNewFile" },
         cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
         build = ":TSUpdate",
-
         opts = {
             ensure_installed = {
                 "c",
