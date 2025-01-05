@@ -39,18 +39,17 @@ return {
 
     {
         "folke/which-key.nvim",
-        keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
-        cmd = "WhichKey",
+        event = "VeryLazy",
         opts = function()
             dofile(vim.g.base46_cache .. "whichkey")
-            return {}
+            return { delay = 500 }
         end,
     },
 
     {
         "rachartier/tiny-inline-diagnostic.nvim",
         event = "VeryLazy", -- "VeryLazy" or `LspAttach`
-        -- priority = 1000, -- needs to be loaded in first
+        -- priority = 10, -- needs to be loaded in first
         config = function()
             vim.diagnostic.config({ virtual_text = false })
             require("tiny-inline-diagnostic").setup({
@@ -70,17 +69,19 @@ return {
 
     {
         "rachartier/tiny-code-action.nvim",
-        event = "LspAttach",
+        keys = {
+            {
+                "<leader>ca",
+                function()
+                    require("tiny-code-action").code_action()
+                end,
+            },
+        },
         dependencies = {
             { "nvim-lua/plenary.nvim" },
             { "nvim-telescope/telescope.nvim" },
         },
-        config = function()
-            vim.keymap.set({ "n", "v" }, "<leader>ca", function()
-                require("tiny-code-action").code_action()
-            end, { desc = "LSP code action" })
-            require("tiny-code-action").setup()
-        end,
+        config = true,
     },
 
     {
