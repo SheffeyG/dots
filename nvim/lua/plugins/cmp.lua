@@ -4,6 +4,8 @@ local options = function()
     local cmp = require("cmp")
 
     local opts = {
+        formatting = { fields = { "abbr", "kind" } },
+
         completion = { completeopt = "menu,menuone" },
 
         snippet = {
@@ -55,7 +57,7 @@ local options = function()
         },
     }
 
-    return vim.tbl_deep_extend("force", opts, require("nvchad.cmp"))
+    return vim.tbl_deep_extend("force", require("nvchad.cmp"), opts)
 end
 
 ---@type NvPluginSpec
