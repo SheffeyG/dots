@@ -59,4 +59,20 @@ return {
             },
         },
     },
+
+    {
+        "AckslD/nvim-neoclip.lua",
+        dependencies = "nvim-telescope/telescope.nvim",
+        keys = {
+            {
+                "<leader>fp",
+                "<cmd>Telescope neoclip<CR>",
+                mode = { "n", "v" },
+                desc = "Telescope find register",
+            },
+        },
+        opts = {
+            default_register = "+",
+        },
+    },
 }
