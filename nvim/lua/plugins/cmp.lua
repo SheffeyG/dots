@@ -1,53 +1,61 @@
-local options = function()
-    dofile(vim.g.base46_cache .. "cmp")
-
+local setup_cmp = function()
     local cmp = require("cmp")
 
-    local opts = {
+    local mapping = {
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-x>"] = cmp.mapping.close(),
+
+        ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        }),
+
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif require("luasnip").expand_or_jumpable() then
+                require("luasnip").expand_or_jump()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif require("luasnip").jumpable(-1) then
+                require("luasnip").jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+    }
+
+    cmp.setup.cmdline({ "/", "?" }, {
+        formatting = { fields = { "abbr" } },
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = { { name = "buffer" } },
+    })
+
+    cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        matching = { disallow_symbol_nonprefix_matching = false },
+        completion = { keyword_length = 3 },
+        sources = { { name = "cmdline" } },
+    })
+
+    cmp.setup(vim.tbl_deep_extend("force", require("nvchad.cmp"), {
         formatting = { fields = { "abbr", "kind" } },
-
-        completion = { completeopt = "menu,menuone" },
-
+        performance = { max_view_entries = 20 },
+        mapping = mapping,
         snippet = {
             expand = function(args)
                 require("luasnip").lsp_expand(args.body)
             end,
         },
-
-        mapping = {
-            ["<C-p>"] = cmp.mapping.select_prev_item(),
-            ["<C-n>"] = cmp.mapping.select_next_item(),
-            ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-            ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            ["<C-Space>"] = cmp.mapping.complete(),
-            ["<C-x>"] = cmp.mapping.close(),
-
-            ["<CR>"] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Insert,
-                select = true,
-            }),
-
-            ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif require("luasnip").expand_or_jumpable() then
-                    require("luasnip").expand_or_jump()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif require("luasnip").jumpable(-1) then
-                    require("luasnip").jump(-1)
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-        },
-
         sources = {
             { name = "nvim_lsp" },
             { name = "luasnip" },
@@ -55,21 +63,18 @@ local options = function()
             { name = "nvim_lua" },
             { name = "path" },
         },
-    }
-
-    return vim.tbl_deep_extend("force", require("nvchad.cmp"), opts)
+    }))
 end
 
 ---@type NvPluginSpec
-local sources = {
+local deps = {
     -- cmp sources plugins
-    {
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-    },
+    "saadparwaiz1/cmp_luasnip",
+    "hrsh7th/cmp-nvim-lua",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
 
     {
         "L3MON4D3/LuaSnip",
@@ -113,11 +118,11 @@ local sources = {
 ---@type NvPluginSpec
 return {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = sources,
-    -- cmp configs calling cmp module itself!
-    -- keep all in a function, so it could be lazy loaded.
-    opts = function()
-        return options()
+    event = { "InsertEnter" },
+    dependencies = deps,
+    -- keep all setup inside a function, so it could be lazy loaded.
+    config = function()
+        dofile(vim.g.base46_cache .. "cmp")
+        setup_cmp()
     end,
 }
