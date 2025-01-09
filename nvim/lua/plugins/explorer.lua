@@ -1,14 +1,6 @@
 ---@type NvPluginSpec
 return {
     {
-        "nvim-tree/nvim-web-devicons",
-        opts = function()
-            dofile(vim.g.base46_cache .. "devicons")
-            return { override = require("nvchad.icons.devicons") }
-        end,
-    },
-
-    {
         "nvim-tree/nvim-tree.lua",
         cmd = { "NvimTreeToggle", "NvimTreeFocus" },
         opts = function()
@@ -58,11 +50,14 @@ return {
         "nosduco/remote-sshfs.nvim",
         dependencies = "nvim-telescope/telescope.nvim",
         cmd = { "RemoteSSHFSConnect" },
-        init = function()
-            -- stylua: ignore
-            vim.keymap.set("n", "<leader>rc", "<cmd>RemoteSSHFSConnect<CR>",
-                { desc = "Remote connection" })
-        end,
+        keys = {
+            {
+                "<leader>rc",
+                "<cmd>RemoteSSHFSConnect<CR>",
+                mode = { "n" },
+                desc = "Remote connection",
+            },
+        },
         opts = {},
     },
 }

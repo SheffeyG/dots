@@ -118,7 +118,7 @@ local deps = {
 ---@type NvPluginSpec
 return {
     "hrsh7th/nvim-cmp",
-    event = { "InsertEnter" },
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = deps,
     -- keep all setup inside a function, so it could be lazy loaded.
     config = function()

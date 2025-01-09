@@ -20,7 +20,7 @@ return {
     -- multiple cursors
     {
         "jake-stewart/multicursor.nvim",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         -- stylua: ignore
         config = function()
             local mc = require("multicursor-nvim")
@@ -61,17 +61,17 @@ return {
     -- mini plugins
     {
         "echasnovski/mini.move",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         config = true,
     },
     {
         "echasnovski/mini.ai",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         config = true,
     },
     {
         "echasnovski/mini.surround",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         config = true,
     },
 }

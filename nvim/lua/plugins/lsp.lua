@@ -120,7 +120,7 @@ return {
 
     {
         "neovim/nvim-lspconfig",
-        event = "User FilePost",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             dofile(vim.g.base46_cache .. "lsp")
             -- dofile(vim.g.base46_cache .. "semantic_tokens")

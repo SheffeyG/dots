@@ -1,8 +1,8 @@
 ---@type NvPluginSpec
 return {
-    { "nvim-lua/plenary.nvim", lazy = true },
+    "nvim-lua/plenary.nvim",
 
-    { "MunifTanjim/nui.nvim", lazy = true },
+    "MunifTanjim/nui.nvim",
 
     {
         "nvchad/base46",
@@ -21,7 +21,7 @@ return {
 
     {
         "lukas-reineke/indent-blankline.nvim",
-        event = "User FilePost",
+        event = { "BufReadPost", "BufNewFile" },
         opts = {
             indent = { char = "│", highlight = "IblChar" },
             scope = { char = "│", highlight = "IblScopeChar" },
@@ -50,21 +50,21 @@ return {
         "rachartier/tiny-inline-diagnostic.nvim",
         event = "VeryLazy", -- "VeryLazy" or `LspAttach`
         -- priority = 10, -- needs to be loaded in first
-        config = function()
+        init = function()
             vim.diagnostic.config({ virtual_text = false })
-            require("tiny-inline-diagnostic").setup({
-                -- preset = "powerline",
-                signs = {
-                    left = "",
-                    right = "",
-                    diag = "●",
-                    arrow = "",
-                    up_arrow = "  ",
-                    vertical = "  ",
-                    vertical_end = "  ",
-                },
-            })
         end,
+        opts = {
+            -- preset = "powerline",
+            signs = {
+                left = "",
+                right = "",
+                diag = "●",
+                arrow = "",
+                up_arrow = "  ",
+                vertical = "  ",
+                vertical_end = "  ",
+            },
+        },
     },
 
     {
@@ -76,7 +76,7 @@ return {
                     require("tiny-code-action").code_action()
                 end,
                 mode = { "n", "v" },
-                desc = "Telescope preview code action"
+                desc = "Telescope preview code action",
             },
         },
         dependencies = {
@@ -89,6 +89,7 @@ return {
     {
         "folke/noice.nvim",
         event = "VeryLazy",
+        dependencies = "MunifTanjim/nui.nvim",
         opts = {
             presets = {
                 bottom_search = true,
