@@ -20,18 +20,29 @@ return {
         cmd = { "DiffviewOpen", "DiffviewClose" },
         keys = {
             { "<leader>dv", "<cmd>DiffviewOpen<CR>", desc = "Git open diffview panel" },
-            { "<leader>dc", "<cmd>DiffviewClose<CR>", desc = "Git close diffview panel" },
         },
         opts = function()
             dofile(vim.g.base46_cache .. "diffview")
             return {
-                enhanced_diff_hl = true,
                 view = {
                     merge_tool = {
                         layout = "diff3_mixed",
                         disable_diagnostics = true,
                         diff_binaries = false,
                     },
+                },
+                key_bindings = {
+                    view = { q = "<cmd>DiffviewClose<CR>" },
+                    file_panel = { q = "<cmd>DiffviewClose<CR>" },
+                    file_history_panel = { q = "<cmd>DiffviewClose<CR>" },
+                },
+                hooks = {
+                    -- Change local options in diff buffers
+                    diff_buf_read = function()
+                        vim.opt_local.wrap = false
+                        vim.opt_local.list = false
+                        vim.opt_local.colorcolumn = { 80 }
+                    end,
                 },
             }
         end,

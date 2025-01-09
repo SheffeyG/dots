@@ -9,8 +9,8 @@ M.base46 = {
         "neogit",
     },
     hl_override = {
-        -- remove nvimtree separator
         NvimTreeWinSeparator = { fg = "line", bg = "black" },
+        DiffviewFilePanelFileName = { fg = "white" },
     },
 }
 
