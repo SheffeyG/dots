@@ -11,9 +11,6 @@ local server_settings = {
                 typeCheckingMode = "basic",
             },
         },
-        python = {
-            venvPath = ".",
-        },
     },
     --- Lua ---
     lua_ls = {

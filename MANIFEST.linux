@@ -1,5 +1,5 @@
 link  | .zshrc     |
-copy  | .p10k.zsh  |
+link  | .p10k.zsh  |
 link  | .tmux.conf |
 copy  | .gitconfig |
 link  | nvim       | .config

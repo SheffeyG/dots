@@ -1,16 +1,6 @@
 ### neovim
 
-Install the latest neovim appimage package:
-
-```sh
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-./nvim.appimage
-```
-
-For aarch64 platform, use this [repo](https://github.com/matsuu/neovim-aarch64-appimage/releases) instead.
-
-If the appimage runs failed, try:
+* [appimage](https://github.com/neovim/neovim/releases/latest/download/nvim.appimage)
 
 ```sh
 ./nvim.appimage --appimage-extract
@@ -18,7 +8,7 @@ mkdir /app && mv squashfs-root /app/neovim
 ln -s /app/neovim/AppRun /usr/bin/nvim
 ```
 
-Or from ppa unstable source:
+* [ppa](https://launchpad.net/~neovim-ppa/+archive/ubuntu/stable)
 
 ```sh
 sudo add-apt-repository ppa:neovim-ppa/unstable
@@ -26,7 +16,9 @@ sudo apt update && apt upgrade
 sudo apt install neovim
 ```
 
-Some mason-provided packages are not compatible with aarch64 platform,
+* [arm64](https://github.com/matsuu/neovim-aarch64-appimage/releases)
+
+Some mason-provided packages are not compatible with arm64 platform,
 install them manaully:
 
 ```sh
@@ -34,17 +26,15 @@ pkg in lua-language-server stylua
 npm i clangd
 ```
 
-### conda
+### package managers
 
-Download miniconda3 from [here](https://repo.anaconda.com/miniconda/).
-
-Install miniconda3:
+* [miniconda](https://repo.anaconda.com/miniconda/).
 
 ```sh
 bash miniconda.sh -b -u -p ~/miniconda3
 ```
 
-### nvm
+* [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#table-of-contents)
 
 ```sh
 export NVM_DIR="$HOME/.nvm" && (
@@ -54,15 +44,7 @@ export NVM_DIR="$HOME/.nvm" && (
 ) && \. "$NVM_DIR/nvm.sh"
 ```
 
-### zsh
-
-Change default shell to zsh:
-
-```sh
-chsh -s $(which zsh)
-```
-
-### git
+### scripts
 
 Format print commits history to a markdown file:
 
