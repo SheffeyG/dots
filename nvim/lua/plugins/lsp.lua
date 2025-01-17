@@ -108,7 +108,7 @@ return {
         },
         config = function()
             dofile(vim.g.base46_cache .. "lsp")
-            -- dofile(vim.g.base46_cache .. "semantic_tokens")
+            dofile(vim.g.base46_cache .. "tiny-inline-diagnostic")
             for server, settings in pairs(server_settings) do
                 require("lspconfig")[server].setup({
                     capabilities = capabilities,

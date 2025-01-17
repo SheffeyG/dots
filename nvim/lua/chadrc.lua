@@ -7,6 +7,7 @@ M.base46 = {
         "diffview",
         "markview",
         "neogit",
+        "tiny-inline-diagnostic",
     },
     hl_override = {
         NvimTreeWinSeparator = { fg = "line", bg = "black" },
