@@ -47,46 +47,6 @@ return {
     },
 
     {
-        "rachartier/tiny-inline-diagnostic.nvim",
-        event = "VeryLazy", -- "VeryLazy" or `LspAttach`
-        -- priority = 10, -- needs to be loaded in first
-        init = function()
-            vim.diagnostic.config({ virtual_text = false })
-        end,
-        opts = {
-            -- preset = "powerline",
-            signs = {
-                left = "",
-                right = "",
-                diag = "●",
-                arrow = "",
-                up_arrow = "  ",
-                vertical = "  ",
-                vertical_end = "  ",
-            },
-        },
-    },
-
-    {
-        "rachartier/tiny-code-action.nvim",
-        keys = {
-            {
-                "<leader>ca",
-                function()
-                    require("tiny-code-action").code_action()
-                end,
-                mode = { "n", "v" },
-                desc = "Telescope preview code action",
-            },
-        },
-        dependencies = {
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope.nvim" },
-        },
-        config = true,
-    },
-
-    {
         "folke/noice.nvim",
         event = "VeryLazy",
         dependencies = "MunifTanjim/nui.nvim",
@@ -142,11 +102,12 @@ return {
             },
             lsp = {
                 progress = { enabled = false },
+                hover = { enabled = false },
                 signature = { enabled = false },
                 override = {
-                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                    ["vim.lsp.util.stylize_markdown"] = true,
                     ["cmp.entry.get_documentation"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                 },
             },
         },

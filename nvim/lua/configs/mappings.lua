@@ -76,9 +76,6 @@ map("n", "<leader>fm", function()
     require("conform").format({ lsp_fallback = true })
 end, { desc = "General format file" })
 
--- lsp
-map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
-
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>",    { desc = "Nvimtree toggle window" })
 map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "Nvimtree focus window" })

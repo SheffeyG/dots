@@ -63,32 +63,16 @@ local on_attach = function(_, bufnr)
     map("n", "gi", vim.lsp.buf.implementation, opts("Go to implementation"))
     map("n", "gr", vim.lsp.buf.references, opts("Show references"))
     map("n", "<leader>sh", vim.lsp.buf.signature_help, opts("Show signature help"))
+    map("n", "<leader>ds", vim.diagnostic.setloclist, opts("Diagnostic loclist"))
     map("n", "<leader>hw", vim.lsp.buf.document_highlight, opts("Add cursorword hl"))
     map("n", "<leader>hc", vim.lsp.buf.clear_references, opts("Remove cursorword hl"))
-    -- map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
-    map("n", "<leader>D", vim.lsp.buf.type_definition, opts("Go to type definition"))
+    map("n", "<leader>td", vim.lsp.buf.type_definition, opts("Go to type definition"))
     map("n", "<leader>rn", require("nvchad.lsp.renamer"), opts("Rename"))
-
-    -- highlight cursor word
-    -- if client.server_capabilities.documentHighlightProvider then
-    --     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-    --     vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
-    --     vim.api.nvim_create_autocmd("CursorHold", {
-    --         callback = vim.lsp.buf.document_highlight,
-    --         buffer = bufnr,
-    --         group = "lsp_document_highlight",
-    --         desc = "Document Highlight",
-    --     })
-    --     vim.api.nvim_create_autocmd("CursorMoved", {
-    --         callback = vim.lsp.buf.clear_references,
-    --         buffer = bufnr,
-    --         group = "lsp_document_highlight",
-    --         desc = "Clear All the References",
-    --     })
-    -- end
+    -- map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
 end
 
 local on_init = function(client, _)
+    vim.diagnostic.config({ virtual_text = false })
     -- disable semantic tokens
     if client.supports_method("textDocument/semanticTokens") then
         client.server_capabilities.semanticTokensProvider = nil
@@ -118,6 +102,10 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPost", "BufNewFile" },
+        dependencies = {
+            "rachartier/tiny-inline-diagnostic.nvim",
+            opts = { preset = "powerline" },
+        },
         config = function()
             dofile(vim.g.base46_cache .. "lsp")
             -- dofile(vim.g.base46_cache .. "semantic_tokens")
@@ -130,5 +118,24 @@ return {
                 })
             end
         end,
+    },
+
+    {
+        "rachartier/tiny-code-action.nvim",
+        keys = {
+            {
+                "<leader>ca",
+                function()
+                    require("tiny-code-action").code_action()
+                end,
+                mode = { "n", "v" },
+                desc = "Telescope preview code action",
+            },
+        },
+        dependencies = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-telescope/telescope.nvim" },
+        },
+        config = true,
     },
 }
