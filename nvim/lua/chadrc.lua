@@ -22,7 +22,8 @@ M.term = {
 
 M.ui = {
     tabufline = {
-        order = { "buffers", "tabs", "btns" },
+        bufwidth = 20,
+        order = { "buffers", "tabs", "btn_close_all" },
     },
 }
 
