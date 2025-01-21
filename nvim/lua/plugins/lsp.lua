@@ -65,9 +65,9 @@ local on_attach = function(_, bufnr)
     map("n", "<leader>sh", vim.lsp.buf.signature_help, opts("Show signature help"))
     map("n", "<leader>ds", vim.diagnostic.setloclist, opts("Diagnostic loclist"))
     map("n", "<leader>hw", vim.lsp.buf.document_highlight, opts("Add cursorword hl"))
-    map("n", "<leader>hc", vim.lsp.buf.clear_references, opts("Remove cursorword hl"))
     map("n", "<leader>td", vim.lsp.buf.type_definition, opts("Go to type definition"))
     map("n", "<leader>rn", require("nvchad.lsp.renamer"), opts("Rename"))
+    -- map("n", "<leader>hc", vim.lsp.buf.clear_references, opts("Clear cursorword hl"))
     -- map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
 end
 

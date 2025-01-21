@@ -39,8 +39,9 @@ return {
                     mc.enableCursors()
                 elseif mc.hasCursors() then
                     mc.clearCursors()
-                else
+                else -- fallback to clear highlights
                     vim.cmd("noh")
+                    vim.lsp.buf.clear_references()
                 end
             end)
         end,
