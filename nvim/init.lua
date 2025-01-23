@@ -1,4 +1,3 @@
-vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46_cache/"
 vim.g.mapleader = " "
 
 -- bootstrap lazy.vim
@@ -33,7 +32,3 @@ require("configs/options")
 require("configs/mappings")
 require("configs/autocmds")
 require("configs/special")
-
--- load cached theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")

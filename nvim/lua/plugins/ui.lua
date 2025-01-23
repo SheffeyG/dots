@@ -1,47 +1,12 @@
----@type NvPluginSpec
 return {
     "nvim-lua/plenary.nvim",
 
     "MunifTanjim/nui.nvim",
 
     {
-        "nvchad/base46",
-        build = function()
-            require("base46").load_all_highlights()
-        end,
-    },
-
-    {
-        "SheffeyG/ui",
-        lazy = false,
-        config = function()
-            require("nvchad")
-        end,
-    },
-
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        event = { "BufReadPost", "BufNewFile" },
-        opts = {
-            indent = { char = "│", highlight = "IblChar" },
-            scope = { char = "│", highlight = "IblScopeChar" },
-        },
-        config = function(_, opts)
-            dofile(vim.g.base46_cache .. "blankline")
-
-            local hooks = require("ibl.hooks")
-            hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
-            require("ibl").setup(opts)
-
-            dofile(vim.g.base46_cache .. "blankline")
-        end,
-    },
-
-    {
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = function()
-            dofile(vim.g.base46_cache .. "whichkey")
             return { delay = 500 }
         end,
     },

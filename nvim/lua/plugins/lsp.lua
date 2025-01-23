@@ -22,7 +22,6 @@ local server_settings = {
                 library = {
                     vim.fn.expand("$VIMRUNTIME/lua"),
                     vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
-                    vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types",
                     vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy",
                     "${3rd}/luv/library",
                 },
@@ -66,7 +65,7 @@ local on_attach = function(_, bufnr)
     map("n", "<leader>ds", vim.diagnostic.setloclist, opts("Diagnostic loclist"))
     map("n", "<leader>hw", vim.lsp.buf.document_highlight, opts("Add cursorword hl"))
     map("n", "<leader>td", vim.lsp.buf.type_definition, opts("Go to type definition"))
-    map("n", "<leader>rn", require("nvchad.lsp.renamer"), opts("Rename"))
+    map("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename"))
     -- map("n", "<leader>hc", vim.lsp.buf.clear_references, opts("Clear cursorword hl"))
     -- map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
 end
@@ -79,24 +78,20 @@ local on_init = function(client, _)
     end
 end
 
----@type NvPluginSpec
 return {
     {
         "williamboman/mason.nvim",
         cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
-        opts = function()
-            dofile(vim.g.base46_cache .. "mason")
-            return {
-                PATH = "skip",
-                ui = {
-                    icons = {
-                        package_pending = " ",
-                        package_installed = " ",
-                        package_uninstalled = " ",
-                    },
+        opts = {
+            PATH = "skip",
+            ui = {
+                icons = {
+                    package_pending = " ",
+                    package_installed = " ",
+                    package_uninstalled = " ",
                 },
-            }
-        end,
+            },
+        },
     },
 
     {
@@ -107,8 +102,6 @@ return {
             opts = { preset = "powerline" },
         },
         config = function()
-            dofile(vim.g.base46_cache .. "lsp")
-            dofile(vim.g.base46_cache .. "tiny-inline-diagnostic")
             for server, settings in pairs(server_settings) do
                 require("lspconfig")[server].setup({
                     capabilities = capabilities,

@@ -47,7 +47,7 @@ local setup_cmp = function()
         sources = { { name = "cmdline" } },
     })
 
-    cmp.setup(vim.tbl_deep_extend("force", require("nvchad.cmp"), {
+    cmp.setup({
         formatting = { fields = { "abbr", "kind" } },
         performance = { max_view_entries = 20 },
         mapping = mapping,
@@ -63,10 +63,9 @@ local setup_cmp = function()
             { name = "nvim_lua" },
             { name = "path" },
         },
-    }))
+    })
 end
 
----@type NvPluginSpec
 local deps = {
     -- cmp sources plugins
     "saadparwaiz1/cmp_luasnip",
@@ -107,7 +106,6 @@ local deps = {
         },
         config = function(_, opts)
             require("nvim-autopairs").setup(opts)
-
             -- setup cmp for autopairs
             local cmp_autopairs = require("nvim-autopairs.completion.cmp")
             require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
@@ -115,14 +113,12 @@ local deps = {
     },
 }
 
----@type NvPluginSpec
 return {
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = deps,
     -- keep all setup inside a function, so it could be lazy loaded.
     config = function()
-        dofile(vim.g.base46_cache .. "cmp")
         setup_cmp()
     end,
 }

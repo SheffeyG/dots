@@ -34,42 +34,11 @@ map("n", "<C-l>", "<C-w>l", { desc = "Switch window right" })
 
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
 
-map({ "n", "t" }, "<leader><leader>", function()
-    require("nvchad.term").toggle({ pos = "sp", id = "hTerm" })
-end, { desc = "Terminal toggle horizontal term" })
-
-map({ "n", "t" }, "<leader>|", function()
-    require("nvchad.term").toggle({ pos = "vsp", id = "vTerm" })
-end, { desc = "Terminal toggle vertical term" })
-
-map({ "n", "t" }, "<leader>=", function()
-    require("nvchad.term").toggle({ pos = "float", id = "fTerm" })
-end, { desc = "Terminal toggle floating term" })
-
 ------------------------------------- Buffer -----------------------------------------
 
 map("n", "<leader>b", "<cmd>enew<CR>", { desc = "Buffer new buffer" })
 
-map("n", "<tab>", function()
-    require("nvchad.tabufline").next()
-end, { desc = "Buffer switch to next buffer" })
-
-map("n", "<S-tab>", function()
-    require("nvchad.tabufline").prev()
-end, { desc = "Buffer switch to prev buffer" })
-
-map("n", "<leader>x", function()
-    require("nvchad.tabufline").close_buffer()
-end, { desc = "Buffer close current buffer" })
-
-map("n", "<leader>X", function()
-    require("nvchad.tabufline").closeAllBufs(false)
-end, { desc = "Buffer close all other buffers" })
-
 ------------------------------------- Plugins ----------------------------------------
-
--- cheatsheet
-map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "Toggle nvcheatsheet" })
 
 -- conform
 map("n", "<leader>fm", function()
@@ -101,8 +70,5 @@ map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>",
 
 map("n", "<leader>fa", "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
     { desc = "Telescope find all files" })
-
-map("n", "<leader>th", function() require("nvchad.themes").open() end,
-    { desc = "Telescope nvchad themes" })
 
 -- stylua: ignore end

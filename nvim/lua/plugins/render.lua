@@ -1,12 +1,5 @@
----@type NvPluginSpec
 return {
-    {
-        "nvim-tree/nvim-web-devicons",
-        opts = function()
-            dofile(vim.g.base46_cache .. "devicons")
-            return { override = require("nvchad.icons.devicons") }
-        end,
-    },
+    "nvim-tree/nvim-web-devicons",
 
     {
         "nvim-treesitter/nvim-treesitter",
@@ -41,10 +34,6 @@ return {
         },
 
         config = function(_, opts)
-            pcall(function()
-                dofile(vim.g.base46_cache .. "syntax")
-                dofile(vim.g.base46_cache .. "treesitter")
-            end)
             require("nvim-treesitter.configs").setup(opts)
         end,
     },
@@ -56,8 +45,5 @@ return {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons",
         },
-        opts = function()
-            dofile(vim.g.base46_cache .. "markview")
-        end,
     },
 }
