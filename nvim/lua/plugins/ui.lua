@@ -12,7 +12,7 @@ return {
     },
 
     {
-        "nvchad/ui",
+        "SheffeyG/ui",
         lazy = false,
         config = function()
             require("nvchad")
