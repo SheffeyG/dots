@@ -10,5 +10,9 @@ local c = colorbuddy.colors
 local g = colorbuddy.groups
 local s = colorbuddy.styles
 
-require("colors." .. colorscheme)(Color.new)
-require("colors.basic")(Group.new, c, g, s)
+require("colors." .. colorscheme)(Color)
+
+require("colors.basic")(Group, c, g, s)
+require("colors.git")(Group, c, g, s)
+require("colors.treesitter")(Group, c, g, s)
+require("colors.integrates")(Group, c, g, s)

@@ -5,6 +5,8 @@ return {
 
     "nvim-tree/nvim-web-devicons",
 
+    "tjdevries/colorbuddy.nvim",
+
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
@@ -117,9 +119,6 @@ return {
                 },
             },
             lsp = {
-                progress = { enabled = false },
-                hover = { enabled = false },
-                signature = { enabled = false },
                 override = {
                     ["cmp.entry.get_documentation"] = true,
                     ["vim.lsp.util.stylize_markdown"] = true,

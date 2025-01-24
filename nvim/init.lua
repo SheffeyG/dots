@@ -28,9 +28,5 @@ vim.opt.rtp:prepend(lazypath)
 local lazy_config = require("config.lazy")
 require("lazy").setup(lazy_config)
 
-require("config/options")
-require("config/mappings")
-require("config/autocmds")
-require("config/special")
-
+require("config")
 require("colors")
