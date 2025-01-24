@@ -51,7 +51,7 @@ map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "Nvimtree focus window"
 
 -- noice
 map("n", "<leader>mh", function()
-  require("noice").cmd("history")
+    require("noice").cmd("history")
 end, { desc = "Noice show message history" })
 
 -- telescope

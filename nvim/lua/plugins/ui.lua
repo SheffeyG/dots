@@ -3,12 +3,23 @@ return {
 
     "MunifTanjim/nui.nvim",
 
+    "nvim-tree/nvim-web-devicons",
+
+    {
+        "nvimdev/indentmini.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        opts = { exclude = { "markdown" } },
+    },
+
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        opts = function()
-            return { delay = 500 }
-        end,
+        opts = { delay = 500 },
     },
 
     {
