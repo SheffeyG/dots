@@ -6,14 +6,54 @@ return {
     "nvim-tree/nvim-web-devicons",
 
     {
-        "nvimdev/indentmini.nvim",
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
         event = { "BufReadPost", "BufNewFile" },
-        opts = { exclude = { "markdown" } },
+        opts = {
+            indent = { char = "│", highlight = "IndentLine" },
+            scope = { char = "│", highlight = "IndentLineCurrent" },
+        },
     },
 
     {
         "nvim-lualine/lualine.nvim",
+        lazy = false,
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            options = {
+                theme = "onedark",
+                section_separators = { left = "", right = "" },
+                component_separators = "",
+                ignore_focus = { "NvimTree", "NeogitStatus" },
+                globalstatus = true,
+            },
+            sections = {
+                lualine_a = {
+                    { "mode", icon = "" },
+                },
+                lualine_b = {
+                    { "branch", icon = "" },
+                },
+                lualine_c = {
+                    { "filetype", icon_only = true, padding = { left = 1, right = 0 } },
+                    { "filename", padding = { left = 0, right = 1 } },
+                },
+                lualine_x = {
+                    "encoding",
+                },
+                lualine_y = {
+                    "progress",
+                },
+                lualine_z = {
+                    {
+                        "tabs",
+                        cond = function()
+                            return #vim.api.nvim_list_tabpages() > 1
+                        end,
+                    },
+                },
+            },
+        },
     },
 
     {

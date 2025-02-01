@@ -3,12 +3,10 @@ local o = vim.o
 local g = vim.g
 
 o.laststatus = 3
-o.showmode = false
-
+o.showtabline = 0
 o.clipboard = "unnamedplus"
 o.cursorline = true
 o.relativenumber = false
-o.cursorlineopt = "number"
 
 --- indenting ---
 o.expandtab = true
@@ -24,7 +22,6 @@ o.mouse = "a"
 --- numbers ---
 o.number = true
 o.numberwidth = 2
-o.ruler = false
 
 -- disable nvim intro
 opt.shortmess:append("sI")
@@ -41,8 +38,7 @@ o.undofile = true
 -- interval for writing swap file to disk, also used by gitsigns
 o.updatetime = 250
 
--- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
+-- go to previous/next when reached the beginning/end of line
 opt.whichwrap:append("<>[]hl")
 
 -- disable some default providers

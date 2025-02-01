@@ -10,18 +10,6 @@ autocmd("BufReadPost", {
     end,
 })
 
--- close nvimtree if the last buffer
-autocmd("BufEnter", {
-    group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
-    pattern = "NvimTree_*",
-    callback = function()
-        local layout = vim.api.nvim_call_function("winlayout", {})
-        if layout[1] == "leaf" and vim.api.nvim_get_option_value("filetype", {}) == "NvimTree" and layout[3] == nil then
-            vim.cmd("confirm quit")
-        end
-    end,
-})
-
 -- open nvimtree for some cases
 autocmd("VimEnter", {
     callback = function(data)
