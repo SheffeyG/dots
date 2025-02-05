@@ -18,9 +18,18 @@ return {
     },
 
     {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = { delay = 500 },
+    },
+
+    {
         "nvim-lualine/lualine.nvim",
         lazy = false,
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "yavorski/lualine-macro-recording.nvim",
+        },
         opts = {
             options = {
                 theme = "onedark",
@@ -41,7 +50,8 @@ return {
                     { "filename", padding = { left = 0, right = 1 } },
                 },
                 lualine_x = {
-                    "encoding",
+                    { "macro_recording", "%S" },
+                    { "encoding" },
                 },
                 lualine_y = {
                     "progress",
@@ -56,12 +66,6 @@ return {
                 },
             },
         },
-    },
-
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = { delay = 500 },
     },
 
     {
