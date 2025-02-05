@@ -31,7 +31,7 @@ return {
                         },
                         git = {
                             unmerged = "",
-                            renamed = "->",
+                            renamed = "󰑕",
                             untracked = "",
                             deleted = "󱂦",
                             ignored = " ",

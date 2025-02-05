@@ -1,4 +1,4 @@
-return function(Group, c, g, s)
+return function(Group, c, _, s)
     Group.new("diffOldFile", c.yellow)
     Group.new("diffNewFile", c.blue)
 
