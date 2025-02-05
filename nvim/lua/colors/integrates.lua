@@ -1,4 +1,4 @@
-return function(Group, c, _, s)
+return function(Group, c, g, s)
     -- indentblank
     Group.new("IndentLine", c.grey)
     Group.new("IndentLineCurrent", c.white_dark)
@@ -17,22 +17,16 @@ return function(Group, c, _, s)
     Group.new("NvimTreeGitNewIcon", c.orange)
     Group.new("NvimTreeGitRenameIcon", c.purple)
 
-    -- diffview
-    Group.new("DiffviewDiffAdd", nil, c.green_bg)
-    Group.new("DiffviewDiffText", nil, c.green_bg:light())
-    Group.new("DiffviewDiffChange", nil, c.green_bg)
-    Group.new("DiffviewDiffAddAsDelete", nil, c.red_bg)
-    Group.new("DiffviewDiffDeleteDim", nil, c.red_bg)
-    Group.new("DiffviewDiffDelete", c.grey)
-
     -- gitsigns
     Group.new("GitSignsAdd", c.green)
     Group.new("GitSignsChange", c.yellow)
     Group.new("GitSignsDelete", c.red)
 
     -- neogit
-    Group.new("NeogitHunkHeaderHighlight", c.black, c.purple, s.bold)
-    Group.new("NeogitHunkHeaderCursor", c.black, c.purple, s.bold)
+    Group.new("NeogitHunkHeaderHighlight", c.black, c.blue, s.bold)
+    Group.link("NeogitHunkHeaderCursor", g.NeogitHunkHeaderHighlight)
+    Group.new("NeogitDiffHeaderHighlight", c.red, c.white_dark, s.bold)
+    Group.link("NeogitDiffHeaderCursor", g.NeogitDiffHeaderHighlight)
     Group.new("NeogitDiffAddCursor", c.green, c.green_bg:light(), s.bold)
     Group.new("NeogitDiffDeleteCursor", c.red, c.red_bg:light(), s.bold)
 end

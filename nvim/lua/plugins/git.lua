@@ -18,6 +18,7 @@ return {
             { "<leader>dv", "<cmd>DiffviewOpen<CR>", desc = "Git open diffview panel" },
         },
         opts = {
+            enhanced_diff_hl = true,
             view = {
                 merge_tool = {
                     layout = "diff3_mixed",

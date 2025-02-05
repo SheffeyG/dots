@@ -9,6 +9,7 @@ return function(Group, c, _, s)
     Group.new("DiffText", nil, c.yellow_bg:light(), s.bold)
     Group.new("DiffAdded", c.green)
     Group.new("DiffRemoved", c.red)
+    Group.new("DiffChanged", c.yellow)
     Group.new("DiffModified", c.yellow)
 
     Group.new("gitcommitOverflow", c.base08)
