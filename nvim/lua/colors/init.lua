@@ -12,7 +12,7 @@ local s = colorbuddy.styles
 
 require("colors." .. colorscheme)(Color)
 
-require("colors.basic")(Group, c, g, s)
+require("colors.neovim")(Group, c, g, s)
+require("colors.syntax")(Group, c, g, s)
 require("colors.git")(Group, c, g, s)
-require("colors.treesitter")(Group, c, g, s)
 require("colors.integrates")(Group, c, g, s)

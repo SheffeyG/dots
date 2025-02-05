@@ -1,6 +1,5 @@
 return function(Group, c, g, s)
     Group.new("Normal", c.white, c.black)
-    Group.new("Comment", c.white_dark)
 
     Group.new("Pmenu", nil, c.black_light)
     Group.new("PmenuSbar", nil, c.black_light)
