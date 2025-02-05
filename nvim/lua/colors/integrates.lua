@@ -1,4 +1,4 @@
-return function(Group, c, g, s)
+return function(Group, c, _, s)
     -- indentblank
     Group.new("IndentLine", c.grey)
     Group.new("IndentLineCurrent", c.white_dark)
@@ -11,6 +11,11 @@ return function(Group, c, g, s)
     Group.new("NvimTreeOpenedFolderName", c.blue, nil, s.bold)
     Group.new("NvimTreeFolderArrowOpen", c.white_dark)
     Group.new("NvimTreeFolderArrowClosed", c.white_dark)
+    Group.new("NvimTreeGitDirtyIcon", c.yellow)
+    Group.new("NvimTreeGitStagedIcon", c.green)
+    Group.new("NvimTreeGitDeletedIcon", c.red)
+    Group.new("NvimTreeGitNewIcon", c.orange)
+    Group.new("NvimTreeGitRenameIcon", c.purple)
 
     -- diffview
     Group.new("DiffviewDiffAdd", nil, c.green_bg)
@@ -24,4 +29,10 @@ return function(Group, c, g, s)
     Group.new("GitSignsAdd", c.green)
     Group.new("GitSignsChange", c.yellow)
     Group.new("GitSignsDelete", c.red)
+
+    -- neogit
+    Group.new("NeogitHunkHeaderHighlight", c.black, c.purple, s.bold)
+    Group.new("NeogitHunkHeaderCursor", c.black, c.purple, s.bold)
+    Group.new("NeogitDiffAddCursor", c.green, c.green_bg:light(), s.bold)
+    Group.new("NeogitDiffDeleteCursor", c.red, c.red_bg:light(), s.bold)
 end
