@@ -48,6 +48,17 @@ local setup_cmp = function()
     })
 
     cmp.setup({
+        window = {
+            completion = {
+                side_padding = 1,
+                border = "single",
+                winhighlight = "FloatBorder:GreyBorder,CursorLine:PmenuSel,Search:None",
+            },
+            documentation = {
+                border = "single",
+                winhighlight = "FloatBorder:GreyBorder",
+            },
+        },
         formatting = { fields = { "abbr", "kind" } },
         performance = { max_view_entries = 20 },
         mapping = mapping,

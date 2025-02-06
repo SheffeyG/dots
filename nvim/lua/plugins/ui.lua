@@ -90,10 +90,7 @@ return {
                     },
                     filter_options = {},
                     win_options = {
-                        winhighlight = {
-                            NormalFloat = "NormalFloat",
-                            FloatBorder = "FloatBorder",
-                        },
+                        winhighlight = { NormalFloat = "NoBorder" },
                     },
                 },
                 cmdline_input = {
