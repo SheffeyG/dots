@@ -21,14 +21,14 @@ return function(Color)
     Color.new("purple",      "#c678dd")
     Color.new("purple_bg",   "#3c2443")
 
-    Color.new("base00", "#1e222a")  -- black0
-    Color.new("base01", "#353b45")  -- black1
-    Color.new("base02", "#3e4451")  -- black2
-    Color.new("base03", "#545862")  -- black3
-    Color.new("base04", "#565c64")  -- black4
-    Color.new("base05", "#abb2bf")  -- white0
-    Color.new("base06", "#b6bdca")  -- white1
-    Color.new("base07", "#c8ccd4")  -- white2
+    Color.new("base00", "#1e222a")  -- black1
+    Color.new("base01", "#353b45")  -- black2
+    Color.new("base02", "#3e4451")  -- black3
+    Color.new("base03", "#545862")  -- grey1
+    Color.new("base04", "#565c64")  -- grey2
+    Color.new("base05", "#abb2bf")  -- white1
+    Color.new("base06", "#b6bdca")  -- white2
+    Color.new("base07", "#c8ccd4")  -- white3
     Color.new("base08", "#e06c75")  -- red
     Color.new("base09", "#d19a66")  -- orange
     Color.new("base0A", "#e5c07b")  -- yellow
