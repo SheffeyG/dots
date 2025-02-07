@@ -1,17 +1,19 @@
 -- stylua: ignore
 return function(Color)
     Color.new("black_dark",  "#1b1f27")
-    Color.new("black",       "#1e222a")
+    Color.new("black",       "#1e222a") -- base00
     Color.new("black_light", "#252931")
     Color.new("grey_dark",   "#31353d")
     Color.new("grey",        "#353b45") -- base01
     --                       "#3e4451"  -- base02
-    Color.new("grey_light",  "#42464e")
-    --                       "#545862"  -- base03
-    Color.new("white_dark",  "#565c64")
-    Color.new("white",       "#abb2bf")
-    Color.new("white_light", "#c8ccd4")
-    Color.new("red_dark",    "#d7424d")
+    --                       "#525966"  -- base03
+    Color.new("grey_light",  "#565c64") -- base04
+    Color.new("white_dark",  "#979aa1")
+    Color.new("white",       "#abb2bf") -- base05
+    --                       "#b6bdca"  -- base06
+    Color.new("white_light", "#c8ccd4") -- base07
+
+    Color.new("crimson",     "#d7424d")
     Color.new("red",         "#e06c75")
     Color.new("orange",      "#d19a66")
     Color.new("yellow",      "#e7c787")
