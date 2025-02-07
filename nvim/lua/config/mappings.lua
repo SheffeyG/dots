@@ -37,7 +37,23 @@ map("n", "<C-l>", "<C-w>l", { desc = "Switch window right" })
 --------------------------
 
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
-map("n", "<leader>b", "<cmd>enew<CR>", { desc = "Buffer new buffer" })
+
+local terminal_window_id = nil
+function _G.toggle_terminal()
+    if terminal_window_id and vim.api.nvim_win_is_valid(terminal_window_id) then
+        vim.api.nvim_win_close(terminal_window_id, true)
+        terminal_window_id = nil
+    else
+        vim.cmd("split")
+        ---@diagnostic disable-next-line: param-type-mismatch
+        terminal_window_id = vim.api.nvim_get_current_win()
+        vim.cmd("terminal")
+        vim.wo.number = false
+        vim.wo.relativenumber = false
+    end
+end
+
+map("n", "<Leader><Leader>", "<cmd>lua toggle_terminal()<CR>")
 
 --------------------------
 --- Plugins
