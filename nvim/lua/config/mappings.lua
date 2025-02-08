@@ -17,8 +17,6 @@ map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 --- Edit
 --------------------------
 
-map("i", "<C-b>", "<ESC>^i", { desc = "Move cusor beginning of line" })
-map("i", "<C-e>", "<End>", { desc = "Move cusor end of line" })
 map("i", "<C-h>", "<Left>", { desc = "Move cusor left" })
 map("i", "<C-j>", "<Down>", { desc = "Move cusor down" })
 map("i", "<C-k>", "<Up>", { desc = "Move cusor up" })
@@ -27,33 +25,25 @@ map("i", "<C-l>", "<Right>", { desc = "Move cusor right" })
 map("n", "H", "^", { desc = "Move cusor beginning of line" })
 map("n", "L", "$", { desc = "Move cusor end of line" })
 
+--------------------------
+--- Buffers
+--------------------------
+
 map("n", "<C-h>", "<C-w>h", { desc = "Switch window left" })
 map("n", "<C-j>", "<C-w>j", { desc = "Switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "Switch window up" })
 map("n", "<C-l>", "<C-w>l", { desc = "Switch window right" })
 
---------------------------
---- Buffers
---------------------------
+map("t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Switch window left" })
+map("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Switch window down" })
+map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Switch window up" })
+map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Switch window right" })
 
-map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
+map("t", "<C-x>", "<C-\\><C-N>", { desc = "Escape terminal mode" })
 
-local terminal_window_id = nil
-function _G.toggle_terminal()
-    if terminal_window_id and vim.api.nvim_win_is_valid(terminal_window_id) then
-        vim.api.nvim_win_close(terminal_window_id, true)
-        terminal_window_id = nil
-    else
-        vim.cmd("split")
-        ---@diagnostic disable-next-line: param-type-mismatch
-        terminal_window_id = vim.api.nvim_get_current_win()
-        vim.cmd("terminal")
-        vim.wo.number = false
-        vim.wo.relativenumber = false
-    end
-end
-
-map("n", "<Leader><Leader>", "<cmd>lua toggle_terminal()<CR>")
+map({ "n", "t" }, "<leader><leader>", function()
+    Snacks.terminal.toggle()
+end, { desc = "Toogle bottom terminal" })
 
 --------------------------
 --- Plugins

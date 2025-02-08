@@ -4,6 +4,7 @@ M.defaults = { lazy = true }
 
 M.spec = {
     { import = "plugins" },
+    { import = "plugins.ui" },
 }
 
 -- automatically check for plugin updates

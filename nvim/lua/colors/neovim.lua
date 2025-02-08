@@ -18,7 +18,7 @@ return function(Group, c, g, s)
 
     -- line
     Group.new("Cursor", c.black, c.white)
-    Group.new("Visual", nil, c.grey)
+    Group.new("Visual", nil, c.grey_dark)
     Group.new("VisualNOS", c.red)
     Group.new("CursorLine", nil, c.black_light)
     Group.new("CursorColumn", nil, c.grey)

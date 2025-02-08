@@ -73,6 +73,7 @@ local setup_cmp = function()
             { name = "buffer" },
             { name = "nvim_lua" },
             { name = "path" },
+            { name = "lazy_dev" },
         },
     })
 end

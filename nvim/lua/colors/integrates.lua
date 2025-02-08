@@ -1,5 +1,5 @@
 return function(Group, c, g, s)
-    -- indentblank
+    -- indentline
     Group.new("IndentLine", c.grey)
     Group.new("IndentLineCurrent", c.grey_light)
 
