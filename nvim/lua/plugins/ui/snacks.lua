@@ -17,7 +17,55 @@ return {
             enabled = true,
             win = { relative = "win" },
         },
-        picker = { enabled = true },
+        picker = {
+            enabled = true,
+            prompt = "   ",
+            layouts = {
+                default = {
+                    layout = {
+                        box = "horizontal",
+                        width = 0.8,
+                        height = 0.8,
+                        border = "none",
+                        {
+                            box = "vertical",
+                            {
+                                win = "input",
+                                height = 1,
+                                border = "solid",
+                                title = "{title} {live} {flags}",
+                            },
+                            { win = "list", border = "solid" },
+                        },
+                        {
+                            win = "preview",
+                            title = "{preview}",
+                            border = "solid",
+                            width = 0.6,
+                        },
+                    },
+                },
+                vertical = {
+                    layout = {
+                        backdrop = true,
+                        width = 0.5,
+                        min_width = 80,
+                        height = 0.8,
+                        min_height = 25,
+                        box = "vertical",
+                        border = "none",
+                        {
+                            win = "input",
+                            height = 1,
+                            border = "solid",
+                            title = "{title} {live} {flags}",
+                        },
+                        { win = "list", border = "hpad", height = 0.3 },
+                        { win = "preview", title = "{preview}", border = "top" },
+                    },
+                },
+            },
+        },
         -- explorer = { enabled = true },
         -- statuscolumn = { enabled = true },
         rename = { enabled = true },
