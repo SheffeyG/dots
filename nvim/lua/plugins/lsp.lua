@@ -40,20 +40,15 @@ capabilities.textDocument.completion.completionItem = {
 local on_attach = function(_, bufnr)
     local map = vim.keymap.set
     local function opts(desc)
-        return { buffer = bufnr, desc = "LSP " .. desc }
+        return { buffer = bufnr, desc = desc }
     end
 
-    map("n", "gD", vim.lsp.buf.declaration, opts("Go to declaration"))
-    map("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
-    map("n", "gi", vim.lsp.buf.implementation, opts("Go to implementation"))
-    map("n", "gr", vim.lsp.buf.references, opts("Show references"))
-    map("n", "<leader>sh", vim.lsp.buf.signature_help, opts("Show signature help"))
-    map("n", "<leader>ds", vim.diagnostic.setloclist, opts("Diagnostic loclist"))
-    map("n", "<leader>hw", vim.lsp.buf.document_highlight, opts("Add cursorword hl"))
-    map("n", "<leader>td", vim.lsp.buf.type_definition, opts("Go to type definition"))
     map("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename"))
+    map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
+    map("n", "<leader>sh", vim.lsp.buf.signature_help, opts("Show signature help"))
+    map("n", "<leader>td", vim.lsp.buf.type_definition, opts("Go to type definition"))
+    -- map("n", "<leader>hw", vim.lsp.buf.document_highlight, opts("Add cursorword hl"))
     -- map("n", "<leader>hc", vim.lsp.buf.clear_references, opts("Clear cursorword hl"))
-    -- map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
 end
 
 local on_init = function(client, _)
@@ -98,24 +93,5 @@ return {
                 })
             end
         end,
-    },
-
-    {
-        "rachartier/tiny-code-action.nvim",
-        keys = {
-            {
-                "<leader>ca",
-                function()
-                    require("tiny-code-action").code_action()
-                end,
-                mode = { "n", "v" },
-                desc = "Telescope preview code action",
-            },
-        },
-        dependencies = {
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope.nvim" },
-        },
-        config = true,
     },
 }

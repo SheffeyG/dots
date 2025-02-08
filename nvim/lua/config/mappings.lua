@@ -40,17 +40,3 @@ map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Switch window up" })
 map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Switch window right" })
 
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Escape terminal mode" })
-
---------------------------
---- Telescope
---------------------------
-
-map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Telescope find files" })
-map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Telescope live grep" })
-map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Telescope find buffers" })
-map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Telescope help page" })
-map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope find oldfiles" })
-map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "Telescope find marks" })
-map("n", "<leader>gm", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
-map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "Telescope git status" })
-map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Telescope fuzzy find" })
