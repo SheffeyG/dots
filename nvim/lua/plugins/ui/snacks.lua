@@ -25,4 +25,12 @@ return {
         scroll = { enabled = true },
         words = { enabled = true },
     },
+    keys = {
+        {
+            mode = { "n", "t" },
+            "<leader><leader>",
+            function() Snacks.terminal.toggle() end,
+            desc = "Toogle bottom terminal",
+        },
+    },
 }

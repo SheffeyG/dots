@@ -2,7 +2,6 @@
 return {
     {
         "nvim-tree/nvim-tree.lua",
-        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
         opts = {
             git = { ignore = false },
             filters = {
@@ -41,20 +40,23 @@ return {
                 },
             },
         },
+        keys = {
+            { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "Nvimtree toggle" },
+            { "<C-e>", "<cmd>NvimTreeFocus<CR>", desc = "Nvimtree focus" },
+        },
     },
 
-    {
-        "nosduco/remote-sshfs.nvim",
-        dependencies = "nvim-telescope/telescope.nvim",
-        cmd = { "RemoteSSHFSConnect" },
-        keys = {
-            {
-                "<leader>rc",
-                "<cmd>RemoteSSHFSConnect<CR>",
-                mode = { "n" },
-                desc = "Remote connection",
-            },
-        },
-        opts = {},
-    },
+    -- {
+    --     "nosduco/remote-sshfs.nvim",
+    --     dependencies = "nvim-telescope/telescope.nvim",
+    --     cmd = { "RemoteSSHFSConnect" },
+    --     keys = {
+    --         {
+    --             "<leader>rc",
+    --             "<cmd>RemoteSSHFSConnect<CR>",
+    --             desc = "Remote connection",
+    --         },
+    --     },
+    --     opts = {},
+    -- },
 }

@@ -50,4 +50,11 @@ return {
             },
         },
     },
+    keys = {
+        {
+            "<leader>mh",
+            function() require("noice").cmd("history") end,
+            desc = "Message history",
+        },
+    },
 }

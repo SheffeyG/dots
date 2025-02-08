@@ -15,6 +15,13 @@ return {
                 typescript = { "prettier" },
             },
         },
+        keys = {
+            {
+                "<leader>fm",
+                function() require("conform").format({ lsp_fallback = true }) end,
+                desc = "Format buffer",
+            },
+        },
     },
 
     -- multiple cursors

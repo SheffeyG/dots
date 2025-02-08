@@ -41,29 +41,10 @@ map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Switch window right" })
 
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Escape terminal mode" })
 
-map({ "n", "t" }, "<leader><leader>", function()
-    Snacks.terminal.toggle()
-end, { desc = "Toogle bottom terminal" })
-
 --------------------------
---- Plugins
+--- Telescope
 --------------------------
 
--- conform
-map("n", "<leader>fm", function()
-    require("conform").format({ lsp_fallback = true })
-end, { desc = "General format file" })
-
--- nvimtree
-map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree toggle window" })
-map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "Nvimtree focus window" })
-
--- noice
-map("n", "<leader>mh", function()
-    require("noice").cmd("history")
-end, { desc = "Noice show message history" })
-
--- telescope
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Telescope find files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Telescope find buffers" })
