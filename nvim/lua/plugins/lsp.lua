@@ -14,7 +14,7 @@ local server_settings = {
     },
     --- Lua ---
     lua_ls = {
-        Lua = { diagnostics = { globals = { "vim" } } },
+        Lua = { diagnostics = { globals = { "vim", "Snacks" } } },
     },
 }
 

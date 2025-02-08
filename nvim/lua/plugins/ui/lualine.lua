@@ -33,12 +33,7 @@ return {
                 "progress",
             },
             lualine_z = {
-                {
-                    "tabs",
-                    cond = function()
-                        return #vim.api.nvim_list_tabpages() > 1
-                    end,
-                },
+                { "tabs", cond = function() return #vim.api.nvim_list_tabpages() > 1 end },
             },
         },
     },
