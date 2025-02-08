@@ -1,12 +1,13 @@
+--- @type LazyPluginSpec[]
 return {
     -- libs
-    "nvim-lua/plenary.nvim",
+    { "nvim-lua/plenary.nvim" },
 
-    "MunifTanjim/nui.nvim",
+    { "MunifTanjim/nui.nvim" },
 
-    "nvim-tree/nvim-web-devicons",
+    { "nvim-tree/nvim-web-devicons" },
 
-    "tjdevries/colorbuddy.nvim",
+    { "tjdevries/colorbuddy.nvim" },
 
     {
         "folke/which-key.nvim",
@@ -19,6 +20,7 @@ return {
         ft = "lua",
         opts = {
             library = {
+                "lazy.nvim",
                 { path = "${3rd}/luv/library", words = { "vim%.uv" } },
                 { path = "snacks.nvim", words = { "Snacks" } },
             },
