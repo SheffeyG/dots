@@ -1,6 +1,5 @@
 --- @type LazyPluginSpec[]
 return {
-    -- libs
     { "nvim-lua/plenary.nvim" },
 
     { "MunifTanjim/nui.nvim" },
@@ -8,12 +7,6 @@ return {
     { "nvim-tree/nvim-web-devicons" },
 
     { "tjdevries/colorbuddy.nvim" },
-
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = { delay = 500 },
-    },
 
     {
         "folke/lazydev.nvim",

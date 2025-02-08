@@ -66,6 +66,12 @@ return {
         cmd = "Code",
     },
 
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = { delay = 500 },
+    },
+
     -- mini plugins
     {
         "echasnovski/mini.move",
