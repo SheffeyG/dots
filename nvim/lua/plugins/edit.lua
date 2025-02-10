@@ -66,6 +66,7 @@ return {
         cmd = "Code",
     },
 
+    -- show keymaps
     {
         "folke/which-key.nvim",
         event = "VeryLazy",

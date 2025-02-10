@@ -3,22 +3,18 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+    ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
         quickfile = { enabled = true },
-        indent = {
-            enabled = true,
-            indent = { hl = "IndentLine" },
-            scope = { hl = "IndentLineCurrent" },
-            animate = { duration = 10 },
-        },
+        rename = { enabled = true },
+        scope = { enabled = true },
+        scroll = { enabled = true },
+        words = { enabled = true },
         input = { enabled = true },
-        terminal = {
-            enabled = true,
-            win = { relative = "win" },
-        },
+        terminal = { win = { relative = "win" } },
+        indent = { animate = { duration = 10 } },
         picker = {
-            enabled = true,
             prompt = "   ",
             layouts = {
                 default = {
@@ -47,7 +43,6 @@ return {
                 },
                 vertical = {
                     layout = {
-                        backdrop = true,
                         width = 0.5,
                         min_width = 80,
                         height = 0.8,
@@ -66,23 +61,16 @@ return {
                 },
             },
         },
-        -- explorer = { enabled = true },
-        -- statuscolumn = { enabled = true },
-        rename = { enabled = true },
-        scope = { enabled = true },
-        scroll = { enabled = true },
-        words = { enabled = true },
     },
     keys = {
         { "<leader>tt", function() Snacks.terminal.toggle() end, desc = "Terminal toogle", mode = { "n", "t" } },
+        { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+        { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+        { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+        { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+        -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
         { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
         { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
-        -- Top Pickers & Explorer
-        { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-        { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
-        { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-        -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
-        { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
         -- find
         { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Find Buffers" },
         { "<leader>ff", function() Snacks.picker.smart() end, desc = "Find Files" },

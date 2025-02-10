@@ -1,8 +1,4 @@
 return function(Group, c, g, s)
-    -- indentline
-    Group.new("IndentLine", c.grey)
-    Group.new("IndentLineCurrent", c.grey_light)
-
     -- nvimtree
     Group.new("NvimTreeIndentMarker", c.grey)
     Group.new("NvimTreeFolderIcon", c.blue)
@@ -30,7 +26,11 @@ return function(Group, c, g, s)
     Group.new("NeogitDiffAddCursor", c.green, c.green_bg:light(), s.bold)
     Group.new("NeogitDiffDeleteCursor", c.red, c.red_bg:light(), s.bold)
 
-    -- snacks
+    -- snacks.indent
+    Group.new("SnacksIndent", c.grey)
+    Group.new("SnacksIndentScope", c.grey_light)
+
+    -- snacks.picker
     Group.new("SnacksPickerInput", nil, c.black_light)
     Group.new("SnacksPickerInputTitle", c.black_light, c.red)
     Group.new("SnacksPickerInputBorder", g.SnacksPickerInput.bg, g.SnacksPickerInput.bg)
