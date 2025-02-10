@@ -33,8 +33,8 @@ return function(Group, c, g, s)
     -- snacks.picker
     Group.new("SnacksPickerInput", nil, c.black_light)
     Group.new("SnacksPickerInputTitle", c.black_light, c.red)
-    Group.new("SnacksPickerInputBorder", g.SnacksPickerInput.bg, g.SnacksPickerInput.bg)
+    Group.new("SnacksPickerInputBorder", nil, g.SnacksPickerInput.bg)
     Group.new("SnacksPickerPreview", nil, c.black_dark)
     Group.new("SnacksPickerPreviewTitle", c.black_light, c.blue)
-    Group.new("SnacksPickerPreviewBorder", g.SnacksPickerPreview.bg, g.SnacksPickerPreview.bg)
+    Group.new("SnacksPickerPreviewBorder", nil, g.SnacksPickerPreview.bg)
 end

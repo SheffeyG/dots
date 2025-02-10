@@ -9,7 +9,7 @@ return {
     opts = {
         options = {
             theme = "onedark",
-            section_separators = { left = "", right = "" },
+            section_separators = "",
             component_separators = "",
             ignore_focus = { "NvimTree", "NeogitStatus" },
             globalstatus = true,

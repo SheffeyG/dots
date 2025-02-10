@@ -39,9 +39,7 @@ capabilities.textDocument.completion.completionItem = {
 
 local on_attach = function(_, bufnr)
     local map = vim.keymap.set
-    local function opts(desc)
-        return { buffer = bufnr, desc = desc }
-    end
+    local function opts(desc) return { buffer = bufnr, desc = desc } end
 
     map("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename"))
     map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
@@ -54,9 +52,7 @@ end
 local on_init = function(client, _)
     vim.diagnostic.config({ virtual_text = false })
     -- disable semantic tokens
-    if client.supports_method("textDocument/semanticTokens") then
-        client.server_capabilities.semanticTokensProvider = nil
-    end
+    if client.supports_method("textDocument/semanticTokens") then client.server_capabilities.semanticTokensProvider = nil end
 end
 
 --- @type LazyPluginSpec[]
@@ -80,8 +76,21 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
-            "rachartier/tiny-inline-diagnostic.nvim",
-            opts = { preset = "powerline" },
+            {
+                "rachartier/tiny-inline-diagnostic.nvim",
+                opts = { preset = "powerline" },
+            },
+            {
+                "folke/lazydev.nvim",
+                ft = "lua",
+                opts = {
+                    library = {
+                        { path = "lazy.nvim", words = { "Lazy.*Spec" } },
+                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                        { path = "snacks.nvim", words = { "Snacks" } },
+                    },
+                },
+            },
         },
         config = function()
             for server, settings in pairs(server_settings) do
