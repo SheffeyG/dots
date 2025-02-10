@@ -60,6 +60,32 @@ return {
                     },
                 },
             },
+            sources = {
+                explorer = {
+                    win = {
+                        list = {
+                            keys = {
+                                ["o"] = "confirm",
+                                ["v"] = "edit_vsplit",
+                                ["s"] = "edit_split",
+                            },
+                        },
+                    },
+                    layout = {
+                        preset = "sidebar",
+                        -- preview = false,
+                        layout = {
+                            backdrop = false,
+                            width = 30,
+                            position = "left",
+                            border = "none",
+                            box = "vertical",
+                            { win = "list", border = "none", hl = "NormalDark" },
+                            { win = "input", height = 1, border = "none" },
+                        },
+                    },
+                },
+            },
         },
     },
     keys = {
