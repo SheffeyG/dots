@@ -75,7 +75,6 @@ return {
                     layout = {
                         auto_close = true,
                         layout = {
-                            backdrop = false,
                             width = 30,
                             position = "left",
                             border = "none",

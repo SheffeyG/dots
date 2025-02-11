@@ -11,7 +11,7 @@ return {
             theme = "onedark",
             section_separators = "",
             component_separators = "",
-            ignore_focus = { "NvimTree", "NeogitStatus" },
+            ignore_focus = { "NeogitStatus" },
             globalstatus = true,
         },
         sections = {

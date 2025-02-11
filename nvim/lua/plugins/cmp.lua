@@ -52,11 +52,11 @@ local setup_cmp = function()
             completion = {
                 side_padding = 1,
                 border = "single",
-                winhighlight = "FloatBorder:GreyBorder,CursorLine:PmenuSel,Search:None",
+                winhighlight = "FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
             },
             documentation = {
                 border = "single",
-                winhighlight = "FloatBorder:GreyBorder",
+                winhighlight = "FloatBorder:FloatBorder",
             },
         },
         formatting = { fields = { "abbr", "kind" } },

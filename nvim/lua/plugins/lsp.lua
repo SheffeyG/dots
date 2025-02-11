@@ -43,8 +43,8 @@ local on_attach = function(_, bufnr)
 
     map("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename"))
     map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
-    map("n", "<leader>sh", vim.lsp.buf.signature_help, opts("Show signature help"))
-    map("n", "<leader>td", vim.lsp.buf.type_definition, opts("Go to type definition"))
+    -- map("n", "<leader>sh", vim.lsp.buf.signature_help, opts("Show signature help"))
+    -- map("n", "<leader>td", vim.lsp.buf.type_definition, opts("Go to type definition"))
     -- map("n", "<leader>hw", vim.lsp.buf.document_highlight, opts("Add cursorword hl"))
     -- map("n", "<leader>hc", vim.lsp.buf.clear_references, opts("Clear cursorword hl"))
 end
@@ -52,7 +52,9 @@ end
 local on_init = function(client, _)
     vim.diagnostic.config({ virtual_text = false })
     -- disable semantic tokens
-    if client.supports_method("textDocument/semanticTokens") then client.server_capabilities.semanticTokensProvider = nil end
+    if client.supports_method("textDocument/semanticTokens") then
+        client.server_capabilities.semanticTokensProvider = nil
+    end
 end
 
 --- @type LazyPluginSpec[]

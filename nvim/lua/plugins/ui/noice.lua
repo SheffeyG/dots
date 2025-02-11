@@ -25,10 +25,7 @@ return {
                 },
             },
             popup = {
-                border = {
-                    style = "single",
-                    padding = { 0, 1 },
-                },
+                border = { style = "single", padding = { 0, 1 } },
                 win_options = {
                     winhighlight = {
                         NormalFloat = "Normal",
@@ -37,9 +34,13 @@ return {
                 },
                 size = { width = 100 },
             },
+            hover = {
+                border = { style = "single", padding = { 0, 1 } },
+                position = { row = 2, col = 0 },
+            },
             mini = {
                 timeout = 3000,
-                size = { max_width = 100 },
+                size = { max_width = 50 },
             },
         },
         lsp = {
