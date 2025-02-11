@@ -1,18 +1,4 @@
 return function(Group, c, g, s)
-    -- nvimtree
-    Group.new("NvimTreeIndentMarker", c.grey)
-    Group.new("NvimTreeFolderIcon", c.blue)
-    Group.new("NvimTreeFolderName", c.blue, nil, s.bold)
-    Group.new("NvimTreeEmptyFolderName", c.blue)
-    Group.new("NvimTreeOpenedFolderName", c.blue, nil, s.bold)
-    Group.new("NvimTreeFolderArrowOpen", c.grey_light)
-    Group.new("NvimTreeFolderArrowClosed", c.grey_light)
-    Group.new("NvimTreeGitDirtyIcon", c.yellow)
-    Group.new("NvimTreeGitStagedIcon", c.green)
-    Group.new("NvimTreeGitDeletedIcon", c.red)
-    Group.new("NvimTreeGitNewIcon", c.orange)
-    Group.new("NvimTreeGitRenameIcon", c.purple)
-
     -- gitsigns
     Group.new("GitSignsAdd", c.green)
     Group.new("GitSignsChange", c.yellow)
@@ -31,10 +17,12 @@ return function(Group, c, g, s)
     Group.new("SnacksIndentScope", c.grey_light)
 
     -- snacks.picker
-    Group.new("SnacksPickerInput", nil, c.black_light)
+    -- Group.new("SnacksPickerInput", nil, c.black)
     Group.new("SnacksPickerInputTitle", c.black_light, c.red)
-    Group.new("SnacksPickerInputBorder", nil, g.SnacksPickerInput.bg)
+    -- Group.new("SnacksPickerInputBorder", g.FloatBorder, g.SnacksPickerInput)
+    -- Group.new("SnacksPickerList", nil, c.black_light)
+    Group.new("SnacksPickerListBorder", c.black)
     Group.new("SnacksPickerPreview", nil, c.black_dark)
     Group.new("SnacksPickerPreviewTitle", c.black_light, c.blue)
-    Group.new("SnacksPickerPreviewBorder", nil, g.SnacksPickerPreview.bg)
+    Group.new("SnacksPickerPreviewBorder", g.FloatBorder, g.SnacksPickerPreview)
 end

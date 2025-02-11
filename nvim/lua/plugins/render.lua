@@ -1,5 +1,7 @@
 --- @type LazyPluginSpec[]
 return {
+    { "tjdevries/colorbuddy.nvim" },
+
     {
         "nvim-treesitter/nvim-treesitter",
         version = "*",
