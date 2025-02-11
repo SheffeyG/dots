@@ -73,20 +73,10 @@ return {
         opts = { delay = 500 },
     },
 
-    -- mini plugins
+    -- move lines
     {
         "echasnovski/mini.move",
-        event = { "BufReadPost", "BufNewFile" },
-        config = true,
-    },
-    {
-        "echasnovski/mini.ai",
-        event = { "BufReadPost", "BufNewFile" },
-        config = true,
-    },
-    {
-        "echasnovski/mini.surround",
-        event = { "BufReadPost", "BufNewFile" },
+        event = "CursorMoved",
         config = true,
     },
 }
