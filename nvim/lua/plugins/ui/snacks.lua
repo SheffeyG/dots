@@ -43,7 +43,16 @@ return {
         words = { enabled = true },
         input = { enabled = true },
         terminal = { win = { relative = "win" } },
-        indent = { animate = { duration = 10 } },
+        indent = {
+            animate = { duration = 10 },
+            filter = function(buf)
+                local exclude = { "markdown" }
+                return vim.g.snacks_indent ~= false
+                    and vim.b[buf].snacks_indent ~= false
+                    and vim.bo[buf].buftype == ""
+                    and not vim.tbl_contains(exclude, vim.bo[buf].filetype)
+            end,
+        },
         picker = {
             prompt = "   ",
             layouts = {

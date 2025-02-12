@@ -65,6 +65,9 @@ return {
         opts = {
             PATH = "skip",
             ui = {
+                border = "single",
+                width = 0.6,
+                height = 0.6,
                 icons = {
                     package_pending = " ",
                     package_installed = " ",
