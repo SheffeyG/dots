@@ -87,7 +87,11 @@ return {
                 },
             },
             sources = {
+                files = { hidden = true, ignored = true },
+                grep = { hidden = true, ignored = false },
                 explorer = {
+                    hidden = true,
+                    ignored = false,
                     win = {
                         list = {
                             keys = {
