@@ -4,8 +4,10 @@ return function(Group, c, g, s)
     Group.link("NormalFloat", g.Normal)
     Group.new("FloatTitle", c.white, c.grey)
     Group.new("FloatBorder", c.blue, g.Normal, s.bold)
+
+    -- custom
     Group.new("NormalDark", c.white, c.black_dark)
-    Group.new("NoBorder", c.black_dark, c.black_dark)
+    Group.new("NormalLight", c.white, c.black_light)
 
     -- menu
     Group.new("Pmenu", nil, c.grey_dark)

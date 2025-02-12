@@ -17,14 +17,8 @@ return function(Group, c, g, s)
     Group.new("SnacksIndentScope", c.grey_light)
 
     -- snacks.picker
-    -- Group.new("SnacksPickerInput", nil, c.black)
     Group.new("SnacksPickerInputTitle", c.black_light, c.red)
-    -- Group.new("SnacksPickerInputBorder", g.FloatBorder, g.SnacksPickerInput)
-    -- Group.new("SnacksPickerList", nil, c.black_light)
-    Group.new("SnacksPickerListBorder", c.black)
-    Group.new("SnacksPickerPreview", nil, c.black_dark)
     Group.new("SnacksPickerPreviewTitle", c.black_light, c.blue)
-    Group.new("SnacksPickerPreviewBorder", g.FloatBorder, g.SnacksPickerPreview)
 
     -- nvimtree
     -- Group.new("NvimTreeIndentMarker", c.grey)

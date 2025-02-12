@@ -1,3 +1,33 @@
+local win_input = {
+    win = "input",
+    height = 1,
+    border = "solid",
+    title = "{title} {live} {flags}",
+    wo = {
+        winhighlight = {
+            Normal = "NormalLight",
+            FloatBorder = "NormalLight",
+            FloatTitle = "SnacksPickerInputTitle",
+        },
+    },
+}
+
+local win_preview = {
+    win = "preview",
+    title = "{preview}",
+    border = "solid",
+    wo = {
+        winhighlight = {
+            Normal = "NormalDark",
+            FloatBorder = "NormalDark",
+            FloatTitle = "SnacksPickerPreviewTitle",
+        },
+        signcolumn = "no",
+        numberwidth = 4,
+        wrap = false,
+    },
+}
+
 --- @type LazyPluginSpec
 return {
     "folke/snacks.nvim",
@@ -25,21 +55,12 @@ return {
                         border = "none",
                         {
                             box = "vertical",
-                            border = "hpad",
-                            {
-                                win = "input",
-                                height = 1,
-                                border = "vpad",
-                                title = "{title} {live} {flags}",
-                            },
-                            { win = "list", border = "bottom" },
+                            border = "none",
+                            width = 0.4,
+                            win_input,
+                            { win = "list", border = "solid" },
                         },
-                        {
-                            win = "preview",
-                            title = "{preview}",
-                            border = "solid",
-                            width = 0.6,
-                        },
+                        win_preview,
                     },
                 },
                 vertical = {
@@ -50,14 +71,9 @@ return {
                         min_height = 25,
                         box = "vertical",
                         border = "none",
-                        {
-                            win = "input",
-                            height = 1,
-                            border = "solid",
-                            title = "{title} {live} {flags}",
-                        },
-                        { win = "list", border = "none", height = 0.3 },
-                        { win = "preview", title = "{preview}", border = "solid" },
+                        win_input,
+                        { win = "list", height = 0.3 },
+                        win_preview,
                     },
                 },
             },
@@ -111,9 +127,8 @@ return {
         { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
         { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
         -- grep
-        { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
         { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
-        { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+        { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Grep Selected", mode = { "n", "x" } },
         -- search
         { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
         { "<leader>s/", function() Snacks.picker.search_history() end, desc = "Search History" },
