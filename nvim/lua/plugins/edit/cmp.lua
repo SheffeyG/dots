@@ -47,7 +47,18 @@ local setup_cmp = function()
         sources = { { name = "cmdline" } },
     })
 
-    cmp.setup(vim.tbl_deep_extend("force", require("nvchad.cmp"), {
+    cmp.setup({
+        window = {
+            completion = {
+                side_padding = 1,
+                border = "single",
+                winhighlight = "FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+            },
+            documentation = {
+                border = "single",
+                winhighlight = "FloatBorder:FloatBorder",
+            },
+        },
         formatting = { fields = { "abbr", "kind" } },
         performance = { max_view_entries = 20 },
         mapping = mapping,
@@ -62,19 +73,25 @@ local setup_cmp = function()
             { name = "buffer" },
             { name = "nvim_lua" },
             { name = "path" },
+            { name = "lazy_dev" },
         },
-    }))
+    })
 end
 
----@type NvPluginSpec
+--- @type LazyPluginSpec[]
 local deps = {
     -- cmp sources plugins
-    "saadparwaiz1/cmp_luasnip",
-    "hrsh7th/cmp-nvim-lua",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
+    { "saadparwaiz1/cmp_luasnip" },
+
+    { "hrsh7th/cmp-nvim-lua" },
+
+    { "hrsh7th/cmp-nvim-lsp" },
+
+    { "hrsh7th/cmp-buffer" },
+
+    { "hrsh7th/cmp-path" },
+
+    { "hrsh7th/cmp-cmdline" },
 
     {
         "L3MON4D3/LuaSnip",
@@ -107,7 +124,6 @@ local deps = {
         },
         config = function(_, opts)
             require("nvim-autopairs").setup(opts)
-
             -- setup cmp for autopairs
             local cmp_autopairs = require("nvim-autopairs.completion.cmp")
             require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
@@ -115,14 +131,13 @@ local deps = {
     },
 }
 
----@type NvPluginSpec
+--- @type LazyPluginSpec
 return {
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = deps,
     -- keep all setup inside a function, so it could be lazy loaded.
     config = function()
-        dofile(vim.g.base46_cache .. "cmp")
         setup_cmp()
     end,
 }

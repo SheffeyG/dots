@@ -1,4 +1,4 @@
----@type NvPluginSpec
+--- @type LazyPluginSpec[]
 return {
     -- formatter
     {
@@ -13,6 +13,13 @@ return {
                 markdown   = { "prettier" },
                 python     = { "ruff_format", "ruff_organize_imports" },
                 typescript = { "prettier" },
+            },
+        },
+        keys = {
+            {
+                "<leader>fm",
+                function() require("conform").format({ lsp_fallback = true }) end,
+                desc = "Format buffer",
             },
         },
     },
@@ -59,20 +66,17 @@ return {
         cmd = "Code",
     },
 
-    -- mini plugins
+    -- show keymaps
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = { delay = 500 },
+    },
+
+    -- move lines
     {
         "echasnovski/mini.move",
-        event = { "BufReadPost", "BufNewFile" },
-        config = true,
-    },
-    {
-        "echasnovski/mini.ai",
-        event = { "BufReadPost", "BufNewFile" },
-        config = true,
-    },
-    {
-        "echasnovski/mini.surround",
-        event = { "BufReadPost", "BufNewFile" },
+        event = "CursorMoved",
         config = true,
     },
 }

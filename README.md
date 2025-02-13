@@ -26,6 +26,11 @@ pkg in lua-language-server stylua
 npm i clangd
 ```
 
+* [win32yank](https://github.com/equalsraf/win32yank/releases)
+
+Do remember to add win32yank to winows path
+
+
 ### package managers
 
 * [miniconda](https://repo.anaconda.com/miniconda/).

@@ -2,19 +2,13 @@
 # Theme
 #-----------------------
 
-# Enable Powerlevel10k instant prompt
+# enable p10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # setting zsh prompt right padding
-if [[ -z "$ZLE_RPROMPT_INDENT" ]]; then
-    if [[ -n "$NVIM" ]]; then
-        ZLE_RPROMPT_INDENT=2
-    else
-        ZLE_RPROMPT_INDENT=0
-    fi
-fi
+ZLE_RPROMPT_INDENT=0
 
 #-----------------------
 # Options
