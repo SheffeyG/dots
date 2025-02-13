@@ -2,7 +2,7 @@ local win_input = {
     win = "input",
     height = 1,
     border = "solid",
-    title = "{title} {live} {flags}",
+    title = "{title} {live}",
     wo = {
         winhighlight = {
             Normal = "NormalLight",
@@ -37,11 +37,11 @@ return {
     opts = {
         bigfile = { enabled = true },
         quickfile = { enabled = true },
-        rename = { enabled = true },
         scope = { enabled = true },
-        scroll = { enabled = true },
         words = { enabled = true },
         input = { enabled = true },
+        rename = { enabled = true },
+        scroll = { enabled = not vim.g.is_termux },
         terminal = { win = { relative = "win" } },
         indent = {
             animate = { duration = 10 },
@@ -61,10 +61,8 @@ return {
                         box = "horizontal",
                         width = 0.8,
                         height = 0.8,
-                        border = "none",
                         {
                             box = "vertical",
-                            border = "none",
                             width = 0.4,
                             win_input,
                             { win = "list", border = "solid" },
@@ -79,7 +77,6 @@ return {
                         height = 0.8,
                         min_height = 25,
                         box = "vertical",
-                        border = "none",
                         win_input,
                         { win = "list", height = 0.3 },
                         win_preview,
@@ -102,14 +99,12 @@ return {
                         },
                     },
                     layout = {
-                        auto_close = true,
                         layout = {
                             width = 30,
                             position = "left",
-                            border = "none",
                             box = "vertical",
-                            { win = "list", border = "none" },
-                            { win = "input", height = 1, border = "none" },
+                            { win = "list" },
+                            { win = "input", height = 1 },
                         },
                     },
                 },
@@ -170,7 +165,7 @@ return {
         { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
         { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
         { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-        { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
-        { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+        { "gs", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+        { "gS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
     },
 }

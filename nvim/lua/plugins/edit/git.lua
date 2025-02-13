@@ -16,7 +16,7 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         cmd = { "DiffviewOpen", "DiffviewClose" },
         keys = {
-            { "<leader>dv", "<cmd>DiffviewOpen<CR>", desc = "Git open diffview panel" },
+            { "<leader>dv", "<CMD>DiffviewOpen<CR>", desc = "Diffview Panel" },
         },
         opts = {
             enhanced_diff_hl = true,
@@ -28,9 +28,9 @@ return {
                 },
             },
             key_bindings = {
-                view = { q = "<cmd>DiffviewClose<CR>" },
-                file_panel = { q = "<cmd>DiffviewClose<CR>" },
-                file_history_panel = { q = "<cmd>DiffviewClose<CR>" },
+                view = { q = "<CMD>DiffviewClose<CR>" },
+                file_panel = { q = "<CMD>DiffviewClose<CR>" },
+                file_history_panel = { q = "<CMD>DiffviewClose<CR>" },
             },
             hooks = {
                 -- Change local options in diff buffers
@@ -51,7 +51,7 @@ return {
         },
         cmd = "Neogit",
         keys = {
-            { "<leader>gg", "<cmd>Neogit<CR>", desc = "Git neogit panel" },
+            { "<leader>gg", "<CMD>Neogit<CR>", desc = "Neogit Panel" },
         },
         opts = {
             kind = "tab", -- auto/tab/floating/split/vsplit

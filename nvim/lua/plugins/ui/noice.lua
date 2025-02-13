@@ -55,7 +55,7 @@ return {
         {
             "<leader>mh",
             function() require("noice").cmd("history") end,
-            desc = "Message history",
+            desc = "Message History",
         },
     },
 }

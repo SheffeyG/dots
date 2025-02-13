@@ -19,7 +19,7 @@ return {
             {
                 "<leader>fm",
                 function() require("conform").format({ lsp_fallback = true }) end,
-                desc = "Format buffer",
+                desc = "Format Buffer",
             },
         },
     },

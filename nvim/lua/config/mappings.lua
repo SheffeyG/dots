@@ -5,9 +5,9 @@ local map = vim.keymap.set
 --------------------------
 
 map("n", ";", ":")
-map("i", "jk", "<ESC>")
+map("i", "jk", "<Esc>")
 
-map("n", "<ESC>", "<cmd>noh<CR>", { desc = "General clear highlights" })
+map("n", "<Esc>", "<CMD>noh<CR>", { desc = "General clear highlights" })
 map("n", "<C-a>", "ggVG", { desc = "General select whole file" })
 
 map("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })

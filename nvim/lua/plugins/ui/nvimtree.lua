@@ -42,7 +42,7 @@ return {
         },
     },
     keys = {
-        { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "Nvimtree toggle" },
-        { "<C-e>", "<cmd>NvimTreeFocus<CR>", desc = "Nvimtree focus" },
+        { "<C-n>", "<CMD>NvimTreeToggle<CR>", desc = "Nvimtree Toggle" },
+        { "<C-e>", "<CMD>NvimTreeFocus<CR>", desc = "Nvimtree Focus" },
     },
 }
