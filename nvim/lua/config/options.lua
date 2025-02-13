@@ -40,6 +40,9 @@ o.undofile = true
 -- interval for writing swap file to disk, also used by gitsigns
 o.updatetime = 250
 
+-- set leaderkey before lazy setup
+g.mapleader = " "
+
 -- disable some providers
 g.loaded_node_provider = 0
 g.loaded_python3_provider = 0

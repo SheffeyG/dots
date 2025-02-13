@@ -120,7 +120,6 @@ return {
         { "<leader>tt", function() Snacks.terminal.toggle() end, desc = "Terminal toogle", mode = { "n", "t" } },
         { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
         { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-        { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
         { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
         -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
         { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
@@ -140,6 +139,7 @@ return {
         { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
         { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
         -- grep
+        { "<leader>ss", function() Snacks.picker.grep() end, desc = "Grep" },
         { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
         { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Grep Selected", mode = { "n", "x" } },
         -- search
