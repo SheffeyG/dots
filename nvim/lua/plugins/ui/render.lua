@@ -3,6 +3,17 @@ return {
     { "tjdevries/colorbuddy.nvim" },
 
     {
+        "lewis6991/gitsigns.nvim",
+        event = { "BufReadPost" },
+        opts = {
+            signs = {
+                delete = { text = "󰍵" },
+                changedelete = { text = "󱕖" },
+            },
+        },
+    },
+
+    {
         "nvim-treesitter/nvim-treesitter",
         version = "*",
         event = { "BufReadPost", "BufNewFile" },
