@@ -31,4 +31,7 @@ return function(Group, c, g, s)
 
     -- snacks.input
     Group.link("SnacksInputTitle", g.FloatTitle)
+
+    -- noice
+    Group.link("NoiceCmdlinePopup", g.NormalDark)
 end

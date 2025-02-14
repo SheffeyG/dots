@@ -35,6 +35,7 @@ local setup_cmp = function()
     }
 
     cmp.setup.cmdline({ "/", "?" }, {
+        ---@diagnostic disable-next-line
         formatting = { fields = { "abbr" } },
         mapping = cmp.mapping.preset.cmdline(),
         sources = { { name = "buffer" } },
@@ -42,6 +43,7 @@ local setup_cmp = function()
 
     cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
+        ---@diagnostic disable-next-line
         matching = { disallow_symbol_nonprefix_matching = false },
         completion = { keyword_length = 3 },
         sources = { { name = "cmdline" } },
@@ -52,20 +54,20 @@ local setup_cmp = function()
             completion = {
                 side_padding = 1,
                 border = "single",
-                winhighlight = "FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+                winhighlight = "FloatBorder:NormalGrey,CursorLine:PmenuSel,Search:None",
             },
             documentation = {
                 border = "single",
-                winhighlight = "FloatBorder:FloatBorder",
+                winhighlight = "FloatBorder:NormalCyan",
             },
         },
+        ---@diagnostic disable-next-line
         formatting = { fields = { "abbr", "kind" } },
+        ---@diagnostic disable-next-line
         performance = { max_view_entries = 20 },
         mapping = mapping,
         snippet = {
-            expand = function(args)
-                require("luasnip").lsp_expand(args.body)
-            end,
+            expand = function(args) require("luasnip").lsp_expand(args.body) end,
         },
         sources = {
             { name = "nvim_lsp" },
@@ -137,7 +139,5 @@ return {
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = deps,
     -- keep all setup inside a function, so it could be lazy loaded.
-    config = function()
-        setup_cmp()
-    end,
+    config = function() setup_cmp() end,
 }
