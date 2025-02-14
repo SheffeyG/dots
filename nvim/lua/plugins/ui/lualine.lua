@@ -23,11 +23,12 @@ return {
             },
             lualine_c = {
                 { "filetype", icon_only = true, padding = { left = 1, right = 0 } },
-                { "filename", padding = { left = 0, right = 1 } },
+                { "filename", padding = 0 },
             },
             lualine_x = {
-                { "macro_recording", "%S" },
-                { "encoding" },
+                { "macro_recording", padding = { left = 0, right = 1 } },
+                { "selectioncount", padding = { left = 0, right = 1 } },
+                { "encoding", padding = { left = 0, right = 1 } },
             },
             lualine_y = {
                 "progress",

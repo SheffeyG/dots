@@ -20,4 +20,6 @@ return function(Group, c, g, s)
     Group.new("SnacksPickerInputTitle", c.black_light, c.red)
     Group.new("SnacksPickerPreviewTitle", c.black_light, c.blue)
 
+    -- snacks.input
+    Group.link("SnacksInputTitle", g.FloatTitle)
 end

@@ -2,7 +2,7 @@ return function(Group, c, g, s)
     -- window
     Group.new("Normal", c.white, c.black)
     Group.link("NormalFloat", g.Normal)
-    Group.new("FloatTitle", c.white, c.grey)
+    Group.new("FloatTitle", c.blue, c.blue_bg)
     Group.new("FloatBorder", c.blue, g.Normal, s.bold)
 
     -- custom
@@ -40,6 +40,13 @@ return function(Group, c, g, s)
     Group.new("MoreMsg", c.green)
     Group.new("Conceal", nil, nil)
 
+    -- diag
+    Group.new("DiagnosticInfo", c.blue)
+    Group.new("DiagnosticWarn", c.yellow)
+    Group.new("DiagnosticOk", c.green)
+    Group.new("DiagnosticHint", c.purple)
+    Group.new("DiagnosticError", c.red)
+
     -- special
     Group.new("Directory", c.blue)
     Group.new("Folded", c.grey_light, c.black_light)
@@ -49,9 +56,4 @@ return function(Group, c, g, s)
     Group.new("Substitute", c.blue, c.black_bg, s.bold)
     Group.new("MatchWord", c.white, c.grey)
     Group.link("MatchParen", g.MatchWord)
-
-    -- Group.new("SignColumn", c.red)
-    -- Group.new("ColorColumn", nil, c.black_light)
-    -- Group.new("Macro", c.red)
-    -- Group.new("SpecialKey", c.grey_light)
 end
