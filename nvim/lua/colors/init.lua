@@ -14,5 +14,4 @@ require("colors." .. colorscheme)(Color)
 
 require("colors.neovim")(Group, c, g, s)
 require("colors.syntax")(Group, c, g, s)
-require("colors.git")(Group, c, g, s)
-require("colors.integrates")(Group, c, g, s)
+require("colors.plugin")(Group, c, g, s)

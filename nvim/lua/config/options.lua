@@ -3,13 +3,19 @@ local o = vim.o
 local g = vim.g
 
 o.mouse = "a"
+o.clipboard = "unnamedplus"
+
 o.laststatus = 3
 o.showtabline = 0
+o.signcolumn = "yes"
+o.colorcolumn = ""
 o.cursorline = true
-o.clipboard = "unnamedplus"
-o.relativenumber = false
+
 o.ignorecase = true
 o.smartcase = true
+o.splitbelow = true
+o.splitright = true
+o.undofile = true
 
 -- indents
 o.expandtab = true
@@ -21,6 +27,11 @@ o.softtabstop = 4
 -- numbers
 o.number = true
 o.numberwidth = 2
+o.relativenumber = false
+
+-- interval for writing swap file to disk, also used by gitsigns
+o.updatetime = 250
+o.timeoutlen = 400
 
 -- disable nvim intro
 opt.shortmess:append("sI")
@@ -30,15 +41,6 @@ opt.whichwrap:append("<>[]hl")
 
 opt.fillchars:append({ eob = " " })
 opt.fillchars:append({ diff = "╱" })
-
-o.signcolumn = "yes"
-o.splitbelow = true
-o.splitright = true
-o.timeoutlen = 400
-o.undofile = true
-
--- interval for writing swap file to disk, also used by gitsigns
-o.updatetime = 250
 
 -- set leaderkey before lazy setup
 g.mapleader = " "
