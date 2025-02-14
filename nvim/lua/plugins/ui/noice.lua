@@ -8,40 +8,17 @@ return {
             bottom_search = true,
             long_message_to_split = true,
         },
-        commands = {
-            history = {
-                view = "popup",
-            },
-        },
         views = {
             cmdline_popup = {
-                border = {
-                    style = "none",
-                    padding = { 2, 3 },
-                },
-                filter_options = {},
-                win_options = {
-                    winhighlight = { NormalFloat = "NormalDark" },
-                },
-            },
-            popup = {
-                border = { style = "single", padding = { 0, 1 } },
-                win_options = {
-                    winhighlight = {
-                        NormalFloat = "Normal",
-                        FloatBorder = "FloatBorder",
-                    },
-                },
-                size = { width = 100 },
+                size = { width = 0.3 },
+                border = { style = "none", padding = { 2, 3 } },
             },
             hover = {
                 border = { style = "single", padding = { 0, 1 } },
                 position = { row = 2, col = 0 },
+                win_options = { winhighlight = "FloatBorder:NormalCyan" },
             },
-            mini = {
-                timeout = 3000,
-                size = { max_width = 50 },
-            },
+            mini = { timeout = 3000 },
         },
         lsp = {
             override = {
@@ -52,10 +29,6 @@ return {
         },
     },
     keys = {
-        {
-            "<leader>mh",
-            function() require("noice").cmd("history") end,
-            desc = "Message History",
-        },
+        { "<leader>mh", "<CMD>NoiceAll<CR>", desc = "Message History" },
     },
 }

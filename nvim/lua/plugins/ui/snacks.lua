@@ -33,7 +33,9 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+    --- @type snacks.Config
     opts = {
+        image = { enabled = false },
         bigfile = { enabled = true },
         quickfile = { enabled = true },
         scope = { enabled = true },
@@ -81,6 +83,17 @@ return {
                         win_preview,
                     },
                 },
+                vscode = {
+                    layout = {
+                        row = 1,
+                        width = 0.4,
+                        min_width = 80,
+                        height = 0.4,
+                        box = "vertical",
+                        win_input,
+                        { win = "list", border = "solid" },
+                    },
+                },
             },
             sources = {
                 files = { hidden = true, ignored = true },
@@ -88,6 +101,8 @@ return {
                 explorer = {
                     hidden = true,
                     ignored = false,
+                    diagnostics = false,
+                    replace_netrw = true,
                     win = {
                         list = {
                             keys = {
@@ -112,7 +127,7 @@ return {
     },
     -- stylua: ignore
     keys = {
-        { "<leader>tt", function() Snacks.terminal.toggle() end, desc = "Terminal toogle", mode = { "n", "t" } },
+        { "<leader>t", function() Snacks.terminal.toggle() end, desc = "Terminal Toogle", mode = { "n", "t" } },
         { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
         { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },

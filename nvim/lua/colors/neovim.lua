@@ -8,6 +8,9 @@ return function(Group, c, g, s)
     -- custom
     Group.new("NormalDark", c.white, c.black_dark)
     Group.new("NormalLight", c.white, c.black_light)
+    Group.new("NormalGrey", c.grey_light, g.Normal)
+    Group.new("NormalBlue", c.blue, g.Normal)
+    Group.new("NormalCyan", c.cyan, g.Normal)
 
     -- menu
     Group.new("Pmenu", nil, c.grey_dark)

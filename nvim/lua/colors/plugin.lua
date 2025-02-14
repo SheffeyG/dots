@@ -26,9 +26,12 @@ return function(Group, c, g, s)
     Group.new("SnacksPickerGitStatusModified", c.yellow)
     Group.new("SnacksPickerGitStatusUnmerged", c.red)
     Group.new("SnacksPickerGitStatusDeleted", c.crimson)
-    Group.new("SnacksPickerGitStatusCopied", c.orange)
+    Group.new("SnacksPickerGitStatusUntracked", c.orange)
     Group.new("SnacksPickerGitStatusRenamed", c.blue)
 
     -- snacks.input
     Group.link("SnacksInputTitle", g.FloatTitle)
+
+    -- noice
+    Group.link("NoiceCmdlinePopup", g.NormalDark)
 end
