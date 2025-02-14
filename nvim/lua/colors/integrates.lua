@@ -20,17 +20,4 @@ return function(Group, c, g, s)
     Group.new("SnacksPickerInputTitle", c.black_light, c.red)
     Group.new("SnacksPickerPreviewTitle", c.black_light, c.blue)
 
-    -- nvimtree
-    -- Group.new("NvimTreeIndentMarker", c.grey)
-    -- Group.new("NvimTreeFolderIcon", c.blue)
-    -- Group.new("NvimTreeFolderName", c.blue, nil, s.bold)
-    -- Group.new("NvimTreeEmptyFolderName", c.blue)
-    -- Group.new("NvimTreeOpenedFolderName", c.blue, nil, s.bold)
-    -- Group.new("NvimTreeFolderArrowOpen", c.grey_light)
-    -- Group.new("NvimTreeFolderArrowClosed", c.grey_light)
-    -- Group.new("NvimTreeGitDirtyIcon", c.yellow)
-    -- Group.new("NvimTreeGitStagedIcon", c.green)
-    -- Group.new("NvimTreeGitDeletedIcon", c.red)
-    -- Group.new("NvimTreeGitNewIcon", c.orange)
-    -- Group.new("NvimTreeGitRenameIcon", c.purple)
 end

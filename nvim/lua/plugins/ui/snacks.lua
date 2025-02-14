@@ -33,7 +33,6 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
         quickfile = { enabled = true },
@@ -111,6 +110,7 @@ return {
             },
         },
     },
+    -- stylua: ignore
     keys = {
         { "<leader>tt", function() Snacks.terminal.toggle() end, desc = "Terminal toogle", mode = { "n", "t" } },
         { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },

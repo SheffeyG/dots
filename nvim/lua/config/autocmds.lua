@@ -13,16 +13,22 @@ autocmd("BufReadPost", {
 -- auto open explorer
 autocmd("VimEnter", {
     callback = function(data)
-        -- wide window
-        if vim.api.nvim_win_get_width(0) > 120 then
+        -- target is a directory
+        if vim.fn.isdirectory(data.file) == 1 then
+            vim.cmd.cd(data.file)
             Snacks.explorer.open()
             return
         end
 
         -- provide no name
-        local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
-        if no_name then
+        if data.file == "" and vim.bo[data.buf].buftype == "" then
             Snacks.explorer.open()
+            return
+        end
+
+        -- wide window
+        if vim.api.nvim_win_get_width(0) > 120 then
+            Snacks.explorer.open({ enter = false })
             return
         end
     end,
