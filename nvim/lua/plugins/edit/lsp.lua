@@ -14,7 +14,11 @@ local server_settings = {
     },
     --- Lua ---
     lua_ls = {
-        Lua = { diagnostics = { globals = { "vim", "Snacks" } } },
+        Lua = {
+            diagnostics = {
+                globals = { "vim", "Snacks", "require" },
+            },
+        },
     },
 }
 
@@ -42,11 +46,7 @@ local on_attach = function(_, bufnr)
     local function opts(desc) return { buffer = bufnr, desc = desc } end
 
     map("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename"))
-    map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
-    -- map("n", "<leader>sh", vim.lsp.buf.signature_help, opts("Show signature help"))
-    -- map("n", "<leader>td", vim.lsp.buf.type_definition, opts("Go to type definition"))
-    -- map("n", "<leader>hw", vim.lsp.buf.document_highlight, opts("Add cursorword hl"))
-    -- map("n", "<leader>hc", vim.lsp.buf.clear_references, opts("Clear cursorword hl"))
+    map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code Action"))
 end
 
 local on_init = function(client, _)

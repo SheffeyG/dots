@@ -103,15 +103,6 @@ return {
                     ignored = false,
                     diagnostics = false,
                     replace_netrw = true,
-                    win = {
-                        list = {
-                            keys = {
-                                ["o"] = "confirm",
-                                ["v"] = "edit_vsplit",
-                                ["s"] = "edit_split",
-                            },
-                        },
-                    },
                     layout = {
                         layout = {
                             width = 30,

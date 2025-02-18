@@ -63,7 +63,6 @@ return {
                 section = { " ", " " },
             },
             sections = {
-                untracked = { folded = true, hidden = false },
                 rebase = { folded = false },
                 recent = { folded = false, hidden = false },
             },
