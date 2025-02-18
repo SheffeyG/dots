@@ -12,6 +12,11 @@ return function(Group, c, g, s)
     Group.new("NeogitDiffAddCursor", c.green, c.green_bg:light(), s.bold)
     Group.new("NeogitDiffDeleteCursor", c.red, c.red_bg:light(), s.bold)
 
+    -- snacks
+    Group.link("SnacksInputTitle", g.FloatTitle)
+    Group.link("SnacksWinBar", g.WinBar)
+    Group.link("SnacksWinBarNC", g.WinBarNC)
+
     -- snacks.indent
     Group.new("SnacksIndent", c.grey)
     Group.new("SnacksIndentScope", c.grey_light)
@@ -28,9 +33,6 @@ return function(Group, c, g, s)
     Group.new("SnacksPickerGitStatusDeleted", c.crimson)
     Group.new("SnacksPickerGitStatusUntracked", c.orange)
     Group.new("SnacksPickerGitStatusRenamed", c.blue)
-
-    -- snacks.input
-    Group.link("SnacksInputTitle", g.FloatTitle)
 
     -- noice
     Group.link("NoiceCmdlinePopup", g.NormalDark)

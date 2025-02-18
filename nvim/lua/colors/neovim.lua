@@ -29,6 +29,8 @@ return function(Group, c, g, s)
     Group.new("ColorColumn", nil, c.black_dark)
     Group.new("LineNr", c.grey_light)
     Group.new("CursorLineNr", c.white_dark)
+    Group.new("WinBar", c.blue, c.blue_bg, s.bold)
+    Group.new("WinBarNC", c.white_dark, c.blue_bg)
 
     -- text
     Group.new("Title", c.blue)
