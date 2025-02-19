@@ -12,6 +12,9 @@ return function(Group, c, g, s)
     Group.new("NeogitDiffAddCursor", c.green, c.green_bg:light(), s.bold)
     Group.new("NeogitDiffDeleteCursor", c.red, c.red_bg:light(), s.bold)
 
+    -- diffview
+    Group.link("DiffviewDiffDelete", g.Comment)
+
     -- snacks
     Group.link("SnacksInputTitle", g.FloatTitle)
     Group.link("SnacksWinBar", g.WinBar)
