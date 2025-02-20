@@ -5,12 +5,10 @@ return function(Group, c, g, s)
     Group.new("GitSignsDelete", c.red)
 
     -- neogit
-    Group.new("NeogitHunkHeaderHighlight", c.black, c.blue, s.bold)
-    Group.link("NeogitHunkHeaderCursor", g.NeogitHunkHeaderHighlight)
-    Group.new("NeogitDiffHeaderHighlight", c.red, c.grey_light, s.bold)
-    Group.link("NeogitDiffHeaderCursor", g.NeogitDiffHeaderHighlight)
-    Group.new("NeogitDiffAddCursor", c.green, c.green_bg:light(), s.bold)
-    Group.new("NeogitDiffDeleteCursor", c.red, c.red_bg:light(), s.bold)
+    Group.new("NeogitDiffHeader", c.yellow, c.yellow_bg, s.bold)
+    Group.link("NeogitDiffHeaderCursor", g.NeogitDiffHeader)
+    Group.new("NeogitDiffAddCursor", c.green, c.green_bg:light())
+    Group.new("NeogitDiffDeleteCursor", c.red, c.red_bg:light())
 
     -- diffview
     Group.link("DiffviewDiffDelete", g.Comment)
@@ -39,4 +37,7 @@ return function(Group, c, g, s)
 
     -- noice
     Group.link("NoiceCmdlinePopup", g.NormalDark)
+
+    -- which-key
+    Group.link("WhichkeyNormal", g.NormalDark)
 end
