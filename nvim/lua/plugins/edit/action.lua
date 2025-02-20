@@ -75,6 +75,13 @@ return {
     {
         "echasnovski/mini.move",
         event = "CursorMoved",
-        config = true,
+        opts = {},
+    },
+
+    -- better mark
+    {
+        "chentoast/marks.nvim",
+        event = "VeryLazy",
+        opts = {},
     },
 }
