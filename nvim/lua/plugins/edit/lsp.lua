@@ -58,6 +58,35 @@ local on_init = function(client, _)
 end
 
 --- @type LazyPluginSpec[]
+local deps = {
+    {
+        "rachartier/tiny-inline-diagnostic.nvim",
+        opts = {
+            signs = {
+                left = "",
+                right = "",
+                diag = "●",
+                arrow = "  ",
+                up_arrow = "    ",
+                vertical = "  ",
+                vertical_end = "  ",
+            },
+        },
+    },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+            library = {
+                { path = "lazy.nvim", words = { "Lazy.*Spec" } },
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                { path = "snacks.nvim", words = { "Snacks" } },
+            },
+        },
+    },
+}
+
+--- @type LazyPluginSpec[]
 return {
     {
         "williamboman/mason.nvim",
@@ -80,23 +109,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPost", "BufNewFile" },
-        dependencies = {
-            {
-                "rachartier/tiny-inline-diagnostic.nvim",
-                opts = { preset = "powerline" },
-            },
-            {
-                "folke/lazydev.nvim",
-                ft = "lua",
-                opts = {
-                    library = {
-                        { path = "lazy.nvim", words = { "Lazy.*Spec" } },
-                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-                        { path = "snacks.nvim", words = { "Snacks" } },
-                    },
-                },
-            },
-        },
+        dependencies = deps,
         config = function()
             for server, settings in pairs(server_settings) do
                 require("lspconfig")[server].setup({
