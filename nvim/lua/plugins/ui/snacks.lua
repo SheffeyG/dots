@@ -35,7 +35,6 @@ return {
     lazy = false,
     --- @type snacks.Config
     opts = {
-        image = { enabled = false },
         bigfile = { enabled = true },
         quickfile = { enabled = true },
         scope = { enabled = true },
@@ -118,11 +117,11 @@ return {
     },
     -- stylua: ignore
     keys = {
-        { "<leader>t", function() Snacks.terminal.toggle() end, desc = "Terminal Toogle", mode = { "n", "t" } },
         { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
         { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
         -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+        { "<C-\\>", function() Snacks.terminal() end, desc = "Toggle Terminal", mode = { "n", "t" } },
         { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
         { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
         -- find
