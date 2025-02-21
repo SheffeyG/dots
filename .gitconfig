@@ -5,11 +5,15 @@
 [core]
     autocrlf = input
 
-[alias]
-    tree = log --graph --decorate --pretty=oneline --abbrev-commit --all
-
 [init]
     defaultBranch = main 
+
+[merge]
+    tool = nvim-diffview
+
+[mergetool "nvim-diffview"]
+    cmd = "nvim -c 'DiffviewOpen'"
+    prompt = false
 
 [pull]
     rebase = true
