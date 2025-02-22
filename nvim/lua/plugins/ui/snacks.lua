@@ -117,6 +117,7 @@ return {
     },
     -- stylua: ignore
     keys = {
+        { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
         { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
@@ -126,7 +127,7 @@ return {
         { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
         -- find
         { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Find Buffers" },
-        { "<leader>ff", function() Snacks.picker.smart() end, desc = "Find Files" },
+        { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
         { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
         { "<leader>fr", function() Snacks.picker.recent() end, desc = "Find in Recent" },
         { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
@@ -173,4 +174,26 @@ return {
         { "gs", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
         { "gS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
     },
+    init = function()
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "VeryLazy",
+            callback = function()
+                -- Setup some globals for debugging (lazy-loaded)
+                _G.dd = function(...) Snacks.debug.inspect(...) end
+                _G.bt = function() Snacks.debug.backtrace() end
+                vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+                -- Create some toggle mappings
+                Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+                Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+                Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+                Snacks.toggle.diagnostics():map("<leader>ud")
+                Snacks.toggle.line_number():map("<leader>ul")
+                Snacks.toggle.treesitter():map("<leader>uT")
+                Snacks.toggle.inlay_hints():map("<leader>uh")
+                Snacks.toggle.indent():map("<leader>ug")
+                Snacks.toggle.dim():map("<leader>uD")
+            end,
+        })
+    end,
 }
