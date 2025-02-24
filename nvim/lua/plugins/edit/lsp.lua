@@ -61,17 +61,7 @@ end
 local deps = {
     {
         "rachartier/tiny-inline-diagnostic.nvim",
-        opts = {
-            signs = {
-                left = "",
-                right = "",
-                diag = "●",
-                arrow = "  ",
-                up_arrow = "    ",
-                vertical = "  ",
-                vertical_end = "  ",
-            },
-        },
+        opts = { preset = "powerline" },
     },
     {
         "folke/lazydev.nvim",

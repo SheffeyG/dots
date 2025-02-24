@@ -22,7 +22,7 @@ local diff = {
 
 local diagnostics = {
     "diagnostics",
-    symbols = { error = " ", warn = " ", hint = " ", info = " " },
+    symbols = { error = " ", warn = "󰗖 ", hint = " ", info = " " },
     sections = { "error", "warn", "info", "hint" },
     padding = { left = 0, right = 1 },
     diagnostics_color = colors.diagnostics,
