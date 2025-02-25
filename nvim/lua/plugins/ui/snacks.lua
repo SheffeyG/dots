@@ -43,6 +43,10 @@ return {
         rename = { enabled = true },
         scroll = { enabled = not vim.g.is_termux },
         terminal = { win = { relative = "win" } },
+        statuscolumn = {
+            left = { "mark", "sign", "git" },
+            right = { "fold" },
+        },
         indent = {
             animate = { duration = 10 },
             filter = function(buf)
@@ -177,6 +181,7 @@ return {
     init = function()
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
+            -- stylua: ignore
             callback = function()
                 -- Setup some globals for debugging (lazy-loaded)
                 _G.dd = function(...) Snacks.debug.inspect(...) end

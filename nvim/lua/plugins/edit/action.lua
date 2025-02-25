@@ -78,11 +78,4 @@ return {
         event = "CursorMoved",
         opts = {},
     },
-
-    -- better mark
-    {
-        "chentoast/marks.nvim",
-        event = "VeryLazy",
-        opts = {},
-    },
 }
