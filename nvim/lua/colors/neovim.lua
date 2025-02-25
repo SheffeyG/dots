@@ -54,7 +54,7 @@ return function(Group, c, g, s)
 
     -- special
     Group.new("Directory", c.blue)
-    Group.new("Folded", c.grey_light, c.black_light)
+    Group.new("Folded", c.grey_light, c.grey_dark)
     Group.new("WinSeparator", c.grey)
     Group.new("Search", c.yellow, c.yellow_bg)
     Group.new("CurSearch", g.Search, g.Search, s.bold)

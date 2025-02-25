@@ -29,6 +29,10 @@ o.number = true
 o.numberwidth = 2
 o.relativenumber = false
 
+-- fold
+o.foldmethod = "indent"
+o.foldlevelstart = 99
+
 -- interval for writing swap file to disk, also used by gitsigns
 o.updatetime = 250
 o.timeoutlen = 400
