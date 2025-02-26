@@ -54,10 +54,13 @@ local setup_cmp = function()
             completion = {
                 side_padding = 1,
                 border = "single",
+                scrollbar = false,
                 winhighlight = "FloatBorder:NormalGrey,CursorLine:PmenuSel,Search:None",
             },
             documentation = {
                 border = "single",
+                max_width = 50,
+                max_height = 15,
                 winhighlight = "FloatBorder:NormalCyan",
             },
         },

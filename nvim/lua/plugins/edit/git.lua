@@ -50,7 +50,7 @@ return {
         },
         opts = {
             kind = "tab", -- auto/tab/floating/split/vsplit
-            commit_view = { kind = "vsplit" },
+            commit_view = { kind = "auto" },
             log_view = { kind = "vsplit" },
             signs = {
                 hunk = { "", "" },
@@ -62,7 +62,7 @@ return {
                 recent = { folded = false, hidden = false },
             },
             commit_editor = {
-                kind = "floating",
+                kind = "auto",
                 show_staged_diff = false,
             },
             graph_style = "unicode",
