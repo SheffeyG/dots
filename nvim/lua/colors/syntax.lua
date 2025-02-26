@@ -101,7 +101,7 @@ return function(Group, c, g, s)
     Group.new("@markup.underline", nil, nil, s.underline)
     Group.new("@markup.italic", nil, nil, s.italic)
     Group.new("@markup.strikethrough", nil, nil, s.strikethrough)
-    Group.new("@markup.quote", c.black_light)
+    Group.new("@markup.quote", c.grey_light)
 
     Group.link("@comment", g.Comment)
     Group.new("@comment.todo", c.grey, c.white)
