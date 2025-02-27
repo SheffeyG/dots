@@ -35,9 +35,6 @@ return function(Group, c, g, s)
     Group.new("SnacksPickerGitStatusUntracked", c.orange)
     Group.new("SnacksPickerGitStatusRenamed", c.blue)
 
-    -- noice
-    Group.link("NoiceCmdlinePopup", g.NormalDark)
-
     -- which-key
     Group.link("WhichkeyNormal", g.NormalDark)
 end

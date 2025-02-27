@@ -12,13 +12,17 @@ return {
             cmdline_popup = {
                 size = { width = 0.3 },
                 border = { style = "none", padding = { 2, 3 } },
+                win_options = { winhighlight = { Normal = "NormalDark" } },
+            },
+            cmdline_input = {
+                win_options = { winhighlight = { NormalFloat = "Normal" } },
             },
             hover = {
                 scrollbar = false,
                 size = { max_width = 50, max_height = 15 },
                 border = { style = "single", padding = { 0, 1 } },
                 position = { row = 2, col = 0 },
-                win_options = { winhighlight = "FloatBorder:NormalCyan" },
+                win_options = { winhighlight = { FloatBorder = "NormalCyan" } },
             },
             mini = { timeout = 3000 },
         },
