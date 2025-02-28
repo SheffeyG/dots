@@ -18,6 +18,7 @@ if g.is_wsl then
     local paste = 'powershell.exe -c \
         [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))'
 
+    -- https://github.com/equalsraf/win32yank
     if vim.fn.executable("win32yank.exe") then
         name = "wsl_win32yank"
         copy = "win32yank.exe -i --crlf"
@@ -31,16 +32,26 @@ if g.is_wsl then
         cache_enabled = true,
     }
 
--- elseif is_ssh then
---     vim.g.clipboard = {
---         name = "OSC52",
---         copy = {
---             ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
---             ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
---         },
---         paste = {
---             ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
---             ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
---         },
---     }
+elseif g.is_ssh then
+    -- https://www.sxrhhh.top/blog/2024/06/06/neovim-copy-anywhere/
+    local do_nothing = function(_)
+        return function(_)
+            local content = vim.fn.getreg('"')
+            return vim.split(content, "\n")
+        end
+    end
+
+    vim.g.clipboard = {
+        name = "OSC52",
+        copy = {
+            ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+            ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+        },
+        paste = {
+            -- ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+            -- ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+            ["+"] = do_nothing("+"), -- pasting disabled
+            ["*"] = do_nothing("*"), -- pasting disabled
+        },
+    }
 end
