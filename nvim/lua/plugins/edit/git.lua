@@ -3,7 +3,10 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPost" },
-        opts = { signs = { changedelete = { text = "󰷣" } } },
+        opts = {
+            signs = { changedelete = { text = "󰷣" } },
+            signs_staged = { changedelete = { text = "󰷣" } },
+        },
     },
 
     {

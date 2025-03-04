@@ -18,6 +18,9 @@ return function(Group, c, g, s)
     Group.link("SnacksWinBar", g.WinBar)
     Group.link("SnacksWinBarNC", g.WinBarNC)
 
+    -- snacks.statuscolumn
+    Group.new("SnacksStatusColumnMark", c.crimson)
+
     -- snacks.indent
     Group.new("SnacksIndent", c.grey)
     Group.new("SnacksIndentScope", c.grey_light)

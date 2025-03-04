@@ -44,8 +44,9 @@ return {
         scroll = { enabled = not vim.g.is_termux },
         terminal = { win = { relative = "win" } },
         statuscolumn = {
-            left = { "mark", "sign", "git" },
-            right = { "fold" },
+            left = { "mark", "sign" },
+            right = { "fold", "git" },
+            git = { patterns = { "Diagnostic" } },
         },
         indent = {
             animate = { duration = 10 },
