@@ -41,7 +41,7 @@ return {
         words = { enabled = true },
         input = { enabled = true },
         rename = { enabled = true },
-        scroll = { enabled = not vim.g.is_termux },
+        scroll = { enabled = not vim.g.is_arm },
         terminal = { win = { relative = "win" } },
         statuscolumn = {
             left = { "mark", "sign" },
