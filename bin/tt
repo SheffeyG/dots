@@ -1,8 +1,8 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
-# small tmux sessionizer: quickly create, attach, or switch tmux sessions
+# small tmux sessionizer: quickly create, attach, and switch tmux sessions
 
-tt() {
+tmux_attach() {
     has_session_exact() {
         tmux list-sessions -F "#{session_name}" 2>/dev/null | grep -qx "$1"
     }
@@ -17,7 +17,7 @@ tt() {
     }
 
     tmux_create_and_attach() {
-        tmux new-session -d -s "$session_name" && tt "$session_name" || echo "Error: Failed to create session '$session_name'."
+        tmux new-session -d -s "$session_name" && tmux_attach "$session_name" || echo "Error: Failed to create session '$session_name'."
     }
 
     # more than 1 parameter provided
@@ -46,5 +46,5 @@ tt() {
     fi
 }
 
-tt "$@"
+tmux_attach "$@"
 
