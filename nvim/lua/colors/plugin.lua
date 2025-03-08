@@ -1,9 +1,4 @@
 return function(Group, c, g, s)
-    -- gitsigns
-    Group.new("GitSignsAdd", c.green)
-    Group.new("GitSignsChange", c.yellow)
-    Group.new("GitSignsDelete", c.red)
-
     -- neogit
     Group.new("NeogitDiffHeader", c.yellow, c.yellow_bg, s.bold)
     Group.link("NeogitDiffHeaderCursor", g.NeogitDiffHeader)
@@ -17,9 +12,6 @@ return function(Group, c, g, s)
     Group.link("SnacksInputTitle", g.FloatTitle)
     Group.link("SnacksWinBar", g.WinBar)
     Group.link("SnacksWinBarNC", g.WinBarNC)
-
-    -- snacks.statuscolumn
-    Group.new("SnacksStatusColumnMark", c.crimson)
 
     -- snacks.indent
     Group.new("SnacksIndent", c.grey)

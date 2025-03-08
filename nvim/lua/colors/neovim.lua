@@ -63,6 +63,11 @@ return function(Group, c, g, s)
     Group.new("MatchWord", c.white, c.grey)
     Group.link("MatchParen", g.MatchWord)
 
+    -- git
+    Group.new("Added", c.green)
+    Group.new("Removed", c.red)
+    Group.new("Changed", c.yellow)
+
     -- git.diff
     Group.new("DiffAdd", nil, c.green_bg)
     Group.new("DiffDelete", nil, c.red_bg)
