@@ -20,10 +20,10 @@ map({ "n", "v", "o" }, "H", "^", { noremap = true, desc = "Line home" })
 map({ "n", "v", "o" }, "L", "$", { noremap = true, desc = "Line end" })
 
 -- Buffers
-map("n", "<C-h>", "<C-w>h", { desc = "Window go left" })
-map("n", "<C-j>", "<C-w>j", { desc = "Window go down" })
-map("n", "<C-k>", "<C-w>k", { desc = "Window go up" })
-map("n", "<C-l>", "<C-w>l", { desc = "Window go right" })
+-- map("n", "<C-h>", "<C-w>h", { desc = "Window go left" })
+-- map("n", "<C-j>", "<C-w>j", { desc = "Window go down" })
+-- map("n", "<C-k>", "<C-w>k", { desc = "Window go up" })
+-- map("n", "<C-l>", "<C-w>l", { desc = "Window go right" })
 
 map("t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "which_key_ignore" })
 map("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "which_key_ignore" })

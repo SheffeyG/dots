@@ -16,6 +16,7 @@ o.smartcase = true
 o.splitbelow = true
 o.splitright = true
 o.undofile = true
+o.wrap = false
 
 -- indents
 o.expandtab = true
