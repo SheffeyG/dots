@@ -1,11 +1,13 @@
 --- @type LazyPluginSpec[]
 return {
     {
-        "lewis6991/gitsigns.nvim",
-        event = { "BufReadPost" },
+        "echasnovski/mini.diff",
+        event = "BufReadPost",
         opts = {
-            signs = { changedelete = { text = "󰷣" } },
-            signs_staged = { changedelete = { text = "󰷣" } },
+            view = {
+                style = "sign",
+                signs = { add = "┃", change = "┃", delete = "▁" },
+            },
         },
     },
 
