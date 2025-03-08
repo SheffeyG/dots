@@ -15,7 +15,7 @@ return {
                 win_options = { winhighlight = { Normal = "NormalDark" } },
             },
             cmdline_input = {
-                win_options = { winhighlight = { NormalFloat = "Normal" } },
+                win_options = { winhighlight = { Normal = "Normal" } },
             },
             hover = {
                 scrollbar = false,

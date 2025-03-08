@@ -4,29 +4,31 @@
 
 # enable p10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # setting zsh prompt right padding
 ZLE_RPROMPT_INDENT=0
+
 
 #-----------------------
 # Options
 #-----------------------
 
 set bell-style none
-
-# pushd and other
+unsetopt BEEP LIST_BEEP HIST_BEEP
 setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS 
 
 # key-bindings
 bindkey '\ej' up-line-or-beginning-search
 bindkey '\ek' down-line-or-beginning-search
 
+
 #-----------------------
 # Aliases
 #-----------------------
 
+# shortcuts
 alias ...=../..
 alias ....=../../..
 alias 1='cd -'
@@ -34,7 +36,6 @@ alias 2='cd -2'
 alias 3='cd -3'
 alias md='mkdir -p'
 alias rd=rmdir
-alias grep='grep --color=auto'
 alias python='PYTHONPATH=$PYTHONPATH:$(pwd) python3'
 # alias tt='if tmux has-session & 2>/dev/null; then tmux a; else tmux; fi'
 
@@ -49,9 +50,11 @@ alias gma='git commit --amend --no-edit'
 alias glo='git log --oneline -n 10 --graph'
 gm() { if [ -z "$1" ]; then git commit; else git commit -m "$1"; fi; }
 
-# software shortcuts
+# 3rd
 [[ $(command -v nvim) ]] && alias vim='nvim' && export EDITOR=nvim
 [[ $(command -v bat) ]] && alias cat='bat' 
+[[ $(command -v rg) ]] && alias grep='rg'
+
 if [[ -n "$TERMUX_VERSION" ]]; then
     alias tcs='termux-clipboard-set'
     alias tcg='termux-clipboard-get'

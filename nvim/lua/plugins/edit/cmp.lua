@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local setup_cmp = function()
     local cmp = require("cmp")
 
@@ -35,7 +36,6 @@ local setup_cmp = function()
     }
 
     cmp.setup.cmdline({ "/", "?" }, {
-        ---@diagnostic disable-next-line
         formatting = { fields = { "abbr" } },
         mapping = cmp.mapping.preset.cmdline(),
         sources = { { name = "buffer" } },
@@ -43,7 +43,6 @@ local setup_cmp = function()
 
     cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
-        ---@diagnostic disable-next-line
         matching = { disallow_symbol_nonprefix_matching = false },
         completion = { keyword_length = 3 },
         sources = { { name = "cmdline" } },
@@ -64,9 +63,7 @@ local setup_cmp = function()
                 winhighlight = "FloatBorder:NormalCyan",
             },
         },
-        ---@diagnostic disable-next-line
         formatting = { fields = { "abbr", "kind" } },
-        ---@diagnostic disable-next-line
         performance = { max_view_entries = 20 },
         mapping = mapping,
         snippet = {
