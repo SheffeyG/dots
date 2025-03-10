@@ -52,6 +52,7 @@ gm() { if [ -z "$1" ]; then git commit; else git commit -m "$1"; fi; }
 
 # 3rd
 [[ $(command -v nvim) ]] && alias vim='nvim' && export EDITOR=nvim
+[[ $(command -v uv) ]] && alias pip='uv pip'
 [[ $(command -v bat) ]] && alias cat='bat' 
 [[ $(command -v rg) ]] && alias grep='rg'
 
@@ -151,5 +152,5 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit wait"1" lucid for agkozak/zsh-z 
 
 # auto switch python venv
-zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
+zinit wait lucid for Skylor-Tang/auto-venv
 
