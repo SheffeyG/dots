@@ -121,8 +121,12 @@ return {
     },
     -- stylua: ignore
     keys = {
+        {
+            "<leader>e",
+            function() Snacks.explorer.open({ auto_close = vim.api.nvim_win_get_width(0) <= 120 }) end,
+            desc = "File Explorer Toggle"
+        },
         { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-        { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
         { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
         -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
