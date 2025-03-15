@@ -19,14 +19,14 @@ vim.env.PATH = prefix .. delim .. vim.env.PATH
 
 -- set clipboard provider
 if g.is_wsl then
-    local name = "wsl_pwsh"
+    local name = "PWSH"
     local copy = "clip.exe"
     local paste = 'powershell.exe -c \
         [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))'
 
     -- https://github.com/equalsraf/win32yank
-    if vim.fn.executable("win32yank.exe") then
-        name = "wsl_win32yank"
+    if vim.fn.executable("win32yank.exe") ~= 0 then
+        name = "WIN32YANK"
         copy = "win32yank.exe -i --crlf"
         paste = "win32yank.exe -o --lf"
     end
