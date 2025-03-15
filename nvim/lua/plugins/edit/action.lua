@@ -4,15 +4,9 @@ return {
     {
         "stevearc/conform.nvim",
         opts = {
-            -- stylua: ignore
             formatters_by_ft = {
-                css        = { "prettier" },
-                javascript = { "prettier" },
-                html       = { "prettier" },
-                lua        = { "stylua" },
-                markdown   = { "prettier" },
-                python     = { "ruff_format", "ruff_organize_imports" },
-                typescript = { "prettier" },
+                lua = { "stylua" },
+                python = { "ruff_format", "ruff_organize_imports" },
             },
         },
         keys = {
@@ -108,5 +102,5 @@ return {
         "echasnovski/mini.pairs",
         event = "InsertEnter",
         opts = {},
-    }
+    },
 }
