@@ -1,3 +1,5 @@
+do return {} end
+
 ---@diagnostic disable: missing-fields
 local setup_cmp = function()
     local cmp = require("cmp")

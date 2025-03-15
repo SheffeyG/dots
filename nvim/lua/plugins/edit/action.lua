@@ -102,4 +102,11 @@ return {
         event = "CursorMoved",
         opts = {},
     },
+
+    -- auto pairs
+    {
+        "echasnovski/mini.pairs",
+        event = "InsertEnter",
+        opts = {},
+    }
 }
