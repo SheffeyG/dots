@@ -53,6 +53,18 @@ local select = {
     padding = { left = 0, right = 1 },
 }
 
+local lsp = {
+    "lsp_status",
+    icon = "",
+    padding = { left = 0, right = 1 },
+    color = colors.text_cyan,
+    symbols = {
+        spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+        done = "",
+        separator = " ",
+    },
+}
+
 --- @type LazyPluginSpec
 return {
     "nvim-lualine/lualine.nvim",
@@ -84,6 +96,7 @@ return {
                 select,
                 macro,
                 diagnostics,
+                lsp,
             },
             lualine_y = {
                 { "progress", color = colors.text_blue },

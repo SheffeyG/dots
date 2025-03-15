@@ -27,6 +27,7 @@ return {
             mini = { timeout = 3000 },
         },
         lsp = {
+            progress = { enabled = false },
             override = {
                 ["cmp.entry.get_documentation"] = true,
                 ["vim.lsp.util.stylize_markdown"] = true,
