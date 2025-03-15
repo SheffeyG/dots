@@ -1,3 +1,5 @@
+local icons = require("config.icons").kind
+
 --- @type LazyPluginSpec
 return {
     ---@module "blink.cmp"
@@ -10,6 +12,7 @@ return {
         keymap = { preset = "enter" },
         appearance = {
             nerd_font_variant = "normal",
+            kind_icons = icons,
         },
         sources = {
             default = {

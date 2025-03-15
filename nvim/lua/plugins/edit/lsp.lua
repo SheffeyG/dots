@@ -24,24 +24,9 @@ local server_settings = {
     },
 }
 
+local icons = require("config.icons").diag
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem = {
-    documentationFormat = { "markdown", "plaintext" },
-    snippetSupport = true,
-    preselectSupport = true,
-    insertReplaceSupport = true,
-    labelDetailsSupport = true,
-    deprecatedSupport = true,
-    commitCharactersSupport = true,
-    tagSupport = { valueSet = { 1 } },
-    resolveSupport = {
-        properties = {
-            "documentation",
-            "detail",
-            "additionalTextEdits",
-        },
-    },
-}
 
 local on_attach = function(_, bufnr)
     local map = vim.keymap.set
@@ -116,10 +101,10 @@ return {
             vim.diagnostic.config({
                 signs = {
                     text = {
-                        [vim.diagnostic.severity.ERROR] = " ",
-                        [vim.diagnostic.severity.WARN] = "󰗖 ",
-                        [vim.diagnostic.severity.HINT] = " ",
-                        [vim.diagnostic.severity.INFO] = " ",
+                        [vim.diagnostic.severity.ERROR] = icons.Error,
+                        [vim.diagnostic.severity.WARN] = icons.Warn,
+                        [vim.diagnostic.severity.HINT] = icons.Hint,
+                        [vim.diagnostic.severity.INFO] = icons.Info,
                     },
                 },
             })

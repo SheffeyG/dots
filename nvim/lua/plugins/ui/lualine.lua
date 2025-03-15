@@ -1,4 +1,5 @@
 local colors = require("colors.lualine")
+local icons = require("config.icons").diag
 
 -- conditions
 local many_tabs = function() return #vim.api.nvim_list_tabpages() > 1 end
@@ -22,7 +23,12 @@ local diff = {
 
 local diagnostics = {
     "diagnostics",
-    symbols = { error = " ", warn = "󰗖 ", hint = " ", info = " " },
+    symbols = {
+        error = icons.Error,
+        warn = icons.Warn,
+        hint = icons.Hint,
+        info = icons.Info,
+    },
     sections = { "error", "warn", "info", "hint" },
     padding = { left = 0, right = 1 },
     diagnostics_color = colors.diagnostics,
