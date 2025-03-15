@@ -5,6 +5,7 @@ return {
     ---@module "blink.cmp"
     "saghen/blink.cmp",
     event = { "InsertEnter", "CmdlineEnter" },
+    dependencies = "rafamadriz/friendly-snippets",
     -- version = "*",
     build = "cargo build --release",
     ---@type blink.cmp.Config
@@ -28,9 +29,10 @@ return {
                     fallbacks = { "lazydev" },
                 },
                 lazydev = {
-                    name = "Development",
+                    name = "LazyDev",
                     module = "lazydev.integrations.blink",
                 },
+                cmdline = { min_keyword_length = 3 },
             },
         },
         completion = {
