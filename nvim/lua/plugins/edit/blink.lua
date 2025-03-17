@@ -6,8 +6,8 @@ return {
     "saghen/blink.cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = "rafamadriz/friendly-snippets",
-    -- version = "*",
-    build = "cargo build --release",
+    version = vim.g.is_arm and "*" or false,
+    build = vim.g.is_arm and false or "cargo build --release",
     ---@type blink.cmp.Config
     opts = {
         keymap = { preset = "enter" },
@@ -43,7 +43,7 @@ return {
                 draw = {
                     columns = {
                         { "kind_icon" },
-                        { "label", "label_description", gap = 1 },
+                        { "label" },
                         { "provider" },
                     },
                     components = {

@@ -41,11 +41,19 @@ return {
         words = { enabled = true },
         input = { enabled = true },
         rename = { enabled = true },
-        scroll = { enabled = not vim.g.is_arm },
         terminal = { win = { relative = "win" } },
         statuscolumn = {
             left = { "mark", "git" },
             right = { "fold", "sign" },
+        },
+        scroll = {
+            enabled = not vim.g.is_arm,
+            filter = function(buf)
+                return vim.g.snacks_scroll ~= false
+                    and vim.b[buf].snacks_scroll ~= false
+                    and vim.bo[buf].buftype ~= "terminal"
+                    and vim.bo[buf].filetype ~= "blink-cmp-menu"
+            end,
         },
         indent = {
             animate = { duration = 10 },

@@ -2,8 +2,8 @@ return function(Group, c, g, s)
     -- blink
     Group.link("BlinkCmpMenu", g.NormalFloat)
     Group.link("BlinkCmpMenuBorder", g.NormalGrey)
-    Group.link("BlinkCmpKind", g.NormalCyan)
-    Group.link("BlinkCmpGhostText", g.NormalGrey)
+    Group.new("BlinkCmpKind", c.cyan, g.BlinkCmpMenu)
+    Group.new("BlinkCmpGhostText", c.grey_dark, g.NormalDark)
 
     -- neogit
     Group.new("NeogitDiffHeader", c.yellow, c.yellow_bg, s.bold)
