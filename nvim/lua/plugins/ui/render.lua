@@ -33,18 +33,27 @@ return {
             },
             indent = { enable = true },
         },
-
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
-        end,
+        config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
     },
 
     {
-        "OXY2DEV/markview.nvim",
+        "MeanderingProgrammer/render-markdown.nvim",
         ft = "markdown",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons",
+        },
+        opts = {
+            heading = {
+                icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
+                position = "inline",
+                width = "block",
+                left_margin = 0.5,
+                left_pad = 0.2,
+                right_pad = 0.2,
+            },
+            sign = { enabled = false },
+            code = { left_pad = 1, language_pad = 1 },
         },
     },
 }
