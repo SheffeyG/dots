@@ -12,44 +12,18 @@ return {
     },
 
     {
-        "sindrets/diffview.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        cmd = { "DiffviewOpen", "DiffviewClose" },
-        keys = {
-            { "<leader>dv", "<CMD>DiffviewOpen<CR>", desc = "Diffview Panel" },
-        },
+        "lewis6991/gitsigns.nvim",
+        event = { "BufReadPost" },
+        enabled = false,
         opts = {
-            enhanced_diff_hl = true,
-            view = {
-                merge_tool = {
-                    layout = "diff3_mixed",
-                    disable_diagnostics = true,
-                    diff_binaries = false,
-                },
-            },
-            key_bindings = {
-                view = { q = "<CMD>DiffviewClose<CR>" },
-                file_panel = { q = "<CMD>DiffviewClose<CR>" },
-                file_history_panel = { q = "<CMD>DiffviewClose<CR>" },
-            },
-            hooks = {
-                -- Change local options in diff buffers
-                diff_buf_read = function()
-                    vim.opt_local.wrap = false
-                    vim.opt_local.list = false
-                    vim.opt_local.colorcolumn = ""
-                end,
-            },
+            signs = { changedelete = { text = "󰷣" } },
+            signs_staged = { changedelete = { text = "󰷣" } },
         },
     },
 
     {
         "NeogitOrg/neogit",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "sindrets/diffview.nvim",
-        },
-        cmd = "Neogit",
+        dependencies = { "nvim-lua/plenary.nvim" },
         keys = {
             { "<leader>gg", "<CMD>Neogit<CR>", desc = "Neogit Panel" },
         },
@@ -76,6 +50,39 @@ return {
                     ["l"] = false,
                     ["L"] = "LogPopup",
                 },
+            },
+        },
+    },
+
+    {
+        "akinsho/git-conflict.nvim",
+        event = "VeryLazy",
+        opts = {
+            disable_diagnostics = true,
+            highlights = { current = "ConflictUp", incoming = "ConflictDown" },
+        },
+    },
+
+    {
+        "sindrets/diffview.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        keys = {
+            { "<leader>dv", "<CMD>DiffviewOpen<CR>", desc = "Diffview Panel" },
+            { "<leader>df", "<CMD>DiffviewFileHistory %<CR>", desc = "Diffview File" },
+        },
+        opts = {
+            enhanced_diff_hl = true,
+            view = {
+                merge_tool = {
+                    layout = "diff3_mixed",
+                    disable_diagnostics = true,
+                    diff_binaries = false,
+                },
+            },
+            key_bindings = {
+                view = { q = "<CMD>DiffviewClose<CR>" },
+                file_panel = { q = "<CMD>DiffviewClose<CR>" },
+                file_history_panel = { q = "<CMD>DiffviewClose<CR>" },
             },
         },
     },

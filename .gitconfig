@@ -9,14 +9,21 @@
     defaultBranch = main 
 
 [merge]
-    tool = nvim-diffview
+    tool = nvim
 
-[mergetool "nvim-diffview"]
-    cmd = "nvim -c 'DiffviewOpen'"
+[mergetool]
     prompt = false
+    keepBackup = false
 
-[pull]
-    rebase = true
+[mergetool "nvim"]
+    cmd = nvim
+    ; cmd = nvim -c "DiffviewOpen"
+
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+
+; [pull]
+;     rebase = true
 
 ; [url "git@github.com:"]
 ;     insteadOf = https://github.com/

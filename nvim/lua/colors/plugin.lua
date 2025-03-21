@@ -13,6 +13,11 @@ return function(Group, c, g, s)
 
     -- diffview
     Group.link("DiffviewDiffDelete", g.Comment)
+    Group.link("DiffviewFilePanelFileName", g.Normal)
+
+    -- git-conflict
+    Group.new("ConflictUp", nil, c.blue_bg)
+    Group.new("ConflictDown", nil, c.cyan_bg)
 
     -- snacks
     Group.link("SnacksInputTitle", g.FloatTitle)

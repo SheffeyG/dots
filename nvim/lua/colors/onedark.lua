@@ -24,6 +24,7 @@ return function(Color)
     Color.new("yellow_bg",   "#4d422d")
     Color.new("green_bg",    "#202919")
     Color.new("blue_bg",     "#223e55")
+    Color.new("cyan_bg",     "#16585f")
     Color.new("purple_bg",   "#3c2443")
 
     -- Color.new("base00", "#1e222a")  -- black1
