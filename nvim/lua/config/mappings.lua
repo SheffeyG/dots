@@ -2,6 +2,8 @@ local map = vim.keymap.set
 
 -- General
 map("n", ";", ":")
+map("v", ";", "<Esc>:")
+map("n", "U", "<C-r>")
 map("i", "jk", "<Esc>")
 
 map("n", "<Esc>", "<CMD>noh<CR>", { desc = "Clear highlights" })

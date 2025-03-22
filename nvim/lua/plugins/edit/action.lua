@@ -22,27 +22,21 @@ return {
     -- multiple cursors
     {
         "jake-stewart/multicursor.nvim",
-        event = { "BufReadPost", "BufNewFile" },
+        keys = {
+            { "<C-M-j>", function() require("multicursor-nvim").lineAddCursor(1) end },
+            { "<C-M-k>", function() require("multicursor-nvim").lineAddCursor(-1) end },
+            { "<C-M-n>", function() require("multicursor-nvim").matchAddCursor(1) end },
+            { "<C-M-p>", function() require("multicursor-nvim").matchAddCursor(-1) end },
+        },
         config = function()
             local mc = require("multicursor-nvim")
-            local map = vim.keymap.set
             mc.setup()
-
-            map("n", "<C-M-j>", function() mc.lineAddCursor(1) end)
-            map("n", "<C-M-k>", function() mc.lineAddCursor(-1) end)
-            map("n", "<C-M-n>", function() mc.matchAddCursor(1) end)
-            map("n", "<C-M-p>", function() mc.matchAddCursor(-1) end)
-            map("n", "<C-x>", mc.deleteCursor)
-            map("n", "<C-M-i>", mc.alignCursors)
-            map("n", "<C-M-leftmouse>", mc.handleMouse)
-            map("n", "<Esc>", function()
-                if not mc.cursorsEnabled() then
-                    mc.enableCursors()
-                elseif mc.hasCursors() then
-                    mc.clearCursors()
-                else -- fallback to clear highlights
-                    vim.cmd("noh")
-                end
+            mc.addKeymapLayer(function(layerSet)
+                layerSet("n", "=", mc.alignCursors)
+                layerSet("n", "<leftmouse>", mc.handleMouse)
+                layerSet("n", "j", function() mc.lineSkipCursor(1) end)
+                layerSet("n", "k", function() mc.lineSkipCursor(-1) end)
+                layerSet("n", "<Esc>", function() mc.clearCursors() end)
             end)
         end,
     },
