@@ -8,6 +8,11 @@ return {
             bottom_search = true,
             long_message_to_split = true,
         },
+        cmdline = {
+            format = {
+                replace = { pattern = "^:%%s/", icon = " 󰬳", lang = "regex", view = "cmdline" },
+            },
+        },
         views = {
             cmdline_popup = {
                 size = { width = 0.3 },
