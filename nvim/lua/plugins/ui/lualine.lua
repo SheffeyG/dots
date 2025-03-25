@@ -1,5 +1,5 @@
 local colors = require("colors.lualine")
-local icons = require("config.icons").diag
+local icons = require("colors.icons").diag
 
 -- conditions
 local many_tabs = function() return #vim.api.nvim_list_tabpages() > 1 end

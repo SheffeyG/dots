@@ -24,7 +24,7 @@ local server_settings = {
     },
 }
 
-local icons = require("config.icons").diag
+local icons = require("colors.icons").diag
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
