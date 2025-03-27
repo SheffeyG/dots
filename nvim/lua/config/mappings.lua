@@ -22,10 +22,10 @@ map({ "n", "v", "o" }, "H", "^", { noremap = true, desc = "Line home" })
 map({ "n", "v", "o" }, "L", "$", { noremap = true, desc = "Line end" })
 
 -- Buffers
--- map("n", "<C-h>", "<C-w>h", { desc = "Window go left" })
--- map("n", "<C-j>", "<C-w>j", { desc = "Window go down" })
--- map("n", "<C-k>", "<C-w>k", { desc = "Window go up" })
--- map("n", "<C-l>", "<C-w>l", { desc = "Window go right" })
+map("n", "<C-h>", "<C-w>h", { desc = "Window go left" })
+map("n", "<C-j>", "<C-w>j", { desc = "Window go down" })
+map("n", "<C-k>", "<C-w>k", { desc = "Window go up" })
+map("n", "<C-l>", "<C-w>l", { desc = "Window go right" })
 
 map("t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "which_key_ignore" })
 map("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "which_key_ignore" })
@@ -33,3 +33,7 @@ map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "which_key_ignore" })
 map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "which_key_ignore" })
 
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Escape terminal mode" })
+
+-- LSP
+map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
+map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })

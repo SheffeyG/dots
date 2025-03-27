@@ -1,12 +1,17 @@
---- @type LazyPluginSpec[]
+---@type LazyPluginSpec[]
 return {
     { "tjdevries/colorbuddy.nvim" },
+
+    {
+        "norcalli/nvim-colorizer.lua",
+        ft = { "css", "lua" },
+        opts = { "css", "lua" },
+    },
 
     {
         "nvim-treesitter/nvim-treesitter",
         version = "*",
         event = { "BufReadPost", "BufNewFile" },
-        cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
         build = ":TSUpdate",
         opts = {
             ensure_installed = {
@@ -33,7 +38,9 @@ return {
             },
             indent = { enable = true },
         },
-        config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
+        config = function(_, opts) -- needs call setup manually
+            require("nvim-treesitter.configs").setup(opts)
+        end,
     },
 
     {
@@ -43,6 +50,8 @@ return {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons",
         },
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
         opts = {
             heading = {
                 icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
@@ -52,8 +61,12 @@ return {
                 left_pad = 0.2,
                 right_pad = 0.2,
             },
+            code = {
+                left_pad = 1,
+                language_pad = 1,
+                border = "thin",
+            },
             sign = { enabled = false },
-            code = { left_pad = 1, language_pad = 1 },
         },
     },
 }

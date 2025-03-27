@@ -2,10 +2,18 @@ local colors = require("colors.lualine")
 local icons = require("config.icons").diag
 
 -- conditions
-local many_tabs = function() return #vim.api.nvim_list_tabpages() > 1 end
--- local not_empty = function() return vim.fn.empty(vim.fn.expand("%:t")) ~= 1 end
--- local wide_win = function() return vim.fn.winwidth(0) > 80 end
--- local has_lsp = function() return next(vim.lsp.get_clients()) ~= nil end
+local many_tabs = function() -- more then one tab
+    return #vim.api.nvim_list_tabpages() > 1
+end
+-- local not_empty = function()
+--     return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+-- end
+-- local wide_win = function()
+--     return vim.fn.winwidth(0) > 80
+-- end
+-- local has_lsp = function()
+--     return next(vim.lsp.get_clients()) ~= nil
+-- end
 
 -- components
 local filename = {
@@ -65,13 +73,11 @@ local lsp = {
     },
 }
 
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "nvim-lualine/lualine.nvim",
-    lazy = false,
-    dependencies = {
-        "nvim-tree/nvim-web-devicons",
-    },
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
         options = {
             theme = colors.theme,
@@ -106,4 +112,5 @@ return {
             },
         },
     },
+    init = function() vim.o.laststatus = 0 end,
 }
