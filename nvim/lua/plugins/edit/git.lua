@@ -1,4 +1,4 @@
---- @type LazyPluginSpec[]
+---@type LazyPluginSpec[]
 return {
     {
         "echasnovski/mini.diff",
@@ -6,7 +6,7 @@ return {
         opts = {
             view = {
                 style = "sign",
-                signs = { add = "┃", change = "┃", delete = "▁" },
+                signs = { add = "│", change = "│", delete = "▁" },
             },
         },
     },
@@ -27,6 +27,8 @@ return {
         keys = {
             { "<leader>gg", "<CMD>Neogit<CR>", desc = "Neogit Panel" },
         },
+        ---@module "neogit"
+        ---@type NeogitConfig
         opts = {
             kind = "tab", -- auto/tab/floating/split/vsplit
             commit_view = { kind = "auto" },
