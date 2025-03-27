@@ -1,4 +1,4 @@
---- @type LazyPluginSpec[]
+---@type LazyPluginSpec[]
 return {
     { "tjdevries/colorbuddy.nvim" },
 
@@ -6,7 +6,6 @@ return {
         "nvim-treesitter/nvim-treesitter",
         version = "*",
         event = { "BufReadPost", "BufNewFile" },
-        cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
         build = ":TSUpdate",
         opts = {
             ensure_installed = {
@@ -52,8 +51,12 @@ return {
                 left_pad = 0.2,
                 right_pad = 0.2,
             },
+            code = {
+                left_pad = 1,
+                language_pad = 1,
+                border = "thin",
+            },
             sign = { enabled = false },
-            code = { left_pad = 1, language_pad = 1 },
         },
     },
 }

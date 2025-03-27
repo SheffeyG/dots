@@ -1,4 +1,4 @@
---- @type LazyPluginSpec[]
+---@type LazyPluginSpec[]
 return {
     -- formatter
     {
@@ -44,6 +44,7 @@ return {
     -- navigation in tmux
     {
         "alexghergh/nvim-tmux-navigation",
+        enabled = vim.g.is_tmux,
         event = "VeryLazy",
         config = function()
             local nvim_tmux_nav = require("nvim-tmux-navigation")

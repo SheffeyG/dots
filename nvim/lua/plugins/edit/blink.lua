@@ -1,13 +1,14 @@
 local icons = require("config.icons").kind
 
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     ---@module "blink.cmp"
     "saghen/blink.cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = "rafamadriz/friendly-snippets",
-    version = vim.g.is_arm and "*" or false,
-    build = vim.g.is_arm and false or "cargo build --release",
+    version = "*",
+    -- version = vim.g.is_arm and "*" or false,
+    -- build = vim.g.is_arm and false or "cargo build --release",
     ---@type blink.cmp.Config
     opts = {
         keymap = { preset = "enter" },

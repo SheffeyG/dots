@@ -1,4 +1,4 @@
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -10,7 +10,7 @@ return {
         },
         cmdline = {
             format = {
-                replace = { pattern = "^:s/", icon = " ", lang = "regex", view = "cmdline" },
+                replace = { pattern = "^:s/", icon = " ", lang = "regex", view = "cmdline" },
                 replace_all = { pattern = "^:%%s/", icon = " 󰬳", lang = "regex", view = "cmdline" },
             },
         },

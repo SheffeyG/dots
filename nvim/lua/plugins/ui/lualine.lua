@@ -65,13 +65,11 @@ local lsp = {
     },
 }
 
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "nvim-lualine/lualine.nvim",
-    lazy = false,
-    dependencies = {
-        "nvim-tree/nvim-web-devicons",
-    },
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
         options = {
             theme = colors.theme,

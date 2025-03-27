@@ -5,7 +5,7 @@ local g = vim.g
 o.mouse = "a"
 o.clipboard = "unnamedplus"
 
-o.laststatus = 3
+o.laststatus = 0
 o.showtabline = 0
 o.signcolumn = "yes"
 o.colorcolumn = ""
