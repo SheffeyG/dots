@@ -1,8 +1,9 @@
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = "MunifTanjim/nui.nvim",
+    ---@type NoiceConfig
     opts = {
         presets = {
             bottom_search = true,
@@ -10,10 +11,23 @@ return {
         },
         cmdline = {
             format = {
-                replace = { pattern = "^:s/", icon = " ", lang = "regex", view = "cmdline" },
-                replace_all = { pattern = "^:%%s/", icon = " 󰬳", lang = "regex", view = "cmdline" },
+                replace = {
+                    conceal = false,
+                    pattern = "^:s/",
+                    icon = " ",
+                    lang = "regex",
+                    view = "cmdline",
+                },
+                replace_all = {
+                    conceal = false,
+                    pattern = "^:%%s/",
+                    icon = " 󰬳",
+                    lang = "regex",
+                    view = "cmdline",
+                },
             },
         },
+        ---@type NoiceConfigViews
         views = {
             cmdline_popup = {
                 size = { width = 0.3 },
@@ -35,7 +49,6 @@ return {
         lsp = {
             progress = { enabled = false },
             override = {
-                ["cmp.entry.get_documentation"] = true,
                 ["vim.lsp.util.stylize_markdown"] = true,
                 ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
             },

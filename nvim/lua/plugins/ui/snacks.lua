@@ -1,3 +1,4 @@
+---@type snacks.picker.layout.Config
 local win_input = {
     win = "input",
     height = 1,
@@ -12,6 +13,7 @@ local win_input = {
     },
 }
 
+---@type snacks.picker.layout.Config
 local win_preview = {
     win = "preview",
     title = "{preview}",
@@ -28,12 +30,12 @@ local win_preview = {
     },
 }
 
---- @type LazyPluginSpec
+---@type LazyPluginSpec
 return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    --- @type snacks.Config
+    ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
         quickfile = { enabled = true },
@@ -58,13 +60,14 @@ return {
         indent = {
             animate = { duration = 10 },
             filter = function(buf)
-                local exclude = { "markdown" }
+                local exclude = { "markdown", "gitcommit" }
                 return vim.g.snacks_indent ~= false
                     and vim.b[buf].snacks_indent ~= false
                     and vim.bo[buf].buftype == ""
                     and not vim.tbl_contains(exclude, vim.bo[buf].filetype)
             end,
         },
+        ---@type snacks.picker.Config
         picker = {
             prompt = "   ",
             layouts = {
@@ -106,6 +109,7 @@ return {
                     },
                 },
             },
+            ---@type snacks.picker.sources.Config
             sources = {
                 files = { hidden = true, ignored = true },
                 grep = { hidden = true, ignored = false },
@@ -127,12 +131,11 @@ return {
             },
         },
     },
-    -- stylua: ignore
     keys = {
         {
-            "<leader>e",
+            "<leader>e", -- set auto_close to true for narrow window
             function() Snacks.explorer.open({ auto_close = vim.api.nvim_win_get_width(0) <= 120 }) end,
-            desc = "File Explorer Toggle"
+            desc = "File Explorer Toggle",
         },
         { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
@@ -193,7 +196,6 @@ return {
     init = function()
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
-            -- stylua: ignore
             callback = function()
                 -- Setup some globals for debugging (lazy-loaded)
                 _G.dd = function(...) Snacks.debug.inspect(...) end

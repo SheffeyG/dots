@@ -2,6 +2,7 @@ local g = vim.g
 
 g.is_wsl = vim.fn.has("WSL") ~= 0
 g.is_win = vim.fn.has("WIN32") ~= 0
+g.is_tmux = os.getenv("TMUX") ~= nil
 g.is_ssh = os.getenv("SSH_CONNECTION") ~= nil or os.getenv("SSH_CLIENT") ~= nil
 
 if not g.is_win then
@@ -10,12 +11,6 @@ if not g.is_win then
 else
     g.is_arm = false
 end
-
--- add mason binaries to path
-local sep = g.is_win and "\\" or "/"
-local delim = g.is_win and ";" or ":"
-local prefix = table.concat({ vim.fn.stdpath("data"), "mason", "bin" }, sep)
-vim.env.PATH = prefix .. delim .. vim.env.PATH
 
 -- set clipboard provider
 if g.is_wsl then

@@ -5,7 +5,7 @@ autocmd("BufReadPost", {
     pattern = { "*" },
     callback = function()
         if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
-            vim.cmd("normal! g'\"", false)
+            vim.cmd("normal! g'\"", false) -- cursor go back
         end
     end,
 })
@@ -40,18 +40,19 @@ autocmd("QuitPre", {
         local floating_windows = {}
         local windows = vim.api.nvim_list_wins()
         for _, w in ipairs(windows) do
-            local filetype =
-                vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(w) })
+            local filetype = vim.api.nvim_get_option_value("filetype", {
+                buf = vim.api.nvim_win_get_buf(w),
+            })
             if filetype:match("snacks_") ~= nil then
                 table.insert(snacks_windows, w)
             elseif vim.api.nvim_win_get_config(w).relative ~= "" then
                 table.insert(floating_windows, w)
             end
         end
-        if
+        if -- when there's only one non-float windows
             1 == #windows - #floating_windows - #snacks_windows
-            and vim.api.nvim_win_get_config(vim.api.nvim_get_current_win()).relative == ""
-        then -- close all other windows
+            and vim.api.nvim_win_get_config(0).relative == ""
+        then
             for _, w in ipairs(snacks_windows) do
                 vim.api.nvim_win_close(w, true)
             end

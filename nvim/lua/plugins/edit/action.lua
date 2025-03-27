@@ -1,4 +1,4 @@
---- @type LazyPluginSpec[]
+---@type LazyPluginSpec[]
 return {
     -- formatter
     {
@@ -44,6 +44,7 @@ return {
     -- navigation in tmux
     {
         "alexghergh/nvim-tmux-navigation",
+        cond = vim.g.is_tmux,
         event = "VeryLazy",
         config = function()
             local nvim_tmux_nav = require("nvim-tmux-navigation")
@@ -55,15 +56,6 @@ return {
             map("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
         end,
     },
-    -- {
-    --     "christoomey/vim-tmux-navigator",
-    --     keys = {
-    --         { "<C-h>", "<Cmd><C-U>TmuxNavigateLeft<CR>" },
-    --         { "<C-j>", "<Cmd><C-U>TmuxNavigateDown<CR>" },
-    --         { "<C-k>", "<Cmd><C-U>TmuxNavigateUp<CR>" },
-    --         { "<C-l>", "<Cmd><C-U>TmuxNavigateRight<CR>" },
-    --     },
-    -- },
 
     -- write as su
     {
@@ -87,7 +79,7 @@ return {
     -- move lines
     {
         "echasnovski/mini.move",
-        event = "CursorMoved",
+        keys = { "<M-h>", "<M-j>", "<M-k>", "<M-l>" },
         opts = {},
     },
 
