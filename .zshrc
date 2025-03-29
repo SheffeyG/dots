@@ -101,8 +101,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -d "$HOME/miniconda3" ] && CONDA_HOME="$HOME/miniconda3/"
 [ -f "/$CONDA_HOME/etc/profile.d/conda.sh" ] && \. "/$CONDA_HOME/etc/profile.d/conda.sh"
 
-[ -d "$HOME/.local/bin" ] && PATH=$PATH:$HOME/.local/bin/
-[ -d "$HOME/.cargo/bin" ] && PATH=$PATH:$HOME/.cargo/bin/
+[ -d "$HOME/.local/bin" ] && PATH="$PATH:$HOME/.local/bin/"
+[ -d "$HOME/.cargo/bin" ] && PATH="$PATH:$HOME/.cargo/bin/"
 
 
 #-----------------------
@@ -111,7 +111,7 @@ export NVM_DIR="$HOME/.nvm"
 
 ### Zinit Initialization
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-if [ ! -d $ZINIT_HOME ]; then
+if [ ! -d "$ZINIT_HOME" ]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
     git clone --depth=1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
