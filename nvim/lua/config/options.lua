@@ -31,21 +31,22 @@ o.numberwidth = 2
 o.relativenumber = false
 
 -- fold
-o.foldmethod = "indent"
-o.foldlevelstart = 99
+o.foldenable = true
+o.foldlevel = 99
+o.foldmethod = "expr"
+o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+o.foldtext = ""
+o.foldcolumn = "0"
 
--- interval for writing swap file to disk, also used by gitsigns
-o.updatetime = 250
-o.timeoutlen = 400
+opt.fillchars:append({ fold = " " })
+opt.fillchars:append({ eob = " " })
+opt.fillchars:append({ diff = "╱" })
 
 -- disable nvim intro
 opt.shortmess:append("sI")
 
--- go to previous/next when reached the beginning/end of line
+-- allow move across line boundaries
 opt.whichwrap:append("<>[]hl")
-
-opt.fillchars:append({ eob = " " })
-opt.fillchars:append({ diff = "╱" })
 
 -- set leaderkey before lazy setup
 g.mapleader = " "

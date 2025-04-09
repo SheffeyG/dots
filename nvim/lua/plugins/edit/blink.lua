@@ -1,13 +1,3 @@
-local icons = require("config.icons").kind
-
----@type blink.cmp.DrawComponent
-local provider = {
-    text = function(ctx) -- text like "[LSP]"
-        return "[" .. ctx.item.source_name:sub(1, 3):upper() .. "]"
-    end,
-    highlight = "NormalGrey",
-}
-
 ---@type LazyPluginSpec
 return {
     "saghen/blink.cmp",
@@ -25,7 +15,7 @@ return {
         },
         appearance = {
             nerd_font_variant = "normal",
-            kind_icons = icons,
+            kind_icons = require("config.icons").kind,
         },
         sources = {
             default = {
@@ -40,7 +30,21 @@ return {
                     name = "dev",
                     module = "lazydev.integrations.blink",
                 },
-                cmdline = { min_keyword_length = 3 },
+                path = {
+                    opts = {
+                        get_cwd = function(ctx)
+                            if ctx.mode == "cmdline" then return vim.fn.getcwd() end
+                            return vim.fn.expand(("#%d:p:h"):format(ctx.bufnr))
+                        end,
+                    },
+                },
+                cmdline = {
+                    fallbacks = { "path" },
+                    min_keyword_length = function(ctx)
+                        if string.find(ctx.line, " ") == nil then return 3 end
+                        return 0
+                    end,
+                },
             },
         },
         completion = {
@@ -54,13 +58,40 @@ return {
                         { "label" },
                         { "provider" },
                     },
-                    components = { provider = provider },
+                    components = {
+                        provider = {
+                            text = function(ctx) -- text like "[LSP]"
+                                return "[" .. ctx.item.source_name:sub(1, 3):upper() .. "]"
+                            end,
+                            highlight = "NormalGrey",
+                        },
+                    },
                 },
             },
             documentation = {
                 auto_show = true,
                 window = { border = "single", scrollbar = false },
             },
+        },
+        cmdline = {
+            keymap = {
+                ["<Tab>"] = {
+                    function(cmp) -- auto accept if only one item
+                        if #cmp.get_items() == 1 then return cmp.accept() end
+                    end,
+                    "show",
+                    "select_next",
+                },
+                ["<CR>"] = {
+                    function(cmp) -- only accept with visible menu
+                        if cmp.is_menu_visible() then return cmp.accept() end
+                    end,
+                    "fallback",
+                },
+                ["<C-x>"] = { "cancel" },
+            },
+            -- make sure auto_insert is false to prevent flicker when accept
+            completion = { list = { selection = { auto_insert = false } } },
         },
         fuzzy = { implementation = "prefer_rust_with_warning" },
     },

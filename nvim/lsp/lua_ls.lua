@@ -24,7 +24,7 @@ return {
             },
             diagnostics = {
                 disable = { "missing-fields" },
-                globals = { "Snacks", "vim", "require" },
+                globals = { "vim", "require", "pcall", "Snacks" },
                 unusedLocalExclude = { "_*" },
             },
         },

@@ -7,6 +7,7 @@ return {
             formatters_by_ft = {
                 lua = { "stylua" },
                 python = { "ruff_format", "ruff_organize_imports" },
+                ["_"] = { "trim_whitespace", lsp_format = "last" },
             },
         },
         keys = {
@@ -14,7 +15,7 @@ return {
                 "<leader>fm",
                 function() require("conform").format({ lsp_fallback = true }) end,
                 desc = "Format Buffer",
-                mode = { "n", "v" },
+                mode = { "n", "x" },
             },
         },
     },
@@ -74,13 +75,6 @@ return {
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = { delay = 500 },
-    },
-
-    -- move lines
-    {
-        "echasnovski/mini.move",
-        keys = { "<M-h>", "<M-j>", "<M-k>", "<M-l>" },
-        opts = {},
     },
 
     -- auto pairs

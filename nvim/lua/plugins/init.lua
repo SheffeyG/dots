@@ -2,7 +2,9 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    vim.api.nvim_echo({ { "Cloning lazy.nvim..." } }, true, {})
+    vim.api.nvim_echo({
+        { "Cloning lazy.nvim...\n", "MoreMsg" },
+    }, true, {})
     local out = vim.fn.system({
         "git",
         "clone",
@@ -20,7 +22,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         vim.fn.getchar()
         os.exit(1)
     end
-    vim.api.nvim_echo({ { "Cloned successfully!" } }, true, {})
 end
 
 vim.opt.rtp:prepend(lazypath)
