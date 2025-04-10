@@ -29,11 +29,13 @@ bindkey '\ek' down-line-or-beginning-search
 #-----------------------
 
 # NVM initialization
+# https://github.com/nvm-sh/nvm?tab=readme-ov-file#manual-install
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # conda initialization
+# https://repo.anaconda.com/miniconda
 [ -d "$HOME/anaconda3" ] && CONDA_HOME="$HOME/anaconda3/"
 [ -d "$HOME/miniconda3" ] && CONDA_HOME="$HOME/miniconda3/"
 [ -f "/$CONDA_HOME/etc/profile.d/conda.sh" ] && \. "/$CONDA_HOME/etc/profile.d/conda.sh"
