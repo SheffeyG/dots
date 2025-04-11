@@ -4,6 +4,7 @@ return {
 
     {
         "norcalli/nvim-colorizer.lua",
+        conf = false,
         ft = { "css", "lua" },
         opts = { "css", "lua" },
     },

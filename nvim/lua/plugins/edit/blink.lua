@@ -1,4 +1,4 @@
-local icons = require("config.icons").kind
+local icons = require("custom.icons").kind
 
 ---@type blink.cmp.DrawComponent
 local provider = {

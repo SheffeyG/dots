@@ -1,5 +1,5 @@
 -- diagnostic
-local icons = require("config.icons").diag
+local icons = require("custom.icons").diag
 local severity = vim.diagnostic.severity
 local text = {
     [severity.ERROR] = icons.Error,

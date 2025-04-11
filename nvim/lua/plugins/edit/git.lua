@@ -58,6 +58,7 @@ return {
 
     {
         "akinsho/git-conflict.nvim",
+        conf = false,
         event = "VeryLazy",
         opts = {
             disable_diagnostics = true,
