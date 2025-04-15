@@ -53,6 +53,20 @@ return {
                 ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
             },
         },
+        routes = {
+            {
+                filter = {
+                    event = "msg_show",
+                    kind = "",
+                    any = { -- skip some noise msg
+                        { find = "^%d+ lines indented" },
+                        { find = "^%d+ lines moved" },
+                        { find = "^lazy.nvim # Config Change Detected. Reloading..." },
+                    },
+                },
+                opts = { skip = true },
+            },
+        },
     },
     keys = {
         { "<leader>mh", "<CMD>NoiceAll<CR>", desc = "Message History" },

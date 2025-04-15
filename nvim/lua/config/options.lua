@@ -3,20 +3,36 @@ local o = vim.o
 local g = vim.g
 
 o.mouse = "a"
-o.clipboard = "unnamedplus"
-
-o.laststatus = 3
-o.showtabline = 0
-o.signcolumn = "yes"
-o.colorcolumn = ""
+o.wrap = false
+o.undofile = true
 o.cursorline = true
-
-o.ignorecase = true
-o.smartcase = true
 o.splitbelow = true
 o.splitright = true
-o.undofile = true
-o.wrap = false
+
+-- sync with system clipboard
+o.clipboard = "unnamedplus"
+
+-- enable 256 true colors
+o.termguicolors = true
+
+-- global statusline
+o.laststatus = 3
+
+-- hide tabline
+o.showtabline = 0
+
+-- disable too-long column
+o.colorcolumn = ""
+
+-- enable signcolumn
+o.signcolumn = "yes"
+
+-- keep lines when scroll
+o.scrolloff = 3
+
+-- search and replace
+o.ignorecase = true
+o.smartcase = true
 
 -- indents
 o.expandtab = true
@@ -38,9 +54,9 @@ o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 o.foldtext = ""
 o.foldcolumn = "0"
 
-opt.fillchars:append({ fold = " " })
-opt.fillchars:append({ eob = " " })
-opt.fillchars:append({ diff = "╱" })
+opt.fillchars:append({ fold = " " }) -- "-"
+opt.fillchars:append({ eob = " " }) -- "~"
+opt.fillchars:append({ diff = "⋰" }) -- "-"
 
 -- disable nvim intro
 opt.shortmess:append("sI")

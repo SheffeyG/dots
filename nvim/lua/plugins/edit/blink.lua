@@ -15,7 +15,7 @@ return {
         },
         appearance = {
             nerd_font_variant = "normal",
-            kind_icons = require("config.icons").kind,
+            kind_icons = require("custom.icons").kind,
         },
         sources = {
             default = {

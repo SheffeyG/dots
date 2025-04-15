@@ -61,7 +61,7 @@ return {
         event = "VeryLazy",
         opts = {
             disable_diagnostics = true,
-            highlights = { current = "ConflictUp", incoming = "ConflictDown" },
+            highlights = { current = "ConflictOurs", incoming = "ConflictTheirs" },
         },
     },
 

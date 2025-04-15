@@ -1,5 +1,5 @@
-local colors = require("colors.lualine")
-local icons = require("config.icons").diag
+local colors = require("custom.lualine")
+local icons = require("custom.icons").diag
 
 -- conditions
 local many_tabs = function() -- more then one tab
@@ -39,7 +39,7 @@ local diagnostics = {
     },
     sections = { "error", "warn", "info", "hint" },
     padding = { left = 0, right = 1 },
-    diagnostics_color = colors.diagnostics,
+    diagnostics_color = colors.diag,
 }
 
 local macro = {

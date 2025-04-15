@@ -1,9 +1,8 @@
 ---@type LazyPluginSpec[]
 return {
-    { "tjdevries/colorbuddy.nvim" },
-
     {
         "norcalli/nvim-colorizer.lua",
+        enabled = false,
         ft = { "css", "lua" },
         opts = { "css", "lua" },
     },
