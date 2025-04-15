@@ -1,6 +1,9 @@
 #-----------------------
-# Theme
+# Initialization
 #-----------------------
+
+# if not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
 # enable p10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -20,8 +23,9 @@ unsetopt BEEP LIST_BEEP HIST_BEEP
 setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
 
 # key-bindings
-bindkey '\ej' up-line-or-beginning-search
-bindkey '\ek' down-line-or-beginning-search
+bindkey '^j' up-line-or-beginning-search
+bindkey '^k' down-line-or-beginning-search
+bindkey '^y' autosuggest-accept
 
 
 #-----------------------
@@ -45,6 +49,7 @@ typeset -U path
 [ -d "$HOME/.local/bin" ] && path=($path "$HOME/.local/bin")
 [ -d "$HOME/.cargo/bin" ] && path=($path "$HOME/.cargo/bin")
 export PATH
+
 
 #-----------------------
 # Aliases
