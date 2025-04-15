@@ -2,12 +2,6 @@
 return {
     cmd = { "basedpyright-langserver", "--stdio" },
     filetypes = { "python" },
-    ---@param client vim.lsp.Client
-    on_attach = function(client)
-        if client.server_capabilities then -- disable semantic tokens
-            client.server_capabilities.semanticTokensProvider = nil
-        end
-    end,
     root_markers = {
         "Pipfile",
         "pyproject.toml",

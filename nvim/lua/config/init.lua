@@ -1,5 +1,6 @@
+require("config.special")
 require("config.options")
 require("config.mappings")
+require("config.colors")
 require("config.autocmds")
-require("config.special")
 require("config.lsp")

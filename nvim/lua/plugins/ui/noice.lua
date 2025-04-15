@@ -53,8 +53,34 @@ return {
                 ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
             },
         },
+        routes = {
+            { -- skip some noise msg
+                filter = {
+                    any = {
+                        { event = "msg_show", kind = "", find = "^%d+ lines indented" },
+                        { event = "msg_show", kind = "", find = "^%d+ lines moved" },
+                        { event = "notify", kind = "warn", find = "^# Config Change Detected." },
+                    },
+                },
+                opts = { skip = true },
+            },
+            { -- show inspect results
+                filter = {
+                    event = "msg_show",
+                    kind = "echo",
+                    any = {
+                        { find = "^Treesitter\n" },
+                        { find = "^Syntax\n" },
+                        { find = "^Semantic Tokens\n" },
+                        { find = "^Extmarks\n" },
+                    },
+                },
+                view = "popup",
+                opts = { size = { width = "80", height = "20" } },
+            },
+        },
     },
     keys = {
-        { "<leader>mh", "<CMD>NoiceAll<CR>", desc = "Message History" },
+        { "<leader>mh", "<CMD>Noice<CR>", desc = "Message History" },
     },
 }

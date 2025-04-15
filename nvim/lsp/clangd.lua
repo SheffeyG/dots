@@ -7,21 +7,6 @@ return {
         "--offset-encoding=utf-8",
     },
     filetypes = { "c", "cpp", "cuda" },
-    init_options = {
-        clangdFileStatus = true,
-        completeUnimported = true,
-        usePlaceholders = true,
-        semanticHighlighting = true,
-    },
-    on_attach = function()
-        require("clangd_extensions").setup()
-
-        local inlay_hints = require("clangd_extensions.inlay_hints")
-
-        inlay_hints.setup_autocmd()
-        inlay_hints.set_inlay_hints()
-        inlay_hints.toggle_inlay_hints()
-    end,
     root_markers = {
         ".clangd",
         "Makefile",
@@ -29,6 +14,12 @@ return {
         "compile_commands.json",
         "configure.in",
         "meson.build",
+    },
+    init_options = {
+        clangdFileStatus = true,
+        completeUnimported = true,
+        usePlaceholders = true,
+        semanticHighlighting = true,
     },
     settings = {
         clangd = {

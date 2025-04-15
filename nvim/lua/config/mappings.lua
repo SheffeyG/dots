@@ -1,13 +1,12 @@
 local map = vim.keymap.set
 
 -- disable useless +/- num
-map("n", "<C-a>", "<nop>", { noremap = true, desc = "which_key_ignore" })
-map("n", "<C-x>", "<nop>", { noremap = true, desc = "which_key_ignore" })
+map("n", "<C-a>", "<Nop>", { noremap = true, desc = "which_key_ignore" })
+map("n", "<C-x>", "<Nop>", { noremap = true, desc = "which_key_ignore" })
 
 -- shortcut alias
 map("i", "jk", "<Esc>")
 map("n", "U", "<C-r>")
-map({ "n", "x" }, ";", ":")
 
 map("n", "<Esc>", "<CMD>noh<CR>", { desc = "Clear highlights" })
 map("n", "<C-a>", "ggVG", { desc = "Select All" })

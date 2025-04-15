@@ -4,19 +4,24 @@ local g = vim.g
 
 o.mouse = "a"
 o.clipboard = "unnamedplus"
-
 o.laststatus = 3
 o.showtabline = 0
-o.signcolumn = "yes"
 o.colorcolumn = ""
-o.cursorline = true
+o.signcolumn = "yes"
+o.scrolloff = 3
 
+o.wrap = false
+o.undofile = true
 o.ignorecase = true
 o.smartcase = true
+o.cursorline = true
 o.splitbelow = true
 o.splitright = true
-o.undofile = true
-o.wrap = false
+
+-- time and timeout
+o.updatetime = 300
+o.timeoutlen = 500
+o.ttimeoutlen = 10
 
 -- indents
 o.expandtab = true
@@ -38,14 +43,12 @@ o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 o.foldtext = ""
 o.foldcolumn = "0"
 
-opt.fillchars:append({ fold = " " })
-opt.fillchars:append({ eob = " " })
-opt.fillchars:append({ diff = "╱" })
+opt.fillchars:append({ eob = " ", fold = " ", diff = "⋰" })
 
 -- disable nvim intro
 opt.shortmess:append("sI")
 
--- allow move across line boundaries
+-- allow cursor across line boundaries
 opt.whichwrap:append("<>[]hl")
 
 -- set leaderkey before lazy setup
