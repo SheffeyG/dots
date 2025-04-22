@@ -9,7 +9,7 @@
     defaultBranch = main 
 
 [merge]
-    tool = nvim
+    tool = vscode
 
 [mergetool]
     prompt = false
