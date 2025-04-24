@@ -306,11 +306,11 @@
   # If POWERLEVEL9K_DIR_SHOW_WRITABLE is set to v3, non-writable and non-existent directories
   # acquire class suffix _NOT_WRITABLE and NON_EXISTENT respectively.
   typeset -g POWERLEVEL9K_DIR_CLASSES=(
-    '~'                   HOME         '\uF015'
-    '~/workspace(|/*)'    WORKSPACE    '\uF1CB'
-    '~/dl(|/*)'           DOWNLOAD     '\uF01A'
-    '~/dots(|/*)'         DOTFILES     '\uE615'
-    '*'                   DEFAULT      '\uF115'
+    '~'                   HOME         ''
+    '~/workspace(|/*)'    WORKSPACE    ''
+    '~/dl(|/*)'           DOWNLOAD     ''
+    '~/dots(|/*)'         DOTFILES     ''
+    '*'                   DEFAULT      ''
   )
 
   # Whenever the current directory is ~/work or a subdirectory of ~/work, it gets styled with one
@@ -761,7 +761,7 @@
   # Vim shell indicator color.
   typeset -g POWERLEVEL9K_VIM_SHELL_FOREGROUND=34
   # Custom icon.
-  # typeset -g POWERLEVEL9K_VIM_SHELL_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_VIM_SHELL_VISUAL_IDENTIFIER_EXPANSION=''
 
   ######[ midnight_commander: midnight commander shell (https://midnight-commander.org/) ]######
   # Midnight Commander shell color.

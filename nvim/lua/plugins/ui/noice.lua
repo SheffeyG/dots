@@ -42,12 +42,16 @@ return {
                 size = { max_width = 50, max_height = 15 },
                 border = { style = "single", padding = { 0, 1 } },
                 position = { row = 2, col = 0 },
-                win_options = { winhighlight = { FloatBorder = "NormalCyan" } },
+                win_options = {
+                    -- same as markdown separator
+                    winhighlight = { FloatBorder = "Special" },
+                },
             },
             mini = { timeout = 3000 },
         },
         lsp = {
             progress = { enabled = false },
+            signature = { enabled = false },
             override = {
                 ["vim.lsp.util.stylize_markdown"] = true,
                 ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -76,7 +80,7 @@ return {
                     },
                 },
                 view = "popup",
-                opts = { size = { width = "80", height = "20" } },
+                opts = { size = { width = "auto", height = "auto" } },
             },
         },
     },

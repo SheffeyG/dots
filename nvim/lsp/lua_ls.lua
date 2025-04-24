@@ -35,6 +35,7 @@ return {
                     "require",
                     "pcall",
                     "colors",
+                    "mix",
                     "Snacks",
                 },
                 unusedLocalExclude = { "_*" },

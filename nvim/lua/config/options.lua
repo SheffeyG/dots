@@ -9,6 +9,7 @@ o.showtabline = 0
 o.colorcolumn = ""
 o.signcolumn = "yes"
 o.scrolloff = 3
+o.statusline = " %t %m %r %h%w %= %l:%c %p%% "
 
 o.wrap = false
 o.undofile = true

@@ -1,15 +1,14 @@
 local map = vim.keymap.set
 
 -- disable useless +/- num
-map("n", "<C-a>", "<Nop>", { noremap = true, desc = "which_key_ignore" })
-map("n", "<C-x>", "<Nop>", { noremap = true, desc = "which_key_ignore" })
+map("n", "<C-a>", "<Nop>", { unique = true, desc = "which_key_ignore" })
+map("n", "<C-x>", "<Nop>", { unique = true, desc = "which_key_ignore" })
 
 -- shortcut alias
-map("i", "jk", "<Esc>")
-map("n", "U", "<C-r>")
-
+map("i", "jk", "<Esc>", { desc = "Esc Alias" })
+map("n", "U", "<C-r>", { desc = "Redo Alias" })
 map("n", "<Esc>", "<CMD>noh<CR>", { desc = "Clear highlights" })
-map("n", "<C-a>", "ggVG", { desc = "Select All" })
+map("n", "<C-a>", "<CMD>keepjumps normal! ggVG<CR>", { desc = "Select All" })
 
 -- comment
 map("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment" })
@@ -21,21 +20,21 @@ map("i", "<C-j>", "<Down>", { desc = "Cusor go Down" })
 map("i", "<C-k>", "<Up>", { desc = "Cusor go Up" })
 map("i", "<C-l>", "<Right>", { desc = "Cusor go Right" })
 
-map({ "n", "x", "o" }, "H", "^", { noremap = true, desc = "Home" })
-map({ "n", "x", "o" }, "L", "$", { noremap = true, desc = "End" })
+map({ "n", "x", "o" }, "H", "^", { desc = "Home" })
+map({ "n", "x", "o" }, "L", "$", { desc = "End" })
 
 -- line
-map("n", "<A-j>", "<CMD>m .+1<CR>==", { silent = true, desc = "Line go Down" })
-map("n", "<A-k>", "<CMD>m .-2<CR>==", { silent = true, desc = "Line go Up" })
+map("n", "<A-j>", "<CMD>m .+1<CR>==", { desc = "Line go Down" })
+map("n", "<A-k>", "<CMD>m .-2<CR>==", { desc = "Line go Up" })
 
 map("x", "<A-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Line go Down" })
 map("x", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Line go Up" })
 
-map("n", "<A-h>", "v<", { silent = true, desc = "Line go Left" })
-map("n", "<A-l>", "v>", { silent = true, desc = "Line go Right" })
+map("n", "<A-h>", "v<", { desc = "Line go Left" })
+map("n", "<A-l>", "v>", { desc = "Line go Right" })
 
-map("x", "<A-h>", "<gv", { silent = true, desc = "Line go Left" })
-map("x", "<A-l>", ">gv", { silent = true, desc = "Line go Right" })
+map("x", "<A-h>", "<gv", { desc = "Line go Left" })
+map("x", "<A-l>", ">gv", { desc = "Line go Right" })
 
 -- buffer
 map("n", "<C-h>", "<C-w>h", { desc = "Window go Left" })

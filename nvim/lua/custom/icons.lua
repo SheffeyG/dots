@@ -39,8 +39,8 @@ M.kind = {
 
 M.diag = {
     Error = " ",
-    Warn = "󰗖 ",
-    Hint = " ",
+    Warn = " ",
+    Hint = " ",
     Info = " ",
 }
 

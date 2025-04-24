@@ -11,7 +11,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # setting zsh prompt right padding
-ZLE_RPROMPT_INDENT=0
+ZLE_RPROMPT_INDENT=${ZLE_RPROMPT_INDENT:-0}
 
 
 #-----------------------
@@ -23,9 +23,9 @@ unsetopt BEEP LIST_BEEP HIST_BEEP
 setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
 
 # key-bindings
-bindkey '^j' up-line-or-beginning-search
-bindkey '^k' down-line-or-beginning-search
-bindkey '^y' autosuggest-accept
+bindkey '^P' up-line-or-beginning-search
+bindkey '^N' down-line-or-beginning-search
+bindkey '^Y' autosuggest-accept
 
 
 #-----------------------
@@ -63,6 +63,7 @@ alias 2='cd -2'
 alias 3='cd -3'
 alias md='mkdir -p'
 alias rd=rmdir
+alias vim=nvim && EDITOR=nvim
 alias python='PYTHONPATH=$PYTHONPATH:$(pwd) python3'
 # alias tt='if tmux has-session & 2>/dev/null; then tmux a; else tmux; fi'
 
@@ -77,7 +78,7 @@ alias gma='git commit --amend --no-edit'
 alias glo='git log --oneline -n 10 --graph'
 gm() { if [ -z "$1" ]; then git commit; else git commit -m "$1"; fi; }
 
-# aliases for ls command
+# better ls
 if [[ $(command -v eza) ]]; then
     alias ls='eza --icons --color=auto'
     alias l='eza -lh --icons'
@@ -92,18 +93,6 @@ else
     alias la='ls -lAh'
     alias lsa='ls -lah'
     alias lst='tree -pCsh'
-fi
-
-# better alternative
-[[ $(command -v nvim) ]] && alias vim=nvim && EDITOR=nvim
-[[ $(command -v bat) ]] && alias cat=bat
-[[ $(command -v rg) ]] && alias grep=rg
-
-# termux
-if [[ -n "$TERMUX_VERSION" ]]; then
-    alias tcs='termux-clipboard-set'
-    alias tcg='termux-clipboard-get'
-    alias hugo='hugo --noBuildLock'
 fi
 
 

@@ -6,36 +6,35 @@ local M = {} ---@type table<string, Highlights>
 M.core = {
     -- window
     Normal      = { fg = colors.white, bg = colors.black },
+    NormalDark  = { fg = colors.white, bg = colors.black_dark },  -- custom
+    NormalLight = { fg = colors.white, bg = colors.black_light }, -- custom
     NormalFloat = { link = "Normal" },
     FloatTitle  = { fg = colors.blue, bg = colors.grey_dark, bold = true },
     FloatBorder = { fg = colors.blue, bg = colors.bg },
 
-    -- custom
-    NormalDark  = { fg = colors.white, bg = colors.black_dark },
-    NormalLight = { fg = colors.white, bg = colors.black_light },
-    NormalGrey  = { fg = colors.grey_light, bg = colors.black },
-    NormalBlue  = { fg = colors.blue, bg = colors.black },
-    NormalCyan  = { fg = colors.cyan, bg = colors.black },
-
     -- menu
     Pmenu      = { bg = colors.grey_dark },
-    PmenuSbar  = { bg = colors.grey_light },
-    PmenuSel   = { fg = colors.grey, bg = colors.blue, bold = true },
-    PmenuThumb = { bg = colors.grey_light },
+    PmenuSel   = { bg = mix(colors.blue, colors.black, 0.3) },
     WildMenu   = { link = "PmenuSel" },
+    PmenuSbar  = { bg = colors.grey_light }, -- menu sidebar
+    PmenuThumb = { bg = colors.grey_light }, -- menu sidebar
 
     -- lines
     Cursor       = { fg = colors.black, bg = colors.white },
+    WinSeparator = { fg = colors.grey },
+    Folded       = { fg = colors.grey_light, bg = colors.grey_dark },
     Visual       = { bg = colors.grey_dark },
-    VisualNOS    = { fg = colors.red },
+    VisualNOS    = { fg = colors.red }, -- Non-Owning Selection
     CursorLine   = { bg = colors.black_light },
     CursorColumn = { bg = colors.grey },
     QuickFixLine = { bg = colors.grey },
-    ColorColumn  = { bg = colors.black_dark },
-    LineNr       = { fg = colors.grey_light },
-    CursorLineNr = { fg = colors.white_dark },
+    ColorColumn  = { bg = colors.black_dark }, -- too long sign column
+    LineNr       = { fg = colors.grey_light }, -- gutter (line number)
+    CursorLineNr = { fg = colors.white_dark }, -- gutter current line
     WinBar       = { fg = colors.blue, bg = colors.black_light, bold = true },
     WinBarNC     = { fg = colors.blue, bg = colors.black_light },
+    StatusLine   = { fg = colors.white, bg = colors.black_bar },
+    StatusLineNC = { fg = colors.white, bg = colors.black_dark },
 
     -- text
     Title      = { fg = colors.blue },
@@ -54,19 +53,15 @@ M.core = {
     DiagnosticOk     = { fg = colors.green },
     DiagnosticHint   = { fg = colors.purple },
     DiagnosticError  = { fg = colors.red },
-    DiagnosticDeprecated = { strikethrough = true },
-    LspReferenceText = { bg = mix(colors.cyan, colors.black, 0.04) }, -- snacks.words
+    LspReferenceText = { bg = mix(colors.cyan, colors.black, 0.05) }, -- snacks.words
 
-    -- special
-    Directory    = { fg = colors.blue },
-    Folded       = { fg = colors.grey_light, bg = colors.grey_dark },
-    WinSeparator = { fg = colors.grey, bg = colors.black },
-    Search       = { fg = colors.yellow, bg = mix(colors.yellow, colors.black, 0.2) },
-    CurSearch    = { fg = colors.yellow, bg = mix(colors.yellow, colors.black, 0.3), bold = true },
-    IncSearch    = { link = "Search" }, -- instant search preview
-    Substitute   = { fg = colors.cyan, bg = mix(colors.cyan, colors.black, 0.2), bold = true },
-    MatchWord    = { fg = colors.white, bg = colors.grey },
-    MatchParen   = { link = "MatchWord" },
+    -- search & replace
+    Search     = { fg = colors.yellow, bg = mix(colors.yellow, colors.black, 0.2) },
+    CurSearch  = { fg = colors.yellow, bg = mix(colors.yellow, colors.black, 0.3), bold = true },
+    IncSearch  = { link = "Search" }, -- instant search preview
+    Substitute = { fg = colors.cyan, bg = mix(colors.cyan, colors.black, 0.2), bold = true },
+    MatchWord  = { fg = colors.white, bg = colors.grey },
+    MatchParen = { link = "MatchWord" },
 
     -- git
     Added   = { fg = colors.green },
@@ -86,7 +81,7 @@ M.core = {
     DiffNewFile      = { fg = colors.blue },
     DiffOldFile      = { fg = colors.yellow },
 
-    -- builtin
+    -- builtin syntax
     Comment      = { fg = colors.grey_light },
     Boolean      = { fg = colors.orange },
     Character    = { fg = colors.red },
@@ -94,6 +89,7 @@ M.core = {
     Constant     = { fg = colors.orange },
     Define       = { fg = colors.purple },
     Delimiter    = { fg = colors.brown },
+    Directory    = { fg = colors.blue },
     Float        = { fg = colors.orange },
     Variable     = { fg = colors.white },
     Function     = { fg = colors.blue },
@@ -214,11 +210,14 @@ M.syntax = {
 M.plugins = {
     -- blink
     BlinkCmpMenu = { link = "NormalFloat" },
-    BlinkCmpMenuBorder = { link = "NormalGrey" },
-    BlinkCmpKind = { link = "NormalCyan" },
+    BlinkCmpMenuBorder = { fg = mix(colors.blue, colors.black, 0.5) },
+    BlinkCmpDocBorder = { fg = mix(colors.cyan, colors.black, 0.5) },
+    BlinkCmpDocSeparator = { link = "BlinkCmpDocBorder" },
+    BlinkCmpSignatureHelpBorder = { link = "BlinkCmpDocBorder" },
     BlinkCmpGhostText = { fg = colors.grey_dark, bg = colors.black_dark },
 
     -- blink.kind
+    BlinkCmpKind = { link = "Special" }, -- default
     BlinkCmpKindClass = { link = "@type" },
     BlinkCmpKindConstant = { link = "@constant" },
     BlinkCmpKindConstructor = { link = "@type" },
@@ -262,11 +261,11 @@ M.plugins = {
     DiffviewFilePanelFileName = { link = "Normal" },
 
     -- git-conflict
-    ConflictOurs = { bg = mix(colors.blue, colors.black, 0.2) },
-    ConflictTheirs = { bg = mix(colors.cyan, colors.black, 0.2) },
+    ConflictOurs = { bg = mix(colors.blue, colors.black, 0.2) },   -- custom
+    ConflictTheirs = { bg = mix(colors.cyan, colors.black, 0.2) }, -- custom
 
     -- noice
-    NoiceVirtualText = { fg = colors.cyan, bg = mix(colors.cyan, colors.black, 0.2) },
+    NoiceVirtualText = { fg = colors.cyan, bg = mix(colors.cyan, colors.black, 0.2) }, -- search label
 
     -- snacks.win
     SnacksWinBar = { link = "WinBar" },
@@ -279,7 +278,6 @@ M.plugins = {
     -- snacks.input
     SnacksInputTitle = { link = "FloatTitle" },
     SnacksInputBorder = { link = "FloatBorder" },
-    SnacksInputIcon = { link = "NormalCyan" },
 
     -- snacks.picker
     SnacksPickerInputTitle = { fg = colors.black_light, bg = colors.red },

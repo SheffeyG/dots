@@ -60,10 +60,10 @@ return {
                     },
                     components = {
                         provider = {
-                            text = function(ctx) -- text like "[LSP]"
+                            text = function(ctx) -- text like [LSP]
                                 return "[" .. ctx.item.source_name:sub(1, 3):upper() .. "]"
                             end,
-                            highlight = "NormalGrey",
+                            highlight = "BlinkCmpLabelDetail",
                         },
                     },
                 },
@@ -72,6 +72,10 @@ return {
                 auto_show = true,
                 window = { border = "single", scrollbar = false },
             },
+        },
+        signature = {
+            enabled = true,
+            window = { border = "single" },
         },
         cmdline = {
             keymap = {

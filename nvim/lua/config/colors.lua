@@ -26,27 +26,6 @@ colors = {
     brown       = "#be5046",
 }
 
--- base16
-local g = vim.g
-g.terminal_color_0 = colors.black
-g.terminal_color_1 = colors.red
-g.terminal_color_2 = colors.green
-g.terminal_color_3 = colors.yellow
-g.terminal_color_4 = colors.blue
-g.terminal_color_5 = colors.purple
-g.terminal_color_6 = colors.cyan
-g.terminal_color_7 = colors.white
-g.terminal_color_8 = colors.black
-g.terminal_color_9 = colors.red
-g.terminal_color_10 = colors.green
-g.terminal_color_11 = colors.yellow
-g.terminal_color_12 = colors.cyan
-g.terminal_color_13 = colors.purple
-g.terminal_color_14 = colors.cyan
-g.terminal_color_15 = colors.white
-g.terminal_color_foreground = colors.white
-g.terminal_color_background = colors.black
-
 ---@see snacks.util.blend
 ---@param fg string foreground color
 ---@param bg string background color
@@ -69,6 +48,14 @@ function mix(fg, bg, alpha)
     return string.format("#%02x%02x%02x", blend(1), blend(2), blend(3))
 end
 
+-- reset highlights
+vim.cmd.highlight("clear")
+if vim.fn.exists("syntax_on") then vim.cmd.syntax("reset") end
+
+-- enable 256 true colors
+vim.o.termguicolors = true
+vim.g.colors_name = "onedark"
+
 -- setup all highlight groups
 local hls = require("custom.highlights")
 
@@ -78,14 +65,6 @@ local function apply_colors(highlights)
         vim.api.nvim_set_hl(0, group, opts)
     end
 end
-
--- reset highlights
-vim.cmd.highlight("clear")
-if vim.fn.exists("syntax_on") then vim.cmd.syntax("reset") end
-
--- enable 256 true colors
-vim.o.termguicolors = true
-vim.g.colors_name = "onedark"
 
 apply_colors(hls.core)
 apply_colors(hls.syntax)

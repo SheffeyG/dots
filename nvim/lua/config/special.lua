@@ -33,8 +33,8 @@ if g.is_wsl then
         cache_enabled = true,
     }
 elseif g.is_ssh then
-    -- https://www.sxrhhh.top/blog/2024/06/06/neovim-copy-anywhere/
-    local do_nothing = function(_)
+    -- https://github.com/neovim/neovim/issues/28611#issuecomment-2147744670
+    local get_system_reg = function()
         return function(_)
             local content = vim.fn.getreg('"')
             return vim.split(content, "\n")
@@ -48,10 +48,11 @@ elseif g.is_ssh then
             ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
         },
         paste = {
+            -- skip OSC 52, use system register instead to avoid blocking
+            ["+"] = get_system_reg(),
+            ["*"] = get_system_reg(),
             -- ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
             -- ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-            ["+"] = do_nothing("+"), -- pasting disabled
-            ["*"] = do_nothing("*"), -- pasting disabled
         },
     }
 end

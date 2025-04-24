@@ -43,7 +43,16 @@ return {
         words = { enabled = true },
         input = { enabled = true },
         rename = { enabled = true },
-        terminal = { win = { relative = "win" } },
+        terminal = {
+            env = {
+                ZLE_RPROMPT_INDENT = 1, -- zsh prompt padding
+                VIMRUNTIME = 1, -- to show a p10k prompt icon
+            },
+            win = {
+                relative = "win",
+                wo = { winbar = "" },
+            },
+        },
         statuscolumn = {
             left = { "mark", "git" },
             right = { "fold", "sign" },
