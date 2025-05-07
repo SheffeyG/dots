@@ -1,8 +1,8 @@
 local map = vim.keymap.set
 
--- disable useless +/- num
-map("n", "<C-a>", "<Nop>", { unique = true, desc = "which_key_ignore" })
-map("n", "<C-x>", "<Nop>", { unique = true, desc = "which_key_ignore" })
+-- disable useless number auto-in(de)crement
+map("", "<C-a>", "<Nop>", { unique = true, desc = "which_key_ignore" })
+map("", "<C-x>", "<Nop>", { unique = true, desc = "which_key_ignore" })
 
 -- shortcut alias
 map("i", "jk", "<Esc>", { desc = "Esc Alias" })
@@ -48,6 +48,9 @@ map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "which_key_ignore" })
 map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "which_key_ignore" })
 
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Escape terminal mode" })
+
+-- marks
+map("n", "dm", ":delmarks ", { silent = true, desc = "Delete Marks" })
 
 -- lsp
 map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })

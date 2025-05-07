@@ -10,8 +10,8 @@ return {
     ---@type blink.cmp.Config
     opts = {
         keymap = {
-            preset = "enter",
-            ["<C-x>"] = { "cancel" },
+            ["<CR>"] = { "accept", "fallback" },
+            ["<C-x>"] = { "cancel", "fallback" },
         },
         appearance = {
             nerd_font_variant = "normal",
@@ -97,7 +97,7 @@ return {
             -- make sure auto_insert is false to prevent flicker when accept
             completion = { list = { selection = { auto_insert = false } } },
         },
-        fuzzy = { implementation = "prefer_rust_with_warning" },
+        fuzzy = { implementation = "prefer_rust" },
     },
     opts_extend = { "sources.default" },
 }

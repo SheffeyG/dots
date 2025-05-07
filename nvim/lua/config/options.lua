@@ -44,7 +44,10 @@ o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 o.foldtext = ""
 o.foldcolumn = "0"
 
-opt.fillchars:append({ eob = " ", fold = " ", diff = "⋰" })
+o.list = true
+opt.listchars = { tab = "░░" }
+
+opt.fillchars:append({ eob = " ", fold = " ", diff = "╱" })
 
 -- disable nvim intro
 opt.shortmess:append("sI")

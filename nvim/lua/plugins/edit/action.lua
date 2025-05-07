@@ -1,6 +1,5 @@
 ---@type LazyPluginSpec[]
 return {
-    -- formatter
     {
         "stevearc/conform.nvim",
         opts = {
@@ -20,7 +19,6 @@ return {
         },
     },
 
-    -- multiple cursors
     {
         "jake-stewart/multicursor.nvim",
         keys = {
@@ -42,7 +40,6 @@ return {
         end,
     },
 
-    -- navigation in tmux
     {
         "alexghergh/nvim-tmux-navigation",
         cond = vim.g.is_tmux,
@@ -58,26 +55,28 @@ return {
         end,
     },
 
-    -- write as su
+    {
+        "kylechui/nvim-surround",
+        keys = { "ys", "ds", "cs" },
+        opts = {},
+    },
+
     {
         "lambdalisue/vim-suda",
         cmd = "SudaWrite",
     },
 
-    -- open in vscode
     {
         "declancm/vim2vscode",
         cmd = "Code",
     },
 
-    -- show keymaps
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = { delay = 500 },
     },
 
-    -- auto pairs
     {
         "echasnovski/mini.pairs",
         event = "InsertEnter",

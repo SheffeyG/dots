@@ -1,7 +1,7 @@
 local autocmd = vim.api.nvim_create_autocmd
 
--- keep the cursor position
 autocmd("BufReadPost", {
+    desc = "keep the cursor position",
     pattern = { "*" },
     callback = function()
         if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
@@ -10,8 +10,8 @@ autocmd("BufReadPost", {
     end,
 })
 
--- auto open explorer
 autocmd("VimEnter", {
+    desc = "auto open explorer",
     callback = function(data)
         local ok, snacks = pcall(require, "snacks")
         if not ok then return end
@@ -33,8 +33,8 @@ autocmd("VimEnter", {
     end,
 })
 
--- auto close explorer
 autocmd("QuitPre", {
+    desc = "auto close explorer",
     callback = function()
         local snacks_windows = {}
         local floating_windows = {}
@@ -60,8 +60,8 @@ autocmd("QuitPre", {
     end,
 })
 
--- auto insert mode for terminal buffers
 -- autocmd({ "WinEnter", "BufWinEnter", "TermOpen" }, {
+--     desc = "auto insert mode for terminal buffers",
 --     callback = function(args)
 --         if vim.startswith(vim.api.nvim_buf_get_name(args.buf), "term://") then
 --             vim.cmd("startinsert")

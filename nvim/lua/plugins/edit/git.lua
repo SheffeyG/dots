@@ -12,16 +12,6 @@ return {
     },
 
     {
-        "lewis6991/gitsigns.nvim",
-        event = { "BufReadPost" },
-        enabled = false,
-        opts = {
-            signs = { changedelete = { text = "󰷣" } },
-            signs_staged = { changedelete = { text = "󰷣" } },
-        },
-    },
-
-    {
         "NeogitOrg/neogit",
         dependencies = { "nvim-lua/plenary.nvim" },
         keys = {
@@ -69,8 +59,9 @@ return {
         "sindrets/diffview.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         keys = {
-            { "<leader>dv", "<CMD>DiffviewOpen<CR>", desc = "Diffview Panel" },
-            { "<leader>df", "<CMD>DiffviewFileHistory %<CR>", desc = "Diffview File" },
+            { "<leader>dv", "<CMD>DiffviewOpen<CR>", desc = "Diffview Open Panel" },
+            { "<leader>dp", "<CMD>DiffviewOpen HEAD^..HEAD<CR>", desc = "Diffview Diff Previous" },
+            { "<leader>df", "<CMD>DiffviewFileHistory %<CR>", desc = "Diffview File History" },
         },
         opts = {
             enhanced_diff_hl = true,

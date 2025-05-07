@@ -25,12 +25,13 @@ M.core = {
     Folded       = { fg = colors.grey_light, bg = colors.grey_dark },
     Visual       = { bg = colors.grey_dark },
     VisualNOS    = { fg = colors.red }, -- Non-Owning Selection
-    CursorLine   = { bg = colors.black_light },
+    -- diffview workaround https://github.com/neovim/neovim/issues/9800
+    CursorLine   = { bg = colors.black_light, ctermfg = "white" },
     CursorColumn = { bg = colors.grey },
     QuickFixLine = { bg = colors.grey },
-    ColorColumn  = { bg = colors.black_dark }, -- too long sign column
-    LineNr       = { fg = colors.grey_light }, -- gutter (line number)
-    CursorLineNr = { fg = colors.white_dark }, -- gutter current line
+    ColorColumn  = { bg = colors.black_dark }, -- "too long" sign column
+    LineNr       = { fg = colors.grey_light }, -- line number
+    CursorLineNr = { fg = colors.white_dark }, -- current line number
     WinBar       = { fg = colors.blue, bg = colors.black_light, bold = true },
     WinBarNC     = { fg = colors.blue, bg = colors.black_light },
     StatusLine   = { fg = colors.white, bg = colors.black_bar },
@@ -46,6 +47,7 @@ M.core = {
     WarningMsg = { fg = colors.yellow },
     ModeMsg    = { fg = colors.green },
     MoreMsg    = { fg = colors.green },
+    Whitespace = { fg = colors.grey_dark }, -- listchars.tab
 
     -- diag & lsp
     DiagnosticInfo   = { fg = colors.blue },
@@ -72,7 +74,7 @@ M.core = {
     DiffAdd          = { bg = mix(colors.green, colors.black, 0.2) },
     DiffDelete       = { bg = mix(colors.red, colors.black, 0.2) },
     DiffChange       = { bg = mix(colors.yellow, colors.black, 0.2) },
-    DiffText         = { bg = mix(colors.yellow, colors.black, 0.3), bold = true },
+    DiffText         = { bg = mix(colors.orange, colors.black, 0.2), bold = true },
     DiffChangeDelete = { link = "DiffDelete" },
     DiffAdded        = { fg = colors.green },
     DiffRemoved      = { fg = colors.red },
@@ -259,9 +261,10 @@ M.plugins = {
 
     -- diffview
     DiffviewFilePanelFileName = { link = "Normal" },
+    DiffviewDiffDeleteDim = { fg = colors.grey_dark }, -- fillchars.diff
 
     -- git-conflict
-    ConflictOurs = { bg = mix(colors.blue, colors.black, 0.2) },   -- custom
+    ConflictOurs = { bg = mix(colors.blue, colors.black, 0.2) }, -- custom
     ConflictTheirs = { bg = mix(colors.cyan, colors.black, 0.2) }, -- custom
 
     -- noice

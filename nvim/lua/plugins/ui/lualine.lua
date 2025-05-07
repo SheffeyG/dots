@@ -105,7 +105,7 @@ return {
                 lsp,
             },
             lualine_y = {
-                { "progress", color = colors.text_blue },
+                { "encoding", color = colors.text_blue, show_bomb = true },
             },
             lualine_z = {
                 { "tabs", show_modified_status = false, cond = many_tabs },

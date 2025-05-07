@@ -4,28 +4,25 @@ return {
         "clangd",
         "--clang-tidy",
         "--background-index",
-        "--offset-encoding=utf-8",
     },
     filetypes = { "c", "cpp", "cuda" },
     root_markers = {
         ".clangd",
+        ".clang-format",
         "Makefile",
-        "build.ninja",
+        "CMakeLists.txt",
         "compile_commands.json",
         "configure.in",
+        "build.ninja",
         "meson.build",
+    },
+    capabilities = {
+        offsetEncoding = { "utf-16" },
     },
     init_options = {
         clangdFileStatus = true,
-        completeUnimported = true,
+        completeUnimported = false,
         usePlaceholders = true,
         semanticHighlighting = true,
     },
-    settings = {
-        clangd = {
-            semanticHighlighting = true,
-            single_file_support = false,
-        },
-    },
-    single_file_support = true,
 }
