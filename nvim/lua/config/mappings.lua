@@ -49,6 +49,9 @@ map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "which_key_ignore" })
 
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Escape terminal mode" })
 
+-- marks
+map("n", "dm", ":delmarks ", { silent = false, desc = "Delete Marks" })
+
 -- lsp
 map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })

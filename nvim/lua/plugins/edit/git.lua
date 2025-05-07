@@ -12,16 +12,6 @@ return {
     },
 
     {
-        "lewis6991/gitsigns.nvim",
-        event = { "BufReadPost" },
-        enabled = false,
-        opts = {
-            signs = { changedelete = { text = "󰷣" } },
-            signs_staged = { changedelete = { text = "󰷣" } },
-        },
-    },
-
-    {
         "NeogitOrg/neogit",
         dependencies = { "nvim-lua/plenary.nvim" },
         keys = {

@@ -69,7 +69,7 @@ return {
         indent = {
             animate = { duration = 10 },
             filter = function(buf)
-                local exclude = { "markdown", "gitcommit" }
+                local exclude = { "markdown", "text", "gitcommit" }
                 return vim.g.snacks_indent ~= false
                     and vim.b[buf].snacks_indent ~= false
                     and vim.bo[buf].buftype == ""
@@ -143,10 +143,11 @@ return {
     keys = {
         {
             "<leader>e", -- set auto_close to true for narrow window
-            function() Snacks.explorer.open({ auto_close = vim.api.nvim_win_get_width(0) <= 120 }) end,
-            desc = "File Explorer Toggle",
+            function() Snacks.explorer.open({ auto_close = vim.api.nvim_win_get_width(0) <= 100 }) end,
+            desc = "Auto-close File Explorer Toggle",
         },
-        { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+        { "<leader>E", function() Snacks.explorer.open() end, desc = "File Explorer Toggle" },
+        { "<leader> ", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
         -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
