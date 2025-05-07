@@ -73,6 +73,13 @@ local lsp = {
     },
 }
 
+local encode = {
+    "encoding",
+    icon = "",
+    padding = { left = 0, right = 1 },
+    color = colors.text_green,
+}
+
 ---@type LazyPluginSpec
 return {
     "nvim-lualine/lualine.nvim",
@@ -103,6 +110,7 @@ return {
                 macro,
                 diagnostics,
                 lsp,
+                encode,
             },
             lualine_y = {
                 { "progress", color = colors.text_blue },

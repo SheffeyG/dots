@@ -69,7 +69,7 @@ return {
         indent = {
             animate = { duration = 10 },
             filter = function(buf)
-                local exclude = { "markdown", "gitcommit" }
+                local exclude = { "markdown", "text", "gitcommit" }
                 return vim.g.snacks_indent ~= false
                     and vim.b[buf].snacks_indent ~= false
                     and vim.bo[buf].buftype == ""

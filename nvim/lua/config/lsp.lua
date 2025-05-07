@@ -20,17 +20,19 @@ vim.diagnostic.config({
     -- },
 })
 
--- lsp configure for all clients
-vim.lsp.config("*", { root_markers = { ".git" } })
+if vim.fn.has("nvim-0.11") == 1 then
+    -- lsp configure for all clients
+    vim.lsp.config("*", { root_markers = { ".git" } })
 
--- enable all lsp clients
-vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
-    :map(function(config_path) -- match all lsp client name
-        return vim.fs.basename(config_path):match("^(.*)%.lua$")
-    end)
-    :each(function(server_name) -- enable all matched lsp
-        vim.lsp.enable(server_name, true)
-    end)
+    -- enable all lsp clients
+    vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
+        :map(function(config_path) -- match all lsp client name
+            return vim.fs.basename(config_path):match("^(.*)%.lua$")
+        end)
+        :each(function(server_name) -- enable all matched lsp
+            vim.lsp.enable(server_name, true)
+        end)
+end
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)

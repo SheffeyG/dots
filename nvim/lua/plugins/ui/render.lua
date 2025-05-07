@@ -1,10 +1,9 @@
 ---@type LazyPluginSpec[]
 return {
     {
-        "norcalli/nvim-colorizer.lua",
-        enabled = false,
-        ft = { "css", "lua" },
-        opts = { "*" },
+        "NMAC427/guess-indent.nvim",
+        event = "BufReadPost",
+        opts = {},
     },
 
     {
@@ -13,14 +12,9 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         build = ":TSUpdate",
         opts = {
+            -- built-in parser: C, Lua, Markdown, Vimscript, Vimdoc.
             ensure_installed = {
-                "c",
-                "cpp",
                 "python",
-                "lua",
-                "luadoc",
-                "vim",
-                "vimdoc",
                 "html",
                 "css",
                 "javascript",
@@ -28,7 +22,6 @@ return {
                 "yaml",
                 "toml",
                 "printf",
-                "markdown",
                 "markdown_inline",
             },
             highlight = {
@@ -53,19 +46,16 @@ return {
         ---@type render.md.UserConfig
         opts = {
             heading = {
-                icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
+                icons = { "󰇊 ", "󰇋 ", "󰇌 ", "󰇍 ", "󰇎 ", "󰇏 " },
                 position = "inline",
-                width = "block",
-                left_margin = 0.5,
-                left_pad = 0.2,
-                right_pad = 0.2,
+                left_pad = 1,
             },
             code = {
+                sign = false,
                 left_pad = 1,
                 language_pad = 1,
                 border = "thin",
             },
-            sign = { enabled = false },
         },
     },
 }
