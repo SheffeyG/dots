@@ -120,10 +120,11 @@ zinit light romkatv/powerlevel10k
 [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
 
 # oh-my-zsh snippets
-zinit snippet OMZL::key-bindings.zsh
+zinit snippet OMZL::completion.zsh
 zinit snippet OMZL::history.zsh
-zinit snippet OMZP::sudo    # double esc to toggle sudo
+zinit snippet OMZL::key-bindings.zsh
 zinit snippet OMZP::extract # x to extract
+zinit snippet OMZP::sudo    # double esc to toggle sudo
 
 # auto suggestions
 zinit ice wait lucid atload"_zsh_autosuggest_start"
