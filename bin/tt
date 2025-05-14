@@ -1,50 +1,32 @@
 #!/usr/bin/env bash
 
-# small tmux sessionizer: quickly create, attach, and switch tmux sessions
-
-tmux_attach() {
-    has_session_exact() {
-        tmux list-sessions -F "#{session_name}" 2>/dev/null | grep -qx "$1"
-    }
-
-    attach_or_switch() {
-        local session_name="$1"
-        if [[ -n "$TMUX" ]]; then
-            tmux switch-client -t "$session_name" || echo "Error: Could not switch to session '$session_name'."
-        else
-            tmux attach-session -t "$session_name" || echo "Error: Could not attach to session '$session_name'."
-        fi
-    }
-
-    tmux_create_and_attach() {
-        tmux new-session -d -s "$session_name" && tmux_attach "$session_name" || echo "Error: Failed to create session '$session_name'."
-    }
-
-    # more than 1 parameter provided
-    if [[ "$#" -gt 1 ]]; then
-        echo "Error: Command tt accept only one parameter as tmux session name."
-        return 1
-    fi
-
-    # one parameter provided
-    if [[ "$#" -eq 1 ]]; then
-        local session_name="$1"
-        if has_session_exact $session_name; then
-            attach_or_switch $session_name
-        else # we don't have that session
-            tmux_create_and_attach
-        fi
-        return
-    fi
-
-    # no parameter provided
-    local session_name='main'
-    if has_session_exact $session_name; then
-        attach_or_switch $session_name
+attach_or_switch() {
+    local session_name="$1"
+    if [[ -n "$TMUX" ]]; then
+        tmux switch-client -t "$session_name" ||
+            echo "Error: Could not switch to session '$session_name'."
     else
-        tmux_create_and_attach
+        tmux attach-session -t "$session_name" ||
+            echo "Error: Could not attach to session '$session_name'."
     fi
 }
 
-tmux_attach "$@"
+attach_or_create() {
+    local session_name="$1"
+    if tmux has-session -t="$session_name" 2>/dev/null; then
+        attach_or_switch "$session_name"
+    else
+        tmux new-session -d -s "$session_name" ||
+            echo "Error: Failed to create session '$session_name'."
+        attach_or_switch "$session_name"
+    fi
+}
 
+if [[ "$#" -eq 0 ]]; then
+    attach_or_create "main"
+elif [[ "$#" -eq 1 ]]; then
+    [[ -d "$1" ]] && cd "$1"
+    attach_or_create "$1"
+else
+    echo "Error: Too many parameters for command 'tt'."
+fi

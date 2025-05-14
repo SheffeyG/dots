@@ -1,35 +1,30 @@
 #!/usr/bin/env bash
 
-set_proxy() {
-    local HOST="127.0.0.1"
-    local PORT="10808"
+HOST="127.0.0.1"
+PORT="10808"
 
-    if [[ "$#" -eq 1 ]]; then
-        if [[ "$1" =~ ^[0-9]+$ ]] && [ "$1" -ge 1 ] && [ "$1" -le 65535 ]; then
-            PORT="$1"
-        else
-            echo "[ERROR]: port should be an integer between 1~65535"
-        fi
-    fi
-
-    if [ -n "$SSH_CONNECTION" ]; then
-        HOST=$(echo "$SSH_CONNECTION" | awk '{print $1}')
-        if [ -z "$HOST" ]; then
-            echo "[WARN]：can not get ssh host info from SSH_CONNECTION, using 127.0.0.1"
-            HOST="127.0.0.1"
-        fi
-    fi
-
-    if [ -n "$HTTP_PROXY" ] || [ -n "$HTTPS_PROXY" ]; then
-        unset HTTP_PROXY
-        unset HTTPS_PROXY
-        echo "proxy removed"
+if [[ "$#" -eq 1 ]]; then
+    if [[ "$1" =~ ^[0-9]+$ ]] && [ "$1" -ge 1 ] && [ "$1" -le 65535 ]; then
+        PORT="$1"
     else
-        export HTTP_PROXY="socks5://$HOST:$PORT"
-        export HTTPS_PROXY="socks5://$HOST:$PORT"
-        echo "HTTP_PROXY=$HTTP_PROXY\nHTTPS_PROXY=$HTTPS_PROXY"
+        echo "[ERROR]: Port should be an integer between 1~65535"
     fi
-}
+fi
 
-set_proxy "$@"
+if [ -n "$SSH_CONNECTION" ]; then
+    HOST=$(echo "$SSH_CONNECTION" | awk '{print $1}')
+    if [ -z "$HOST" ]; then
+        echo "[WARN]: Could not get ssh host info from SSH_CONNECTION, using 127.0.0.1"
+        HOST="127.0.0.1"
+    fi
+fi
 
+if [ -n "$HTTP_PROXY" ] || [ -n "$HTTPS_PROXY" ]; then
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    echo "Proxy Removed!"
+else
+    export HTTP_PROXY="socks5://$HOST:$PORT"
+    export HTTPS_PROXY="socks5://$HOST:$PORT"
+    echo "HTTP_PROXY=$HTTP_PROXY\nHTTPS_PROXY=$HTTPS_PROXY"
+fi

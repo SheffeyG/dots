@@ -1,9 +1,4 @@
 #!/usr/bin/bash
 
-last() {
-    branch=`git symbolic-ref refs/remotes/origin/HEAD`
-    git log --pretty=%H $branch | head -1 | xargs git checkout
-}
-
-last "$@"
-
+branch=$(git symbolic-ref refs/remotes/origin/HEAD)
+git log --pretty=%H $branch | head -1 | xargs git checkout

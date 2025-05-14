@@ -1,14 +1,5 @@
 #!/usr/bin/bash
 
-prev() {
-    branch=`git symbolic-ref refs/remotes/origin/HEAD`
-    if [ -z "$1" ]; then
-        n=1
-    else
-        n=$1
-    fi
-    git checkout HEAD~$n
-}
-
-prev "$@"
-
+branch=$(git symbolic-ref refs/remotes/origin/HEAD)
+n=${1:-1}
+git checkout HEAD~$n

@@ -1,9 +1,4 @@
 #!/usr/bin/bash
 
-first() {
-    branch=`git symbolic-ref refs/remotes/origin/HEAD`
-    git log --reverse --pretty=%H $branch | head -1 | xargs git checkout
-}
-
-first "$@"
-
+branch=$(git symbolic-ref refs/remotes/origin/HEAD)
+git log --reverse --pretty=%H $branch | head -1 | xargs git checkout
