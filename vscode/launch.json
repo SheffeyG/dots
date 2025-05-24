@@ -2,17 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C/C++: g++ build and debug active file",
+            "name": "C/C++: gcc build and debug chibicc",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [],
-            "stopAtEntry": false,
+            "program": "${workspaceFolder}/chibicc", // executable path, default is 'main'
+            "args": ["1+2\\;"], // arguments with escaping
+            "stopAtEntry": true, // wheather stop at the entry point
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerArgs": "-q -ex quit; wait() { fg >/dev/null; }; /bin/gdb -q --interpreter=mi",
+            "externalConsole": false, // use external console beyand VSCode
+            "MIMode": "gdb", // debug mode
+            "miDebuggerPath": "/usr/bin/gdb", // gdb path
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -20,27 +20,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: g++ build active file"
-        },
-        {
-            "name": "C/C++ Runner: Debug Session",
-            "type": "cppdbg",
-            "request": "launch",
-            "args": [],
-            "stopAtEntry": false,
-            "externalConsole": false,
-            "cwd": "${workspaceFolder}",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "MIMode": "gdb",
-            "miDebuggerArgs": "-q -ex quit; wait() { fg >/dev/null; }; /bin/gdb -q --interpreter=mi",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "C/C++: g++ build active file"
+            "preLaunchTask": "C/C++: gcc build chibicc" // pre-launch task, same as in tasks.json
         }
     ]
 }

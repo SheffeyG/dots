@@ -1,23 +1,22 @@
-// Place your key bindings in this file to override the defaults
 [
     // Select completion suggestion
     {
-        "key": "tab",
+        "key": "ctrl+n",
         "command": "selectNextQuickFix",
-        "when": "editorFocus && quickFixWidgetVisible"
+        "when": "editorFocus && quickFixWidgetVisible",
     },
     {
-        "key": "shift+tab",
+        "key": "ctrl+p",
         "command": "selectPrevQuickFix",
         "when": "editorFocus && quickFixWidgetVisible"
     },
     {
-        "key": "tab",
+        "key": "ctrl+n",
         "command": "selectNextSuggestion",
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     {
-        "key": "shift+tab",
+        "key": "ctrl+p",
         "command": "selectPrevSuggestion",
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
@@ -85,7 +84,7 @@
         "when": "vim.mode != 'Insert'"
     },
     {
-        "key": "ctrl+n",
+        "key": "ctrl+\\",
         "command": "workbench.action.togglePanel"
-    }
+    },
 ]

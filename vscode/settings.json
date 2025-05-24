@@ -25,8 +25,24 @@
     },
     "vim.normalModeKeyBindings": [
         {
+            "before": [ "<tab>" ],
+            "commands": [ "workbench.action.nextEditor" ],
+        },
+        {
+            "before": [ "<S-tab>" ],
+            "commands": [ "workbench.action.previousEditor" ],
+        },
+        {
             "before": [ "<leader>", "r", "n" ],
             "commands": [ "editor.action.rename" ],
+        },
+        {
+            "before": [ "<leader>", "f", "m" ],
+            "commands": [ "editor.action.formatDocument" ],
+        },
+        {
+            "before": [ "<leader>", "c", "a" ],
+            "commands": [ "editor.action.quickFix" ],
         },
         {
             "before": [ "<leader>", "\/" ],
@@ -34,7 +50,19 @@
         },
         {
             "before": [ "<C-a>" ],
-            "after": [ "g", "g", "V", "G" ],
+            "commands": [ "editor.action.selectAll" ],
+        },
+        {
+            "before": [ "g", "r" ],
+            "commands": [ "editor.action.goToReferences" ],
+        },
+        {
+            "before": [ "g", "i" ],
+            "commands": [ "editor.action.goToImplementation" ],
+        },
+        {
+            "before": [ "<C-x>" ],
+            "commands": [ "workbench.action.closeActiveEditor" ],
         },
     ],
     "vim.insertModeKeyBindings": [
@@ -62,26 +90,25 @@
     "vim.visualModeKeyBindings": [
         {
             "before": [ ">" ],
-            "commands": [ "editor.action.indentLines" ]
+            "commands": [ "editor.action.indentLines" ],
         },
         {
             "before": [ "<" ],
-            "commands": [ "editor.action.outdentLines" ]
+            "commands": [ "editor.action.outdentLines" ],
         },
         {
             "before": [ "<leader>", "\/" ],
             "commands": [ "editor.action.commentLine" ],
         },
+        {
+            "before": [ "<leader>", "f", "m" ],
+            "commands": [ "editor.action.formatSelection" ],
+        }
     ],
 
-    // Software & Language
+    // Software & Languages
     "docker.images.label": "Tag",
-    "ruff.lint.ignore": [ "E741", "E731", "E402" ],
+    "docker.commands.run": "${containerCommand} run --rm --gpus all -d ${exposedPorts} ${tag}",
+    "docker.commands.runInteractive": "${containerCommand} run --rm -it --gpus all ${exposedPorts} ${tag}",
     "terminal.integrated.env.linux": {"PYTHONPATH":"${workspaceFolder}:${env:PYTHONPATH}"},
-    "git.confirmSync": false,
-    "git.openRepositoryInParentFolders": "never",
-
-    // Remote
-    "remote.SSH.configFile": "~/.ssh/config",
-    "remote.autoForwardPorts": false,
 }
