@@ -10,26 +10,34 @@ autocmd("BufReadPost", {
     end,
 })
 
+autocmd("VimResized", {
+    desc = "resize splits after window resized",
+    callback = function()
+        vim.g.is_wide = vim.api.nvim_win_get_width(0) > 120
+        vim.cmd("tabdo wincmd =")
+        vim.cmd("tabnext " .. vim.fn.tabpagenr())
+    end,
+})
+
 autocmd("VimEnter", {
     desc = "auto open explorer",
     callback = function(data)
         local ok, snacks = pcall(require, "snacks")
         if not ok then return end
 
-        local wild_win = vim.api.nvim_win_get_width(0) > 120
         -- provide no name
         if data.file == "" and vim.bo[data.buf].buftype == "" then
-            snacks.explorer.open({ auto_close = not wild_win })
+            snacks.explorer.open({ auto_close = not vim.g.is_wide })
             return
         end
         -- target is a directory
         if vim.fn.isdirectory(data.file) == 1 then
             vim.cmd.cd(data.file)
-            snacks.explorer.open({ auto_close = not wild_win })
+            snacks.explorer.open({ auto_close = not vim.g.is_wide })
             return
         end
         -- file with wild_win
-        if wild_win then snacks.explorer.open({ enter = false }) end
+        if vim.g.is_wide then snacks.explorer.open({ enter = false }) end
     end,
 })
 
@@ -57,6 +65,21 @@ autocmd("QuitPre", {
                 vim.api.nvim_win_close(w, true)
             end
         end
+    end,
+})
+
+autocmd("FileType", {
+    desc = "close some filetypes with <q>",
+    pattern = {
+        "checkhealth",
+        "help",
+        "lspinfo",
+        "man",
+        "qf",
+    },
+    callback = function(e)
+        vim.bo[e.buf].buflisted = false
+        vim.keymap.set("n", "q", "<CMD>close<CR>", { buffer = e.buf, silent = true })
     end,
 })
 

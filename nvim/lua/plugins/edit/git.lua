@@ -66,11 +66,7 @@ return {
         opts = {
             enhanced_diff_hl = true,
             view = {
-                merge_tool = {
-                    layout = "diff3_mixed",
-                    disable_diagnostics = true,
-                    diff_binaries = false,
-                },
+                merge_tool = { layout = "diff3_mixed" },
             },
             key_bindings = {
                 view = { q = "<CMD>DiffviewClose<CR>" },

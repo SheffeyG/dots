@@ -12,6 +12,8 @@ else
     g.is_arm = false
 end
 
+g.is_wide = vim.api.nvim_win_get_width(0) > 120
+
 -- set clipboard provider
 if g.is_wsl then
     local name = "PWSH"

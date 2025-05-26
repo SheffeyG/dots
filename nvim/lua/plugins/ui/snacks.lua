@@ -44,6 +44,7 @@ return {
         input = { enabled = true },
         rename = { enabled = true },
         notifier = { top_down = false },
+        statuscolumn = { enabled = true },
         terminal = {
             env = {
                 ZLE_RPROMPT_INDENT = 1, -- zsh prompt padding
@@ -53,10 +54,6 @@ return {
                 relative = "win",
                 wo = { winbar = "" },
             },
-        },
-        statuscolumn = {
-            left = { "mark", "git" },
-            right = { "fold", "sign" },
         },
         scroll = {
             enabled = not vim.g.is_arm,
@@ -144,7 +141,7 @@ return {
     keys = {
         {
             "<leader>e", -- set auto_close to true for narrow window
-            function() Snacks.explorer.open({ auto_close = vim.api.nvim_win_get_width(0) <= 100 }) end,
+            function() Snacks.explorer.open({ auto_close = not vim.g.is_wide }) end,
             desc = "Auto-close File Explorer Toggle",
         },
         { "<leader>E", function() Snacks.explorer.open() end, desc = "File Explorer Toggle" },
