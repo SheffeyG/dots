@@ -63,8 +63,8 @@ alias 2='cd -2'
 alias 3='cd -3'
 alias md='mkdir -p'
 alias rd=rmdir
-alias vim=nvim && EDITOR=nvim
 alias python='PYTHONPATH=$PYTHONPATH:$(pwd) python3'
+[[ -n $(whence nvim) ]] && alias vim=nvim && export EDITOR=nvim
 # alias tt='if tmux has-session & 2>/dev/null; then tmux a; else tmux; fi'
 
 # git
@@ -79,7 +79,7 @@ alias glo='git log --oneline -n 10 --graph'
 gm() { if [ -z "$1" ]; then git commit; else git commit -m "$1"; fi; }
 
 # better ls
-if [[ $(command -v eza) ]]; then
+if [[ -n $(which eza) ]]; then
     alias ls='eza --icons --color=auto'
     alias l='eza -lh --icons'
     alias ll='eza -labg --icons'
