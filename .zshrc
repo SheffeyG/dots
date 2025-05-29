@@ -13,25 +13,6 @@ fi
 # setting zsh prompt right padding
 ZLE_RPROMPT_INDENT=${ZLE_RPROMPT_INDENT:-0}
 
-
-#-----------------------
-# Options
-#-----------------------
-
-set bell-style none
-unsetopt BEEP LIST_BEEP HIST_BEEP
-setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
-
-# key-bindings
-bindkey '^P' up-line-or-beginning-search
-bindkey '^N' down-line-or-beginning-search
-bindkey '^Y' autosuggest-accept
-
-
-#-----------------------
-# Path
-#-----------------------
-
 # NVM initialization
 # https://github.com/nvm-sh/nvm?tab=readme-ov-file#manual-install
 # export NVM_DIR="$HOME/.nvm"
@@ -49,51 +30,6 @@ typeset -U path
 [ -d "$HOME/.local/bin" ] && path=($path "$HOME/.local/bin")
 [ -d "$HOME/.cargo/bin" ] && path=($path "$HOME/.cargo/bin")
 export PATH
-
-
-#-----------------------
-# Aliases
-#-----------------------
-
-# shortcuts
-alias ...=../..
-alias ....=../../..
-alias 1='cd -'
-alias 2='cd -2'
-alias 3='cd -3'
-alias md='mkdir -p'
-alias rd=rmdir
-alias vim=nvim && EDITOR=nvim
-alias python='PYTHONPATH=$PYTHONPATH:$(pwd) python3'
-# alias tt='if tmux has-session & 2>/dev/null; then tmux a; else tmux; fi'
-
-# git
-alias gc1='git clone --depth=1'
-alias gs='git status -sb'
-alias ga='git add'
-alias gaa='git add .'
-alias gill='git pull'
-alias gish='git push'
-alias gma='git commit --amend --no-edit'
-alias glo='git log --oneline -n 10 --graph'
-gm() { if [ -z "$1" ]; then git commit; else git commit -m "$1"; fi; }
-
-# better ls
-if [[ $(command -v eza) ]]; then
-    alias ls='eza --icons --color=auto'
-    alias l='eza -lh --icons'
-    alias ll='eza -labg --icons'
-    alias la='eza -labgh --icons'
-    alias lsa='eza -lbagR --icons'
-    alias lst='eza --tree --level=3'
-else
-    alias ls='ls --color=auto'
-    alias l='ls -lh'
-    alias ll='ls -lah'
-    alias la='ls -lAh'
-    alias lsa='ls -lah'
-    alias lst='tree -pCsh'
-fi
 
 
 #-----------------------
@@ -147,5 +83,64 @@ if [[ $(command -v fzf) ]]; then
         FZF_DEFAULT_OPTS='--color=pointer:#e06c75,bg+:#51576d,gutter:-1'
         zstyle ':fzf-tab:*' use-fzf-default-opts yes"
     zinit light Aloxaf/fzf-tab
+fi
+
+
+#-----------------------
+# Options
+#-----------------------
+
+set bell-style none
+unsetopt BEEP LIST_BEEP HIST_BEEP
+setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
+
+# key-bindings
+bindkey '^P' up-line-or-beginning-search
+bindkey '^N' down-line-or-beginning-search
+bindkey '^Y' autosuggest-accept
+
+
+#-----------------------
+# Aliases
+#-----------------------
+
+# shortcuts
+alias ...=../..
+alias ....=../../..
+alias 1='cd -'
+alias 2='cd -2'
+alias 3='cd -3'
+alias md='mkdir -p'
+alias rd=rmdir
+alias python='PYTHONPATH=$PYTHONPATH:$(pwd) python3'
+[[ -n $(whence nvim) ]] && alias vim=nvim && export EDITOR=nvim
+# alias tt='if tmux has-session & 2>/dev/null; then tmux a; else tmux; fi'
+
+# git
+alias gc1='git clone --depth=1'
+alias gs='git status -sb'
+alias ga='git add'
+alias gaa='git add .'
+alias gill='git pull'
+alias gish='git push'
+alias gma='git commit --amend --no-edit'
+alias glo='git log --oneline -n 10 --graph'
+gm() { if [ -z "$1" ]; then git commit; else git commit -m "$1"; fi; }
+
+# better ls
+if [[ -n $(which eza) ]]; then
+    alias ls='eza --icons --color=auto'
+    alias l='eza -lh --icons'
+    alias ll='eza -labg --icons'
+    alias la='eza -labgh --icons'
+    alias lsa='eza -lbagR --icons'
+    alias lst='eza --tree --level=3'
+else
+    alias ls='ls --color=auto'
+    alias l='ls -lh'
+    alias ll='ls -lah'
+    alias la='ls -lAh'
+    alias lsa='ls -lah'
+    alias lst='tree -pCsh'
 fi
 
