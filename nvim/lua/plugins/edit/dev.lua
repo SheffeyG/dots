@@ -23,8 +23,8 @@ return {
     },
 
     {
-        "williamboman/mason.nvim",
-        cmd = { "Mason" },
+        "mason-org/mason.nvim",
+        cmd = { "Mason", "MasonInstall" },
         opts = {
             PATH = "skip",
             ui = {

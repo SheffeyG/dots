@@ -1,4 +1,4 @@
--- diagnostic
+--- Diagnostic -----------------------------------
 local icons = require("custom.icons").diag
 local severity = vim.diagnostic.severity
 local text = {
@@ -20,20 +20,7 @@ vim.diagnostic.config({
     -- },
 })
 
-if vim.fn.has("nvim-0.11") == 1 then
-    -- lsp configure for all clients
-    vim.lsp.config("*", { root_markers = { ".git" } })
-
-    -- enable all lsp clients
-    vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
-        :map(function(config_path) -- match all lsp client name
-            return vim.fs.basename(config_path):match("^(.*)%.lua$")
-        end)
-        :each(function(server_name) -- enable all matched lsp
-            vim.lsp.enable(server_name, true)
-        end)
-end
-
+--- Fold -----------------------------------------
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -47,3 +34,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.api.nvim_create_autocmd("LspDetach", { command = "setl foldexpr<" })
+
+--- LSP ------------------------------------------
+if not vim.lsp.config then return end
+
+-- lsp configure for all clients
+vim.lsp.config("*", { root_markers = { ".git" } })
+
+-- enable all lsp clients
+-- vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
+--     :map(function(config_path) -- match all lsp client name
+--         return vim.fs.basename(config_path):match("^(.*)%.lua$")
+--     end)
+--     :each(function(server_name) -- enable all matched lsp
+--         vim.lsp.enable(server_name, true)
+--     end)
+
+local language_servers = {
+    "clangd",
+    "lua_ls",
+    "basedpyright",
+}
+
+for _, lsp in ipairs(language_servers) do
+    vim.lsp.enable(lsp, true)
+end

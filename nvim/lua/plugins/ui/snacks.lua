@@ -32,7 +32,8 @@ local win_preview = {
 
 ---@type LazyPluginSpec
 return {
-    "folke/snacks.nvim",
+    "sheffeyg/snacks.nvim",
+    branch = "fix-terminal-create",
     priority = 1000,
     lazy = false,
     ---@type snacks.Config

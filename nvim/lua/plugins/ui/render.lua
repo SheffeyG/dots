@@ -37,12 +37,19 @@ return {
 
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        ft = "markdown",
+        ft = { "markdown", "codecompanion" },
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
         opts = {
+            anti_conceal = {
+                ignore = { head_background = true },
+            },
+            win_options = {
+                concealcursor = { rendered = "n" },
+            },
+            completions = { blink = { enabled = true } },
             heading = {
-                icons = { "󰇊 ", "󰇋 ", "󰇌 ", "󰇍 ", "󰇎 ", "󰇏 " },
+                icons = { "󱅊 ", "󱅋 ", "󱅌 ", "󱅍 ", "󱅎 ", "󱅏 " },
                 position = "inline",
                 left_pad = 1,
             },

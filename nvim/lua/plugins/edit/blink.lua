@@ -12,6 +12,8 @@ return {
         keymap = {
             ["<CR>"] = { "accept", "fallback" },
             ["<C-x>"] = { "cancel", "fallback" },
+            ["<C-s>"] = { "show_signature", "hide_signature", "fallback" },
+            ["<C-k>"] = { "fallback" },
         },
         appearance = {
             nerd_font_variant = "normal",

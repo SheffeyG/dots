@@ -1,10 +1,6 @@
 ---@type vim.lsp.Config
 return {
-    cmd = {
-        "clangd",
-        "--clang-tidy",
-        "--background-index",
-    },
+    cmd = { "clangd", "--background-index" },
     filetypes = { "c", "cpp", "cuda" },
     root_markers = {
         ".clangd",
@@ -16,13 +12,22 @@ return {
         "build.ninja",
         "meson.build",
     },
-    capabilities = {
-        offsetEncoding = { "utf-16" },
-    },
+    -- https://clangd.llvm.org/config
     init_options = {
-        clangdFileStatus = true,
-        completeUnimported = false,
-        usePlaceholders = true,
-        semanticHighlighting = true,
+        headerInsertion = "never",
+        -- compilationDatabasePath = "./build/",
+        -- compileCommandsDir = "./build/compile_commands.json"
     },
+    capabilities = {
+        textDocument = {
+            completion = { editsNearCursor = true },
+        },
+        offsetEncoding = { "utf-8", "utf-16" },
+    },
+    ---@diagnostic disable: undefined-field
+    on_init = function(client, config)
+        if config.offsetEncoding then -- offset extenstion
+            client.offset_encoding = config.offsetEncoding
+        end
+    end,
 }

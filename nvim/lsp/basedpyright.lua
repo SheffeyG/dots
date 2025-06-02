@@ -3,14 +3,11 @@ return {
     cmd = { "basedpyright-langserver", "--stdio" },
     filetypes = { "python" },
     root_markers = {
-        "Pipfile",
+        ".venv",
+        "venv",
         "pyproject.toml",
         "pyrightconfig.json",
         "requirements.txt",
-        "setup.cfg",
-        "setup.py",
-        "venv",
-        ".venv",
     },
     settings = {
         basedpyright = {
@@ -22,8 +19,8 @@ return {
                 reportMissingTypeStubs = false,
                 reportUnreachable = "none",
                 useLibraryCodeForTypes = true,
-                reportUndefinedVariable = "none", -- ruff
-                reportUnusedImport = "none", -- ruff
+                reportUndefinedVariable = "none",
+                reportUnusedImport = "none",
             },
             disableOrganizeImports = true, -- ruff
         },
