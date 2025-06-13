@@ -1,0 +1,138 @@
+-- statusline click action
+vim.cmd([[
+    function! StlSwitchTab(tabnr, mouseclicks, mousebutton, modifiers)
+        execute a:tabnr . "tabnext"
+    endfunction
+]])
+
+STL = {}
+
+STL.getmode = function()
+    local C_S = vim.api.nvim_replace_termcodes("<C-S>", true, true, true)
+    local C_V = vim.api.nvim_replace_termcodes("<C-V>", true, true, true)
+    -- stylua: ignore
+    local modes_info = {
+        ["n"] = { name = "NORMAL",   hl = "%#ModeNormal#" },
+        ["v"] = { name = "VISUAL",   hl = "%#ModeVisual#" },
+        ["V"] = { name = "V-LINE",   hl = "%#ModeVisual#" },
+        [C_V] = { name = "V-BLOCK",  hl = "%#ModeVisual#" },
+        ["s"] = { name = "SELECT",   hl = "%#ModeVisual#" },
+        ["S"] = { name = "S-LINE",   hl = "%#ModeVisual#" },
+        [C_S] = { name = "S-BLOCK",  hl = "%#ModeVisual#" },
+        ["i"] = { name = "INSERT",   hl = "%#ModeInsert#" },
+        ["R"] = { name = "REPLACE",  hl = "%#ModeReplace#" },
+        ["c"] = { name = "COMMAND",  hl = "%#ModeCommand#" },
+        ["r"] = { name = "PROMPT",   hl = "%#ModeTerminal#" },
+        ["!"] = { name = "SHELL",    hl = "%#ModeTerminal#" },
+        ["t"] = { name = "TERMINAL", hl = "%#ModeTerminal#" },
+    }
+
+    -- set a default option via metatable
+    local modes = setmetatable(modes_info, {
+        __index = function() return { name = "UNKNOWN", hl = "%#ModeNormal#" } end,
+    })
+
+    return modes[vim.fn.mode()]
+end
+
+STL.build = function()
+    local current_mode = STL.getmode()
+    local mode = string.format("%s  %s ", current_mode.hl, current_mode.name)
+    local perc = string.format("%s %%P ", current_mode.hl)
+
+    local folder = function()
+        local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+        local handle = io.popen("git rev-parse --abbrev-ref HEAD 2>/dev/null")
+        if not handle then return "" end
+        local branch = handle:read("*a")
+        handle:close()
+        branch = branch:gsub("^%s*(.-)%s*$", "%1")
+        if branch == "" then return string.format("  %s ", cwd) end
+        return string.format("  %s:%s ", cwd, branch)
+    end
+
+    local file = function()
+        local path = vim.fn.expand("%:.")
+        if vim.bo.buftype ~= "" or path == "" then return "" end
+        return string.format(" 󰈙 %s", path)
+    end
+
+    local recording = function()
+        local reg = vim.fn.reg_recording()
+        if reg == "" then return "" end
+        return string.format("%%#TextRed# %s ", reg)
+    end
+
+    local selection = function()
+        local mode_name = current_mode.name
+        local lines = math.abs(vim.fn.line("v") - vim.fn.line(".")) + 1
+        local chars = math.abs(vim.fn.col("v") - vim.fn.col(".")) + 1
+        if mode_name == "V-BLOCK" then
+            return string.format("%%#TextPurple#󰒉 %dx%d ", lines, chars)
+        elseif lines > 1 then
+            return string.format("%%#TextPurple# %d ", lines)
+        elseif mode_name == "VISUAL" then
+            return string.format("%%#TextPurple#󰒉 %d ", chars)
+        else
+            return ""
+        end
+    end
+
+    local lsp = function()
+        local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+        if next(clients) == nil then return "" end
+        local client_names = {}
+        for _, client in ipairs(clients) do
+            if client and client.name ~= "" then table.insert(client_names, client.name) end
+        end
+        return string.format("%%#TextGreen# %s ", table.concat(client_names, "|"))
+    end
+
+    local tab = function()
+        local current_tab = vim.fn.tabpagenr()
+        local total_tabs = vim.fn.tabpagenr("$")
+        if not current_tab or total_tabs <= 1 then return "" end
+        local tab_str = ""
+        for i = 1, total_tabs do
+            if i == current_tab then
+                tab_str = tab_str .. string.format("%%#BarTab# %d ", i)
+            else
+                tab_str = tab_str .. string.format("%%#BarTabDim#%%%d@StlSwitchTab@ %d %%T", i, i)
+            end
+        end
+        return tab_str
+    end
+
+    local code = function()
+        local enc = (vim.bo.fileencoding == "") and vim.go.encoding or vim.bo.fileencoding
+        local width = "TAB:" .. vim.bo.tabstop
+        if vim.bo.expandtab then width = "SPC:" .. vim.bo.shiftwidth end
+        return string.format(" %s | %s ", enc:upper(), width)
+    end
+
+    return table.concat({
+        mode,
+
+        "%#BarGrey#",
+        folder(),
+
+        "%#BarBlack#",
+        file(),
+
+        "%=",
+
+        recording(),
+        selection(),
+        lsp(),
+        tab(),
+
+        "%#BarGrey#",
+        code(),
+
+        perc,
+    })
+end
+
+STL.setup = function() vim.go.statusline = "%!v:lua.STL.build()" end
+
+return STL

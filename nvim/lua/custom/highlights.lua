@@ -1,9 +1,59 @@
----@alias Highlights table<string, vim.api.keyset.highlight>
-
-local M = {} ---@type table<string, Highlights>
+---@see snacks.util.blend
+---@param fg string foreground color
+---@param bg string background color
+---@param alpha number number between 0 and 1. 0 results in bg, 1 results in fg
+local mix = function(fg, bg, alpha)
+    local fg_rgb = {
+        tonumber(fg:sub(2, 3), 16),
+        tonumber(fg:sub(4, 5), 16),
+        tonumber(fg:sub(6, 7), 16),
+    }
+    local bg_rgb = {
+        tonumber(bg:sub(2, 3), 16),
+        tonumber(bg:sub(4, 5), 16),
+        tonumber(bg:sub(6, 7), 16),
+    }
+    local blend = function(i)
+        local ret = (alpha * fg_rgb[i] + ((1 - alpha) * bg_rgb[i]))
+        return math.floor(math.min(math.max(0, ret), 255) + 0.5)
+    end
+    return string.format("#%02x%02x%02x", blend(1), blend(2), blend(3))
+end
 
 -- stylua: ignore
-M.core = {
+local colors = {
+    -- onedark color scheme
+    black_dark  = "#1b1f27",
+    black       = "#1e222a",
+    black_light = "#252931",
+    black_bar   = "#2c323c",
+    grey_dark   = "#31353d",
+    grey        = "#353b45",
+    grey_bar    = "#3E4452",
+    grey_light  = "#565c64",
+    white_dark  = "#979aa1",
+    white       = "#abb2bf",
+    white_light = "#c8ccd4",
+
+    crimson     = "#d7424d",
+    red         = "#e06c75",
+    orange      = "#d19a66",
+    yellow      = "#e7c787",
+    green       = "#98c379",
+    cyan        = "#56b6c2",
+    blue        = "#61afef",
+    purple      = "#c678dd",
+    brown       = "#be5046",
+}
+
+local M = {}
+
+---@alias Highlights table<string, vim.api.keyset.highlight>
+---@type table<string, Highlights>
+M.highlight = {}
+
+-- stylua: ignore
+M.highlight.core = {
     -- window
     Normal      = { fg = colors.white, bg = colors.black },
     NormalDark  = { fg = colors.white, bg = colors.black_dark },  -- custom
@@ -11,6 +61,26 @@ M.core = {
     NormalFloat = { link = "Normal" },
     FloatTitle  = { fg = colors.blue, bg = colors.grey_dark, bold = true },
     FloatBorder = { fg = colors.blue, bg = colors.bg },
+
+    -- statusline
+    ModeNormal   = { fg = colors.grey, bg = colors.blue, bold = true },
+    ModeCommand  = { fg = colors.grey, bg = colors.yellow, bold = true },
+    ModeInsert   = { fg = colors.grey, bg = colors.green, bold = true },
+    ModeVisual   = { fg = colors.grey, bg = colors.purple, bold = true },
+    ModeTerminal = { fg = colors.grey, bg = colors.cyan, bold = true },
+    ModeReplace  = { fg = colors.grey, bg = colors.red, bold = true },
+
+    BarGrey      = { bg = colors.grey_bar },
+    BarBlack     = { bg = colors.black_bar },
+    BarTab       = { fg = colors.grey, bg = colors.blue, bold = true },
+    BarTabDim    = { fg = colors.white_dark, bg = colors.grey, bold = true },
+
+    TextBlue   = { fg = colors.blue },
+    TextGreen  = { fg = colors.green },
+    TextPurple = { fg = colors.purple },
+    TextCyan   = { fg = colors.cyan },
+    TextRed    = { fg = colors.red },
+    TextYellow = { fg = colors.yellow },
 
     -- menu
     Pmenu      = { bg = colors.grey_dark },
@@ -115,7 +185,7 @@ M.core = {
     Todo         = { fg = colors.yellow, bg = colors.grey },
 }
 
-M.syntax = {
+M.highlight.syntax = {
     -- treesitter
     ["@module"] = { fg = colors.red },
     ["@module.builtin"] = { fg = colors.red },
@@ -209,7 +279,7 @@ M.syntax = {
     ["@lsp.type.type"] = { link = "@type" },
 }
 
-M.plugins = {
+M.highlight.plugins = {
     -- blink
     BlinkCmpMenu = { link = "NormalFloat" },
     BlinkCmpMenuBorder = { fg = mix(colors.blue, colors.black, 0.5) },
@@ -299,5 +369,26 @@ M.plugins = {
     -- which-key
     WhichkeyNormal = { link = "NormalDark" },
 }
+
+M.setup = function()
+    -- reset highlights
+    vim.cmd.highlight("clear")
+    if vim.fn.exists("syntax_on") then vim.cmd.syntax("reset") end
+
+    -- enable 256 true colors
+    vim.o.termguicolors = true
+    vim.g.colors_name = "onedark"
+
+    ---@param highlights Highlights highlight groups
+    local function apply(highlights)
+        for group, opts in pairs(highlights) do
+            vim.api.nvim_set_hl(0, group, opts)
+        end
+    end
+
+    apply(M.highlight.core)
+    apply(M.highlight.syntax)
+    apply(M.highlight.plugins)
+end
 
 return M
