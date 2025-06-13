@@ -12,6 +12,16 @@ M.core = {
     FloatTitle  = { fg = colors.blue, bg = colors.grey_dark, bold = true },
     FloatBorder = { fg = colors.blue, bg = colors.bg },
 
+    --statusline
+    ModeNormal   = { fg = colors.grey, bg = colors.blue, bold = true },
+    ModeCommand  = { fg = colors.grey, bg = colors.yellow, bold = true },
+    ModeInsert   = { fg = colors.grey, bg = colors.green, bold = true },
+    ModeVisual   = { fg = colors.grey, bg = colors.purple, bold = true },
+    ModeTerminal = { fg = colors.grey, bg = colors.cyan, bold = true },
+    ModeReplace  = { fg = colors.grey, bg = colors.red, bold = true },
+    BarGrey      = { fg = colors.white, bg = colors.grey_bar },
+    BarBlack     = { fg = colors.white, bg = colors.black_bar },
+
     -- menu
     Pmenu      = { bg = colors.grey_dark },
     PmenuSel   = { bg = mix(colors.blue, colors.black, 0.3) },

@@ -1,3 +1,4 @@
+if true then return {} end
 local colors = require("custom.lualine")
 local icons = require("custom.icons").diag
 

@@ -4,3 +4,5 @@ require("config.mappings")
 require("config.colors")
 require("config.autocmds")
 require("config.lsp")
+
+require("custom.statusline").setup()
