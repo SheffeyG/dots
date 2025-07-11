@@ -23,13 +23,22 @@ ZLE_RPROMPT_INDENT=${ZLE_RPROMPT_INDENT:-0}
 # https://repo.anaconda.com/miniconda
 [ -d "$HOME/anaconda3" ] && CONDA_HOME="$HOME/anaconda3/"
 [ -d "$HOME/miniconda3" ] && CONDA_HOME="$HOME/miniconda3/"
-[ -f "/$CONDA_HOME/etc/profile.d/conda.sh" ] && \. "/$CONDA_HOME/etc/profile.d/conda.sh"
+[ -f "$CONDA_HOME/etc/profile.d/conda.sh" ] && source "$CONDA_HOME/etc/profile.d/conda.sh"
 
 # custom path
 typeset -U path
 [[ -d "${HOME}/.local/bin" ]] && path+=("${HOME}/.local/bin")
 [[ -d "${HOME}/.cargo/bin" ]] && path+=("${HOME}/.cargo/bin")
 
+# autovenv for python
+_autovenv() {
+    VENV='.venv'
+    [[ -d $VENV ]] && source $VENV/bin/activate > /dev/null 2>&1
+    [[ ! -d $VENV ]] && deactivate > /dev/null 2>&1
+}
+autoload -U add-zsh-hook
+add-zsh-hook chpwd _autovenv
+_autovenv # run autovenv after zsh initializated
 
 #-----------------------
 # Plugins
@@ -37,9 +46,9 @@ typeset -U path
 
 # zinit initialization
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-if [ ! -d "$ZINIT_HOME" ]; then
+if [ ! -d $ZINIT_HOME ]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
-    git clone --depth=1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+    git clone --depth=1 https://github.com/zdharma-continuum/zinit.git $ZINIT_HOME
 fi
 source "${ZINIT_HOME}/zinit.zsh"
 autoload -Uz _zinit
@@ -73,14 +82,11 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit ice wait"1" lucid atload"ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/.z"
 zinit light agkozak/zsh-z
 
-# auto switch python venv
-zinit wait"1" lucid for Skylor-Tang/auto-venv
-
 # fzf tab completion
 if command -v fzf >/dev/null 2>&1; then
     zinit ice wait"1" lucid atload"
-        FZF_DEFAULT_OPTS='--color=pointer:#e06c75,bg+:#51576d,gutter:-1'
-        zstyle ':fzf-tab:*' use-fzf-default-opts yes"
+    FZF_DEFAULT_OPTS='--color=pointer:#e06c75,bg+:#51576d,gutter:-1'
+    zstyle ':fzf-tab:*' use-fzf-default-opts yes"
     zinit light Aloxaf/fzf-tab
 fi
 
@@ -124,7 +130,7 @@ alias gill='git pull'
 alias gish='git push'
 alias gma='git commit --amend --no-edit'
 alias glo='git log --oneline -n 10 --graph'
-gm() { if [ -z "$1" ]; then git commit; else git commit -m "$1"; fi; }
+gm() { if [ -z $1 ]; then git commit; else git commit -m $1; fi; }
 
 if command -v eza >/dev/null 2>&1; then
     alias ls='eza --icons --color=auto'
@@ -140,5 +146,11 @@ else
     alias la='ls -lAh'
     alias lsa='ls -lah'
     alias lst='tree -pCsh'
+fi
+
+if command -v bat >/dev/null 2>&1; then
+    alias less='bat'
+    alias more='bat'
+    alias cat='bat --style=plain --paging=never'
 fi
 
