@@ -43,18 +43,54 @@ STL.build = function()
     local folder = function()
         local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
         local handle = io.popen("git rev-parse --abbrev-ref HEAD 2>/dev/null")
-        if not handle then return "" end
-        local branch = handle:read("*a")
-        handle:close()
-        branch = branch:gsub("^%s*(.-)%s*$", "%1")
+        local branch = ""
+        if handle then
+            branch = handle:read("*a"):gsub("^%s*(.-)%s*$", "%1")
+            handle:close()
+        end
         if branch == "" then return string.format("  %s ", cwd) end
         return string.format("  %s:%s ", cwd, branch)
     end
 
     local file = function()
-        local path = vim.fn.expand("%:.")
-        if vim.bo.buftype ~= "" or path == "" then return "" end
-        return string.format(" 󰈙 %s", path)
+        local file = vim.g.is_wide and vim.fn.expand("%:.") or vim.fn.expand("%:t")
+        if vim.bo.buftype ~= "" or file == "" then return "" end
+        return string.format(" 󰈙 %s", file)
+    end
+
+    local diff = function()
+        if not vim.g.is_wide then return "" end
+        local status = vim.b.gitsigns_status_dict
+        if not status then return "" end
+        local res = {}
+        if status.added and status.added > 0 then
+            table.insert(res, string.format("%%#DiffAdded# %s", status.added))
+        end
+        if status.removed and status.removed > 0 then
+            table.insert(res, string.format("%%#DiffRemoved# %s", status.removed))
+        end
+        if status.changed and status.changed > 0 then
+            table.insert(res, string.format("%%#DiffChanged# %s", status.changed))
+        end
+        return #res > 0 and " " .. table.concat(res, " ") or ""
+    end
+
+    local diagnostic = function()
+        if not vim.g.is_wide then return "" end
+        local counts = vim.diagnostic.count(0)
+        local levels = { ERROR = 0, WARN = 0, INFO = 0, HINT = 0 }
+
+        for level, _ in pairs(levels) do
+            levels[level] = counts[vim.diagnostic.severity[level]] or 0
+        end
+
+        local res = {}
+        if levels.ERROR > 0 then table.insert(res, "%#DiagnosticError# " .. levels.ERROR) end
+        if levels.WARN > 0 then table.insert(res, "%#DiagnosticWarn# " .. levels.WARN) end
+        if levels.INFO > 0 then table.insert(res, "%#DiagnosticInfo# " .. levels.INFO) end
+        if levels.HINT > 0 then table.insert(res, "%#DiagnosticHint# " .. levels.HINT) end
+
+        return #res > 0 and table.concat(res, " ") .. " " or ""
     end
 
     local recording = function()
@@ -118,11 +154,13 @@ STL.build = function()
 
         "%#BarBlack#",
         file(),
+        diff(),
 
         "%=",
 
         recording(),
         selection(),
+        diagnostic(),
         lsp(),
         tab(),
 
