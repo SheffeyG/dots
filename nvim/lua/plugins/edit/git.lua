@@ -1,13 +1,17 @@
+local signs = {
+    add = { text = "│" },
+    change = { text = "│" },
+    changedelete = { text = "┼" },
+}
+
 ---@type LazyPluginSpec[]
 return {
     {
-        "echasnovski/mini.diff",
-        event = "BufReadPost",
+        "lewis6991/gitsigns.nvim",
+        event = { "BufReadPost" },
         opts = {
-            view = {
-                style = "sign",
-                signs = { add = "│", change = "│", delete = "▁" },
-            },
+            signs = signs,
+            signs_staged = signs,
         },
     },
 

@@ -40,10 +40,10 @@ M.kind = {
 
 -- stylua: ignore
 M.diag = {
-    Error = " ",
-    Warn  = " ",
-    Hint  = " ",
-    Info  = " ",
+    Error = " ",
+    Warn  = " ",
+    Hint  = " ",
+    Info  = " ",
 }
 
 return M

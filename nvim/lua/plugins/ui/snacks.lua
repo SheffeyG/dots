@@ -45,7 +45,10 @@ return {
         input = { enabled = true },
         rename = { enabled = true },
         notifier = { top_down = false },
-        statuscolumn = { enabled = true },
+        statuscolumn = {
+            left = { "mark", "git" },
+            right = { "fold", "sign" },
+        },
         terminal = {
             env = {
                 ZLE_RPROMPT_INDENT = 1, -- zsh prompt padding
