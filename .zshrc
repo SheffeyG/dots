@@ -15,9 +15,9 @@ ZLE_RPROMPT_INDENT=${ZLE_RPROMPT_INDENT:-0}
 
 # NVM initialization
 # https://github.com/nvm-sh/nvm?tab=readme-ov-file#manual-install
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # conda initialization
 # https://repo.anaconda.com/miniconda
@@ -38,7 +38,7 @@ _autovenv() {
 }
 autoload -U add-zsh-hook
 add-zsh-hook chpwd _autovenv
-_autovenv # run autovenv after zsh initializated
+_autovenv # activate venv once enter the shell
 
 #-----------------------
 # Plugins
@@ -89,7 +89,6 @@ if command -v fzf >/dev/null 2>&1; then
     zstyle ':fzf-tab:*' use-fzf-default-opts yes"
     zinit light Aloxaf/fzf-tab
 fi
-
 
 #-----------------------
 # Options

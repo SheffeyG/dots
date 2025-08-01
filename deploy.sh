@@ -1,51 +1,43 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-SCRIPT_DIR="$( cd "$( dirname "$BASH_SOURCE[0]" )" && pwd )"
-
+SCRIPT_DIR="$(cd "$(dirname "$BASH_SOURCE[0]")" && pwd)"
 
 symlinkFile() {
-    filename="$SCRIPT_DIR/$1"
-    destination="$HOME/$2/$1"
+    file="$SCRIPT_DIR/$1"
+    dest="$HOME/${2:+$2/}$1"
 
-    mkdir -p $(dirname "$destination")
+    mkdir -p $(dirname "$dest")
 
-    if [ ! -e "$filename" ]; then
-        echo "[WARNING] Source '$filename' doesn't exist! skipped."
+    if [ ! -e "$file" ]; then
+        echo "[LINK] Skipped, source '$file' doesn't exist."
         return
-    fi 
-
-    if [ ! -L "$destination" ]; then
-        if [ -e "$destination" ]; then
-            echo "[WARNING] Target '$destination' exists but it's not a symlink! skipped."
-        else
-            ln -s "$filename" "$destination"
-            echo "[OK] symlink: $filename -> $destination"
-        fi
-    else
-        echo "[WARNING] Target '$filename' already symlinked! skipped."
+    elif [ -L "$dest" ]; then
+        echo "[LINK] Skipped, target '$dest' already symlinked."
+        return
+    elif [ -e "$dest" ]; then
+        echo "[LINK] Skipped, target '$dest' exists but not a symlink."
+        return
     fi
-}
 
+    ln -s "$file" "$dest" && echo "[LINK] $file -> $dest"
+}
 
 copyFile() {
-    filename="$SCRIPT_DIR/$1"
-    destination="$HOME/$2/$1"
+    file="$SCRIPT_DIR/$1"
+    dest="$HOME/${2:+$2/}$1"
 
-    mkdir -p $(dirname "$destination")
+    mkdir -p $(dirname "$dest")
 
-    if [ ! -e "$filename" ]; then
-        echo "[WARNING] Source '$filename' doesn't exist! skipped."
+    if [ ! -e "$file" ]; then
+        echo "[COPY] Skipped, source '$file' doesn't exist."
         return
-    fi 
-
-    if [ -e "$destination" ]; then
-        echo "[WARNING] Target '$destination' already exists! skipped."
-    else
-        cp -r "$filename" "$destination"
-        echo "[OK] copy: $filename -> $destination"
+    elif [ -e "$dest" ]; then
+        echo "[COPY] Skipped, target '$dest' already exists."
+        return
     fi
-}
 
+    cp -r "$file" "$dest" && echo "[COPY] $file -> $dest"
+}
 
 recursiveLink() {
     sourcepath="$1"
@@ -61,36 +53,26 @@ recursiveLink() {
     done
 }
 
-
-deployManifest() {
-    while IFS='|' read -r operation source target; do
-        operation=$(echo "$operation" | tr -d '[:space:]')
-        source=$(echo "$source" | tr -d '[:space:]')
-        target=$(echo "$target" | tr -d '[:space:]')
-
-        case $operation in
-            link) symlinkFile $source $target ;;
-
-            copy) copyFile $source $target ;;
-
-            rlink) recursiveLink $source $target ;;
-
-            *) echo "[WARNING] Unknown operation '$operation', skipped." ;;
-        esac
-    done < "$SCRIPT_DIR/$1"
-}
-
-
 # set -ex
-manifest=$1
+MANIFEST=$1
 
-if [ -z "$manifest" ]; then
-    echo "[ERROR] No MANIFEST file provided."
+if [ -z "$MANIFEST" ]; then
+    echo "[ERROR] No MANIFEST file provided!"
     exit 1
-elif [ ! -e "$manifest" ]; then
-    echo "[ERROR] MANIFEST file '$manifest' doesn't exists!"
+elif [ ! -e "$MANIFEST" ]; then
+    echo "[ERROR] MANIFEST file '$MANIFEST' doesn't exists!"
     exit 1
 fi
 
-deployManifest $manifest
+while IFS='|' read -r opt src tgt; do
+    opt=$(printf '%s' "$opt" | tr -d '[:space:]')
+    src=$(printf '%s' "$src" | tr -d '[:space:]')
+    tgt=$(printf '%s' "$tgt" | tr -d '[:space:]')
 
+    case $opt in
+        link) symlinkFile $src $tgt ;;
+        copy) copyFile $src $tgt ;;
+        rlink) recursiveLink $src $tgt ;;
+        *) echo "[WARNING] Unknown operation '$opt'!" ;;
+    esac
+done <"$SCRIPT_DIR/$MANIFEST"
