@@ -4,10 +4,10 @@ attach_or_switch() {
     local session_name="$1"
     if [[ -n "$TMUX" ]]; then
         tmux switch-client -t "$session_name" ||
-            echo "Error: Could not switch to session '$session_name'."
+            echo "[Error] Could not switch to session '$session_name'."
     else
         tmux attach-session -t "$session_name" ||
-            echo "Error: Could not attach to session '$session_name'."
+            echo "[Error] Could not attach to session '$session_name'."
     fi
 }
 
@@ -17,7 +17,7 @@ attach_or_create() {
         attach_or_switch "$session_name"
     else
         tmux new-session -d -s "$session_name" ||
-            echo "Error: Failed to create session '$session_name'."
+            echo "[Error] Failed to create session '$session_name'."
         attach_or_switch "$session_name"
     fi
 }
@@ -28,5 +28,5 @@ elif [[ "$#" -eq 1 ]]; then
     [[ -d "$1" ]] && cd "$1"
     attach_or_create "$1"
 else
-    echo "Error: Too many parameters for command 'tt'."
+    echo "[Error] Too many parameters for command 'tt'."
 fi

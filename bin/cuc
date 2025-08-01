@@ -6,5 +6,5 @@ if [ -d "$CUDA_PATH" ]; then
     export PATH="$CUDA_PATH/bin:$PATH"
     export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
 else
-    echo "[ERROR]: Could not find cuda path '$CUDA_PATH'"
+    echo "[ERROR] Could not find cuda path '$CUDA_PATH'"
 fi
