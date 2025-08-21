@@ -3,6 +3,10 @@ return {
     {
         "stevearc/conform.nvim",
         opts = {
+            formatters = {
+                shfmt = { append_args = { "-ci" } }, -- switch case indent
+                -- ruff_format = { append_args = { "--line-length", "120" } },
+            },
             formatters_by_ft = {
                 lua = { "stylua" },
                 python = { "ruff_format", "ruff_organize_imports" },
