@@ -32,7 +32,7 @@ typeset -U path
 
 # autovenv for python
 _autovenv() {
-    VENV='.venv'
+    local VENV='.venv'
     [[ -d $VENV ]] && source $VENV/bin/activate > /dev/null 2>&1
     [[ ! -d $VENV ]] && deactivate > /dev/null 2>&1
 }
@@ -94,7 +94,6 @@ fi
 # Options
 #-----------------------
 
-set bell-style none
 unsetopt BEEP LIST_BEEP HIST_BEEP
 setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
 

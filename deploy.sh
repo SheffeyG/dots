@@ -2,9 +2,9 @@
 
 SCRIPT_DIR="$(cd "$(dirname "$BASH_SOURCE[0]")" && pwd)"
 
-symlinkFile() {
-    file="$SCRIPT_DIR/$1"
-    dest="$HOME/${2:+$2/}$1"
+function symlinkFile() {
+    local file="$SCRIPT_DIR/$1"
+    local dest="$HOME/${2:+$2/}$1"
 
     mkdir -p $(dirname "$dest")
 
@@ -22,9 +22,9 @@ symlinkFile() {
     ln -s "$file" "$dest" && echo "[LINK] $file -> $dest"
 }
 
-copyFile() {
-    file="$SCRIPT_DIR/$1"
-    dest="$HOME/${2:+$2/}$1"
+function copyFile() {
+    local file="$SCRIPT_DIR/$1"
+    local dest="$HOME/${2:+$2/}$1"
 
     mkdir -p $(dirname "$dest")
 
@@ -39,9 +39,9 @@ copyFile() {
     cp -r "$file" "$dest" && echo "[COPY] $file -> $dest"
 }
 
-recursiveLink() {
-    sourcepath="$1"
-    targetpath="$2"
+function recursiveLink() {
+    local sourcepath="$1"
+    local targetpath="$2"
 
     for source in "$sourcepath"/*; do
         if [ -f "$source" ]; then
