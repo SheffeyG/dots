@@ -1,31 +1,36 @@
 #!/usr/bin/env bash
 
-_HOST="127.0.0.1"
-_PORT="10808"
-
-if [[ "$#" -eq 1 ]]; then
-    if [[ "$1" =~ ^[0-9]+$ ]] && [ "$1" -ge 1 ] && [ "$1" -le 65535 ]; then
-        _PORT="$1"
-    else
-        echo "[ERROR] Port should be an integer between 1~65535"
-    fi
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+    echo "[Error] This script should be sourced, not executed directly."
+    echo "        Usage: source proxy [host] [port]"
+    exit 1
 fi
 
-if [ -n "$SSH_CONNECTION" ]; then
-    _HOST=$(echo "$SSH_CONNECTION" | awk '{print $1}')
-    if [ -z "$_HOST" ]; then
-        echo "[WARNING] Could not get ssh host info, using localhost instead."
-        _HOST="127.0.0.1"
-    fi
-fi
+function set_proxy() {
+    local host="127.0.0.1"
+    local port="10808"
 
-if [ -n "$HTTP_PROXY" ] || [ -n "$HTTPS_PROXY" ]; then
+    [[ "$#" -eq 1 ]] && port="$1"
+    [[ "$#" -eq 2 ]] && host="$1" && port="$2"
+
+    if [ -n "$SSH_CONNECTION" ]; then
+        host=$(echo "$SSH_CONNECTION" | awk '{print $1}')
+        if [ -z "$host" ]; then
+            echo "[WARNING] Could not get ssh host ip, using localhost instead."
+            host="127.0.0.1"
+        fi
+    fi
+
+    export HTTP_PROXY="socks5://$host:$port"
+    export HTTPS_PROXY="socks5://$host:$port"
+}
+
+if [[ $# -eq 0 ]] && [[ -n "$HTTP_PROXY" || -n "$HTTPS_PROXY" ]]; then
     unset HTTP_PROXY
     unset HTTPS_PROXY
     echo "Proxy Removed!"
 else
-    HTTP_PROXY="socks5://$_HOST:$_PORT"
-    HTTPS_PROXY="socks5://$_HOST:$_PORT"
+    set_proxy "$@"
     echo "HTTP_PROXY=$HTTP_PROXY"
     echo "HTTPS_PROXY=$HTTPS_PROXY"
 fi

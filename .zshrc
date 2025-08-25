@@ -94,7 +94,6 @@ fi
 # Options
 #-----------------------
 
-set bell-style none
 unsetopt BEEP LIST_BEEP HIST_BEEP
 setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
 
