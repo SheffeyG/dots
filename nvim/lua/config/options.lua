@@ -45,15 +45,18 @@ o.foldtext = ""
 o.foldcolumn = "0"
 
 o.list = true
-opt.listchars = { tab = "░░" }
+opt.listchars:append({ tab = "░░" })
 
-opt.fillchars:append({ eob = " ", fold = " ", diff = "╱" })
+opt.fillchars:append({ eob = " ", fold = " ", diff = " " })
 
 -- disable nvim intro
 opt.shortmess:append("sI")
 
 -- allow cursor across line boundaries
 opt.whichwrap:append("<>[]hl")
+
+-- set vertical diffview
+opt.diffopt:append("vertical")
 
 -- set leaderkey before lazy setup
 g.mapleader = " "

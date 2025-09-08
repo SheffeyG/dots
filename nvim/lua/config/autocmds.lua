@@ -76,6 +76,9 @@ autocmd("FileType", {
         "lspinfo",
         "man",
         "qf",
+        "git",
+        "fugitive",
+        "vim",
     },
     callback = function(e)
         vim.bo[e.buf].buflisted = false

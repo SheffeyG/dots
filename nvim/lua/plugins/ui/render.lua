@@ -1,5 +1,7 @@
 ---@type LazyPluginSpec[]
 return {
+    { "nvim-tree/nvim-web-devicons" },
+
     {
         "NMAC427/guess-indent.nvim",
         event = "BufReadPost",

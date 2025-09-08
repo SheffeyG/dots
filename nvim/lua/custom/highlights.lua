@@ -95,11 +95,11 @@ M.highlight.core = {
     Folded       = { fg = colors.grey_light, bg = colors.grey_dark },
     Visual       = { bg = colors.grey_dark },
     VisualNOS    = { fg = colors.red }, -- Non-Owning Selection
-    -- diffview workaround https://github.com/neovim/neovim/issues/9800
-    CursorLine   = { bg = colors.black_light, ctermfg = "white" },
-    CursorColumn = { bg = colors.grey },
-    QuickFixLine = { bg = colors.grey },
-    ColorColumn  = { bg = colors.black_dark }, -- "too long" sign column
+    -- A underline workaround https://github.com/neovim/neovim/issues/9800
+    CursorLine   = { bg = colors.black_light, nocombine = true },
+    CursorColumn = { bg = colors.grey, nocombine = true },
+    QuickFixLine = { bg = colors.grey, nocombine = true },
+    ColorColumn  = { bg = colors.black_dark, nocombine = true }, -- "too long" sign column
     LineNr       = { fg = colors.grey_light }, -- line number
     CursorLineNr = { fg = colors.white_dark }, -- current line number
     WinBar       = { fg = colors.blue, bg = colors.black_light, bold = true },
@@ -119,13 +119,15 @@ M.highlight.core = {
     MoreMsg    = { fg = colors.green },
     Whitespace = { fg = colors.grey_dark }, -- listchars.tab
 
-    -- diag & lsp
+    -- diagnostic
     DiagnosticInfo   = { fg = colors.blue },
     DiagnosticWarn   = { fg = colors.yellow },
     DiagnosticOk     = { fg = colors.green },
     DiagnosticHint   = { fg = colors.purple },
     DiagnosticError  = { fg = colors.red },
-    LspReferenceText = { bg = mix(colors.cyan, colors.black, 0.05) }, -- snacks.words
+
+    -- LSP
+    LspReferenceText = { bg = mix(colors.cyan, colors.black, 0.05), nocombine = true }, -- snacks.words
 
     -- search & replace
     Search     = { fg = colors.yellow, bg = mix(colors.yellow, colors.black, 0.2) },
@@ -140,18 +142,13 @@ M.highlight.core = {
     Removed = { fg = colors.red },
     Changed = { fg = colors.yellow },
 
-    -- git.diff
-    DiffAdd          = { bg = mix(colors.green, colors.black, 0.2) },
+    -- diff
     DiffDelete       = { bg = mix(colors.red, colors.black, 0.2) },
+    DiffAdd          = { bg = mix(colors.green, colors.black, 0.2) },
     DiffChange       = { bg = mix(colors.yellow, colors.black, 0.2) },
     DiffText         = { bg = mix(colors.orange, colors.black, 0.2), bold = true },
     DiffChangeDelete = { link = "DiffDelete" },
-    DiffAdded        = { fg = colors.green },
-    DiffRemoved      = { fg = colors.red },
-    DiffChanged      = { fg = colors.yellow },
-    DiffModified     = { fg = colors.yellow },
-    DiffNewFile      = { fg = colors.blue },
-    DiffOldFile      = { fg = colors.yellow },
+    -- DiffDelete       = { fg = colors.grey_dark }, -- for diffchar '/'
 
     -- builtin syntax
     Comment      = { fg = colors.grey_light },
@@ -318,25 +315,6 @@ M.highlight.plugins = {
     BlinkCmpLabelDescription = { fg = colors.grey, italic = true },
     BlinkCmpLabelDetail = { fg = colors.grey },
 
-    -- neogit
-    -- NeogitDiffHeader = { fg = colors.black, bg = colors.grey_light, bold = true },
-    NeogitDiffHeader = { link = "NeogitDiffHeaderCursor" }, -- TODO: waiting for upsteam solution
-    NeogitDiffHeaderCursor = { fg = colors.black, bg = mix(colors.yellow, colors.black, 0.7), bold = true },
-    NeogitDiffHeaderHighlight = { link = "NeogitDiffHeaderCursor" },
-    NeogitHunkHeader = { fg = colors.black, bg = colors.grey, bold = true },
-    NeogitHunkHeaderCursor = { fg = colors.black, bg = mix(colors.blue, colors.black, 0.4), bold = true },
-    NeogitHunkHeaderHighlight = { link = "NeogitHunkHeaderCursor" },
-    NeogitDiffAddCursor = { fg = colors.green, bg = mix(colors.green, colors.black, 0.3) },
-    NeogitDiffDeleteCursor = { fg = colors.red, bg = mix(colors.red, colors.black, 0.3) },
-
-    -- diffview
-    DiffviewFilePanelFileName = { link = "Normal" },
-    DiffviewDiffDeleteDim = { fg = colors.grey_dark }, -- fillchars.diff
-
-    -- git-conflict
-    ConflictOurs = { bg = mix(colors.blue, colors.black, 0.2) }, -- custom
-    ConflictTheirs = { bg = mix(colors.cyan, colors.black, 0.2) }, -- custom
-
     -- noice
     NoiceVirtualText = { fg = colors.cyan, bg = mix(colors.cyan, colors.black, 0.2) }, -- search label
 
@@ -368,6 +346,25 @@ M.highlight.plugins = {
 
     -- which-key
     WhichkeyNormal = { link = "NormalDark" },
+
+    -- -- neogit
+    -- -- NeogitDiffHeader = { fg = colors.black, bg = colors.grey_light, bold = true },
+    -- NeogitDiffHeader = { link = "NeogitDiffHeaderCursor" }, -- TODO: waiting for upsteam solution
+    -- NeogitDiffHeaderCursor = { fg = colors.black, bg = mix(colors.yellow, colors.black, 0.7), bold = true },
+    -- NeogitDiffHeaderHighlight = { link = "NeogitDiffHeaderCursor" },
+    -- NeogitHunkHeader = { fg = colors.black, bg = colors.grey, bold = true },
+    -- NeogitHunkHeaderCursor = { fg = colors.black, bg = mix(colors.blue, colors.black, 0.4), bold = true },
+    -- NeogitHunkHeaderHighlight = { link = "NeogitHunkHeaderCursor" },
+    -- NeogitDiffAddCursor = { fg = colors.green, bg = mix(colors.green, colors.black, 0.3) },
+    -- NeogitDiffDeleteCursor = { fg = colors.red, bg = mix(colors.red, colors.black, 0.3) },
+    --
+    -- -- diffview
+    -- DiffviewFilePanelFileName = { link = "Normal" },
+    -- DiffviewDiffDeleteDim = { fg = colors.grey_dark }, -- fillchars.diff
+
+    -- git-conflict
+    -- ConflictOurs = { bg = mix(colors.blue, colors.black, 0.2) }, -- custom
+    -- ConflictTheirs = { bg = mix(colors.cyan, colors.black, 0.2) }, -- custom
 }
 
 M.setup = function()
