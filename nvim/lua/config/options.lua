@@ -47,7 +47,7 @@ o.foldcolumn = "0"
 o.list = true
 opt.listchars:append({ tab = "░░" })
 
-opt.fillchars:append({ eob = " ", fold = " ", diff = " " })
+opt.fillchars:append({ eob = " ", fold = " ", diff = "╱" })
 
 -- disable nvim intro
 opt.shortmess:append("sI")

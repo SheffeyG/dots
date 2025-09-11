@@ -95,7 +95,7 @@ M.highlight.core = {
     Folded       = { fg = colors.grey_light, bg = colors.grey_dark },
     Visual       = { bg = colors.grey_dark },
     VisualNOS    = { fg = colors.red }, -- Non-Owning Selection
-    -- A underline workaround https://github.com/neovim/neovim/issues/9800
+    -- A underline workaround: https://github.com/neovim/neovim/issues/9800
     CursorLine   = { bg = colors.black_light, nocombine = true },
     CursorColumn = { bg = colors.grey, nocombine = true },
     QuickFixLine = { bg = colors.grey, nocombine = true },
@@ -146,9 +146,8 @@ M.highlight.core = {
     DiffDelete       = { bg = mix(colors.red, colors.black, 0.2) },
     DiffAdd          = { bg = mix(colors.green, colors.black, 0.2) },
     DiffChange       = { bg = mix(colors.yellow, colors.black, 0.2) },
-    DiffText         = { bg = mix(colors.orange, colors.black, 0.2), bold = true },
+    DiffText         = { bg = mix(colors.yellow, colors.black, 0.25), bold = true },
     DiffChangeDelete = { link = "DiffDelete" },
-    -- DiffDelete       = { fg = colors.grey_dark }, -- for diffchar '/'
 
     -- builtin syntax
     Comment      = { fg = colors.grey_light },
@@ -347,24 +346,24 @@ M.highlight.plugins = {
     -- which-key
     WhichkeyNormal = { link = "NormalDark" },
 
-    -- -- neogit
-    -- -- NeogitDiffHeader = { fg = colors.black, bg = colors.grey_light, bold = true },
-    -- NeogitDiffHeader = { link = "NeogitDiffHeaderCursor" }, -- TODO: waiting for upsteam solution
-    -- NeogitDiffHeaderCursor = { fg = colors.black, bg = mix(colors.yellow, colors.black, 0.7), bold = true },
-    -- NeogitDiffHeaderHighlight = { link = "NeogitDiffHeaderCursor" },
-    -- NeogitHunkHeader = { fg = colors.black, bg = colors.grey, bold = true },
-    -- NeogitHunkHeaderCursor = { fg = colors.black, bg = mix(colors.blue, colors.black, 0.4), bold = true },
-    -- NeogitHunkHeaderHighlight = { link = "NeogitHunkHeaderCursor" },
-    -- NeogitDiffAddCursor = { fg = colors.green, bg = mix(colors.green, colors.black, 0.3) },
-    -- NeogitDiffDeleteCursor = { fg = colors.red, bg = mix(colors.red, colors.black, 0.3) },
-    --
-    -- -- diffview
-    -- DiffviewFilePanelFileName = { link = "Normal" },
-    -- DiffviewDiffDeleteDim = { fg = colors.grey_dark }, -- fillchars.diff
+    -- neogit
+    -- NeogitDiffHeader = { fg = colors.black, bg = colors.grey_light, bold = true },
+    NeogitDiffHeader = { link = "NeogitDiffHeaderCursor" }, -- TODO: waiting for upsteam solution
+    NeogitDiffHeaderCursor = { fg = colors.black, bg = mix(colors.yellow, colors.black, 0.7), bold = true },
+    NeogitDiffHeaderHighlight = { link = "NeogitDiffHeaderCursor" },
+    NeogitHunkHeader = { fg = colors.black, bg = colors.grey, bold = true },
+    NeogitHunkHeaderCursor = { fg = colors.black, bg = mix(colors.blue, colors.black, 0.4), bold = true },
+    NeogitHunkHeaderHighlight = { link = "NeogitHunkHeaderCursor" },
+    NeogitDiffAddCursor = { fg = colors.green, bg = mix(colors.green, colors.black, 0.3) },
+    NeogitDiffDeleteCursor = { fg = colors.red, bg = mix(colors.red, colors.black, 0.3) },
+
+    -- diffview
+    -- Highlight for fillchars.diff, see https://github.com/sindrets/diffview.nvim/issues/340
+    DiffviewDiffDelete = { fg = mix(colors.red, colors.black, 0.25), bg = mix(colors.red, colors.black, 0.2) },
 
     -- git-conflict
-    -- ConflictOurs = { bg = mix(colors.blue, colors.black, 0.2) }, -- custom
-    -- ConflictTheirs = { bg = mix(colors.cyan, colors.black, 0.2) }, -- custom
+    DiffOurs = { bg = mix(colors.blue, colors.black, 0.2) }, -- custom
+    DiffTheirs = { bg = mix(colors.cyan, colors.black, 0.2) }, -- custom
 }
 
 M.setup = function()

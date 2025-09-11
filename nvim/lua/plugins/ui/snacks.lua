@@ -49,38 +49,10 @@ return {
             left = { "mark", "git" },
             right = { "fold", "sign" },
         },
-        lazygit = {
-            config = {
-                gui = {
-                    showCommandLog = false,
-                    sidePanelWidth = 0.45,
-                },
-                git = {
-                    autoFetch = false,
-                },
-            },
-            -- stylua: ignore
-            theme = {
-                [241]                      = { fg = "Special" },
-                defaultFgColor             = { fg = "Normal" },
-                inactiveBorderColor        = { fg = "Normal" },
-                activeBorderColor          = { fg = "FloatBorder", bold = true },
-                searchingActiveBorderColor = { fg = "FloatBorder", bold = true },
-                cherryPickedCommitBgColor  = { fg = "Identifier" },
-                cherryPickedCommitFgColor  = { fg = "Function" },
-                optionsTextColor           = { fg = "Function" },
-                selectedLineBgColor        = { bg = "Visual" },
-                unstagedChangesColor       = { fg = "DiagnosticError" },
-            },
-            win = {
-                relative = "editor",
-                border = "solid",
-            },
-        },
         terminal = {
             env = {
-                ZLE_RPROMPT_INDENT = 1, -- zsh prompt padding
-                VIMRUNTIME = 1, -- to show a p10k prompt icon
+                ZLE_RPROMPT_INDENT = 1, -- p10k prompt padding
+                VIMRUNTIME = 1, -- to tell p10k we are in vim
             },
             win = {
                 relative = "win",
@@ -191,7 +163,6 @@ return {
         { "<leader>fr", function() Snacks.picker.recent() end, desc = "Find in Recent" },
         { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
         -- git
-        { "<leader>gg", function() Snacks.lazygit() end, desc = "Git Open Lazygit" },
         { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
         { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
         { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },

@@ -55,6 +55,7 @@ local language_servers = {
     "lua_ls",
     "basedpyright",
     "bashls",
+    "rust_analyzer",
 }
 
 for _, lsp in ipairs(language_servers) do
