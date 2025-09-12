@@ -1,3 +1,5 @@
+---@module "snacks"
+
 ---@type snacks.picker.layout.Config
 local win_input = {
     win = "input",
@@ -33,7 +35,6 @@ local win_preview = {
 ---@type LazyPluginSpec
 return {
     "sheffeyg/snacks.nvim",
-    branch = "fix-terminal-create",
     priority = 1000,
     lazy = false,
     ---@type snacks.Config
@@ -46,8 +47,8 @@ return {
         rename = { enabled = true },
         notifier = { top_down = false },
         statuscolumn = {
-            left = { "mark", "git" },
-            right = { "fold", "sign" },
+            left = { "sign", "mark", "git" },
+            right = { "diag", "fold" },
         },
         terminal = {
             env = {

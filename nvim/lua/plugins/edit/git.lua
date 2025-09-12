@@ -17,7 +17,7 @@ return {
         },
         keys = {
             { "<leader>uH", "<CMD>lua MiniDiff.toggle_overlay()<CR>", desc = "Toggle hunk preview" },
-        }
+        },
     },
 
     {
@@ -44,28 +44,32 @@ return {
         ---@module "neogit"
         ---@type NeogitConfig
         opts = {
-            kind = "tab", -- auto/tab/floating/split/vsplit
-            commit_view = { kind = "auto" },
-            log_view = { kind = "vsplit" },
             signs = {
                 hunk = { "", "" },
-                item = { " ", " " },
+                item = { "", "" },
                 section = { " ", " " },
             },
+            graph_style = "unicode",
             sections = {
                 rebase = { folded = false },
-                recent = { folded = false, hidden = false },
+                recent = { folded = false },
+                unmerged_upstream = { hidden = true },
             },
+            kind = "tab",
+            commit_view = { kind = "auto" },
+            log_view = { kind = "auto" },
             commit_editor = {
                 kind = "auto",
                 show_staged_diff = false,
             },
-            graph_style = "unicode",
             mappings = {
                 popup = {
-                    ["l"] = false,
                     ["L"] = "LogPopup",
                 },
+                status = {
+                    -- ["h"] = "Close",
+                    ["l"] = "GoToFile",
+                }
             },
         },
     },

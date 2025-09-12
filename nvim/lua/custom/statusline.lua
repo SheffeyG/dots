@@ -70,17 +70,20 @@ STL.build = function()
 
     local diff = function()
         if not vim.g.is_wide then return "" end
-        local status = vim.b.gitsigns_status_dict
-        if not status then return "" end
         local res = {}
-        if status.added and status.added > 0 then
-            table.insert(res, string.format("%%#DiffAdded# %s", status.added))
-        end
-        if status.removed and status.removed > 0 then
-            table.insert(res, string.format("%%#DiffRemoved# %s", status.removed))
-        end
-        if status.changed and status.changed > 0 then
-            table.insert(res, string.format("%%#DiffChanged# %s", status.changed))
+        -- Get info from gitsigns or mini.diff
+        if vim.b.gitsigns_status_dict then
+            local s = vim.b.gitsign_status_dict
+            if s.added and s.added > 0 then table.insert(res, string.format("%%#Added# %s", s.added)) end
+            if s.removed and s.removed > 0 then table.insert(res, string.format("%%#Removed# %s", s.removed)) end
+            if s.changed and s.changed > 0 then table.insert(res, string.format("%%#Changed# %s", s.changed)) end
+        elseif vim.b.minidiff_summary then
+            local s = vim.b.minidiff_summary
+            if s.add and s.add > 0 then table.insert(res, string.format("%%#Added# %s", s.add)) end
+            if s.delete and s.delete > 0 then table.insert(res, string.format("%%#Removed# %s", s.delete)) end
+            if s.change and s.change > 0 then table.insert(res, string.format("%%#Changed# %s", s.change)) end
+        else
+            return ""
         end
         return #res > 0 and " " .. table.concat(res, " ") or ""
     end
