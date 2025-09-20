@@ -4,14 +4,14 @@ return {
 
     {
         "NMAC427/guess-indent.nvim",
-        event = "BufReadPost",
+        event = "BufReadPre",
         opts = {},
     },
 
     {
         "nvim-treesitter/nvim-treesitter",
-        version = "*",
-        event = { "BufReadPost", "BufNewFile" },
+        branch = "main",
+        lazy = false,
         build = ":TSUpdate",
         opts = {
             -- built-in parser: C, Lua, Markdown, Vimscript, Vimdoc.
@@ -32,28 +32,21 @@ return {
             },
             indent = { enable = true },
         },
-        config = function(_, opts) -- needs call setup manually
-            require("nvim-treesitter.configs").setup(opts)
-        end,
     },
 
     {
         "MeanderingProgrammer/render-markdown.nvim",
         ft = { "markdown", "codecompanion" },
-        ---@module 'render-markdown'
+        ---@module "render-markdown"
         ---@type render.md.UserConfig
         opts = {
-            anti_conceal = {
-                ignore = { head_background = true },
-            },
-            win_options = {
-                concealcursor = { rendered = "n" },
-            },
+            anti_conceal = { enabled = false },
             completions = { blink = { enabled = true } },
             heading = {
-                icons = { "󱅊 ", "󱅋 ", "󱅌 ", "󱅍 ", "󱅎 ", "󱅏 " },
-                position = "inline",
                 left_pad = 1,
+                position = "inline",
+                -- icons = { "󱅊 ", "󱅋 ", "󱅌 ", "󱅍 ", "󱅎 ", "󱅏 " },
+                icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
             },
             code = {
                 sign = false,

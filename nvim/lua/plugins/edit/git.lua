@@ -17,7 +17,7 @@ return {
         },
         keys = {
             { "<leader>uH", "<CMD>lua MiniDiff.toggle_overlay()<CR>", desc = "Toggle hunk preview" },
-        }
+        },
     },
 
     {
@@ -29,7 +29,7 @@ return {
             signs_staged = signs,
         },
         keys = {
-            { "<leader>uH", "<CMD>Gitsigns preview_hunk_inline<CR>", desc = "Toggle preview hunk" },
+            { "<leader>uH", "<CMD>Gitsigns preview_hunk_inline<CR>", desc = "Toggle hunk preview" },
             { "gh", "<CMD>Gitsigns stage_hunk<CR>", desc = "Git stage hunk" },
             { "gH", "<CMD>Gitsigns reset_hunk<CR>", desc = "Git reset hunk" },
         },
@@ -44,27 +44,32 @@ return {
         ---@module "neogit"
         ---@type NeogitConfig
         opts = {
-            kind = "tab", -- auto/tab/floating/split/vsplit
-            commit_view = { kind = "auto" },
-            log_view = { kind = "vsplit" },
             signs = {
                 hunk = { "", "" },
-                item = { " ", " " },
+                item = { "", "" },
                 section = { " ", " " },
             },
+            graph_style = "unicode",
             sections = {
                 rebase = { folded = false },
-                recent = { folded = false, hidden = false },
+                recent = { folded = false },
+                unmerged_upstream = { hidden = true },
             },
+            kind = "tab",
+            commit_view = { kind = "auto" },
+            log_view = { kind = "auto" },
             commit_editor = {
                 kind = "auto",
                 show_staged_diff = false,
             },
-            graph_style = "unicode",
             mappings = {
                 popup = {
                     ["l"] = false,
                     ["L"] = "LogPopup",
+                },
+                status = {
+                    -- ["h"] = "Close",
+                    ["l"] = "GoToFile",
                 },
             },
         },
@@ -87,6 +92,7 @@ return {
 
     {
         "sindrets/diffview.nvim",
+        cmd = { "DiffviewOpen" },
         keys = {
             { "<leader>dv", "<CMD>DiffviewOpen<CR>", desc = "Diffview Open Panel" },
             { "<leader>dp", "<CMD>DiffviewOpen HEAD^..HEAD<CR>", desc = "Diffview Diff Previous" },

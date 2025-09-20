@@ -1,3 +1,5 @@
+---@module "blink.cmp"
+
 ---@type LazyPluginSpec
 return {
     "saghen/blink.cmp",
@@ -6,7 +8,6 @@ return {
     version = "*",
     -- version = vim.g.is_arm and "*" or false,
     -- build = vim.g.is_arm and false or "cargo build --release",
-    ---@module "blink.cmp"
     ---@type blink.cmp.Config
     opts = {
         keymap = {

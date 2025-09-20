@@ -1,13 +1,6 @@
--- statusline click action
-vim.cmd([[
-    function! StlSwitchTab(tabnr, mouseclicks, mousebutton, modifiers)
-        execute a:tabnr . "tabnext"
-    endfunction
-]])
-
 STL = {}
 
-STL.getmode = function()
+STL.get_mode = function()
     local C_S = vim.api.nvim_replace_termcodes("<C-S>", true, true, true)
     local C_V = vim.api.nvim_replace_termcodes("<C-V>", true, true, true)
     -- stylua: ignore
@@ -35,8 +28,11 @@ STL.getmode = function()
     return modes[vim.fn.mode()]
 end
 
+-- click to switch tab
+STL.switch_tab = function(tabnr) vim.cmd(tabnr .. "tabnext") end
+
 STL.build = function()
-    local current_mode = STL.getmode()
+    local current_mode = STL.get_mode()
     local mode = string.format("%s  %s ", current_mode.hl, current_mode.name)
     local perc = string.format("%s %%P ", current_mode.hl)
 
@@ -70,17 +66,20 @@ STL.build = function()
 
     local diff = function()
         if not vim.g.is_wide then return "" end
-        local status = vim.b.gitsigns_status_dict
-        if not status then return "" end
         local res = {}
-        if status.added and status.added > 0 then
-            table.insert(res, string.format("%%#DiffAdded# %s", status.added))
-        end
-        if status.removed and status.removed > 0 then
-            table.insert(res, string.format("%%#DiffRemoved# %s", status.removed))
-        end
-        if status.changed and status.changed > 0 then
-            table.insert(res, string.format("%%#DiffChanged# %s", status.changed))
+        -- Get info from gitsigns or mini.diff
+        if vim.b.gitsigns_status_dict then
+            local s = vim.b.gitsign_status_dict
+            if s.added and s.added > 0 then table.insert(res, string.format("%%#Added# %s", s.added)) end
+            if s.removed and s.removed > 0 then table.insert(res, string.format("%%#Removed# %s", s.removed)) end
+            if s.changed and s.changed > 0 then table.insert(res, string.format("%%#Changed# %s", s.changed)) end
+        elseif vim.b.minidiff_summary then
+            local s = vim.b.minidiff_summary
+            if s.add and s.add > 0 then table.insert(res, string.format("%%#Added# %s", s.add)) end
+            if s.delete and s.delete > 0 then table.insert(res, string.format("%%#Removed# %s", s.delete)) end
+            if s.change and s.change > 0 then table.insert(res, string.format("%%#Changed# %s", s.change)) end
+        else
+            return ""
         end
         return #res > 0 and " " .. table.concat(res, " ") or ""
     end
@@ -143,7 +142,7 @@ STL.build = function()
             if i == current_tab then
                 tab_str = tab_str .. string.format("%%#BarTab# %d ", i)
             else
-                tab_str = tab_str .. string.format("%%#BarTabDim#%%%d@StlSwitchTab@ %d %%T", i, i)
+                tab_str = tab_str .. string.format("%%#BarTabDim#%%%d@v:lua.STL.switch_tab@ %d %%T", i, i)
             end
         end
         return tab_str

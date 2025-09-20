@@ -83,7 +83,7 @@ return {
     },
 
     {
-        "echasnovski/mini.pairs",
+        "windwp/nvim-autopairs",
         event = "InsertEnter",
         opts = {},
     },
