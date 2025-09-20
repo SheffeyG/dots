@@ -119,6 +119,7 @@ alias rd=rmdir
 alias python='PYTHONPATH=$PYTHONPATH:$(pwd) python3'
 command -v nvim >/dev/null 2>&1 && alias vim='nvim' && export EDITOR='nvim'
 # alias tt='if tmux has-session & 2>/dev/null; then tmux a; else tmux; fi'
+alias ds='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Command}}"'
 
 alias gc1='git clone --depth=1'
 alias gs='git status -sb'

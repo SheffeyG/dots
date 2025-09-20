@@ -1,32 +1,35 @@
 [user]
     name = SheffeyG
     email = 57262511+SheffeyG@users.noreply.github.com
+    signingkey = 068680527A960DCE
 
 [core]
     autocrlf = input
 
 [init]
-    defaultBranch = main 
+    defaultBranch = main
+
+[commit]
+    gpgsign = true
 
 [merge]
-    tool = vscode
+    tool = nvim
 
 [mergetool]
     prompt = false
     keepBackup = false
 
 [mergetool "nvim"]
-    cmd = nvim
-    ; cmd = nvim -c "DiffviewOpen"
+    cmd = nvim -c DiffviewOpen
 
 [mergetool "vscode"]
     cmd = code --wait $MERGED
 
-; [pull]
-;     rebase = true
+[rebase]
+    autostash = true
 
-; [rebase]
-;     autostash = true
+[pull]
+    rebase = true
 
 ; [url "git@github.com:"]
 ;     insteadOf = https://github.com/
