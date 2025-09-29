@@ -4,7 +4,7 @@ return {
 
     {
         "NMAC427/guess-indent.nvim",
-        event = "BufReadPost",
+        event = "BufReadPre",
         opts = {},
     },
 
@@ -40,20 +40,16 @@ return {
     {
         "MeanderingProgrammer/render-markdown.nvim",
         ft = { "markdown", "codecompanion" },
-        ---@module 'render-markdown'
+        ---@module "render-markdown"
         ---@type render.md.UserConfig
         opts = {
-            anti_conceal = {
-                ignore = { head_background = true },
-            },
-            win_options = {
-                concealcursor = { rendered = "n" },
-            },
+            anti_conceal = { enabled = false },
             completions = { blink = { enabled = true } },
             heading = {
-                icons = { "󱅊 ", "󱅋 ", "󱅌 ", "󱅍 ", "󱅎 ", "󱅏 " },
-                position = "inline",
                 left_pad = 1,
+                position = "inline",
+                -- icons = { "󱅊 ", "󱅋 ", "󱅌 ", "󱅍 ", "󱅎 ", "󱅏 " },
+                icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
             },
             code = {
                 sign = false,

@@ -2,6 +2,8 @@ local opt = vim.opt
 local o = vim.o
 local g = vim.g
 
+g.mapleader = " "
+
 o.mouse = "a"
 o.clipboard = "unnamedplus"
 o.laststatus = 3
@@ -45,21 +47,17 @@ o.foldtext = ""
 o.foldcolumn = "0"
 
 o.list = true
+o.ruler = false
+o.showmode = false
+
 opt.listchars:append({ tab = "░░" })
-
 opt.fillchars:append({ eob = " ", fold = " ", diff = "╱" })
-
--- disable nvim intro
-opt.shortmess:append("sI")
-
+-- disable some message
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
 -- allow cursor across line boundaries
 opt.whichwrap:append("<>[]hl")
-
 -- set vertical diffview
 opt.diffopt:append("vertical")
-
--- set leaderkey before lazy setup
-g.mapleader = " "
 
 -- disable some providers
 g.loaded_node_provider = 0

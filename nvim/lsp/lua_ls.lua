@@ -36,7 +36,7 @@ return {
                     "pcall",
                     "Snacks",
                 },
-                unusedLocalExclude = { "_*" },
+                unusedLocalExclude = { "^_" },
             },
         },
     },
