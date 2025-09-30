@@ -1,4 +1,11 @@
----@type vim.lsp.Config
+---@brief
+---
+--- https://github.com/luals/lua-language-server
+---
+--- Lua language server.
+---
+--- `lua-language-server` can be installed by following the instructions [here](https://luals.github.io/#neovim-install).---@type vim.lsp.Config
+
 return {
     cmd = { "lua-language-server" },
     filetypes = { "lua" },

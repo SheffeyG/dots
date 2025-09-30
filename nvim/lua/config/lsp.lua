@@ -1,15 +1,8 @@
---- Diagnostic -----------------------------------
 local icons = require("custom.icons").diag
-local severity = vim.diagnostic.severity
-local text = {
-    [severity.ERROR] = icons.Error,
-    [severity.WARN] = icons.Warn,
-    [severity.HINT] = icons.Hint,
-    [severity.INFO] = icons.Info,
-}
 
+--- Diagnostic -----------------------------------
 vim.diagnostic.config({
-    signs = { text = text },
+    signs = { text = { icons.Error, icons.Warn, icons.Hint, icons.Info } },
     -- virtual_text = {
     --     current_line = true,
     --     severity = { max = severity.WARN },
@@ -18,6 +11,17 @@ vim.diagnostic.config({
     --     current_line = true,
     --     severity = { min = severity.ERROR },
     -- },
+})
+
+--- LSP ------------------------------------------
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+    once = true,
+    callback = function()
+        local server_configs = vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
+            :map(function(file) return vim.fn.fnamemodify(file, ":t:r") end)
+            :totable()
+        vim.lsp.enable(server_configs)
+    end,
 })
 
 --- Fold -----------------------------------------
@@ -35,29 +39,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.api.nvim_create_autocmd("LspDetach", { command = "setl foldexpr<" })
 
---- LSP ------------------------------------------
-if not vim.lsp.config then return end
+--- NES ------------------------------------------
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        local bufnr = args.buf
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
--- lsp configure for all clients
-vim.lsp.config("*", { root_markers = { ".git" } })
+        if client:supports_method("textDocument/inlineCompletion", bufnr) then
+            vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
 
--- enable all lsp clients
--- vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
---     :map(function(config_path) -- match all lsp client name
---         return vim.fs.basename(config_path):match("^(.*)%.lua$")
---     end)
---     :each(function(server_name) -- enable all matched lsp
---         vim.lsp.enable(server_name, true)
---     end)
-
-local language_servers = {
-    "clangd",
-    "lua_ls",
-    "basedpyright",
-    "bashls",
-    "rust_analyzer",
-}
-
-for _, lsp in ipairs(language_servers) do
-    vim.lsp.enable(lsp, true)
-end
+            vim.keymap.set(
+                "i",
+                "<C-y>",
+                vim.lsp.inline_completion.get,
+                { desc = "LSP: accept inline completion", buffer = bufnr }
+            )
+            vim.keymap.set(
+                "i",
+                "<C-n>",
+                vim.lsp.inline_completion.select,
+                { desc = "LSP: switch inline completion", buffer = bufnr }
+            )
+        end
+    end,
+})

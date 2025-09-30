@@ -34,6 +34,7 @@ local win_preview = {
 ---@type LazyPluginSpec
 return {
     "sheffeyg/snacks.nvim",
+    branch = "mine",
     priority = 1000,
     lazy = false,
     ---@type snacks.Config
@@ -210,9 +211,9 @@ return {
             pattern = "VeryLazy",
             callback = function()
                 -- Setup some globals for debugging (lazy-loaded)
-                _G.dd = function(...) Snacks.debug.inspect(...) end
-                _G.bt = function() Snacks.debug.backtrace() end
-                vim.print = _G.dd -- Override print to use snacks for `:=` command
+                -- _G.dd = function(...) Snacks.debug.inspect(...) end
+                -- _G.bt = function() Snacks.debug.backtrace() end
+                -- vim.print = _G.dd -- Override print to use snacks for `:=` command
 
                 -- Create some toggle mappings
                 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>uS")

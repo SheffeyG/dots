@@ -1,13 +1,21 @@
+---@brief
+---
+--- https://detachhead.github.io/basedpyright
+---
+--- `basedpyright`, a static type checker and language server for python
+
 ---@type vim.lsp.Config
 return {
     cmd = { "basedpyright-langserver", "--stdio" },
     filetypes = { "python" },
     root_markers = {
-        ".venv",
-        "venv",
         "pyproject.toml",
-        "pyrightconfig.json",
+        "setup.py",
+        "setup.cfg",
         "requirements.txt",
+        "Pipfile",
+        "pyrightconfig.json",
+        ".git",
     },
     settings = {
         basedpyright = {
@@ -15,6 +23,7 @@ return {
                 typeCheckingMode = "basic", -- standard
                 autoImportCompletions = false,
                 autoSearchPaths = true,
+                autoFormatStrings = true,
                 diagnosticMode = "openFilesOnly",
                 reportMissingTypeStubs = false,
                 reportUnreachable = "none",

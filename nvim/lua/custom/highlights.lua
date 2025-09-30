@@ -1,25 +1,3 @@
----@see snacks.util.blend
----@param fg string foreground color
----@param bg string background color
----@param alpha number number between 0 and 1. 0 results in bg, 1 results in fg
-local mix = function(fg, bg, alpha)
-    local fg_rgb = {
-        tonumber(fg:sub(2, 3), 16),
-        tonumber(fg:sub(4, 5), 16),
-        tonumber(fg:sub(6, 7), 16),
-    }
-    local bg_rgb = {
-        tonumber(bg:sub(2, 3), 16),
-        tonumber(bg:sub(4, 5), 16),
-        tonumber(bg:sub(6, 7), 16),
-    }
-    local blend = function(i)
-        local ret = (alpha * fg_rgb[i] + ((1 - alpha) * bg_rgb[i]))
-        return math.floor(math.min(math.max(0, ret), 255) + 0.5)
-    end
-    return string.format("#%02x%02x%02x", blend(1), blend(2), blend(3))
-end
-
 -- stylua: ignore
 local colors = {
     -- onedark color scheme
@@ -45,6 +23,31 @@ local colors = {
     purple      = "#c678dd",
     brown       = "#be5046",
 }
+
+---@see snacks.util.blend
+---@param fg string foreground color
+---@param bg string background color
+---@param alpha number number between 0 and 1. 0 results in bg, 1 results in fg
+local mix = function(fg, bg, alpha)
+    local fg_rgb = {
+        tonumber(fg:sub(2, 3), 16),
+        tonumber(fg:sub(4, 5), 16),
+        tonumber(fg:sub(6, 7), 16),
+    }
+    local bg_rgb = {
+        tonumber(bg:sub(2, 3), 16),
+        tonumber(bg:sub(4, 5), 16),
+        tonumber(bg:sub(6, 7), 16),
+    }
+    local blend = function(i)
+        local ret = (alpha * fg_rgb[i] + ((1 - alpha) * bg_rgb[i]))
+        return math.floor(math.min(math.max(0, ret), 255) + 0.5)
+    end
+    return string.format("#%02x%02x%02x", blend(1), blend(2), blend(3))
+end
+
+local mix_fg = function(color, alpha) return mix(colors.white, color, alpha) end
+local mix_bg = function(color, alpha) return mix(color, colors.black, alpha) end
 
 local M = {}
 
@@ -127,13 +130,13 @@ M.highlight.core = {
     DiagnosticError  = { fg = colors.red },
 
     -- LSP
-    LspReferenceText = { bg = mix(colors.cyan, colors.black, 0.05), nocombine = true }, -- snacks.words
+    LspReferenceText = { bg = mix_bg(colors.cyan, 0.05), nocombine = true }, -- snacks.words
 
     -- search & replace
-    Search     = { fg = colors.yellow, bg = mix(colors.yellow, colors.black, 0.2) },
-    CurSearch  = { fg = colors.yellow, bg = mix(colors.yellow, colors.black, 0.3), bold = true },
+    Search     = { fg = colors.yellow, bg = mix_bg(colors.yellow, 0.2) },
+    CurSearch  = { fg = colors.yellow, bg = mix_bg(colors.yellow, 0.3), bold = true },
     IncSearch  = { link = "Search" }, -- instant search preview
-    Substitute = { fg = colors.cyan, bg = mix(colors.cyan, colors.black, 0.2), bold = true },
+    Substitute = { fg = colors.cyan, bg = mix_bg(colors.cyan, 0.2), bold = true },
     MatchWord  = { fg = colors.white, bg = colors.grey },
     MatchParen = { link = "MatchWord" },
 
@@ -143,10 +146,10 @@ M.highlight.core = {
     Changed = { fg = colors.yellow },
 
     -- diff
-    DiffDelete       = { bg = mix(colors.red, colors.black, 0.2) },
-    DiffAdd          = { bg = mix(colors.green, colors.black, 0.2) },
-    DiffChange       = { bg = mix(colors.yellow, colors.black, 0.2) },
-    DiffText         = { bg = mix(colors.yellow, colors.black, 0.25), bold = true },
+    DiffDelete       = { bg = mix_bg(colors.red, 0.2) },
+    DiffAdd          = { bg = mix_bg(colors.green, 0.2) },
+    DiffChange       = { bg = mix_bg(colors.yellow, 0.2) },
+    DiffText         = { bg = mix_bg(colors.yellow, 0.25), bold = true },
     DiffChangeDelete = { link = "DiffDelete" },
 
     -- builtin syntax
@@ -278,8 +281,8 @@ M.highlight.syntax = {
 M.highlight.plugins = {
     -- blink
     BlinkCmpMenu = { link = "NormalFloat" },
-    BlinkCmpMenuBorder = { fg = mix(colors.blue, colors.black, 0.5) },
-    BlinkCmpDocBorder = { fg = mix(colors.cyan, colors.black, 0.5) },
+    BlinkCmpMenuBorder = { fg = mix_bg(colors.blue, 0.5) },
+    BlinkCmpDocBorder = { fg = mix_bg(colors.cyan, 0.5) },
     BlinkCmpDocSeparator = { link = "BlinkCmpDocBorder" },
     BlinkCmpSignatureHelpBorder = { link = "BlinkCmpDocBorder" },
     BlinkCmpGhostText = { fg = colors.grey_dark, bg = colors.black_dark },
@@ -315,7 +318,7 @@ M.highlight.plugins = {
     BlinkCmpLabelDetail = { fg = colors.grey },
 
     -- noice
-    NoiceVirtualText = { fg = colors.cyan, bg = mix(colors.cyan, colors.black, 0.2) }, -- search label
+    NoiceVirtualText = { fg = colors.cyan, bg = mix_bg(colors.cyan, 0.2) }, -- search label
 
     -- snacks.win
     SnacksWinBar = { link = "WinBar" },
@@ -349,21 +352,21 @@ M.highlight.plugins = {
     -- neogit
     -- NeogitDiffHeader = { fg = colors.black, bg = colors.grey_light, bold = true },
     NeogitDiffHeader = { link = "NeogitDiffHeaderCursor" }, -- TODO: waiting for upsteam solution
-    NeogitDiffHeaderCursor = { fg = colors.black, bg = mix(colors.yellow, colors.black, 0.7), bold = true },
+    NeogitDiffHeaderCursor = { fg = colors.black, bg = mix_bg(colors.yellow, 0.7), bold = true },
     NeogitDiffHeaderHighlight = { link = "NeogitDiffHeaderCursor" },
     NeogitHunkHeader = { fg = colors.black, bg = colors.grey, bold = true },
-    NeogitHunkHeaderCursor = { fg = colors.black, bg = mix(colors.blue, colors.black, 0.4), bold = true },
+    NeogitHunkHeaderCursor = { fg = colors.black, bg = mix_bg(colors.blue, 0.4), bold = true },
     NeogitHunkHeaderHighlight = { link = "NeogitHunkHeaderCursor" },
-    NeogitDiffAddCursor = { fg = colors.green, bg = mix(colors.green, colors.black, 0.3) },
-    NeogitDiffDeleteCursor = { fg = colors.red, bg = mix(colors.red, colors.black, 0.3) },
+    NeogitDiffAddCursor = { fg = colors.green, bg = mix_bg(colors.green, 0.3) },
+    NeogitDiffDeleteCursor = { fg = colors.red, bg = mix_bg(colors.red, 0.3) },
 
     -- diffview
     -- Highlight for fillchars.diff, see https://github.com/sindrets/diffview.nvim/issues/340
-    DiffviewDiffDelete = { fg = mix(colors.red, colors.black, 0.25), bg = mix(colors.red, colors.black, 0.2) },
+    DiffviewDiffDelete = { fg = mix_bg(colors.red, 0.15), bg = mix_bg(colors.red, 0.1) },
 
     -- git-conflict
-    DiffOurs = { bg = mix(colors.blue, colors.black, 0.2) }, -- custom
-    DiffTheirs = { bg = mix(colors.cyan, colors.black, 0.2) }, -- custom
+    DiffOurs = { bg = mix_bg(colors.blue, 0.2) }, -- custom
+    DiffTheirs = { bg = mix_bg(colors.cyan, 0.2) }, -- custom
 }
 
 M.setup = function()
