@@ -5,18 +5,19 @@ return {
     root_markers = {
         ".clangd",
         ".clang-format",
+        "build",
         "Makefile",
+        "configure",
         "CMakeLists.txt",
         "compile_commands.json",
-        "configure.in",
-        "build.ninja",
-        "meson.build",
     },
     -- https://clangd.llvm.org/config
-    init_options = {
-        headerInsertion = "never",
-        -- compilationDatabasePath = "./build/",
-        -- compileCommandsDir = "./build/compile_commands.json"
+    settings = {
+        clangd = {
+            -- fallbackFlags = { "-std=c++17" },
+            headerInsertion = "never", -- "always", "iwyu", "never"
+            compilationDatabasePath = "build",
+        },
     },
     capabilities = {
         textDocument = {
