@@ -1,4 +1,7 @@
----@type vim.lsp.Config
+---@brief
+--- https://github.com/luals/lua-language-server
+--- Install with `pacman -S lua-language-server`
+
 return {
     cmd = { "lua-language-server" },
     filetypes = { "lua" },
