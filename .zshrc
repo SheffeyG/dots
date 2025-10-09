@@ -16,19 +16,24 @@ ZLE_RPROMPT_INDENT=${ZLE_RPROMPT_INDENT:-0}
 # NVM initialization
 # https://github.com/nvm-sh/nvm?tab=readme-ov-file#manual-install
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+
+# setup global pnpm path
+export PNPM_HOME="${HOME}/.local/share/pnpm"
+[[ -d "${PNPM_HOME}" ]] && path+=("${PNPM_HOME}")
 
 # conda initialization
 # https://repo.anaconda.com/miniconda
-[ -d "$HOME/anaconda3" ] && CONDA_HOME="$HOME/anaconda3/"
-[ -d "$HOME/miniconda3" ] && CONDA_HOME="$HOME/miniconda3/"
-[ -f "$CONDA_HOME/etc/profile.d/conda.sh" ] && source "$CONDA_HOME/etc/profile.d/conda.sh"
+[[ -d "$HOME/anaconda3" ]] && CONDA_HOME="$HOME/anaconda3/"
+[[ -d "$HOME/miniconda3" ]] && CONDA_HOME="$HOME/miniconda3/"
+[[ -s "$CONDA_HOME/etc/profile.d/conda.sh" ]] && source "$CONDA_HOME/etc/profile.d/conda.sh"
 
 # custom path
-typeset -U path
 [[ -d "${HOME}/.local/bin" ]] && path+=("${HOME}/.local/bin")
 [[ -d "${HOME}/.cargo/bin" ]] && path+=("${HOME}/.cargo/bin")
+
+typeset -U path
 
 # autovenv for python
 _autovenv() {
@@ -46,7 +51,7 @@ _autovenv # activate venv once enter the shell
 
 # zinit initialization
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-if [ ! -d $ZINIT_HOME ]; then
+if [[ ! -d $ZINIT_HOME ]]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
     git clone --depth=1 https://github.com/zdharma-continuum/zinit.git $ZINIT_HOME
 fi
@@ -61,7 +66,7 @@ ZINIT[ZCOMPDUMP_PATH]="${XDG_CACHE_HOME:-$HOME/.cache}/.zcompdump"
 # p10k theme
 zinit ice depth"1"
 zinit light romkatv/powerlevel10k
-[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
+[[ -s ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # oh-my-zsh snippets
 zinit snippet OMZL::completion.zsh
