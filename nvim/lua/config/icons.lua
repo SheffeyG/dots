@@ -1,7 +1,7 @@
-local M = {}
+ICON = {}
 
 -- stylua: ignore
-M.kind = {
+ICON.kind = {
     Array         = "",
     Boolean       = "",
     Class         = "",
@@ -39,11 +39,11 @@ M.kind = {
 }
 
 -- stylua: ignore
-M.diag = {
+ICON.diag = {
     Error = " ",
     Warn  = " ",
     Hint  = " ",
     Info  = " ",
 }
 
-return M
+return ICON

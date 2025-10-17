@@ -1,3 +1,5 @@
+local icons = ICON.kind
+
 ---@module "blink.cmp"
 
 ---@type LazyPluginSpec
@@ -18,7 +20,7 @@ return {
         },
         appearance = {
             nerd_font_variant = "normal",
-            kind_icons = require("custom.icons").kind,
+            kind_icons = icons,
         },
         sources = {
             default = {

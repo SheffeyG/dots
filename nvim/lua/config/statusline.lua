@@ -66,21 +66,24 @@ end
 ---@return string
 STL.diff_component = function(truncate)
     if truncate then return "" end
+
+    local s = vim.b.minidiff_summary
+    -- local s = vim.b.gitsigns_status_dict
+    if not s then return "" end
+
+    local keys = { "add", "delete", "change" } -- minidiff
+    -- local keys = { "added", "removed", "changed" } -- gitsigns
+    local hls = { "Added", "Removed", "Changed" }
+    local icons = { "", "", "" }
     local res = {}
-    -- Get info from gitsigns or mini.diff
-    if vim.b.gitsigns_status_dict then
-        local s = vim.b.gitsign_status_dict
-        if s.added and s.added > 0 then table.insert(res, string.format("%%#Added# %s", s.added)) end
-        if s.removed and s.removed > 0 then table.insert(res, string.format("%%#Removed# %s", s.removed)) end
-        if s.changed and s.changed > 0 then table.insert(res, string.format("%%#Changed# %s", s.changed)) end
-    elseif vim.b.minidiff_summary then
-        local s = vim.b.minidiff_summary
-        if s.add and s.add > 0 then table.insert(res, string.format("%%#Added# %s", s.add)) end
-        if s.delete and s.delete > 0 then table.insert(res, string.format("%%#Removed# %s", s.delete)) end
-        if s.change and s.change > 0 then table.insert(res, string.format("%%#Changed# %s", s.change)) end
-    else
-        return ""
+
+    for i = 1, 3 do
+        local key = keys[i]
+        if s[key] and s[key] > 0 then --
+            table.insert(res, string.format("%%#%s#%s %s", hls[i], icons[i], s[key]))
+        end
     end
+
     return #res > 0 and " " .. table.concat(res, " ") or ""
 end
 
@@ -89,17 +92,20 @@ end
 STL.diagnostic_component = function(truncate)
     if truncate then return "" end
     local counts = vim.diagnostic.count(0)
-    local levels = { ERROR = 0, WARN = 0, INFO = 0, HINT = 0 }
-
-    for level, _ in pairs(levels) do
-        levels[level] = counts[vim.diagnostic.severity[level]] or 0
-    end
-
     local res = {}
-    if levels.ERROR > 0 then table.insert(res, "%#DiagnosticError# " .. levels.ERROR) end
-    if levels.WARN > 0 then table.insert(res, "%#DiagnosticWarn# " .. levels.WARN) end
-    if levels.INFO > 0 then table.insert(res, "%#DiagnosticInfo# " .. levels.INFO) end
-    if levels.HINT > 0 then table.insert(res, "%#DiagnosticHint# " .. levels.HINT) end
+    local severities = {
+        { name = "Error", icon = " " },
+        { name = "Warn", icon = " " },
+        { name = "Hint", icon = " " },
+        { name = "Info", icon = " " },
+    }
+
+    for i, s in ipairs(severities) do
+        local count = counts[i]
+        if count and count > 0 then --
+            table.insert(res, string.format("%%#Diagnostic%s#%s%d", s.name, s.icon, count))
+        end
+    end
 
     return #res > 0 and table.concat(res, " ") .. " " or ""
 end
@@ -200,6 +206,6 @@ STL.render = function()
     })
 end
 
-STL.setup = function() vim.go.statusline = "%!v:lua.STL.render()" end
+vim.o.statusline = "%!v:lua.STL.render()"
 
 return STL

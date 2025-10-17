@@ -1,4 +1,4 @@
-local icons = require("custom.icons").diag
+local icons = ICON.diag
 
 --- LSP ------------------------------------------
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {

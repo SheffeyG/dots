@@ -1,6 +1,9 @@
+-- Custom one-dark theme
+vim.g.colors_name = "onedark"
+vim.o.termguicolors = true
+
 -- stylua: ignore
 local colors = {
-    -- onedark color scheme
     black_dark  = "#1b1f27",
     black       = "#1e222a",
     black_light = "#252931",
@@ -49,14 +52,12 @@ end
 local mix_fg = function(color, alpha) return mix(colors.white, color, alpha) end
 local mix_bg = function(color, alpha) return mix(color, colors.black, alpha) end
 
-local M = {}
-
 ---@alias Highlights table<string, vim.api.keyset.highlight>
 ---@type table<string, Highlights>
-M.highlight = {}
+local M = {}
 
 -- stylua: ignore
-M.highlight.core = {
+M.core = {
     -- window
     Normal      = { fg = colors.white, bg = colors.black },
     NormalDark  = { fg = colors.white, bg = colors.black_dark },  -- custom
@@ -184,7 +185,7 @@ M.highlight.core = {
     Todo         = { fg = colors.yellow, bg = colors.grey },
 }
 
-M.highlight.syntax = {
+M.syntax = {
     -- treesitter
     ["@module"] = { fg = colors.red },
     ["@module.builtin"] = { fg = colors.red },
@@ -278,7 +279,7 @@ M.highlight.syntax = {
     ["@lsp.type.type"] = { link = "@type" },
 }
 
-M.highlight.plugins = {
+M.plugins = {
     -- blink
     BlinkCmpMenu = { link = "NormalFloat" },
     BlinkCmpMenuBorder = { fg = mix_bg(colors.blue, 0.5) },
@@ -369,25 +370,18 @@ M.highlight.plugins = {
     DiffTheirs = { bg = mix_bg(colors.cyan, 0.2) }, -- custom
 }
 
-M.setup = function()
-    -- reset highlights
-    vim.cmd.highlight("clear")
-    if vim.fn.exists("syntax_on") then vim.cmd.syntax("reset") end
+-- Reset highlights
+vim.cmd.highlight("clear")
+if vim.fn.exists("syntax_on") then vim.cmd.syntax("reset") end
 
-    -- enable 256 true colors
-    vim.o.termguicolors = true
-    vim.g.colors_name = "onedark"
-
-    ---@param highlights Highlights highlight groups
-    local function apply(highlights)
-        for group, opts in pairs(highlights) do
-            vim.api.nvim_set_hl(0, group, opts)
-        end
+-- Apply highlight groups
+---@param highlights Highlights highlight groups
+local function apply(highlights)
+    for group, opts in pairs(highlights) do
+        vim.api.nvim_set_hl(0, group, opts)
     end
-
-    apply(M.highlight.core)
-    apply(M.highlight.syntax)
-    apply(M.highlight.plugins)
 end
 
-return M
+apply(M.core)
+apply(M.syntax)
+apply(M.plugins)
