@@ -11,6 +11,7 @@ return {
                 lua = { "stylua" },
                 python = { "ruff_format", "ruff_organize_imports" },
                 sh = { "shfmt" },
+                json = { "clang-format" },
                 ["_"] = { "trim_whitespace", lsp_format = "last" },
             },
         },
@@ -69,11 +70,6 @@ return {
     {
         "lambdalisue/vim-suda",
         cmd = "SudaWrite",
-    },
-
-    {
-        "declancm/vim2vscode",
-        cmd = "Code",
     },
 
     {

@@ -1,7 +1,7 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd("BufReadPost", {
-    desc = "keep the cursor position",
+    desc = "Keep the cursor position",
     pattern = { "*" },
     callback = function()
         if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
@@ -11,7 +11,7 @@ autocmd("BufReadPost", {
 })
 
 autocmd("VimResized", {
-    desc = "resize splits after window resized",
+    desc = "Resize splits after window resized",
     callback = function()
         vim.g.is_wide = vim.api.nvim_win_get_width(0) > 120
         vim.cmd("tabdo wincmd =")
@@ -20,7 +20,7 @@ autocmd("VimResized", {
 })
 
 autocmd("VimEnter", {
-    desc = "auto open explorer",
+    desc = "Open explorer for wide screen",
     callback = function(data)
         local ok, snacks = pcall(require, "snacks")
         if not ok then return end
@@ -42,7 +42,7 @@ autocmd("VimEnter", {
 })
 
 autocmd("QuitPre", {
-    desc = "auto close explorer",
+    desc = "Close explorer for the last buffer",
     callback = function()
         local snacks_windows = {}
         local floating_windows = {}
@@ -69,7 +69,7 @@ autocmd("QuitPre", {
 })
 
 autocmd("FileType", {
-    desc = "close some filetypes with <q>",
+    desc = "Close window for some filetypes with <q>",
     pattern = {
         "checkhealth",
         "help",
@@ -84,6 +84,11 @@ autocmd("FileType", {
         vim.bo[e.buf].buflisted = false
         vim.keymap.set("n", "q", "<CMD>close<CR>", { buffer = e.buf, silent = true })
     end,
+})
+
+autocmd("TextYankPost", {
+    desc = "Highlight on yank",
+    callback = function() vim.hl.on_yank({ higroup = "TextPurple" }) end,
 })
 
 -- autocmd({ "WinEnter", "BufWinEnter", "TermOpen" }, {

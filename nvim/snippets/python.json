@@ -1,0 +1,32 @@
+{
+    "#!/usr/bin/env python": {
+        "prefix": "#!",
+        "body": "#!/usr/bin/env python$0",
+        "description": "Shebang line for the first python in PATH"
+    },
+
+    "if __name__ == __main__": {
+        "prefix": "ifmain",
+        "body": [
+            "if __name__ == \"__main__\":",
+            "\t${1:main()}"
+        ],
+        "description": "Execute code if the file is executed directly"
+    },
+
+    "function docstring": {
+        "prefix": "\"\"\"doc",
+        "body": [
+            "\"\"\"",
+            "${1:summary.}",
+            "",
+            "Args:",
+            "    ${2:argument_name} (${3:type}): ${4:description.}",
+            "",
+            "Returns:",
+            "    ${5:type}: ${6:description.}",
+            ""
+        ],
+        "description": "Python docstring."
+    }
+}
