@@ -2,7 +2,7 @@
 return {
     {
         "rachartier/tiny-inline-diagnostic.nvim",
-        event = "VeryLazy",
+        event = "LspAttach",
         opts = { preset = "powerline" },
     },
 

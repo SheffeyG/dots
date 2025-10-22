@@ -86,11 +86,13 @@ autocmd("FileType", {
     end,
 })
 
-autocmd("TextYankPost", {
-    desc = "Highlight on yank",
-    callback = function() vim.hl.on_yank({ higroup = "TextPurple" }) end,
-})
+-- yanky.nvim builtin
+-- autocmd("TextYankPost", {
+--     desc = "Highlight on yank",
+--     callback = function() vim.hl.on_yank({ higroup = "TextPurple" }) end,
+-- })
 
+-- snacks.nvim builtin
 -- autocmd({ "WinEnter", "BufWinEnter", "TermOpen" }, {
 --     desc = "auto insert mode for terminal buffers",
 --     callback = function(args)

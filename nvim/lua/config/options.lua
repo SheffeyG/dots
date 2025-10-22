@@ -21,24 +21,20 @@ o.cursorline = true
 o.splitbelow = true
 o.splitright = true
 
--- time and timeout
 o.updatetime = 300
 o.timeoutlen = 500
 o.ttimeoutlen = 10
 
--- indents
 o.expandtab = true
 o.shiftwidth = 4
 o.smartindent = true
 o.tabstop = 4
 o.softtabstop = 4
 
--- numbers
 o.number = true
 o.numberwidth = 2
 o.relativenumber = false
 
--- fold
 o.foldenable = true
 o.foldlevel = 99
 o.foldmethod = "expr"
@@ -52,15 +48,20 @@ o.showmode = false
 
 opt.listchars:append({ tab = "░░" })
 opt.fillchars:append({ eob = " ", fold = " ", diff = "╱" })
--- disable some message
+-- Disable some message
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
--- allow cursor across line boundaries
+-- Allow cursor across line boundaries
 opt.whichwrap:append("<>[]hl")
--- set vertical diffview
+-- Set vertical diffview
 opt.diffopt:append("vertical")
 
--- disable some providers
+-- Disable other providers
 g.loaded_node_provider = 0
 g.loaded_python3_provider = 0
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
+
+-- Custom global flags
+g.is_tmux = os.getenv("TMUX") ~= nil
+g.is_ssh = os.getenv("SSH_CONNECTION") ~= nil or os.getenv("SSH_CLIENT") ~= nil
+g.is_wide = vim.api.nvim_win_get_width(0) > 120
