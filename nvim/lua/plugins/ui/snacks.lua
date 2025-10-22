@@ -33,8 +33,7 @@ local win_preview = {
 
 ---@type LazyPluginSpec
 return {
-    "sheffeyg/snacks.nvim",
-    branch = "mine",
+    "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
     ---@type snacks.Config
@@ -45,30 +44,10 @@ return {
         words = { enabled = true },
         input = { enabled = true },
         rename = { enabled = true },
+        scroll = { enabled = true },
         notifier = { top_down = false },
-        statuscolumn = {
-            left = { "sign", "mark", "git" },
-            right = { "diag", "fold" },
-        },
-        terminal = {
-            env = {
-                ZLE_RPROMPT_INDENT = 1, -- p10k prompt padding
-                VIMRUNTIME = 1, -- to tell p10k we are in vim
-            },
-            win = {
-                relative = "win",
-                wo = { winbar = "" },
-            },
-        },
-        scroll = {
-            enabled = not vim.g.is_arm,
-            filter = function(buf)
-                return vim.g.snacks_scroll ~= false
-                    and vim.b[buf].snacks_scroll ~= false
-                    and vim.bo[buf].buftype ~= "terminal"
-                    and vim.bo[buf].filetype ~= "blink-cmp-menu"
-            end,
-        },
+        statuscolumn = { enabled = true },
+        terminal = { win = { relative = "win" } },
         indent = {
             animate = { duration = 10 },
             filter = function(buf)
@@ -140,6 +119,14 @@ return {
                         },
                     },
                 },
+                notifications = {
+                    win = {
+                        preview = {
+                            title = "Detail",
+                            wo = { wrap = true, number = false },
+                        },
+                    },
+                },
             },
         },
     },
@@ -147,10 +134,10 @@ return {
         {
             "<leader>e", -- set auto_close to true for narrow window
             function() Snacks.explorer.open({ auto_close = not vim.g.is_wide }) end,
-            desc = "Auto-close File Explorer Toggle",
+            desc = "Toggle File Explorer (Auto Close)",
         },
+        { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<leader>E", function() Snacks.explorer.open() end, desc = "File Explorer Toggle" },
-        { "<leader> ", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
         { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },

@@ -1,6 +1,5 @@
 vim.cmd.colorscheme("onedark")
 
-require("config.special")
 require("config.icons")
 require("config.options")
 require("config.mappings")

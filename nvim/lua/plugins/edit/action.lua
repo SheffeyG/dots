@@ -48,7 +48,7 @@ return {
 
     {
         "alexghergh/nvim-tmux-navigation",
-        cond = vim.g.is_tmux,
+        cond = vim.g.is_tmux or vim.g.is_ssh,
         event = "VeryLazy",
         config = function()
             local nvim_tmux_nav = require("nvim-tmux-navigation")
@@ -59,6 +59,25 @@ return {
             map("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
             map("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
         end,
+    },
+
+    {
+        "gbprod/yanky.nvim",
+        opts = { highlight = { timer = 300 } },
+        keys = {
+            { "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
+            { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
+            { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
+            { "<c-n>", "<Plug>(YankyNextEntry)", desc = "Put next yanked text" },
+            { "<c-p>", "<Plug>(YankyPreviousEntry)", desc = "Put prev yanked text" },
+            {
+                "<leader>p",
+                ---@diagnostic disable-next-line: undefined-field
+                function() Snacks.picker.yanky() end,
+                mode = { "n", "x" },
+                desc = "Open Yank History",
+            },
+        },
     },
 
     {
