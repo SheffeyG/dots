@@ -1,4 +1,4 @@
--- bootstrap lazy.vim
+-- Bootstrap lazy.vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -17,23 +17,22 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
             { out, "WarningMsg" },
-            { "\nPress any key to exit..." },
+            { "\nPress any key to continue..." },
         }, true, {})
         vim.fn.getchar()
-        os.exit(1)
+        return -1
     end
 end
 
 vim.opt.rtp:prepend(lazypath)
 
--- setup lazy and all plugins
+-- Setup lazy and other plugins
 require("lazy").setup({
     defaults = { lazy = true },
     spec = {
         { import = "plugins.ui" },
         { import = "plugins.edit" },
     },
-    -- automatically check for plugin updates
     checker = {
         enabled = true,
         notify = false,
@@ -45,7 +44,7 @@ require("lazy").setup({
             not_loaded = " ",
         },
     },
-    -- disable some rtp plugins
+    -- Disable some rtp built-in plugins
     performance = {
         rtp = {
             disabled_plugins = {

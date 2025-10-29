@@ -131,7 +131,7 @@ M.core = {
     DiagnosticError  = { fg = colors.red },
 
     -- LSP
-    LspReferenceText = { bg = mix_bg(colors.cyan, 0.05), nocombine = true }, -- snacks.words
+    LspReferenceText = { bg = mix_bg(colors.cyan, 0.05)}, -- snacks.words
 
     -- search & replace
     Search     = { fg = colors.yellow, bg = mix_bg(colors.yellow, 0.2) },

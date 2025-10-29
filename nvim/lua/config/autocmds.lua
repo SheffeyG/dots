@@ -57,7 +57,7 @@ autocmd("QuitPre", {
                 table.insert(floating_windows, w)
             end
         end
-        if -- when there's only one non-float windows
+        if -- there is only one non-float window
             1 == #windows - #floating_windows - #snacks_windows
             and vim.api.nvim_win_get_config(0).relative == ""
         then
