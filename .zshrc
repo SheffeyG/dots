@@ -110,8 +110,9 @@ bindkey -M viins '^Y' autosuggest-accept
 bindkey -M viins '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
 bindkey -M viins '^U' kill-whole-line
-bindkey -M viins '^W' backward-kill-word
 bindkey -M viins '^R' history-incremental-search-backward
+bindkey -M viins '^W' backward-kill-word
+bindkey -M viins '^[^?' backward-kill-word
 
 # shortcuts
 alias ...=../..
@@ -124,7 +125,7 @@ alias rd=rmdir
 alias python='PYTHONPATH=$PYTHONPATH:$(pwd) python3'
 command -v nvim >/dev/null 2>&1 && alias vim='nvim' && export EDITOR='nvim'
 # alias tt='if tmux has-session & 2>/dev/null; then tmux a; else tmux; fi'
-alias ds='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Command}}"'
+alias ds='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"'
 
 alias gc1='git clone --depth=1'
 alias gs='git status -sb'
@@ -137,19 +138,15 @@ alias glo='git log --oneline -n 10 --graph'
 gm() { if [ -z $1 ]; then git commit; else git commit -m $1; fi; }
 
 if command -v eza >/dev/null 2>&1; then
-    alias ls='eza --icons --color=auto'
-    alias l='eza -lh --icons'
-    alias ll='eza -labg --icons'
-    alias la='eza -labgh --icons'
-    alias lsa='eza -lbagR --icons'
-    alias lst='eza --tree --level=3'
+    alias ls='eza --icons'
+    alias la='eza -a --icons'
+    alias ll='eza -labgh --icons'
+    alias lt='eza --tree --level=3'
 else
     alias ls='ls --color=auto'
-    alias l='ls -lh'
-    alias ll='ls -lah'
-    alias la='ls -lAh'
-    alias lsa='ls -lah'
-    alias lst='tree -pCsh'
+    alias la='ls -a --color=auto'
+    alias ll='ls -lah --color=auto'
+    command -v tree >/dev/null 2>&1 && alias lt='tree -pCsh'
 fi
 
 if command -v bat >/dev/null 2>&1; then
