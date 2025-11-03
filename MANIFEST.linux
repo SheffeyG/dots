@@ -3,4 +3,8 @@ link  | .p10k.zsh  |
 link  | .tmux.conf |
 copy  | .gitconfig |
 link  | nvim       | .config
+link  | waybar     | .config
+link  | niri       | .config
+link  | alacritty  | .config
+link  | fuzzel     | .config
 rlink | bin        | .local
