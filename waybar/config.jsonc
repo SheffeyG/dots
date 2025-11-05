@@ -7,9 +7,21 @@
     "margin-right": 8,
     "margin-top": 8,
 
-    "modules-left": ["clock", "temperature"],
-    "modules-center": ["niri/workspaces"],
-    "modules-right": ["wireplumber", "battery", "idle_inhibitor", "network", "bluetooth", "tray"],
+    "modules-left": [
+        "clock",
+        "idle_inhibitor",
+    ],
+    "modules-center": [
+        "niri/workspaces"
+    ],
+    "modules-right": [
+        "bluetooth",
+        "network",
+        "wireplumber",
+        "temperature",
+        "battery",
+        "tray"
+    ],
 
     "niri/workspaces": {
         "format": "{icon}",
@@ -25,7 +37,7 @@
         "format": "{:%H:%M}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
-            "mode": "mouth",
+            "mode": "month",
             "mode-mon-col": 3,
             "on-scroll": 1,
             "format": {
@@ -53,10 +65,8 @@
     },
 
     "battery": {
-        "bat": "BAT1",
         "interval": 60,
         "format": "{icon} {capacity}%",
-        // "format-icons": ["", "", "", "", ""],
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁽", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
 
@@ -66,13 +76,13 @@
     },
 
     "temperature": {
-        "format": " {temperatureC}󰔄"
+        "format": " {temperatureC}°C"
     },
 
     "network": {
         "format": "",
         "format-ethernet": "󰲝",
-        "format-wifi": "{icon}",
+        "format-wifi": "{icon}  {essid}",
         "format-disconnected": "󰤮",
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
@@ -81,9 +91,9 @@
     },
 
     "bluetooth": {
-        "format": "",
+        "format": "󰂯",
         "format-disabled": "󰂲",
-        "format-connected": "󰂱",
+        "format-connected": "",
         "tooltip-format": "{controller_alias}[{controller_address}]",
         "tooltip-format-connected": "{controller_alias}[{controller_address}]\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}[{device_address}]"

@@ -14,12 +14,6 @@
     background-color: @background;
 }
 
-#clock {
-#memory,
-#custom-platform-profile {
-    padding-left: 1em
-}
-
 #workspaces button {
     color: @foreground;
     padding-left: 0.5em;
@@ -40,12 +34,19 @@
     border: none;
 }
 
+#clock,
+#memory,
+#idle_inhibitor,
+#custom-platform-profile {
+    padding-left: 0.7em
+}
+
+#network,
+#temperature,
 #wireplumber,
 #battery,
-#idle_inhibitor,
 #language,
-#network,
 #bluetooth,
 #tray {
-    padding-right: 1em
+    padding-right: 0.7em
 }

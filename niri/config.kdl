@@ -58,7 +58,7 @@ screenshot-path "~/Pictures/screenshots/%Y-%m-%d_%H-%M-%S.png"
 spawn-at-startup "mako"
 spawn-at-startup "waybar"
 // spawn-at-startup "fcitx5"
-spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/sheffey/dl/pic/soft.jpg"
+spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/sheffey/.local/share/swaybg/wall.png"
 
 
 //------------------------------------------------
