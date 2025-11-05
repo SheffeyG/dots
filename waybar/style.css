@@ -14,9 +14,16 @@
     background-color: @background;
 }
 
+#clock {
+#memory,
+#custom-platform-profile {
+    padding-left: 1em
+}
+
 #workspaces button {
     color: @foreground;
-    padding-left: 0.7em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     border: none;
 }
 
@@ -24,17 +31,13 @@
     color: @foreground-inactive;
 }
 
+/* Remove predefined hover style */
 #workspaces button:hover {
-    box-shadow: none; /* Remove predefined box-shadow */
-    text-shadow: none; /* Remove predefined text-shadow */
-    background: none; /* Remove predefined background color (white) */
-    transition: none; /* Disable predefined animations */
-    border: none; /* Disable predefined border-color */
-}
-
-#memory,
-#custom-platform-profile {
-    padding-left: 1em
+    box-shadow: none;
+    text-shadow: none;
+    background: none;
+    transition: none;
+    border: none;
 }
 
 #wireplumber,
