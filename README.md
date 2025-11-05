@@ -30,3 +30,11 @@
       printf "\n";
     }'
     ```
+
+- tty fallback to bash
+```sh
+# ~/.profile
+if [[ ! ( -z "$DISPLAY" && "$(tty)" =~ ^/dev/tty[0-9]+$ ) ]]; then
+  exec zsh -l 2>/dev/null || exec bash
+fi
+```

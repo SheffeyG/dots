@@ -2,8 +2,8 @@
 # Initialization
 #-----------------------
 
-# if not running interactively, don't do anything
-[[ $- != *i* ]] && return
+# if tty or not running interactively, don't do anything
+[[ $- != *i* || "$(tty)" == ^/dev/tty[0-9]+$ ]] && return
 
 # enable p10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
