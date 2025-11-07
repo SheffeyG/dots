@@ -56,21 +56,16 @@ screenshot-path "~/Pictures/screenshots/%Y-%m-%d_%H-%M-%S.png"
 //------------------------------------------------
 
 environment {
-    DISPLAY ":0"
-    XDG_SESSION_TYPE "wayland"
-    MOZ_ENABLE_WAYLAND "1"
-
     XMODIFIERS "@im=fcitx"
-    // QT_IM_MODULE "fcitx"
-    // SDL_IM_MODULE "fcitx"
+    QT_IM_MODULE "fcitx"
+    SDL_IM_MODULE "fcitx"
 }
 
+spawn-at-startup "fcitx5"
 spawn-at-startup "mako"
 spawn-at-startup "waybar"
-spawn-at-startup "fcitx5"
-// spawn-at-startup "swaylock"
-
-spawn-sh-at-startup "swaybg -m fill -i ~/.local/share/swaybg/wall.png"
+spawn-sh-at-startup "swaybg -m fill -i ~/wallpaper.png"
+spawn-sh-at-startup "swayidle -w timeout 601 'niri msg action power-off-monitors' timeout 600 'swaylock -f' before-sleep 'swaylock -f'"
 
 
 //------------------------------------------------
@@ -78,22 +73,28 @@ spawn-sh-at-startup "swaybg -m fill -i ~/.local/share/swaybg/wall.png"
 //------------------------------------------------
 
 window-rule {
+    opacity 0.9
+    geometry-corner-radius 0
+    clip-to-geometry true
+    draw-border-with-background false
+}
+
+window-rule {
     match app-id="imv"
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
-    default-column-width { fixed 480; }
-    default-window-height { fixed 270; }
+    default-column-width { proportion 0.5; }
+    default-window-height { proportion 0.5; }
+    opacity 1.0
+    focus-ring {
+        off
+    }
 }
 
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
     block-out-from "screen-capture"
-}
-
-window-rule {
-    geometry-corner-radius 0
-    clip-to-geometry true
 }
 
 
@@ -104,19 +105,16 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Backslash hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Mod+N         hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+Space     hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Alt+L   hotkey-overlay-title="Lock the Screen: swaylock"  { spawn "swaylock"; }
+    Mod+Backslash hotkey-overlay-title="Open Terminal" { spawn "alacritty"; }
+    Mod+N         hotkey-overlay-title="Application Launcher" { spawn "fuzzel"; }
+    Mod+Space     hotkey-overlay-title="Application Launcher" { spawn "fuzzel"; }
+    Super+Alt+L   hotkey-overlay-title="Lock Screen"  { spawn "swaylock"; }
 
     XF86AudioMute         allow-when-locked=true { spawn "wpctl" "set-mute"   "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioRaiseVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
-
-    Mod+O repeat=false { toggle-overview; }
-    Mod+Q repeat=false { close-window; }
 
     Mod+H { focus-column-left; }
     Mod+J { focus-window-or-workspace-down; }
@@ -165,10 +163,12 @@ binds {
     Mod+Comma  { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
 
+    Mod+O repeat=false { toggle-overview; }
+    Mod+X repeat=false { close-window; }
     Mod+R { switch-preset-column-width; }
     Mod+C { center-column; }
     Mod+M { maximize-column; }
-    Mod+B { fullscreen-window; }
+    Mod+F { fullscreen-window; }
     Mod+V { toggle-window-floating; }
     Mod+W { toggle-column-tabbed-display; }
 
