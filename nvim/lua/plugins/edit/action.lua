@@ -63,7 +63,13 @@ return {
 
     {
         "gbprod/yanky.nvim",
-        opts = { highlight = { timer = 300 } },
+        opts = function()
+            local fix = vim.g.is_wsl and require("yanky.wrappers").remove_carriage_return
+            return {
+                highlight = { timer = 300 },
+                ring = { permanent_wrapper = fix },
+            }
+        end,
         keys = {
             { "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
             { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },

@@ -104,6 +104,7 @@ setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
 
 # key-bindings
 bindkey -v
+export KEYTIMEOUT=1 # to avoid alt+keys
 bindkey -M viins '^P' up-line-or-beginning-search
 bindkey -M viins '^N' down-line-or-beginning-search
 bindkey -M viins '^Y' autosuggest-accept
