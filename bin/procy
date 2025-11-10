@@ -2,7 +2,7 @@
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
     echo "[Error] This script should be sourced, not executed directly."
-    echo "        Usage: source proxy [host] [port]"
+    echo "        Usage: source procy [host] [port]"
     exit 1
 fi
 
