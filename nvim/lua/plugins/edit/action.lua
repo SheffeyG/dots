@@ -64,7 +64,7 @@ return {
     {
         "gbprod/yanky.nvim",
         opts = function()
-            local fix = vim.g.is_wsl and require("yanky.wrappers").remove_carriage_return
+            local fix = vim.g.is_wsl and require("yanky.wrappers").remove_carriage_return or nil
             return {
                 highlight = { timer = 300 },
                 ring = { permanent_wrapper = fix },

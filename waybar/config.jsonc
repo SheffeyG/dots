@@ -58,7 +58,7 @@
     },
 
     "wireplumber": {
-        "format": "{icon}  {volume}%",
+        "format": "{icon} {volume}%",
         "format-icons": ["", "", ""],
         "scroll-step": 5,
         "max-volume": 100

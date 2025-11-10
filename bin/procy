@@ -23,14 +23,17 @@ function set_proxy() {
 
     export HTTP_PROXY="socks5://$host:$port"
     export HTTPS_PROXY="socks5://$host:$port"
+    export ALL_PROXY="socks5://$host:$port"
 }
 
 if [[ $# -eq 0 ]] && [[ -n "$HTTP_PROXY" || -n "$HTTPS_PROXY" ]]; then
     unset HTTP_PROXY
     unset HTTPS_PROXY
+    unset ALL_PROXY
     echo "Proxy Removed!"
 else
     set_proxy "$@"
     echo "HTTP_PROXY=$HTTP_PROXY"
     echo "HTTPS_PROXY=$HTTPS_PROXY"
+    echo "ALL_PROXY=$ALL_PROXY"
 fi
