@@ -1,0 +1,223 @@
+{
+  "$schema": "https://raw.githubusercontent.com/way-edges/way-edges/master/config/config.schema.json",
+  "widgets": [
+    // =========== buttons ===========
+    {
+      "pin-with-key": false,
+      "edge": "top",
+      "position": "left",
+      "layer": "overlay",
+      "margins": {
+        "left": "25%"
+      },
+      "thickness": 20,
+      "length": "25%",
+      "type": "btn",
+      "color": "#333",
+      "event-map": {
+        "272": "niri msg action focus-column-left",
+        "273": "niri msg action focus-workspace-up"
+      }
+    },
+    {
+      "pin-with-key": false,
+      "edge": "top",
+      "position": "right",
+      "layer": "overlay",
+      "margins": {
+        "right": "25%"
+      },
+      "thickness": 20,
+      "length": "25%",
+      "type": "btn",
+      "color": "#333",
+      "event-map": {
+        "272": "niri msg action focus-column-right",
+        "273": "niri msg action focus-workspace-down"
+      }
+    },
+    {
+      "pin-with-key": false,
+      "edge": "bottom",
+      "layer": "overlay",
+      "thickness": 20,
+      "length": "40%",
+      "type": "btn",
+      "event-map": {
+        "273": "niri msg action maximize-column",
+        "272": "sh -c pkill nwg-drawer || nwg-drawer -ovl",
+        "274": "niri msg action close-window",
+        "276": "niri msg action toggle-column-tabbed-display",
+        "275": "niri msg action toggle-overview"
+      }
+    },
+    // =========== workspace ===========
+    {
+      "edge": "right",
+      "layer": "overlay",
+      "type": "workspace",
+      "thickness": 8,
+      "length": "30%",
+      "hover-color": "#4E884Faa",
+      "active-increase": 0.2,
+      // "active-color": "#fff",
+      "focus-color": "#7FC8FF",
+      "default-color": "#000",
+      "focused-only": true,
+      "margins": { "right": 20 },
+      "preset": { "type": "niri", "filter-empty": false }
+    },
+    // =========== ring stats ===========
+    {
+      "namespace": "stats",
+      "edge": "left",
+      "position": "top",
+      "margins": {
+        "top": 40
+      },
+      "monitor": "*",
+      "layer": "overlay",
+      "type": "wrap-box",
+      "outlook": {
+        "type": "window",
+        "color": "#555555CC"
+      },
+      "items": [
+        {
+          "radius": 14,
+          "ring-width": 8,
+          "font-size": 20,
+          "font-family": "JetBrainsMono Nerd Font",
+          "fg-color": "#FFB77B",
+          "bg-color": "#000000AA",
+          "type": "ring",
+          "prefix": "  ",
+          "suffix": " {preset}",
+          "suffix-hide": true,
+          "preset": {
+            "update-interval": 500,
+            "type": "battery"
+          }
+        },
+        {
+          "radius": 14,
+          "ring-width": 8,
+          "font-size": 20,
+          "font-family": "JetBrainsMono Nerd Font",
+          "fg-color": "#FB8893",
+          "bg-color": "#000000AA",
+          "type": "ring",
+          "prefix": "  ",
+          "suffix": " {preset}",
+          "suffix-hide": true,
+          "preset": {
+            "update-interval": 500,
+            "type": "cpu"
+          }
+        },
+        {
+          "radius": 14,
+          "ring-width": 8,
+          "font-size": 20,
+          "font-family": "JetBrainsMono Nerd Font",
+          "bg-color": "#000000AA",
+          "type": "ring",
+          "prefix": "  ",
+          "suffix": " {preset}",
+          "suffix-hide": true,
+          "preset": {
+            "update-interval": 500,
+            "type": "ram"
+          }
+        },
+        {
+          "radius": 14,
+          "ring-width": 8,
+          "font-size": 20,
+          "font-family": "JetBrainsMono Nerd Font",
+          "fg-color": "#BEAFD9",
+          "bg-color": "#000000AA",
+          "type": "ring",
+          "prefix": "  ",
+          "suffix": " {preset}",
+          "suffix-hide": true,
+          "preset": {
+            "update-interval": 500,
+            "type": "swap"
+          }
+        },
+        {
+          "radius": 14,
+          "ring-width": 8,
+          "font-size": 20,
+          "font-family": "JetBrainsMono Nerd Font",
+          "fg-color": "#82B2E3",
+          "bg-color": "#000000AA",
+          "type": "ring",
+          "prefix": "  ",
+          "suffix": " {preset}",
+          "suffix-hide": true,
+          "preset": {
+            "update-interval": 500,
+            "type": "disk"
+          }
+        }
+      ]
+    },
+    // =========== time ===========
+    {
+      "namespace": "time",
+      "edge": "top",
+      "position": "right",
+      "layer": "overlay",
+      "type": "wrap-box",
+      "outlook": {
+        "type": "window",
+        "color": "#00000000"
+      },
+      "items": [
+        {
+          "type": "text",
+          "fg-color": "#FFFFFF",
+          "font-size": 16,
+          "preset": {
+            "type": "time",
+            "update-interval": 500,
+            "format": "%T %v %A"
+          }
+        }
+      ]
+    },
+    // =========== tray ===========
+    {
+      "namespace": "tray",
+      "edge": "bottom",
+      "position": "right",
+      "layer": "overlay",
+      "type": "wrap-box",
+      "align": "bottom-left",
+      "outlook": {
+        "type": "window",
+        "color": "#CCCCCCAA"
+      },
+      "items": [
+        {
+          "font-family": "JetBrainsMono Nerd Font",
+          "type": "tray",
+          "icon-size": 10,
+          "header-menu-stack": "menu-top",
+          "header-menu-align": "left",
+          "menu-draw-config": {
+            "font-pixel-height": 20,
+            "text-color": "#eee",
+            "border-color": "#111"
+          },
+          "header-draw-config": {
+            "text-color": "#eee"
+          },
+          "grid-align": "bottom-left"
+        }
+      ]
+    }
+  ]
+}
