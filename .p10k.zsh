@@ -106,7 +106,7 @@
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     proxy                   # system-wide http/https/ftp proxy
-    # time                  # current time
+    time                    # current time
 
     # =========================[ Line #2 ]=========================
     # newline
