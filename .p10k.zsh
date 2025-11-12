@@ -109,7 +109,7 @@
     time                    # current time
 
     # =========================[ Line #2 ]=========================
-    # newline
+    newline
     # cpu_arch              # CPU architecture
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
