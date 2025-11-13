@@ -17,6 +17,7 @@ return {
             -- built-in parser: C, Lua, Markdown, Vimscript, Vimdoc.
             ensure_installed = {
                 "python",
+                "rust",
                 "html",
                 "css",
                 "javascript",
