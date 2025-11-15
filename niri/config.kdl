@@ -93,7 +93,7 @@ window-rule {
     block-out-from "screen-capture"
 }
 
-layer-rule {
+/-layer-rule {
     match namespace=r#"^way-edges-widget"#
     opacity 0.9
 }

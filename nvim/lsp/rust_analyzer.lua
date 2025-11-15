@@ -24,6 +24,14 @@ return {
             serverStatusNotification = true,
         },
     },
+    settings = {
+        ["rust-analyzer"] = {
+            cachePriming = { enable = false },
+            inlayHints = { enable = false },
+            procMacro = { enable = false },
+            cargo = { loadOutDirsFromCheck = false },
+        },
+    },
     before_init = function(init_params, config)
         -- https://github.com/microsoft/language-server-protocol/issues/567
         if config.settings and config.settings["rust-analyzer"] then

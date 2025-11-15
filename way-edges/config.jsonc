@@ -176,6 +176,7 @@
       "edge": "top",
       "position": "right",
       "layer": "overlay",
+      "extra-trigger-size": 7,
       "type": "wrap-box",
       "outlook": {
         "type": "window",
