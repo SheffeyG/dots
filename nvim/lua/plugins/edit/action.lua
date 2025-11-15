@@ -12,6 +12,7 @@ return {
                 python = { "ruff_format", "ruff_organize_imports" },
                 sh = { "shfmt" },
                 json = { "clang-format" },
+                rust = { "rustfmt" },
                 ["_"] = { "trim_whitespace", lsp_format = "last" },
             },
         },

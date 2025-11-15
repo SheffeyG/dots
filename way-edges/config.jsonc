@@ -85,8 +85,15 @@
       "layer": "overlay",
       "type": "wrap-box",
       "outlook": {
-        "type": "window",
-        "color": "#666666"
+        "type": "board",
+        "color": "#666666DD",
+        "border-radius": 20,
+        "margins": {
+          "left": 14,
+          "right": 16,
+          "top": 16,
+          "bottom": 16
+        }
       },
       "items": [
         {
@@ -179,8 +186,8 @@
       "extra-trigger-size": 7,
       "type": "wrap-box",
       "outlook": {
-        "type": "window",
-        "color": "#00000000"
+        "type": "board",
+        "color": "#666666DD",
       },
       "items": [
         {
