@@ -6,15 +6,15 @@ return {
     cmd = { "lua-language-server" },
     filetypes = { "lua" },
     root_markers = {
-        ".luacheckrc",
+        ".emmyrc.json",
         ".luarc.json",
         ".luarc.jsonc",
+        ".luacheckrc",
         ".stylua.toml",
-        "lazy-lock.json",
+        "stylua.toml",
         "selene.toml",
         "selene.yml",
-        "stylua.toml",
-        "lua/",
+        ".git",
     },
     settings = {
         Lua = {

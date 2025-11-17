@@ -8,6 +8,8 @@ return {
     filetypes = { "python" },
     root_markers = {
         "pyproject.toml",
+        ".venv",
+        "venv",
         "setup.py",
         "setup.cfg",
         "requirements.txt",

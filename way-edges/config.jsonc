@@ -49,7 +49,7 @@
       "color": "#333",
       "event-map": {
         "273": "niri msg action maximize-column",
-        "272": "sh -c pkill nwg-drawer || nwg-drawer -ovl",
+        "272": "niri msg action fullscreen-window",
         "274": "niri msg action close-window",
         "276": "niri msg action toggle-column-tabbed-display",
         "275": "niri msg action toggle-overview"
@@ -87,7 +87,7 @@
       "outlook": {
         "type": "board",
         "color": "#666666DD",
-        "border-radius": 20,
+        "border-radius": 10,
         "margins": {
           "left": 14,
           "right": 16,
