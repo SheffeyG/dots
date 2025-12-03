@@ -12,6 +12,7 @@ return {
                 python = { "ruff_format", "ruff_organize_imports" },
                 sh = { "shfmt" },
                 json = { "clang-format" },
+                rust = { "rustfmt" },
                 ["_"] = { "trim_whitespace", lsp_format = "last" },
             },
         },
@@ -63,7 +64,13 @@ return {
 
     {
         "gbprod/yanky.nvim",
-        opts = { highlight = { timer = 300 } },
+        opts = function()
+            local fix = vim.g.is_wsl and require("yanky.wrappers").remove_carriage_return or nil
+            return {
+                highlight = { timer = 300 },
+                ring = { permanent_wrapper = fix },
+            }
+        end,
         keys = {
             { "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
             { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },

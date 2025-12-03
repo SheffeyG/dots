@@ -2,7 +2,7 @@
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
     echo "[Error] This script should be sourced, not executed directly."
-    echo "        Usage: source proxy [host] [port]"
+    echo "        Usage: source procy [host] [port]"
     exit 1
 fi
 
@@ -14,7 +14,7 @@ function set_proxy() {
     [[ "$#" -eq 2 ]] && host="$1" && port="$2"
 
     if [ -n "$SSH_CONNECTION" ]; then
-        host=$(echo "$SSH_CONNECTION" | awk '{print $1}')
+        host="$(echo "$SSH_CONNECTION" | awk '{print $1}')"
         if [ -z "$host" ]; then
             echo "[WARNING] Could not get ssh host ip, using localhost instead."
             host="127.0.0.1"
@@ -23,14 +23,17 @@ function set_proxy() {
 
     export HTTP_PROXY="socks5://$host:$port"
     export HTTPS_PROXY="socks5://$host:$port"
+    export ALL_PROXY="socks5://$host:$port"
 }
 
-if [[ $# -eq 0 ]] && [[ -n "$HTTP_PROXY" || -n "$HTTPS_PROXY" ]]; then
+if [[ "$#" -eq 0 ]] && [[ -n "$HTTP_PROXY" || -n "$HTTPS_PROXY" ]]; then
     unset HTTP_PROXY
     unset HTTPS_PROXY
+    unset ALL_PROXY
     echo "Proxy Removed!"
 else
     set_proxy "$@"
     echo "HTTP_PROXY=$HTTP_PROXY"
     echo "HTTPS_PROXY=$HTTPS_PROXY"
+    echo "ALL_PROXY=$ALL_PROXY"
 fi

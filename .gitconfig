@@ -9,11 +9,14 @@
 [init]
     defaultBranch = main
 
-[commit]
-    gpgsign = true
+[rebase]
+    autostash = true
+
+[pull]
+    rebase = true
 
 [merge]
-    tool = nvim
+    tool = vscode
 
 [mergetool]
     prompt = false
@@ -25,11 +28,8 @@
 [mergetool "vscode"]
     cmd = code --wait $MERGED
 
-[rebase]
-    autostash = true
-
-[pull]
-    rebase = true
+; [commit]
+;     gpgsign = true
 
 ; [url "git@github.com:"]
 ;     insteadOf = https://github.com/

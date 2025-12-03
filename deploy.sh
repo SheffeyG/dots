@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$(cd "$(dirname "$BASH_SOURCE[0]")" && pwd)"
+SOURCE="$(cd "$(dirname "$BASH_SOURCE[0]")" && pwd)"
+TARGET="$HOME"
 
 function symlinkFile() {
-    local file="$SCRIPT_DIR/$1"
-    local dest="$HOME/${2:+$2/}$1"
+    local file="$SOURCE/$1"
+    local dest="$TARGET/${2:+$2/}$1"
 
-    mkdir -p $(dirname "$dest")
+    mkdir -p "$(dirname "$dest")"
 
     if [ ! -e "$file" ]; then
         echo "[LINK] Skipped, source '$file' doesn't exist."
@@ -23,10 +24,10 @@ function symlinkFile() {
 }
 
 function copyFile() {
-    local file="$SCRIPT_DIR/$1"
-    local dest="$HOME/${2:+$2/}$1"
+    local file="$SOURCE/$1"
+    local dest="$TARGET/${2:+$2/}$1"
 
-    mkdir -p $(dirname "$dest")
+    mkdir -p "$(dirname "$dest")"
 
     if [ ! -e "$file" ]; then
         echo "[COPY] Skipped, source '$file' doesn't exist."
@@ -39,22 +40,17 @@ function copyFile() {
     cp -r "$file" "$dest" && echo "[COPY] $file -> $dest"
 }
 
-function recursiveLink() {
+function linkDirectory() {
     local sourcepath="$1"
     local targetpath="$2"
 
     for source in "$sourcepath"/*; do
-        if [ -f "$source" ]; then
-            symlinkFile $source $targetpath
-        fi
-        if [ -d "$source" ]; then
-            recursiveLink $source $targetpath
-        fi
+        symlinkFile "$source" "$targetpath"
     done
 }
 
 # set -ex
-MANIFEST=$1
+MANIFEST="$1"
 
 if [ -z "$MANIFEST" ]; then
     echo "[ERROR] No MANIFEST file provided!"
@@ -65,14 +61,14 @@ elif [ ! -e "$MANIFEST" ]; then
 fi
 
 while IFS='|' read -r opt src tgt; do
-    opt=$(printf '%s' "$opt" | tr -d '[:space:]')
-    src=$(printf '%s' "$src" | tr -d '[:space:]')
-    tgt=$(printf '%s' "$tgt" | tr -d '[:space:]')
+    opt="$(printf '%s' "$opt" | tr -d '[:space:]')"
+    src="$(printf '%s' "$src" | tr -d '[:space:]')"
+    tgt="$(printf '%s' "$tgt" | tr -d '[:space:]')"
 
-    case $opt in
-        link) symlinkFile $src $tgt ;;
-        copy) copyFile $src $tgt ;;
-        rlink) recursiveLink $src $tgt ;;
+    case "$opt" in
+        link) symlinkFile "$src" "$tgt" ;;
+        copy) copyFile "$src" "$tgt" ;;
+        ldir) linkDirectory "$src" "$tgt" ;;
         *) echo "[WARNING] Unknown operation '$opt'!" ;;
     esac
-done <"$SCRIPT_DIR/$MANIFEST"
+done <"$SOURCE/$MANIFEST"

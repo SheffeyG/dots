@@ -2,8 +2,8 @@
 # Initialization
 #-----------------------
 
-# if not running interactively, don't do anything
-[[ $- != *i* ]] && return
+# if tty or not running interactively, don't do anything
+[[ $- != *i* || "$(tty)" == ^/dev/tty[0-9]+$ ]] && return
 
 # enable p10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -104,6 +104,9 @@ setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
 
 # key-bindings
 bindkey -v
+bindkey -r '^[' # disable esc key
+export KEYTIMEOUT=1 # to avoid alt+keys
+bindkey -M viins '^V' vi-cmd-mode
 bindkey -M viins '^P' up-line-or-beginning-search
 bindkey -M viins '^N' down-line-or-beginning-search
 bindkey -M viins '^Y' autosuggest-accept

@@ -183,6 +183,7 @@ M.core = {
     Type         = { fg = colors.yellow },
     Typedef      = { fg = colors.yellow },
     Todo         = { fg = colors.yellow, bg = colors.grey },
+    LspInlayHint = { fg = colors.grey, bg = colors.black_dark },
 }
 
 M.syntax = {

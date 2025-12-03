@@ -1,6 +1,15 @@
 ---@brief
+---
 --- https://clangd.llvm.org/installation.html
---- Install with `pacman -S clang`
+---
+--- - **NOTE:** Clang >= 11 is recommended! See [#23](https://github.com/neovim/nvim-lspconfig/issues/23).
+--- - If `compile_commands.json` lives in a build directory, you should
+---   symlink it to the root of your source tree.
+---   ```
+---   ln -s /path/to/myproject/build/compile_commands.json /path/to/myproject/
+---   ```
+--- - clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html)
+---   specified as compile_commands.json, see https://clangd.llvm.org/installation#compile_commandsjson
 
 -- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
 local function switch_source_header(bufnr, client)
@@ -54,7 +63,7 @@ end
 
 ---@type vim.lsp.Config
 return {
-    cmd = { "clangd", "--background-index" },
+    cmd = { "clangd" },
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
     root_markers = {
         ".clangd",
@@ -64,14 +73,6 @@ return {
         "compile_flags.txt",
         "configure.ac", -- AutoTools
         ".git",
-    },
-    -- https://clangd.llvm.org/config
-    settings = {
-        clangd = {
-            -- fallbackFlags = { "-std=c++17" },
-            headerInsertion = "never", -- "always", "iwyu", "never"
-            compilationDatabasePath = "build",
-        },
     },
     capabilities = {
         textDocument = {
@@ -83,9 +84,7 @@ return {
     },
     ---@param init_result ClangdInitializeResult
     on_init = function(client, init_result)
-        if init_result.offsetEncoding then -- to adjust CJK characters
-            client.offset_encoding = init_result.offsetEncoding
-        end
+        if init_result.offsetEncoding then client.offset_encoding = init_result.offsetEncoding end
     end,
     on_attach = function(client, bufnr)
         vim.api.nvim_buf_create_user_command(

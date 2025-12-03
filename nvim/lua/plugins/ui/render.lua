@@ -17,6 +17,7 @@ return {
             -- built-in parser: C, Lua, Markdown, Vimscript, Vimdoc.
             ensure_installed = {
                 "python",
+                "rust",
                 "html",
                 "css",
                 "javascript",
@@ -45,18 +46,7 @@ return {
         opts = {
             anti_conceal = { enabled = false },
             completions = { blink = { enabled = true } },
-            heading = {
-                left_pad = 1,
-                position = "inline",
-                -- icons = { "󱅊 ", "󱅋 ", "󱅌 ", "󱅍 ", "󱅎 ", "󱅏 " },
-                icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
-            },
-            code = {
-                sign = false,
-                left_pad = 1,
-                language_pad = 1,
-                border = "thin",
-            },
+            code = { border = "thin" },
         },
     },
 }

@@ -1,6 +1,11 @@
-link  | .zshrc     |
-link  | .p10k.zsh  |
-link  | .tmux.conf |
-copy  | .gitconfig |
-link  | nvim       | .config
-rlink | bin        | .local
+link | .zshrc     | .
+link | .p10k.zsh  | .
+link | .tmux.conf | .
+copy | .gitconfig | .
+link | nvim       | .config
+link | niri       | .config
+link | alacritty  | .config
+link | fuzzel     | .config
+link | swaylock   | .config
+link | way-edges  | .config
+ldir | bin        | .local
