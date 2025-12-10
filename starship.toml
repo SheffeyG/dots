@@ -1,0 +1,280 @@
+# p10k like starship configure
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$os\
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$status\
+$cmd_duration\
+$direnv\
+$package\
+$c\
+$cpp\
+$cmake\
+$conda\
+$container\
+$docker_context\
+$java\
+$lua\
+$nodejs\
+$python\
+$ruby\
+$rust\
+$username\
+$hostname\
+$time\
+$battery \
+\n\
+$character\
+"""
+add_newline = true
+
+[cmd_duration]
+format = '[ $duration]($style)'
+style = 'fg:248'
+min_time = 3000
+
+[status]
+disabled = false
+symbol = '✘'
+format = '[$symbol( $common_meaning)( $signal_name)( $signal_number)( $maybe_int) ]($style)'
+style = 'bold fg:160'
+success_style = 'bold fg:70'
+map_symbol = false
+pipestatus = true
+pipestatus_format = '[$pipestatus]($style)'
+
+[character]
+success_symbol = '[❯](bold fg:76)'
+error_symbol = '[❯](bold fg:196)'
+vimcmd_symbol = '[❮](bold fg:76)'
+vimcmd_replace_one_symbol = '[▶](bold fg:76)'
+vimcmd_replace_symbol = '[▶](bold fg:76)'
+vimcmd_visual_symbol = '[V](bold fg:76)'
+
+[os]
+format = '[$symbol]($style)'
+style = 'fg:255'
+disabled = false
+
+[directory]
+format ='[$read_only]($read_only_style)[ ](fg:31)[$path ]($style)'
+style = 'fg:39'
+read_only_style = 'bold fg:31'
+repo_root_format = """
+[$read_only]($read_only_style)\
+[$before_root_path]($before_repo_root_style)\
+[$repo_root]($repo_root_style)\
+[$path ]($style)\
+"""
+before_repo_root_style = 'bold fg:31'
+repo_root_style = 'bold fg:39'
+read_only = "󰌾 "
+home_symbol = '~'
+truncate_to_repo = false
+fish_style_pwd_dir_length = 2
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch) ]($style)'
+symbol = " "
+style = 'fg:76'
+
+[git_status]
+format = '[$all_status$ahead_behind]($style)'
+style = 'fg:246'
+conflicted = '~${count} '
+stashed    = '*${count} '
+ahead      = '⇡${count} '
+behind     = '⇣${count} '
+untracked  = '?${count} '
+modified   = '!${count} '
+staged     = '+${count} '
+renamed    = '»${count} '
+deleted    = '✘${count} '
+diverged   = '⇠${behind_count} ⇢${ahead_count} '
+
+[os.symbols]
+Alpine     = " "
+AlmaLinux  = " "
+Amazon     = " "
+Android    = " "
+Arch       = " "
+Artix      = " "
+CachyOS    = " "
+CentOS     = " "
+Debian     = " "
+Fedora     = " "
+FreeBSD    = " "
+Garuda     = "󰛓 "
+Gentoo     = " "
+Kali       = " "
+Linux      = " "
+Macos      = " "
+Manjaro    = " "
+Mint       = " "
+NixOS      = " "
+OpenBSD    = "󰈺 "
+openSUSE   = " "
+Pop        = " "
+Raspbian   = " "
+Redhat     = " "
+RockyLinux = " "
+Redox      = "󰀘 "
+Solus      = "󰠳 "
+SUSE       = " "
+Ubuntu     = " "
+Unknown    = " "
+Void       = " "
+Windows    = "󰍲 "
+
+[fill]
+symbol = '─'
+style = 'fg:240'
+
+[time]
+disabled = false
+format = ' [ $time]($style)'
+style = 'fg:66'
+
+[direnv]
+format = ' [$symbol$loaded/$allowed]($style)'
+style = 'bold fg:178'
+
+[package]
+disabled = true
+format = ' [$symbol$version]($style)'
+style = 'bold fg:yellow'
+symbol = "󰏗 "
+
+[c]
+format = ' [$symbol($version(-$name))]($style)'
+style = 'bold fg:149'
+symbol = " "
+
+[cpp]
+format = ' [$symbol($version(-$name))]($style)'
+style = 'bold fg:149'
+symbol = " "
+
+[cmake]
+format = ' [$symbol($version)]($style)'
+style = 'bold fg:blue'
+symbol = " "
+
+[python]
+format = ' [${symbol}${pyenv_prefix}$virtualenv\(${version}\)]($style)'
+style = 'bold fg:37'
+symbol = " "
+
+[conda]
+format = ' [$symbol$environment]($style)'
+style = 'bold fg:37'
+symbol = " "
+
+[java]
+format = ' [${symbol}(${version})]($style)'
+style = 'dimmed fg:red'
+symbol = " "
+
+[lua]
+format = ' [$symbol($version)]($style)'
+style = 'bold fg:blue'
+symbol = " "
+
+[nodejs]
+format = ' [$symbol($version)]($style)'
+style = 'bold fg:green'
+symbol = " "
+
+[ruby]
+format = ' [$symbol($version)]($style)'
+style = 'bold fg:red'
+symbol = " "
+
+[rust]
+format = ' [$symbol($version)]($style)'
+style = 'bold fg:yellow'
+symbol = "󱘗 "
+
+[container]
+format = ' [$symbol \[$name\]]($style)'
+style = 'bold dimmed fg:blue'
+
+[docker_context]
+format = ' [$symbol$context]($style)'
+style = 'bold fg:blue'
+symbol = " "
+
+[username]
+format = ' [$user]($style)'
+style_root = 'bold fg:178'
+style_user = 'fg:180'
+
+[hostname]
+format = '[$ssh_symbol$hostname]($style)'
+style = 'fg:180'
+ssh_symbol = '@'
+
+[battery]
+format = ' [$symbol]($style)'
+full_symbol = '[󰁹 $percentage](bold fg:70)'
+unknown_symbol = '[󰂑 ](bold fg:70)'
+empty_symbol = '[󰂎 $percentage](bold fg:160)'
+
+[[battery.display]]
+threshold = 100
+charging_symbol = '[󰁹 $percentage](bold fg:70)'
+discharging_symbol = '[󰁹 $percentage](bold fg:178)'
+
+[[battery.display]]
+threshold = 95
+charging_symbol = '[󰂂 $percentage](bold fg:70)'
+discharging_symbol = '[󰂂 $percentage](bold fg:178)'
+
+[[battery.display]]
+threshold = 85
+charging_symbol = '[󰂁 $percentage](bold fg:70)'
+discharging_symbol = '[󰂁 $percentage](bold fg:178)'
+
+[[battery.display]]
+threshold = 75
+charging_symbol = '[󰂀 $percentage](bold fg:70)'
+discharging_symbol = '[󰂀 $percentage](bold fg:178)'
+
+[[battery.display]]
+threshold = 65
+charging_symbol = '[󰁿 $percentage](bold fg:70)'
+discharging_symbol = '[󰁿 $percentage](bold fg:178)'
+
+[[battery.display]]
+threshold = 55
+charging_symbol = '[󰁾 $percentage](bold fg:70)'
+discharging_symbol = '[󰁾 $percentage](bold fg:178)'
+
+[[battery.display]]
+threshold = 45
+charging_symbol = '[󰁽 $percentage](bold fg:70)'
+discharging_symbol = '[󰁽 $percentage](bold fg:178)'
+
+[[battery.display]]
+threshold = 35
+charging_symbol = '[󰁼 $percentage](bold fg:70)'
+discharging_symbol = '[󰁼 $percentage](bold fg:178)'
+
+[[battery.display]]
+threshold = 25
+charging_symbol = '[󰁻 $percentage](bold fg:70)'
+discharging_symbol = '[󰁻 $percentage](bold fg:160)'
+
+[[battery.display]]
+threshold = 15
+charging_symbol = '[󰁺 $percentage](bold fg:70)'
+discharging_symbol = '[󰁺 $percentage](bold fg:160)'
+
+[[battery.display]]
+threshold = 5
+charging_symbol = '[󰂎 $percentage](bold fg:70)'
+discharging_symbol = '[󰂎 $percentage](bold fg:160)'

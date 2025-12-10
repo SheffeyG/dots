@@ -1,26 +1,21 @@
 #-----------------------
-# Initialization
+# General
 #-----------------------
 
 # if tty or not running interactively, don't do anything
-[[ $- != *i* || "$(tty)" == ^/dev/tty[0-9]+$ ]] && return
-
-# enable p10k instant prompt
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+[[ $- != *i* || "$TTY" == ^/dev/tty[0-9]+$ ]] && return
 
 # setting zsh prompt right padding
 ZLE_RPROMPT_INDENT=${ZLE_RPROMPT_INDENT:-0}
 
-# NVM initialization
-# https://github.com/nvm-sh/nvm?tab=readme-ov-file#manual-install
-export NVM_DIR="$HOME/.nvm"
-[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
-[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+# prompt theme
+# eval "$(starship init zsh)"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # setup global pnpm path
-export PNPM_HOME="${HOME}/.local/share/pnpm"
+export PNPM_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/pnpm"
 [[ -d "${PNPM_HOME}" ]] && path+=("${PNPM_HOME}")
 
 # conda initialization
@@ -36,14 +31,18 @@ export PNPM_HOME="${HOME}/.local/share/pnpm"
 typeset -U path
 
 # autovenv for python
-_autovenv() {
-    local VENV='.venv'
-    [[ -d $VENV ]] && source $VENV/bin/activate > /dev/null 2>&1
-    [[ ! -d $VENV ]] && deactivate > /dev/null 2>&1
+venv() {
+    if [[ -z "$VIRTUAL_ENV" ]]; then
+        venv_dir='.venv'
+        [[ -d "$venv_dir" ]] && source "$venv_dir/bin/activate"
+    else
+        parent_dir="$(dirname "$VIRTUAL_ENV")"
+        [[ "$PWD"/ != "$parent_dir"/* ]] && deactivate
+    fi
 }
 autoload -U add-zsh-hook
-add-zsh-hook chpwd _autovenv
-_autovenv # activate venv once enter the shell
+add-zsh-hook chpwd venv
+venv # activate venv while initialization
 
 #-----------------------
 # Plugins
@@ -96,7 +95,7 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 #-----------------------
-# Options
+# ZSH Options
 #-----------------------
 
 unsetopt BEEP LIST_BEEP HIST_BEEP
