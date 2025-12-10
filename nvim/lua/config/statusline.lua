@@ -40,7 +40,7 @@ STL.folder_component = function()
         branch = handle:read("*a"):gsub("^%s*(.-)%s*$", "%1")
         handle:close()
     end
-    if branch == "" then return string.format("  %s ", cwd) end
+    if branch == "" then return string.format("  %s ", cwd) end
     return string.format("  %s:%s ", cwd, branch)
 end
 
