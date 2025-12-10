@@ -2,10 +2,25 @@ local autocmd = vim.api.nvim_create_autocmd
 
 autocmd("BufReadPost", {
     desc = "Keep the cursor position",
-    pattern = { "*" },
+    pattern = "*",
     callback = function()
         if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
             vim.cmd("normal! g'\"", false) -- resume cursor position
+        end
+    end,
+})
+
+autocmd({ "BufLeave", "FocusLost" }, {
+    desc = "Write buffers when leave it",
+    pattern = "*",
+    callback = function()
+        if -- check if the file should be saved
+            vim.bo.modified
+            and not vim.bo.readonly
+            and vim.fn.expand("%") ~= ""
+            and vim.bo.buftype == ""
+        then
+            vim.cmd("silent! update")
         end
     end,
 })
