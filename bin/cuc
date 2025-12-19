@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-CUDA_PATH="/usr/local/cuda-$1"
+cuda_home="/usr/local/cuda-$1"
 
-if [ -d "$CUDA_PATH" ]; then
-    export PATH="$CUDA_PATH/bin:$PATH"
-    export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
-else
-    echo "[ERROR] Could not find cuda path '$CUDA_PATH'"
+if [ ! -d "$cuda_home" ]; then
+    echo "[ERROR] Could not find cuda path '$cuda_home'" >&2
+    exit 1
 fi
+
+export CUDA_HOME="$cuda_home"
+export PATH="$cuda_home/bin:$PATH"
+export LD_LIBRARY_PATH="$cuda_home/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
