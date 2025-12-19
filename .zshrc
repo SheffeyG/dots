@@ -3,7 +3,7 @@
 #-----------------------
 
 # if tty or not running interactively, don't do anything
-[[ $- != *i* || "$TTY" == ^/dev/tty[0-9]+$ ]] && return
+[[ $- != *i* || "$TTY" =~ ^/dev/tty[0-9]+$ ]] && return
 
 # setting zsh prompt right padding
 ZLE_RPROMPT_INDENT=${ZLE_RPROMPT_INDENT:-0}
@@ -102,19 +102,23 @@ unsetopt BEEP LIST_BEEP HIST_BEEP
 setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
 
 # key-bindings
-bindkey -v
-bindkey -r '^[' # disable esc key
-export KEYTIMEOUT=1 # to avoid alt+keys
-bindkey -M viins '^V' vi-cmd-mode
-bindkey -M viins '^P' up-line-or-beginning-search
-bindkey -M viins '^N' down-line-or-beginning-search
-bindkey -M viins '^Y' autosuggest-accept
-bindkey -M viins '^A' beginning-of-line
-bindkey -M viins '^E' end-of-line
-bindkey -M viins '^U' kill-whole-line
-bindkey -M viins '^R' history-incremental-search-backward
-bindkey -M viins '^W' backward-kill-word
-bindkey -M viins '^[^?' backward-kill-word
+bindkey '^[' vi-cmd-mode
+bindkey '^Y' autosuggest-accept
+
+# bindkey -v
+# bindkey -r '^[' # disable esc key
+# bindkey -M viins '^V' vi-cmd-mode
+# bindkey -M viins '^P' up-line-or-beginning-search
+# bindkey -M viins '^N' down-line-or-beginning-search
+# bindkey -M viins '^Y' autosuggest-accept
+# bindkey -M viins '^A' beginning-of-line
+# bindkey -M viins '^E' end-of-line
+# bindkey -M viins '^U' kill-whole-line
+# bindkey -M viins '^R' history-incremental-search-backward
+# bindkey -M viins '^Q' push-line
+# bindkey -M viins '^W' backward-kill-word
+# bindkey -M viins '^[^?' backward-kill-word
+# bindkey -M viins '^X^E' edit-command-line
 
 # shortcuts
 alias ...=../..
@@ -140,9 +144,9 @@ alias glo='git log --oneline -n 10 --graph'
 gm() { if [ -z $1 ]; then git commit; else git commit -m $1; fi; }
 
 if command -v eza >/dev/null 2>&1; then
-    alias ls='eza --icons'
-    alias la='eza -a --icons'
-    alias ll='eza -labgh --icons'
+    alias ls='eza --icons=auto'
+    alias la='eza -a --icons=auto'
+    alias ll='eza -labgh --icons=auto'
     alias lt='eza --tree --level=3'
 else
     alias ls='ls --color=auto'
