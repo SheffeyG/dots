@@ -7,9 +7,12 @@ STL.switch_tab = function(tabnr) vim.cmd(tabnr .. "tabnext") end
 local C_S = vim.api.nvim_replace_termcodes("<C-S>", true, true, true)
 local C_V = vim.api.nvim_replace_termcodes("<C-V>", true, true, true)
 
+---@class ModeInfo
+---@field name string
+---@field hl   string
 ---@param current_mode string
----@return string
-STL.mode_component = function(current_mode)
+---@return ModeInfo
+local get_mode_info = function(current_mode)
     -- stylua: ignore
     local modes = {
         ["n"] = { name = "NORMAL",   hl = "%#ModeNormal#" },
@@ -26,9 +29,13 @@ STL.mode_component = function(current_mode)
         ["!"] = { name = "SHELL",    hl = "%#ModeTerminal#" },
         ["t"] = { name = "TERMINAL", hl = "%#ModeTerminal#" },
     }
+    return modes[current_mode] or { name = "UNKNOWN", hl = "%#ModeNormal#" }
+end
 
-    local mode_info = modes[current_mode] or { name = "UNKNOWN", hl = "%#ModeNormal#" }
-    return string.format("%s  %s ", mode_info.hl, mode_info.name)
+---@param mode_name string
+---@return string
+STL.mode_component = function(mode_name) --
+    return string.format("  %s ", mode_name)
 end
 
 ---@return string
@@ -160,31 +167,28 @@ STL.tab_component = function()
     return tab_str
 end
 
----@param truncate boolean
 ---@return string
-STL.code_component = function(truncate)
-    local col = vim.fn.virtcol(".")
-    local rule = string.format("%03d", col)
-    local res = { rule }
+STL.rule_component = function()
+    local rule = string.format("%03d", vim.fn.virtcol("."))
+    return string.format(" %s ", rule)
+end
 
-    if not truncate then
-        local enc = (vim.bo.fileencoding == "") and vim.go.encoding or vim.bo.fileencoding
-        local width = "TAB:" .. vim.bo.tabstop
-        if vim.bo.expandtab then width = "SPC:" .. vim.bo.shiftwidth end
-        table.insert(res, enc:upper())
-        table.insert(res, width)
-    end
-
-    return string.format(" %s ", table.concat(res, " | "))
+---@return string
+STL.encode_component = function()
+    local enc = (vim.bo.fileencoding == "") and vim.go.encoding or vim.bo.fileencoding
+    return string.format(" %s ", enc:upper())
 end
 
 ---@return string
 STL.render = function()
-    local mode = vim.fn.mode()
     local truncate = not vim.g.is_wide
+    local mode = vim.fn.mode()
+    local mode_info = get_mode_info(mode)
+    local mode_hl, mode_name = mode_info.hl, mode_info.name
 
     return table.concat({
-        STL.mode_component(mode),
+        mode_hl,
+        STL.mode_component(mode_name),
 
         "%#BarGrey#",
         STL.folder_component(),
@@ -202,7 +206,10 @@ STL.render = function()
         STL.tab_component(),
 
         "%#BarGrey#",
-        STL.code_component(truncate),
+        STL.rule_component(),
+
+        mode_hl,
+        STL.encode_component(),
     })
 end
 

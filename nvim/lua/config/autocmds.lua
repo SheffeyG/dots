@@ -1,18 +1,18 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd("BufReadPost", {
-    desc = "Keep the cursor position",
-    pattern = "*",
-    callback = function()
-        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
-            vim.cmd("normal! g'\"", false) -- resume cursor position
+    desc = "Keep the last location for opened buffer",
+    callback = function(args)
+        local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+        local line_count = vim.api.nvim_buf_line_count(args.buf)
+        if mark[1] > 0 and mark[1] <= line_count then --
+            vim.cmd('normal! g`"zz')
         end
     end,
 })
 
 autocmd({ "BufLeave", "FocusLost" }, {
     desc = "Write buffers when leave it",
-    pattern = "*",
     callback = function()
         if -- check if the file should be saved
             vim.bo.modified
@@ -97,7 +97,7 @@ autocmd("FileType", {
     },
     callback = function(e)
         vim.bo[e.buf].buflisted = false
-        vim.keymap.set("n", "q", "<CMD>close<CR>", { buffer = e.buf, silent = true })
+        vim.keymap.set("n", "q", "<CMD>close<CR>", { buffer = e.buf })
     end,
 })
 

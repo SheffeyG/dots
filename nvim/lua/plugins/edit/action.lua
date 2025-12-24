@@ -75,8 +75,8 @@ return {
             { "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
             { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
             { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
-            { "<c-n>", "<Plug>(YankyNextEntry)", desc = "Put next yanked text" },
-            { "<c-p>", "<Plug>(YankyPreviousEntry)", desc = "Put prev yanked text" },
+            { "[p", "<Plug>(YankyPreviousEntry)", desc = "Put prev yanked text" },
+            { "]p", "<Plug>(YankyNextEntry)", desc = "Put next yanked text" },
             {
                 "<leader>p",
                 ---@diagnostic disable-next-line: undefined-field
