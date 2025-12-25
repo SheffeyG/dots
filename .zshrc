@@ -55,12 +55,9 @@ if [[ ! -d $ZINIT_HOME ]]; then
     git clone --depth=1 https://github.com/zdharma-continuum/zinit.git $ZINIT_HOME
 fi
 source "${ZINIT_HOME}/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# zinit custom config
-ZINIT[COMPINIT_OPTS]=-C # skip safe check for speed up
-ZINIT[ZCOMPDUMP_PATH]="${XDG_CACHE_HOME:-$HOME/.cache}/.zcompdump"
+# skip safe check for speed up
+ZINIT[COMPINIT_OPTS]=-C
 
 # p10k theme
 zinit ice depth"1"
@@ -68,11 +65,9 @@ zinit light romkatv/powerlevel10k
 [[ -s ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # oh-my-zsh snippets
-zinit snippet OMZL::completion.zsh
 zinit snippet OMZL::history.zsh
 zinit snippet OMZL::key-bindings.zsh
-zinit snippet OMZP::extract # x to extract
-zinit snippet OMZP::sudo    # double esc to toggle sudo
+zinit snippet OMZP::sudo
 
 # auto suggestions
 zinit ice wait lucid atload"_zsh_autosuggest_start"
@@ -82,15 +77,14 @@ zinit light zsh-users/zsh-autosuggestions
 zinit ice wait lucid atinit"zicompinit;zicdreplay"
 zinit light zdharma-continuum/fast-syntax-highlighting
 
-# z to jump dir
-zinit ice wait"1" lucid atload"ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/.z"
-zinit light agkozak/zsh-z
+# z for quick jump
+zinit ice wait"1" lucid
+zinit light skywind3000/z.lua
 
-# fzf tab completion
+# fzf tab completion, note `wait` doesn't work here
 if command -v fzf >/dev/null 2>&1; then
-    zinit ice wait"1" lucid atload"
-    FZF_DEFAULT_OPTS='--color=pointer:#e06c75,bg+:#51576d,gutter:-1'
-    zstyle ':fzf-tab:*' use-fzf-default-opts yes"
+    FZF_DEFAULT_OPTS='--color=pointer:#e06c75,bg+:#51576d,gutter:#3e4452'
+    zstyle ':fzf-tab:*' use-fzf-default-opts yes
     zinit light Aloxaf/fzf-tab
 fi
 
@@ -104,21 +98,8 @@ setopt AUTO_PUSHD AUTO_CD AUTO_LIST PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
 # key-bindings
 bindkey '^[' vi-cmd-mode
 bindkey '^Y' autosuggest-accept
-
-# bindkey -v
-# bindkey -r '^[' # disable esc key
-# bindkey -M viins '^V' vi-cmd-mode
-# bindkey -M viins '^P' up-line-or-beginning-search
-# bindkey -M viins '^N' down-line-or-beginning-search
-# bindkey -M viins '^Y' autosuggest-accept
-# bindkey -M viins '^A' beginning-of-line
-# bindkey -M viins '^E' end-of-line
-# bindkey -M viins '^U' kill-whole-line
-# bindkey -M viins '^R' history-incremental-search-backward
-# bindkey -M viins '^Q' push-line
-# bindkey -M viins '^W' backward-kill-word
-# bindkey -M viins '^[^?' backward-kill-word
-# bindkey -M viins '^X^E' edit-command-line
+bindkey '^P' up-line-or-beginning-search
+bindkey '^N' down-line-or-beginning-search
 
 # shortcuts
 alias ...=../..
