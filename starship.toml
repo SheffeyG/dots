@@ -26,7 +26,7 @@ $rust\
 $username\
 $hostname\
 $time\
-$battery \
+$battery\
 \n\
 $character\
 """
