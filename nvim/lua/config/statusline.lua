@@ -1,9 +1,19 @@
 STL = {}
 
---- Click Actions --------------------------------
-STL.switch_tab = function(tabnr) vim.cmd(tabnr .. "tabnext") end
+--- Action Tab Click -----------------------------
+STL.switch_tab = function(tabnr) --
+    vim.api.nvim_set_current_tabpage(tabnr)
+end
 
---- Statusline Components ------------------------
+--- Autocmd Git Branch ---------------------------
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusGained" }, {
+    callback = function()
+        local branch = vim.fn.system("git branch --show-current 2> /dev/null")
+        if branch ~= "" then vim.g.branch_name = branch:gsub("\n", "") end
+    end,
+})
+
+--- Mode Information -----------------------------
 local C_S = vim.api.nvim_replace_termcodes("<C-S>", true, true, true)
 local C_V = vim.api.nvim_replace_termcodes("<C-V>", true, true, true)
 
@@ -32,6 +42,7 @@ local get_mode_info = function(current_mode)
     return modes[current_mode] or { name = "UNKNOWN", hl = "%#ModeNormal#" }
 end
 
+--- Statusline Components ------------------------
 ---@param mode_name string
 ---@return string
 STL.mode_component = function(mode_name) --
@@ -41,13 +52,8 @@ end
 ---@return string
 STL.folder_component = function()
     local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-    local handle = io.popen("git rev-parse --abbrev-ref HEAD 2>/dev/null")
-    local branch = ""
-    if handle then
-        branch = handle:read("*a"):gsub("^%s*(.-)%s*$", "%1")
-        handle:close()
-    end
-    if branch == "" then return string.format("  %s ", cwd) end
+    local branch = vim.g.branch_name
+    if not branch then return string.format("  %s ", cwd) end
     return string.format("  %s:%s ", cwd, branch)
 end
 
