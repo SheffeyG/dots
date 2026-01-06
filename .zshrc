@@ -71,15 +71,15 @@ zinit snippet OMZL::history.zsh
 zinit snippet OMZP::sudo
 
 # auto suggestions
-zinit ice wait lucid atload="_zsh_autosuggest_start"
+zinit ice wait lucid nocd atload="_zsh_autosuggest_start"
 zinit load zsh-users/zsh-autosuggestions
 
 # NOTE: heighlights must after the autosuggest plugin
-zinit ice wait lucid atload="zicompinit;zicdreplay" src="fast-highlight"
+zinit ice wait lucid nocd atload="zicompinit;zicdreplay" src="fast-highlight"
 zinit load zdharma-continuum/fast-syntax-highlighting
 
 # z for quick jump
-zinit ice wait="1" lucid atinit="ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/.z"
+zinit ice wait="1" lucid nocd atinit="ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/.z"
 zinit load agkozak/zsh-z
 
 # NOTE: fzf-tab doesn't work with zinit `wait`
