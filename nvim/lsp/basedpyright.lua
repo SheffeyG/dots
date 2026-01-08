@@ -1,4 +1,5 @@
 ---@brief
+---
 --- https://detachhead.github.io/basedpyright
 --- Install with `uv tool install basedpyright`
 
