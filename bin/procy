@@ -16,24 +16,24 @@ function set_proxy() {
     if [ -n "$SSH_CONNECTION" ]; then
         host="$(echo "$SSH_CONNECTION" | awk '{print $1}')"
         if [ -z "$host" ]; then
-            echo "[WARNING] Could not get ssh host ip, using localhost instead."
+            echo "[WARNING] could not get ssh host ip, using localhost instead."
             host="127.0.0.1"
         fi
     fi
 
-    export HTTP_PROXY="socks5://$host:$port"
-    export HTTPS_PROXY="socks5://$host:$port"
-    export ALL_PROXY="socks5://$host:$port"
+    export http_proxy="http://$host:$port"
+    export https_proxy="http://$host:$port"
+    export all_proxy="http://$host:$port"
 }
 
-if [[ "$#" -eq 0 ]] && [[ -n "$HTTP_PROXY" || -n "$HTTPS_PROXY" ]]; then
-    unset HTTP_PROXY
-    unset HTTPS_PROXY
-    unset ALL_PROXY
-    echo "Proxy Removed!"
+if [[ "$#" -eq 0 ]] && [[ -n "$http_proxy" || -n "$https_proxy" ]]; then
+    unset http_proxy
+    unset https_proxy
+    unset all_proxy
+    echo "proxy removed!"
 else
     set_proxy "$@"
-    echo "HTTP_PROXY=$HTTP_PROXY"
-    echo "HTTPS_PROXY=$HTTPS_PROXY"
-    echo "ALL_PROXY=$ALL_PROXY"
+    echo "http_proxy=$http_proxy"
+    echo "https_proxy=$https_proxy"
+    echo "all_proxy=$all_proxy"
 fi
