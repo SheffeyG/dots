@@ -7,22 +7,7 @@ local signs = {
 ---@type LazyPluginSpec[]
 return {
     {
-        "nvim-mini/mini.diff",
-        event = "BufReadPost",
-        opts = {
-            view = {
-                style = "sign",
-                signs = { add = "│", change = "│", delete = "▁" },
-            },
-        },
-        keys = {
-            { "<leader>uH", "<CMD>lua MiniDiff.toggle_overlay()<CR>", desc = "Toggle hunk preview" },
-        },
-    },
-
-    {
         "lewis6991/gitsigns.nvim",
-        enabled = false,
         event = "BufReadPost",
         opts = {
             signs = signs,
