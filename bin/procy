@@ -24,12 +24,18 @@ function set_proxy() {
     export http_proxy="http://$host:$port"
     export https_proxy="http://$host:$port"
     export all_proxy="http://$host:$port"
+    export HTTP_PROXY="http://$host:$port"
+    export HTTPS_PROXY="http://$host:$port"
+    export ALL_PROXY="http://$host:$port"
 }
 
 if [[ "$#" -eq 0 ]] && [[ -n "$http_proxy" || -n "$https_proxy" ]]; then
     unset http_proxy
     unset https_proxy
     unset all_proxy
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    unset ALL_PROXY
     echo "proxy removed!"
 else
     set_proxy "$@"

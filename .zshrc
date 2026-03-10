@@ -31,7 +31,7 @@ export PNPM_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/pnpm"
 typeset -U path
 
 # autovenv for python
-venv() {
+function venv() {
     if [[ -z "$VIRTUAL_ENV" ]]; then
         venv_dir='.venv'
         [[ -d "$venv_dir" ]] && source "$venv_dir/bin/activate"
@@ -43,6 +43,16 @@ venv() {
 autoload -U add-zsh-hook
 add-zsh-hook chpwd venv
 venv # activate venv while initialization
+
+# show nothing for keys without bindings
+function skip-csi-sequence() {
+    local key
+    while read -sk key && (( $((#key)) < 0x40 || $((#key)) > 0x7E )); do
+        # empty body
+    done
+}
+zle -N skip-csi-sequence
+bindkey '\e[' skip-csi-sequence
 
 #-----------------------
 # Plugins

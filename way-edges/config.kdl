@@ -1,0 +1,53 @@
+workspace {
+    edge "right"
+    layer "overlay"
+    thickness 6
+    extra-trigger-size 8
+    offset 10
+    length "25%"
+    active-increase 0.2
+    focus-color "#7FC8FF"
+    default-color "#4b7799"
+    border-width 0
+    border-radius 0
+    focused-only
+    preset "niri" {
+        preserve-empty
+    }
+}
+
+btn {
+    edge "bottom"
+    position "left"
+    layer "overlay"
+    margins {
+        left "25%"
+    }
+    thickness 7
+    extra-trigger-size 7
+    length "25%"
+    type "btn"
+    color "#333"
+    event-map {
+        mouse-left "niri msg action focus-column-left"
+        mouse-right "niri msg action focus-workspace-up"
+    }
+}
+
+btn {
+    edge "bottom"
+    position "right"
+    layer "overlay"
+    margins {
+        right "25%"
+    }
+    thickness 7
+    extra-trigger-size 7
+    length "25%"
+    type "btn"
+    color "#333"
+    event-map {
+        mouse-left "niri msg action focus-column-right"
+        mouse-right "niri msg action focus-workspace-down"
+    }
+}
