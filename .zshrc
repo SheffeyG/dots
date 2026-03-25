@@ -25,19 +25,23 @@ export PNPM_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/pnpm"
 [[ -s "$CONDA_HOME/etc/profile.d/conda.sh" ]] && source "$CONDA_HOME/etc/profile.d/conda.sh"
 
 # custom path
-[[ -d "${HOME}/.local/bin" ]] && path+=("${HOME}/.local/bin")
-[[ -d "${HOME}/.cargo/bin" ]] && path+=("${HOME}/.cargo/bin")
+[[ -d "$HOME/.local/bin" ]] && path+=("$HOME/.local/bin")
+[[ -d "$HOME/.cargo/bin" ]] && path+=("$HOME/.cargo/bin")
 
 typeset -U path
 
 # autovenv for python
 function venv() {
+    local venv_dir='.venv'
     if [[ -z "$VIRTUAL_ENV" ]]; then
-        venv_dir='.venv'
         [[ -d "$venv_dir" ]] && source "$venv_dir/bin/activate"
     else
-        parent_dir="$(dirname "$VIRTUAL_ENV")"
-        [[ "$PWD"/ != "$parent_dir"/* ]] && deactivate
+        local root_dir=$(dirname "$VIRTUAL_ENV")
+        if [[ $PWD != "$root_dir" && $PWD != "$root_dir"/* ]]; then
+            # try deactivate, if can't then activate first
+            deactivate >/dev/null 2>&1 && return
+            source "$root_dir/$venv_dir/bin/activate" && deactivate
+        fi
     fi
 }
 autoload -U add-zsh-hook
