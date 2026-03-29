@@ -359,8 +359,10 @@ M.plugins = {
     NeogitHunkHeader = { fg = colors.black, bg = colors.grey, bold = true },
     NeogitHunkHeaderCursor = { fg = colors.black, bg = mix_bg(colors.blue, 0.4), bold = true },
     NeogitHunkHeaderHighlight = { link = "NeogitHunkHeaderCursor" },
-    NeogitDiffAddCursor = { fg = colors.green, bg = mix_bg(colors.green, 0.3) },
-    NeogitDiffDeleteCursor = { fg = colors.red, bg = mix_bg(colors.red, 0.3) },
+    NeogitDiffAddInline = { fg = colors.green, bg = mix_bg(colors.green, 0.2), bold = true },
+    NeogitDiffAddCursor = { fg = colors.green, bg = mix_bg(colors.green, 0.15) },
+    NeogitDiffDeleteInline = { fg = colors.red, bg = mix_bg(colors.red, 0.2), bold = true },
+    NeogitDiffDeleteCursor = { fg = colors.red, bg = mix_bg(colors.red, 0.15) },
 
     -- diffview
     -- Highlight for fillchars.diff, see https://github.com/sindrets/diffview.nvim/issues/340
