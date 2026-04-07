@@ -64,9 +64,9 @@ local function on_attach(client, bufnr)
         })
     end
 
-    -- if client:supports_method("textDocument/onTypeFormatting", bufnr) then
-    --     vim.lsp.on_type_formatting.enable(true, { bufnr = bufnr })
-    -- end
+    if client:supports_method("textDocument/onTypeFormatting", bufnr) then
+        vim.lsp.on_type_formatting.enable(true, { bufnr = bufnr })
+    end
 
     if client:supports_method("textDocument/inlineCompletion", bufnr) then
         vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
