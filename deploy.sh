@@ -3,7 +3,7 @@
 SOURCE="$(cd "$(dirname "$BASH_SOURCE[0]")" && pwd)"
 TARGET="$HOME"
 
-function symlinkFile() {
+function link() {
     local file="$SOURCE/$1"
     local dest="$TARGET/${2:+$2/}$1"
 
@@ -23,7 +23,7 @@ function symlinkFile() {
     ln -s "$file" "$dest" && echo "[LINK] $file -> $dest"
 }
 
-function copyFile() {
+function copy() {
     local file="$SOURCE/$1"
     local dest="$TARGET/${2:+$2/}$1"
 
@@ -40,35 +40,30 @@ function copyFile() {
     cp -r "$file" "$dest" && echo "[COPY] $file -> $dest"
 }
 
-function linkDirectory() {
+function ldir() {
     local sourcepath="$1"
     local targetpath="$2"
 
     for source in "$sourcepath"/*; do
-        symlinkFile "$source" "$targetpath"
+        link "$source" "$targetpath"
     done
 }
 
 # set -ex
-MANIFEST="$1"
 
-if [ -z "$MANIFEST" ]; then
-    echo "[ERROR] No MANIFEST file provided!"
-    exit 1
-elif [ ! -e "$MANIFEST" ]; then
-    echo "[ERROR] MANIFEST file '$MANIFEST' doesn't exists!"
-    exit 1
+link    .zshrc
+link    .p10k.zsh
+link    .tmux.conf
+copy    .gitconfig
+
+link    nvim    .config
+ldir    bin     .local
+
+if [[ "$1" == "linux" ]]; then
+    link    niri         .config
+    link    alacritty    .config
+    link    fuzzel       .config
+    link    swaylock     .config
+    link    way-edges    .config
 fi
 
-while IFS='|' read -r opt src tgt; do
-    opt="$(printf '%s' "$opt" | tr -d '[:space:]')"
-    src="$(printf '%s' "$src" | tr -d '[:space:]')"
-    tgt="$(printf '%s' "$tgt" | tr -d '[:space:]')"
-
-    case "$opt" in
-        link) symlinkFile "$src" "$tgt" ;;
-        copy) copyFile "$src" "$tgt" ;;
-        ldir) linkDirectory "$src" "$tgt" ;;
-        *) echo "[WARNING] Unknown operation '$opt'!" ;;
-    esac
-done <"$SOURCE/$MANIFEST"
