@@ -16,7 +16,7 @@ fi
 
 # setup global pnpm path
 export PNPM_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/pnpm"
-[[ -d "${PNPM_HOME}" ]] && path+=("${PNPM_HOME}")
+[[ -d "${PNPM_HOME}" ]] && path+=("${PNPM_HOME}" "${PNPM_HOME}/bin")
 
 # conda initialization
 # https://repo.anaconda.com/miniconda
