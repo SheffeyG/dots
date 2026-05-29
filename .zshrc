@@ -14,12 +14,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# setup global pnpm path
-export PNPM_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/pnpm"
-[[ -d "${PNPM_HOME}" ]] && path+=("${PNPM_HOME}" "${PNPM_HOME}/bin")
+# pnpm
+export PNPM_HOME="${XDG_CACHE_HOME:-$HOME/.local}/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
-# conda initialization
-# https://repo.anaconda.com/miniconda
+# conda https://repo.anaconda.com/miniconda
 [[ -d "$HOME/anaconda3" ]] && CONDA_HOME="$HOME/anaconda3/"
 [[ -d "$HOME/miniconda3" ]] && CONDA_HOME="$HOME/miniconda3/"
 [[ -s "$CONDA_HOME/etc/profile.d/conda.sh" ]] && source "$CONDA_HOME/etc/profile.d/conda.sh"
@@ -71,7 +73,7 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 ZINIT[COMPINIT_OPTS]=-C # skip safe check for speed up
-ZINIT[ZCOMPDUMP_PATH]="${XDG_CACHE_HOME:-$HOME/.cache}"
+ZINIT[ZCOMPDUMP_PATH]="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
 
 # p10k theme
 zinit ice depth="1"
@@ -137,7 +139,7 @@ alias gill='git pull'
 alias gish='git push'
 alias gma='git commit --amend --no-edit'
 alias glo='git log --oneline -n 10 --graph'
-gm() { if [ -z $1 ]; then git commit; else git commit -m $1; fi; }
+gm() { if [[ -z "$1" ]]; then git commit; else git commit -m "$*"; fi; }
 
 if command -v eza >/dev/null 2>&1; then
     alias ls='eza --icons=auto'
