@@ -16,10 +16,7 @@ fi
 
 # pnpm
 export PNPM_HOME="${XDG_CACHE_HOME:-$HOME/.local}/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+[[ -d "$PNPM_HOME" ]] && path+=("$PNPM_HOME" "$PNPM_HOME/bin")
 
 # conda https://repo.anaconda.com/miniconda
 [[ -d "$HOME/anaconda3" ]] && CONDA_HOME="$HOME/anaconda3/"
