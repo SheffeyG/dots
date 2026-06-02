@@ -65,9 +65,9 @@ spawn-at-startup "dms" "run"
 //------------------------------------------------
 // Window rules & layout rules
 //------------------------------------------------
-
 window-rule {
     opacity 0.9
+    open-maximized true
     geometry-corner-radius 0
     clip-to-geometry true
     draw-border-with-background false
@@ -89,14 +89,15 @@ window-rule {
 }
 
 window-rule {
+    match app-id="xdg-desktop-portal-gtk"
+    open-floating true
+    open-focused true
+}
+
+window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
     block-out-from "screen-capture"
-}
-
-/-layer-rule {
-    match namespace=r#"^way-edges-widget"#
-    opacity 0.9
 }
 
 
