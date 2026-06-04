@@ -46,7 +46,7 @@ return {
         rename = { enabled = true },
         scroll = { enabled = true },
         notifier = { top_down = false },
-        statuscolumn = { enabled = true },
+        statuscolumn = { enabled = true, refresh = 10 },
         terminal = { win = { relative = "win" } },
         indent = {
             animate = { duration = 10 },

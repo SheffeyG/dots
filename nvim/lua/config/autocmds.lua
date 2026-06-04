@@ -37,6 +37,12 @@ autocmd("VimResized", {
 autocmd("VimEnter", {
     desc = "Open explorer for wide screen",
     callback = function(data)
+        -- do nothing if there is lazy window
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+            local buf = vim.api.nvim_win_get_buf(win)
+            if vim.bo[buf].filetype == "lazy" then return end
+        end
+
         local ok, snacks = pcall(require, "snacks")
         if not ok then return end
 

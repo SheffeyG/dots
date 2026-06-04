@@ -37,6 +37,9 @@ require("lazy").setup({
         enabled = true,
         notify = false,
     },
+    install = {
+        colorscheme = { "onedark" },
+    },
     ui = {
         icons = {
             ft = " ",
