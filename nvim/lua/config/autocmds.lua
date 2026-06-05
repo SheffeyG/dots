@@ -1,31 +1,38 @@
 local autocmd = vim.api.nvim_create_autocmd
+local group = vim.api.nvim_create_augroup("sheffey-autocmds", { clear = true })
 
 autocmd("BufReadPost", {
+    group = group,
     desc = "Keep the last location for opened buffer",
     callback = function(args)
         local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
         local line_count = vim.api.nvim_buf_line_count(args.buf)
-        if mark[1] > 0 and mark[1] <= line_count then --
-            vim.cmd('normal! g`"zz')
+        if mark[1] > 0 and mark[1] <= line_count then
+            local wins = vim.fn.win_findbuf(args.buf)
+            local win = wins[1]
+            if win then vim.api.nvim_win_call(win, function() vim.cmd('normal! g`"zz') end) end
         end
     end,
 })
 
 autocmd({ "BufLeave", "FocusLost" }, {
+    group = group,
     desc = "Write buffers when leave it",
-    callback = function()
+    callback = function(args)
+        local buf = args.buf
         if -- check if the file should be saved
-            vim.bo.modified
-            and not vim.bo.readonly
-            and vim.fn.expand("%") ~= ""
-            and vim.bo.buftype == ""
+            vim.bo[buf].modified
+            and not vim.bo[buf].readonly
+            and vim.api.nvim_buf_get_name(buf) ~= ""
+            and vim.bo[buf].buftype == ""
         then
-            vim.cmd("silent! update")
+            vim.api.nvim_buf_call(buf, function() vim.cmd("silent! update") end)
         end
     end,
 })
 
 autocmd("VimResized", {
+    group = group,
     desc = "Resize splits after window resized",
     callback = function()
         vim.g.is_wide = vim.api.nvim_win_get_width(0) > 120
@@ -35,6 +42,7 @@ autocmd("VimResized", {
 })
 
 autocmd("VimEnter", {
+    group = group,
     desc = "Open explorer for wide screen",
     callback = function(data)
         -- do nothing if there is lazy window
@@ -63,6 +71,7 @@ autocmd("VimEnter", {
 })
 
 autocmd("QuitPre", {
+    group = group,
     desc = "Close explorer for the last buffer",
     callback = function()
         local snacks_windows = {}
@@ -90,6 +99,7 @@ autocmd("QuitPre", {
 })
 
 autocmd("FileType", {
+    group = group,
     desc = "Close window for some filetypes with <q>",
     pattern = {
         "checkhealth",
@@ -109,12 +119,14 @@ autocmd("FileType", {
 
 -- yanky.nvim builtin
 -- autocmd("TextYankPost", {
+--     group = group,
 --     desc = "Highlight on yank",
 --     callback = function() vim.hl.on_yank({ higroup = "TextPurple" }) end,
 -- })
 
 -- snacks.nvim builtin
 -- autocmd({ "WinEnter", "BufWinEnter", "TermOpen" }, {
+--     group = group,
 --     desc = "auto insert mode for terminal buffers",
 --     callback = function(args)
 --         if vim.startswith(vim.api.nvim_buf_get_name(args.buf), "term://") then

@@ -5,14 +5,6 @@ STL.switch_tab = function(tabnr) --
     vim.api.nvim_set_current_tabpage(tabnr)
 end
 
---- Autocmd Git Branch ---------------------------
-vim.api.nvim_create_autocmd({ "BufLeave", "FocusGained" }, {
-    callback = function()
-        local branch = vim.fn.system("git branch --show-current 2> /dev/null")
-        if branch ~= "" then vim.g.branch_name = branch:gsub("\n", "") end
-    end,
-})
-
 --- Mode Information -----------------------------
 local C_S = vim.api.nvim_replace_termcodes("<C-S>", true, true, true)
 local C_V = vim.api.nvim_replace_termcodes("<C-V>", true, true, true)
@@ -52,8 +44,8 @@ end
 ---@return string
 STL.folder_component = function()
     local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-    local branch = vim.g.branch_name
-    if not branch then return string.format("  %s ", cwd) end
+    local branch = vim.b.gitsigns_head
+    if not branch or branch == "" then return string.format("  %s ", cwd) end
     return string.format("  %s:%s ", cwd, branch)
 end
 

@@ -1,7 +1,9 @@
 local icons = ICON.diag
+local group = vim.api.nvim_create_augroup("sheffey-lsp", { clear = true })
 
 --- LSP ------------------------------------------
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+    group = group,
     desc = "Enable all LSP servers",
     once = true,
     callback = function()
@@ -35,18 +37,23 @@ vim.diagnostic.config({
 
 --- Fold -----------------------------------------
 vim.api.nvim_create_autocmd("LspAttach", {
+    group = group,
     desc = "Use LSP as fold method",
     callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client and client:supports_method("textDocument/foldingRange") then
-            local win = vim.api.nvim_get_current_win()
-            vim.wo[win][0].foldmethod = "expr"
-            vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+            for _, win in ipairs(vim.fn.win_findbuf(args.buf)) do
+                vim.wo[win].foldmethod = "expr"
+                vim.wo[win].foldexpr = "v:lua.vim.lsp.foldexpr()"
+            end
         end
     end,
 })
 
-vim.api.nvim_create_autocmd("LspDetach", { command = "setl foldexpr<" })
+vim.api.nvim_create_autocmd("LspDetach", {
+    group = group,
+    command = "setl foldexpr<",
+})
 
 --- Keymaps --------------------------------------
 ---@param client vim.lsp.Client
@@ -84,6 +91,7 @@ local function on_attach(client, bufnr)
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
+    group = group,
     desc = "Configure LSP keymaps",
     callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
