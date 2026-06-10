@@ -58,7 +58,6 @@ environment {
     DMS_DISABLE_MATUGEN "1"
 }
 
-spawn-at-startup "fcitx5"
 spawn-at-startup "dms" "run"
 
 
