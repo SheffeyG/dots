@@ -20,7 +20,12 @@ return {
 
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        ft = { "markdown", "codecompanion" },
+        ft = { "markdown" },
+        init = function()
+            vim.filetype.add({
+                extension = { mdx = "markdown" },
+            })
+        end,
         ---@module "render-markdown"
         ---@type render.md.UserConfig
         opts = {

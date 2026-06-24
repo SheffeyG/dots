@@ -64,7 +64,8 @@ g.loaded_ruby_provider = 0
 
 -- Custom global flags
 g.is_tmux = os.getenv("TMUX") ~= nil
-g.is_wsl = os.getenv("WSL_DISTRO_NAME") ~= nil
+g.is_win = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+g.is_wsl = os.getenv("WSL_DISTRO_NAME") ~= nil or os.getenv("WSL_INTEROP") ~= nil
 g.is_ssh = os.getenv("SSH_CONNECTION") ~= nil or os.getenv("SSH_CLIENT") ~= nil
 g.is_wide = vim.api.nvim_win_get_width(0) > 120
 
