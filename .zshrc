@@ -91,15 +91,19 @@ zinit load zsh-users/zsh-autosuggestions
 zinit ice wait lucid nocd atload="zicompinit;zicdreplay" src="fast-highlight"
 zinit load zdharma-continuum/fast-syntax-highlighting
 
-# z for quick jump
-zinit ice wait="1" lucid nocd atinit="ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/.z"
-zinit load agkozak/zsh-z
-
 # NOTE: fzf-tab doesn't work with zinit `wait`
 if command -v fzf >/dev/null 2>&1; then
     FZF_DEFAULT_OPTS='--color=pointer:#e06c75,bg+:#51576d,gutter:#3e4452'
     zstyle ':fzf-tab:*' use-fzf-default-opts yes
     zinit light Aloxaf/fzf-tab
+fi
+
+# z for quick jump
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+else
+    zinit ice wait="1" lucid nocd atinit="ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/.z"
+    zinit load agkozak/zsh-z
 fi
 
 #-----------------------
