@@ -21,11 +21,10 @@ return {
     settings = {
         basedpyright = {
             analysis = {
-                typeCheckingMode = "basic", -- standard
+                typeCheckingMode = "off",
                 autoImportCompletions = false,
                 autoSearchPaths = true,
                 autoFormatStrings = true,
-                diagnosticMode = "openFilesOnly",
                 reportMissingTypeStubs = false,
                 reportUnreachable = "none",
                 useLibraryCodeForTypes = true,

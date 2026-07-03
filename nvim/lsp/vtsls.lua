@@ -7,6 +7,14 @@
 return {
     cmd = { "vtsls", "--stdio" },
     init_options = { hostInfo = "neovim" },
+    settings = {
+        typescript = {
+            validate = { enable = false },
+        },
+        javascript = {
+            validate = { enable = false },
+        },
+    },
     filetypes = {
         "javascript",
         "javascriptreact",

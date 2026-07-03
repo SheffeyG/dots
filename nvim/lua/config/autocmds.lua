@@ -31,6 +31,15 @@ autocmd({ "BufLeave", "FocusLost" }, {
     end,
 })
 
+autocmd("FocusGained", {
+    group = group,
+    desc = "Refresh buffers on focus",
+    callback = function()
+        vim.cmd("checktime")
+        vim.cmd("redraw!")
+    end,
+})
+
 autocmd("VimResized", {
     group = group,
     desc = "Resize splits after window resized",
