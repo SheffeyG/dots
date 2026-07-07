@@ -13,6 +13,7 @@ return {
                 sh = { "shfmt" },
                 json = { "clang-format" },
                 rust = { "rustfmt" },
+                yaml = { "prettier" },
                 ["_"] = { "trim_whitespace", lsp_format = "last" },
             },
         },
