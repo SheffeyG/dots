@@ -14,6 +14,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# custom path
+[[ -d "$HOME/.local/bin" ]] && path+=("$HOME/.local/bin")
+[[ -d "$HOME/.cargo/bin" ]] && path+=("$HOME/.cargo/bin")
+[[ -d "$HOME/.bun/bin" ]] && path+=("$HOME/.bun/bin")
+
 # pnpm
 export PNPM_HOME="${XDG_CACHE_HOME:-$HOME/.local}/share/pnpm"
 [[ -d "$PNPM_HOME" ]] && path+=("$PNPM_HOME" "$PNPM_HOME/bin")
@@ -22,10 +27,6 @@ export PNPM_HOME="${XDG_CACHE_HOME:-$HOME/.local}/share/pnpm"
 [[ -d "$HOME/anaconda3" ]] && CONDA_HOME="$HOME/anaconda3/"
 [[ -d "$HOME/miniconda3" ]] && CONDA_HOME="$HOME/miniconda3/"
 [[ -s "$CONDA_HOME/etc/profile.d/conda.sh" ]] && source "$CONDA_HOME/etc/profile.d/conda.sh"
-
-# custom path
-[[ -d "$HOME/.local/bin" ]] && path+=("$HOME/.local/bin")
-[[ -d "$HOME/.cargo/bin" ]] && path+=("$HOME/.cargo/bin")
 
 typeset -U path
 
