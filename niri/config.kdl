@@ -2,6 +2,20 @@
 // https://yalter.github.io/niri
 //------------------------------------------------
 
+include "dms/outputs.kdl"
+include "dms/layout.kdl"
+include "dms/colors.kdl"
+include "dms/windowrules.kdl"
+include "dms/binds.kdl"
+include "dms/cursor.kdl"
+include "dms/alttab.kdl"
+include "dms/wpblur.kdl"
+
+
+//------------------------------------------------
+// General settings
+//------------------------------------------------
+
 input {
     workspace-auto-back-and-forth
 
@@ -10,31 +24,6 @@ input {
         drag true
         natural-scroll
         accel-speed 0.2
-    }
-}
-
-output "eDP-1" {
-    scale 1.5
-}
-
-layout {
-    gaps 4
-    center-focused-column "on-overflow"
-
-    preset-column-widths {
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.66667
-    }
-
-    focus-ring {
-        width 1
-        active-color "#7fc8ff"
-        inactive-color "#505050"
-    }
-
-    border {
-        off
     }
 }
 
@@ -55,10 +44,7 @@ environment {
     XMODIFIERS "@im=fcitx"
     QT_IM_MODULE "fcitx"
     SDL_IM_MODULE "fcitx"
-    DMS_DISABLE_MATUGEN "1"
 }
-
-spawn-at-startup "dms" "run"
 
 
 //------------------------------------------------
@@ -107,7 +93,7 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Backslash hotkey-overlay-title="Open Terminal" { spawn "alacritty"; }
+    Mod+Backslash hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
     Mod+N         hotkey-overlay-title="Application Launcher" { spawn "fuzzel"; }
     Mod+Space     hotkey-overlay-title="Application Launcher" { spawn "fuzzel"; }
     Super+Alt+L   hotkey-overlay-title="Lock Screen"  { spawn "swaylock"; }
