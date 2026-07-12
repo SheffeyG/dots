@@ -61,6 +61,7 @@ ldir    bin     .local
 
 if [[ "$1" == "linux" ]]; then
     link    niri         .config
+    link    ghostty      .config
     link    alacritty    .config
     link    fuzzel       .config
     link    swaylock     .config
