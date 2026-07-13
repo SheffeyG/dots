@@ -54,6 +54,19 @@ autocmd("FocusGained", {
     end,
 })
 
+autocmd("FileType", {
+    group = group,
+    desc = "Disable statuscolumn for Neogit buffers",
+    pattern = "Neogit*",
+    callback = function(args)
+        vim.schedule(function()
+            for _, win in ipairs(vim.fn.win_findbuf(args.buf)) do
+                vim.wo[win].statuscolumn = ""
+            end
+        end)
+    end,
+})
+
 autocmd("VimResized", {
     group = group,
     desc = "Resize splits after window resized",
