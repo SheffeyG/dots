@@ -1,16 +1,30 @@
 local autocmd = vim.api.nvim_create_autocmd
 local group = vim.api.nvim_create_augroup("sheffey-autocmds", { clear = true })
 
-autocmd("BufReadPost", {
+local function should_save_view(buf)
+    return vim.bo[buf].buftype == "" and vim.api.nvim_buf_get_name(buf) ~= ""
+end
+
+autocmd("BufWinLeave", {
     group = group,
-    desc = "Keep the last location for opened buffer",
+    desc = "Save cursor and fold view",
     callback = function(args)
-        local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
-        local line_count = vim.api.nvim_buf_line_count(args.buf)
-        if mark[1] > 0 and mark[1] <= line_count then
-            local wins = vim.fn.win_findbuf(args.buf)
-            local win = wins[1]
-            if win then vim.api.nvim_win_call(win, function() vim.cmd('normal! g`"zz') end) end
+        if should_save_view(args.buf) then
+            vim.api.nvim_buf_call(args.buf, function() vim.cmd("silent! mkview") end)
+        end
+    end,
+})
+
+autocmd("BufWinEnter", {
+    group = group,
+    desc = "Restore cursor and fold view",
+    callback = function(args)
+        if should_save_view(args.buf) then
+            vim.defer_fn(function()
+                if vim.api.nvim_buf_is_valid(args.buf) then
+                    vim.api.nvim_buf_call(args.buf, function() vim.cmd("silent! loadview") end)
+                end
+            end, 50)
         end
     end,
 })

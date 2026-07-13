@@ -47,6 +47,7 @@ o.list = true
 o.ruler = false
 o.showmode = false
 
+opt.viewoptions = { "folds", "cursor" }
 opt.listchars:append({ tab = "░░" })
 opt.fillchars:append({ eob = " ", fold = " ", diff = "╱" })
 -- Disable some message
