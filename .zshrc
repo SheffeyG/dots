@@ -15,6 +15,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # custom path
+# ~/dots/bin first so that the imv wrapper shadows /usr/bin/imv
+[[ -d "$HOME/dots/bin" ]] && path=("$HOME/dots/bin" $path)
 [[ -d "$HOME/.local/bin" ]] && path+=("$HOME/.local/bin")
 [[ -d "$HOME/.cargo/bin" ]] && path+=("$HOME/.cargo/bin")
 [[ -d "$HOME/.bun/bin" ]] && path+=("$HOME/.bun/bin")

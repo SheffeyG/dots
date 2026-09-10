@@ -1,0 +1,329 @@
+#!/usr/bin/env python3
+"""imv - imv wrapper that
+
+  1. opens the window sized to the image's aspect ratio (capped to a box on the
+     focused output), and
+  2. quits imv as soon as the window loses focus.
+
+Both features are independent and can be turned off (see ENVIRONMENT).
+
+Why a wrapper: imv never resizes its window when a new image is loaded - its
+`width`/`height` config keys and -W/-H options are one-shot values applied at
+startup (default 1280x720). And imv has no focus event at all, so close-on-
+unfocus has to come from outside. niri's window rule `default-column-width`
+overrides whatever the client asks for, so the imv rule must use the empty form
+(`default-column-width {}` / `default-window-height {}`) to let this through.
+
+Usage:  imv [options] [paths...]
+
+ENVIRONMENT
+  IMV_FIT_MAX_PERCENT      max window box, percent of the output (default 80)
+  IMV_FIT_GEOMETRY         max window box, e.g. 800x600 (overrides the above)
+  IMV_FIT_UPSCALE          allow enlarging small images (default no)
+  IMV_FIT_NO_FOCUS_CLOSE   disable close-on-focus-loss
+  IMV_FIT_GRACE            seconds to wait for the first focus (default 3)
+  IMV_FIT_CMD              command to launch instead of imv (default imv)
+  IMV_FIT_DRY_RUN          print the command instead of launching it
+"""
+
+import json
+import os
+import select
+import shlex
+import shutil
+import signal
+import subprocess
+import sys
+import time
+import urllib.parse
+
+# --- tunables -------------------------------------------------------------
+
+MAX_PERCENT = float(os.environ.get("IMV_FIT_MAX_PERCENT", "80"))
+UPSCALE = os.environ.get("IMV_FIT_UPSCALE", "0") not in ("", "0", "no", "false")
+GRACE = float(os.environ.get("IMV_FIT_GRACE", "3"))
+NO_CLOSE = os.environ.get("IMV_FIT_NO_FOCUS_CLOSE", "") not in ("", "0", "no", "false")
+DRY_RUN = os.environ.get("IMV_FIT_DRY_RUN", "") not in ("", "0", "no", "false")
+
+
+def stderr(msg):
+    print("imv: " + msg, file=sys.stderr)
+
+
+def resolve_imv():
+    raw = os.environ.get("IMV_FIT_CMD", "imv")
+    cmd = shlex.split(raw) or ["imv"]
+    exe = shutil.which(cmd[0]) or cmd[0]
+    me = os.path.realpath(__file__)
+    if os.path.realpath(exe) == me:
+        for cand in ("/usr/bin/imv", "/usr/local/bin/imv"):
+            if os.path.exists(cand) and os.path.realpath(cand) != me:
+                exe = cand
+                break
+    return [exe] + cmd[1:]
+
+
+def identify(path):
+    """(width, height) of the first frame of `path`, or None."""
+    if not shutil.which("identify"):
+        return None
+    try:
+        out = subprocess.run(
+            ["identify", "-format", "%w %h", path + "[0]"],
+            capture_output=True, text=True, timeout=10,
+        )
+    except Exception:
+        return None
+    if out.returncode != 0:
+        return None
+    parts = out.stdout.split()
+    if len(parts) != 2:
+        return None
+    try:
+        w, h = int(parts[0]), int(parts[1])
+    except ValueError:
+        return None
+    return (w, h) if w > 0 and h > 0 else None
+
+
+def candidates(args):
+    """Image paths from the imv command line, in the order imv would show them."""
+    out, after_ddash = [], False
+    for arg in args:
+        if arg == "--":
+            after_ddash = True
+            continue
+        if not after_ddash and arg.startswith("-"):
+            continue
+        path = arg
+        if path.startswith("file://"):
+            # plain imv would fail on this too, but xdg-open/file managers do
+            # hand out file:// URLs, so resolve it for the size calculation
+            path = urllib.parse.unquote(path[7:])
+        if os.path.isdir(path):
+            try:
+                entries = sorted(os.listdir(path))
+            except OSError:
+                continue
+            out.extend(os.path.join(path, e) for e in entries)
+        elif os.path.isfile(path):
+            out.append(path)
+    return out
+
+
+def first_image(args):
+    for path in candidates(args):
+        size = identify(path)
+        if size:
+            return path, size
+    return None, None
+
+
+def output_size():
+    """Logical size of the focused output."""
+    try:
+        out = subprocess.run(
+            ["niri", "msg", "--json", "focused-output"],
+            capture_output=True, text=True, timeout=3,
+        )
+        logical = json.loads(out.stdout)["logical"]
+        return int(logical["width"]), int(logical["height"])
+    except Exception:
+        return None
+
+
+def fit_size(img, out):
+    """Window size matching `img`'s aspect ratio, capped to a box on `out`."""
+    iw, ih = img
+    geom = os.environ.get("IMV_FIT_GEOMETRY")
+    if geom:
+        try:
+            box = tuple(int(v) for v in geom.lower().split("x"))
+            assert len(box) == 2 and box[0] > 0 and box[1] > 0
+        except Exception:
+            stderr("ignoring bad IMV_FIT_GEOMETRY=%r" % geom)
+            box = None
+    elif out:
+        box = (
+            max(1, round(out[0] * MAX_PERCENT / 100)),
+            max(1, round(out[1] * MAX_PERCENT / 100)),
+        )
+    else:
+        box = None
+
+    if box is None or (iw <= box[0] and ih <= box[1] and not UPSCALE):
+        return iw, ih
+    scale = min(box[0] / iw, box[1] / ih)
+    return max(1, round(iw * scale)), max(1, round(ih * scale))
+
+
+def niri_json(*args):
+    try:
+        out = subprocess.run(
+            ["niri", "msg", "--json", *args],
+            capture_output=True, text=True, timeout=3,
+        )
+        return json.loads(out.stdout)
+    except Exception:
+        return None
+
+
+def quit_imv(imv):
+    if shutil.which("imv-msg"):
+        try:
+            subprocess.run(["imv-msg", str(imv.pid), "quit"],
+                           timeout=2, capture_output=True)
+            imv.wait(timeout=2)
+            return
+        except subprocess.TimeoutExpired:
+            pass
+        except Exception:
+            pass
+    try:
+        imv.terminate()
+        imv.wait(timeout=2)
+    except subprocess.TimeoutExpired:
+        imv.kill()
+
+
+def main():
+    args = list(sys.argv[1:])
+    imv_args = list(args)
+
+    # --- 1. window size follows the image -------------------------------
+    if "-W" not in args and "-H" not in args:
+        path, img = first_image(args)
+        if img:
+            out = output_size()
+            w, h = fit_size(img, out)
+            # keep these before any user `--` so imv still sees them as options
+            imv_args = ["-W", str(w), "-H", str(h)] + imv_args
+            if DRY_RUN:
+                stderr("%s %dx%d -> window %dx%d%s"
+                       % (os.path.basename(path), img[0], img[1], w, h,
+                          " (output %dx%d)" % out if out else " (no niri)"))
+        else:
+            stderr("no readable image found, leaving window size to imv")
+
+    cmd = resolve_imv() + imv_args
+    if DRY_RUN:
+        print(shlex.join(cmd))
+        return 0
+
+    imv = subprocess.Popen(cmd)
+
+    # --- 2. quit when the window loses focus ----------------------------
+    if NO_CLOSE:
+        return imv.wait()
+
+    try:
+        stream = subprocess.Popen(
+            ["niri", "msg", "--json", "event-stream"],
+            stdout=subprocess.PIPE, bufsize=0,
+        )
+    except FileNotFoundError:
+        stream = None
+    if stream is None or stream.stdout is None:
+        stderr("niri unavailable, close-on-unfocus disabled")
+        return imv.wait()
+
+    for sig in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP):
+        signal.signal(sig, lambda s, _f: imv.send_signal(s))
+
+    windows = {}          # window id -> pid
+    focused_pid = None    # pid of the focused window, if any
+    armed = False         # only close once our window has been focused
+    deadline = time.monotonic() + GRACE
+    pending = b""
+    fh = stream.stdout.fileno()
+
+    def sync():
+        """Rebuild the window map + focus state from a fresh query.
+
+        Needed because niri does not emit WindowFocusChanged for a window that
+        is opened already focused - it only sets is_focused in the
+        WindowOpenedOrChanged payload - and because focus may have moved before
+        we managed to connect to the event stream.
+        """
+        nonlocal focused_pid
+        wins = niri_json("windows")
+        if wins is None:
+            return
+        windows.clear()
+        for w in wins:
+            windows[w["id"]] = w.get("pid")
+            if w.get("is_focused"):
+                focused_pid = w.get("pid")
+
+    sync()
+
+    def decide():
+        """Return an exit code if we should stop, else None."""
+        nonlocal armed, focused_pid
+        if not armed:
+            if focused_pid == imv.pid:
+                armed = True
+            elif time.monotonic() > deadline:
+                # never focused: don't auto-close a background instance
+                return imv.wait()
+            return None
+        if focused_pid != imv.pid:
+            quit_imv(imv)
+            return imv.returncode
+        return None
+
+    try:
+        while True:
+            if imv.poll() is not None:
+                return imv.returncode
+            if not select.select([fh], [], [], 0.3)[0]:
+                continue
+            chunk = os.read(fh, 65536)
+            if not chunk:
+                break
+            pending += chunk
+            while b"\n" in pending:
+                line, pending = pending.split(b"\n", 1)
+                if not line.strip():
+                    continue
+                try:
+                    event = json.loads(line)
+                except ValueError:
+                    continue
+                for name, payload in event.items():
+                    if name == "WindowsChanged":
+                        for w in payload["windows"]:
+                            windows[w["id"]] = w.get("pid")
+                            if w.get("is_focused"):
+                                focused_pid = w.get("pid")
+                    elif name == "WindowOpenedOrChanged":
+                        w = payload["window"]
+                        windows[w["id"]] = w.get("pid")
+                        if w.get("is_focused"):
+                            focused_pid = w.get("pid")
+                    elif name == "WindowClosed":
+                        windows.pop(payload["id"], None)
+                        # the closed window may have been the focused one; the
+                        # new focus is only known from the compositor
+                        sync()
+                    elif name == "WindowFocusChanged":
+                        fid = payload.get("id")
+                        if fid is None:
+                            focused_pid = None
+                        elif fid not in windows:
+                            sync()
+                        else:
+                            focused_pid = windows[fid]
+                code = decide()
+                if code is not None:
+                    return code
+    finally:
+        try:
+            stream.terminate()
+        except Exception:
+            pass
+    return imv.wait()
+
+
+if __name__ == "__main__":
+    sys.exit(main() or 0)
