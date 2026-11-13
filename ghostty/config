@@ -1,6 +1,15 @@
+command = /usr/bin/zsh
+
 font-family = FiraCode Nerd Font
 copy-on-select = clipboard
 window-padding-balance = true
 cursor-style = block
 mouse-hide-while-typing = true
 scrollbar = never
+
+window-theme = ghostty
+
+gtk-titlebar = true
+gtk-toolbar-style = raised
+gtk-custom-css = ~/.config/ghostty/custom.css
+

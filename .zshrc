@@ -5,6 +5,10 @@
 # if tty or not running interactively, don't do anything
 [[ $- != *i* || "$TTY" =~ ^/dev/tty[0-9]+$ ]] && return
 
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US:en
+export LC_ALL=en_US.UTF-8
+
 # setting zsh prompt right padding
 ZLE_RPROMPT_INDENT=${ZLE_RPROMPT_INDENT:-0}
 
@@ -31,6 +35,9 @@ export PNPM_HOME="${XDG_CACHE_HOME:-$HOME/.local}/share/pnpm"
 [[ -s "$CONDA_HOME/etc/profile.d/conda.sh" ]] && source "$CONDA_HOME/etc/profile.d/conda.sh"
 
 typeset -U path
+
+# custom completions (e.g. bob from `bob complete zsh > ~/.zfunc/_bob`)
+[[ -d "$HOME/.zfunc" ]] && fpath+=("$HOME/.zfunc")
 
 # autovenv for python
 function venv() {

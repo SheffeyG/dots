@@ -31,6 +31,7 @@ vim.api.nvim_create_user_command("Code", code_current_buffer, {
 
 -- Redraw screen when marks are changed via `m` commands
 vim.on_key(function(_, typed)
+    if not typed or typed == "" then return end
     if typed:sub(1, 1) ~= "m" then return end
 
     local mark = typed:sub(2)
